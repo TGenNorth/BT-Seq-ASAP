@@ -310,11 +310,14 @@ def _json_decode(json_dict):
     else:
         return json_dict
     
-def parse_json(filename):
+def parseJSON(filename):
     import json
     with open(filename) as json_fh:
         assay_data = json.load(json_fh, object_hook=_json_decode)
         return assay_data['assay']
+    
+def generateReference(assay_list):
+    pass
         
 def main():
     assays = parse_json('../TB.json')

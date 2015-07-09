@@ -122,7 +122,7 @@ def _submit_job(job_submitter, command, job_parms, waitfor_id=None, hold=False, 
     logging.info("jobid = %s" % jobid)
     return jobid
 
-def find_reads(path):
+def findReads(path):
     import os
     import re
     read_list = []
@@ -130,18 +130,18 @@ def find_reads(path):
         is_read = re.search('(.*)(\.fastq(?:\.gz)?)$', file, re.IGNORECASE)
         if is_read:
             sample_name = is_read.group(1)
-            is_paired = re.search('^(.*)(_[R]?)([12])(.*)$', sample_name, re.IGNORECASE)
+            is_paired = re.search('^((.*?)(?:_L\d\d\d)?(?:_[R]?))([12])(.*)$', sample_name, re.IGNORECASE)
             if is_paired:
                 if is_paired.group(3) == '1':  # If paired, only process read 1, so we don't double count the pair, see TODO below
-                    sample_name = is_paired.group(1)
+                    sample_name = is_paired.group(2)
                     read1 = file
-                    read2 = "%s%s2%s%s" % (is_paired.group(1), is_paired.group(2), is_paired.group(4), is_read.group(2))
+                    read2 = "%s2%s%s" % (is_paired.group(1), is_paired.group(4), is_read.group(2))
                     if os.path.exists(os.path.join(path, read2)):
                         read = (sample_name, os.path.join(path, read1), os.path.join(path, read2))
                         read_list.append(read)
                         logging.info(read)
                     else:
-                        # TODO: If only R2 is found, it won't be included
+                        # TODO: If only R2 exists, it won't be included
                         logging.warning("Cannot find %s, the matching read to %s. Including as unpaired..." % (read2, read1))
                         read = (sample_name, os.path.join(path, read1))
                         read_list.append(read)
@@ -152,20 +152,21 @@ def find_reads(path):
                 logging.info(read)
     return read_list
 
-def trim_adapters(sample, read1, read2=None, adapters="../illumina_adapters_all.fasta", minlen=80):
+def trimAdapters(sample, read1, read2=None, quality=None, adapters="../illumina_adapters_all.fasta", minlen=80):
     import os
-    job_params = {'queue':'', 'mem_requested':3, 'num_cpus':1, 'walltime':8}
+    job_params = {'queue':'', 'mem_requested':3, 'num_cpus':1, 'walltime':8, 'args':''}
     job_params['name'] = "asap_trim_%s" % sample
     job_params['work_dir'] = os.path.dirname(read1)
+    qual_string = quality if quality else ''
     if read2:
         out_reads = [sample+"_R1_trimmed.fastq", sample+"_R1_unpaired.fastq", sample+"_R2_trimmed.fastq", sample+"_R2_unpaired.fastq"]
-        command = "java -jar /scratch/bin/trimmomatic-0.32.jar PE %s %s %s %s %s $%s ILLUMINACLIP:%s:2:30:10 MINLEN:%d" % (read1, read2, out_reads[0], out_reads[1], out_reads[2], out_reads[3], adapters, minlen)
+        command = "java -jar /scratch/bin/trimmomatic-0.32.jar PE %s %s %s %s %s $%s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (read1, read2, out_reads[0], out_reads[1], out_reads[2], out_reads[3], adapters, qual_string, minlen)
     else:
         out_reads = [sample+"_trimmed.fastq"]
-        command = "java -jar /scratch/bin/trimmomatic-0.32.jar SE %s %s ILLUMINACLIP:%s:2:30:10 MINLEN:%d" % (read1, out_reads[0], adapters, minlen)
+        command = "java -jar /scratch/bin/trimmomatic-0.32.jar SE %s %s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (read1, out_reads[0], adapters, qual_string, minlen)
     jobid = _submit_job('PBS', command, job_params)
+    #jobid=1
     #print(command)
-    #print(job_params)
     return (sample, jobid, out_reads)
 
 if __name__ == '__main__':

@@ -16,8 +16,12 @@ asap.analyzeAmplicons
 
 import sys
 import os
+import re
 import argparse
+import logging
+
 import asap.dispatcher as dispatcher
+import asap.assayInfo as assayInfo
 
 __all__ = []
 __version__ = 0.1
@@ -69,28 +73,63 @@ USAGE
     try:
         # Setup argument parser
         parser = argparse.ArgumentParser(description=program_license, formatter_class=argparse.RawDescriptionHelpFormatter)
-        parser.add_argument("-n", "--name", action="store", required=True, help="name for this run. [REQUIRED]")
-        parser.add_argument("-j", "--json", action="store", required=True, type=argparse.FileType('r'), help="JSON file of assay descriptions. [REQUIRED]")
-        parser.add_argument("-d", "--dir", action="store", default=".", help="directory of read files to analyze. [default: `pwd`]")
-        trim_group = parser.add_mutually_exclusive_group()
-        trim_group.add_argument("--trim", action="store_true", default=True, help="perform adapter trimming on reads. [default]")
-        trim_group.add_argument("--no-trim", dest="trim", action="store_false", help="do not perform adapter trimming.")
-        parser.add_argument('-V', '--version', action='version', version=program_version_message)
+        required_group = parser.add_argument_group("required arguments")
+        required_group.add_argument("-n", "--name", required=True, help="name for this run. [REQUIRED]")
+        required_group.add_argument("-j", "--json", required=True, help="JSON file of assay descriptions. [REQUIRED]")
+        optional_group = parser.add_argument_group("optional arguments")
+        optional_group.add_argument("-r", "--read-dir", dest="rdir", metavar="DIR", help="directory of read files to analyze. [default: `pwd`]")
+        optional_group.add_argument("-o", "--out-dir", dest="wdir", metavar="DIR", help="directory to write output files to. [default: `pwd`]")
+        trim_group = parser.add_argument_group("read trimming options")
+        on_off_group = trim_group.add_mutually_exclusive_group()
+        on_off_group.add_argument("--trim", action="store_true", default=True, help="perform adapter trimming on reads. [default: True]")
+        on_off_group.add_argument("--no-trim", dest="trim", action="store_false", help="do not perform adapter trimming.")
+        trim_group.add_argument("-q", "--qual", nargs="?", const="SLIDINGWINDOW:5:20", help="perform quality trimming [default: False], optional parameter can be used to customize quality trimming parameters to trimmomatic. [default: SLIDINGWINDOW:5:20]")
+        trim_group.add_argument("-m", "--minlen", nargs=1, metavar="LEN", default=80, type=int, help="minimum read length to keep after trimming. [default: 80]")
+        parser.add_argument("-V", "--version", action="version", version=program_version_message)
      
         # Process arguments
         args = parser.parse_args()
 
         run_name = args.name
         json_fp = args.json
-        read_dir = args.dir
+        read_dir = args.rdir
+        out_dir = args.wdir
         trim = args.trim
+        qual = args.qual
+        minlen = args.minlen
         
-        print("Combining reads in %s and JSON file: %s for run: %s. Trim=%s" % (read_dir, json_fp, run_name, trim))
+        if not read_dir:
+            read_dir = os.getcwd()
+        if not out_dir:
+            out_dir = os.getcwd()
         
-        read_list = dispatcher.find_reads(read_dir)
+        if os.path.exists(out_dir):
+            response = input(
+                "\nOutput folder %s already exists!\nFiles in it may be overwritten!\nShould we continue anyway [N]? " % out_dir)
+            if not re.match('^[Yy]', response):
+                print("Operation cancelled!")
+                quit()
+        else:
+            os.makedirs(out_dir)
+
+        logfile = os.path.join(out_dir, "asap.log")
+        logging.basicConfig(level=logging.DEBUG,
+                            format='%(asctime)s %(levelname)-8s %(message)s',
+                            datefmt='%m/%d/%Y %H:%M:%S',
+                            filename=logfile,
+                            filemode='w')
+        
+        logging.info("Combining reads in %s and JSON file: %s for run: %s. Trim=%s Qual=%s" % (read_dir, json_fp, run_name, trim, qual))
+        
+        assay_list = assayInfo.parseJSON(json_fp)
+        
+        reference = assayInfo.generateReference(assay_list)
+        
+        read_list = dispatcher.findReads(read_dir)
         if trim:
             for read in read_list:
-                dispatcher.trim_adapters(*read)
+                dispatcher.trimAdapters(*read, quality=qual, minlen=minlen)
+        
                     
 
         return 0
