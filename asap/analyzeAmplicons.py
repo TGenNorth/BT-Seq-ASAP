@@ -91,7 +91,7 @@ USAGE
         trim_group.add_argument("-m", "--minlen", nargs=1, metavar="LEN", default=80, type=int, help="minimum read length to keep after trimming. [default: 80]")
         align_group = parser.add_argument_group("read mapping options")
         align_group.add_argument("-a", "--aligner", nargs=1, default="bwa", help="aligner to use for read mapping. [default: bwa (mem)]")
-        align_group.add_argument("--aligner-args", dest="aargs", metavar="ARGS", nargs=1, help="additional arguments to pass to the aligner, enclosed in \"\".")
+        align_group.add_argument("--aligner-args", dest="aargs", metavar="ARGS", nargs=1, default='', help="additional arguments to pass to the aligner, enclosed in \"\".")
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
      
         # Process arguments
@@ -111,7 +111,10 @@ USAGE
             read_dir = os.getcwd()
         if not out_dir:
             out_dir = os.getcwd()
-        
+       
+        out_dir = dispatcher.expandPath(out_dir)
+        read_dir = dispatcher.expandPath(read_dir)
+
         if os.path.exists(out_dir):
             response = input(
                 "\nOutput folder %s already exists!\nFiles in it may be overwritten!\nShould we continue anyway [N]? " % out_dir)
@@ -141,7 +144,7 @@ USAGE
         #trimmed_reads = []
         if trim:
             for read in read_list:
-                trimmed_reads = dispatcher.trimAdapters(*read, out_dir, quality=qual, minlen=minlen)
+                trimmed_reads = dispatcher.trimAdapters(*read, outdir=out_dir, quality=qual, minlen=minlen)
                 dispatcher.alignReadsToReference(trimmed_reads.sample, trimmed_reads.reads, ref_fasta, out_dir, jobid=trimmed_reads.jobid, aligner=aligner, args=aligner_args)
         else:            
             dispatcher.alignReadsToReference(read_list.sample, read_list.reads, ref_fasta, out_dir, aligner=aligner, args=aligner_args)        

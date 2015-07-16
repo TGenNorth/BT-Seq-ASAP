@@ -6,6 +6,14 @@ Created on Jul 8, 2015
 
 import logging
 
+def expandPath(path):
+    import re
+    import os
+    user_match = re.match('^(~)(.*)$', path)
+    if user_match:
+        path = os.path.expanduser(path)
+    return os.path.abspath(path)
+
 def _submit_job(job_submitter, command, job_parms, waitfor_id=None, hold=False, notify=False):
     import subprocess
     import re
@@ -122,7 +130,7 @@ def _submit_job(job_submitter, command, job_parms, waitfor_id=None, hold=False, 
     logging.info("jobid = %s" % jobid)
     return jobid
 
-def _run_bwa(sample, reads, reference, outdir='', dependency=None, sampath='samtools', bwapath='bwa', ncpus=4, args=None):
+def _run_bwa(sample, reads, reference, outdir='', dependency=None, sampath='samtools', bwapath='bwa', ncpus=4, args=''):
     import os
     read1 = reads[0]
     read2 = reads[1] if len(reads) > 1 else None
@@ -186,6 +194,7 @@ def indexFasta(fasta):
 
 def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adapters_all.fasta", minlen=80):
     from collections import namedtuple
+    import os
     read1 = reads[0]
     read2 = reads[1] if len(reads) > 1 else None
     TrimmedRead = namedtuple('TrimmedRead', ['sample', 'jobid', 'reads'])
@@ -196,10 +205,10 @@ def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adap
     if read2:
         out_reads1 = [sample+"_R1_trimmed.fastq", sample+"_R1_unpaired.fastq"]
         out_reads2 = [sample+"_R2_trimmed.fastq", sample+"_R2_unpaired.fastq"]
-        out_reads = [out_reads1[0], out_reads2[0]]
+        out_reads = [os.path.join(outdir, out_reads1[0]), os.path.join(outdir, out_reads2[0])]
         command = "java -jar /scratch/bin/trimmomatic-0.32.jar PE %s %s %s %s %s $%s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (read1, read2, out_reads1[0], out_reads1[1], out_reads2[0], out_reads2[1], adapters, qual_string, minlen)
     else:
-        out_reads = [sample+"_trimmed.fastq"]
+        out_reads = [os.path.join(outdir, sample+"_trimmed.fastq")]
         command = "java -jar /scratch/bin/trimmomatic-0.32.jar SE %s %s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (read1, out_reads[0], adapters, qual_string, minlen)
     jobid = _submit_job('PBS', command, job_params)
     return TrimmedRead(sample, jobid, out_reads)
