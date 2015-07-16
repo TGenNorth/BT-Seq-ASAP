@@ -176,15 +176,22 @@ def findReads(path):
                 logging.info(read)
     return read_list
 
-def trimAdapters(sample, reads, quality=None, adapters="../illumina_adapters_all.fasta", minlen=80):
+def indexFasta(fasta):
     import os
+    job_params = {'queue':'', 'mem_requested':2, 'num_cpus':1, 'walltime':4, 'args':''}
+    job_params['name'] = "asap_index_%s" % fasta
+    job_params['work_dir'] = os.path.dirname(fasta)
+    command = "bwa index %s" % (fasta)
+    return _submit_job('PBS', command, job_params)
+
+def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adapters_all.fasta", minlen=80):
     from collections import namedtuple
     read1 = reads[0]
     read2 = reads[1] if len(reads) > 1 else None
     TrimmedRead = namedtuple('TrimmedRead', ['sample', 'jobid', 'reads'])
     job_params = {'queue':'', 'mem_requested':3, 'num_cpus':1, 'walltime':8, 'args':''}
     job_params['name'] = "asap_trim_%s" % sample
-    job_params['work_dir'] = os.path.dirname(read1)
+    job_params['work_dir'] = outdir
     qual_string = quality if quality else ''
     if read2:
         out_reads1 = [sample+"_R1_trimmed.fastq", sample+"_R1_unpaired.fastq"]

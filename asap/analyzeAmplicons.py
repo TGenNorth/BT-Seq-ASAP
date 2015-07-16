@@ -130,13 +130,14 @@ USAGE
         
         reference = assayInfo.generateReference(assay_list)
         ref_fasta = os.path.join(out_dir, "reference.fasta")
-        reference.write(ref_fasta, 'fasta')          
+        reference.write(ref_fasta, 'fasta')
+        jobid = dispatcher.indexFasta(ref_fasta)        
         
         read_list = dispatcher.findReads(read_dir)
         #trimmed_reads = []
         if trim:
             for read in read_list:
-                trimmed_reads = dispatcher.trimAdapters(*read, quality=qual, minlen=minlen)
+                trimmed_reads = dispatcher.trimAdapters(*read, out_dir, quality=qual, minlen=minlen)
                 dispatcher.alignReadsToReference(trimmed_reads.sample, trimmed_reads.reads, ref_fasta, out_dir, jobid=trimmed_reads.jobid, aligner=aligner, args=aligner_args)
         else:            
             dispatcher.alignReadsToReference(read_list.sample, read_list.reads, ref_fasta, out_dir, aligner=aligner, args=aligner_args)        
