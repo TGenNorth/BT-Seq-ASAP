@@ -85,6 +85,9 @@ USAGE
         on_off_group.add_argument("--no-trim", dest="trim", action="store_false", help="do not perform adapter trimming.")
         trim_group.add_argument("-q", "--qual", nargs="?", const="SLIDINGWINDOW:5:20", help="perform quality trimming [default: False], optional parameter can be used to customize quality trimming parameters to trimmomatic. [default: SLIDINGWINDOW:5:20]")
         trim_group.add_argument("-m", "--minlen", nargs=1, metavar="LEN", default=80, type=int, help="minimum read length to keep after trimming. [default: 80]")
+        align_group = parser.add_argument_group("read mapping options")
+        align_group.add_argument("-a", "--aligner", nargs=1, default="bwa", help="aligner to use for read mapping. [default: bwa (mem)]")
+        align_group.add_argument("--aligner-args", dest="aargs", metavar="ARGS", nargs=1, help="additional arguments to pass to the aligner, enclosed in \"\".")
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
      
         # Process arguments
@@ -97,6 +100,8 @@ USAGE
         trim = args.trim
         qual = args.qual
         minlen = args.minlen
+        aligner = args.aligner
+        aligner_args = args.aargs
         
         if not read_dir:
             read_dir = os.getcwd()
@@ -124,13 +129,18 @@ USAGE
         assay_list = assayInfo.parseJSON(json_fp)
         
         reference = assayInfo.generateReference(assay_list)
+        ref_fasta = os.path.join(out_dir, "reference.fasta")
+        reference.write(ref_fasta, 'fasta')          
         
         read_list = dispatcher.findReads(read_dir)
+        #trimmed_reads = []
         if trim:
             for read in read_list:
-                dispatcher.trimAdapters(*read, quality=qual, minlen=minlen)
-        
-                    
+                trimmed_reads = dispatcher.trimAdapters(*read, quality=qual, minlen=minlen)
+                dispatcher.alignReadsToReference(trimmed_reads.sample, trimmed_reads.reads, ref_fasta, out_dir, jobid=trimmed_reads.jobid, aligner=aligner, args=aligner_args)
+        else:            
+            dispatcher.alignReadsToReference(read_list.sample, read_list.reads, ref_fasta, out_dir, aligner=aligner, args=aligner_args)        
+                
 
         return 0
     except KeyboardInterrupt:

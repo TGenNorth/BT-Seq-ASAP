@@ -317,10 +317,28 @@ def parseJSON(filename):
         return assay_data['assay']
     
 def generateReference(assay_list):
-    pass
+    from skbio import DNA
+    from skbio import SequenceCollection
+    reference = []
+    for assay in assay_list:
+        name = assay.name
+        if assay.AND:
+            for operand in assay.AND:
+                if isinstance(operand, Target):
+                    name = name + "_%s" % operand.gene_name if operand.gene_name else name
+                    for amplicon in operand.amplicons:
+                        name = name + "_%s" % amplicon.variant_name if amplicon.variant_name else name
+                        seq = DNA(amplicon.sequence, id=name)
+                        reference.append(seq)
+        else:
+            for amplicon in assay.target.amplicons:
+                name = name + "_%s" % amplicon.variant_name if amplicon.variant_name else name
+                seq = DNA(amplicon.sequence, id=name)
+                reference.append(seq)
+    return SequenceCollection(reference)
         
 def main():
-    assays = parse_json('../TB.json')
+    assays = parseJSON('../TB.json')
     for assay in assays:
         print(assay)
 

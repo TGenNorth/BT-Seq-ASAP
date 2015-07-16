@@ -122,10 +122,34 @@ def _submit_job(job_submitter, command, job_parms, waitfor_id=None, hold=False, 
     logging.info("jobid = %s" % jobid)
     return jobid
 
+def _run_bwa(sample, reads, reference, outdir='', dependency=None, sampath='samtools', bwapath='bwa', ncpus=4, args=None):
+    import os
+    read1 = reads[0]
+    read2 = reads[1] if len(reads) > 1 else None
+    bam_string = "\'@RG\\tID:%s\\tSM:%s\'" % (sample, sample)
+    job_params = {'queue':'', 'mem_requested':10, 'num_cpus':ncpus, 'walltime':36, 'args':''}
+    job_params['name'] = "asap_bwa_%s" % sample
+    aligner_name = "bwamem"
+    aligner_command = "%s mem -R %s %s -t %s %s %s %s" % (bwapath, bam_string, args, ncpus, reference, read1, read2)
+    bam_nickname = "%s-%s" % (sample, aligner_name)
+    samview_command = "%s view -S -b -h -" % sampath
+    samsort_command = "%s sort - %s" % (sampath, bam_nickname)
+    samindex_command = "%s index %s.bam" % (sampath, bam_nickname)
+    command = "%s | %s | %s \n %s" % (aligner_command, samview_command, samsort_command, samindex_command)
+    work_dir = os.path.join(outdir, aligner_name)
+    job_params['work_dir'] = work_dir
+    if not os.path.exists(work_dir):
+        os.makedirs(work_dir)
+    final_file = os.path.join(work_dir, "%s.bam" % bam_nickname)
+    job_id = _submit_job('PBS', command, job_params, (dependency,))
+    return bam_nickname, job_id, final_file
+
 def findReads(path):
     import os
     import re
+    from collections import namedtuple
     read_list = []
+    Read = namedtuple('Read', ['sample', 'reads'])
     for file in os.listdir(path):
         is_read = re.search('(.*)(\.fastq(?:\.gz)?)$', file, re.IGNORECASE)
         if is_read:
@@ -137,37 +161,44 @@ def findReads(path):
                     read1 = file
                     read2 = "%s2%s%s" % (is_paired.group(1), is_paired.group(4), is_read.group(2))
                     if os.path.exists(os.path.join(path, read2)):
-                        read = (sample_name, os.path.join(path, read1), os.path.join(path, read2))
+                        read = Read(sample_name, [os.path.join(path, read1), os.path.join(path, read2)])
                         read_list.append(read)
                         logging.info(read)
                     else:
                         # TODO: If only R2 exists, it won't be included
                         logging.warning("Cannot find %s, the matching read to %s. Including as unpaired..." % (read2, read1))
-                        read = (sample_name, os.path.join(path, read1))
+                        read = Read(sample_name, [os.path.join(path, read1)])
                         read_list.append(read)
                         logging.info(read)
             else:
-                read = (sample_name, os.path.join(path, file))
+                read = Read(sample_name, [os.path.join(path, file)])
                 read_list.append(read)
                 logging.info(read)
     return read_list
 
-def trimAdapters(sample, read1, read2=None, quality=None, adapters="../illumina_adapters_all.fasta", minlen=80):
+def trimAdapters(sample, reads, quality=None, adapters="../illumina_adapters_all.fasta", minlen=80):
     import os
+    from collections import namedtuple
+    read1 = reads[0]
+    read2 = reads[1] if len(reads) > 1 else None
+    TrimmedRead = namedtuple('TrimmedRead', ['sample', 'jobid', 'reads'])
     job_params = {'queue':'', 'mem_requested':3, 'num_cpus':1, 'walltime':8, 'args':''}
     job_params['name'] = "asap_trim_%s" % sample
     job_params['work_dir'] = os.path.dirname(read1)
     qual_string = quality if quality else ''
     if read2:
-        out_reads = [sample+"_R1_trimmed.fastq", sample+"_R1_unpaired.fastq", sample+"_R2_trimmed.fastq", sample+"_R2_unpaired.fastq"]
-        command = "java -jar /scratch/bin/trimmomatic-0.32.jar PE %s %s %s %s %s $%s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (read1, read2, out_reads[0], out_reads[1], out_reads[2], out_reads[3], adapters, qual_string, minlen)
+        out_reads1 = [sample+"_R1_trimmed.fastq", sample+"_R1_unpaired.fastq"]
+        out_reads2 = [sample+"_R2_trimmed.fastq", sample+"_R2_unpaired.fastq"]
+        out_reads = [out_reads1[0], out_reads2[0]]
+        command = "java -jar /scratch/bin/trimmomatic-0.32.jar PE %s %s %s %s %s $%s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (read1, read2, out_reads1[0], out_reads1[1], out_reads2[0], out_reads2[1], adapters, qual_string, minlen)
     else:
         out_reads = [sample+"_trimmed.fastq"]
         command = "java -jar /scratch/bin/trimmomatic-0.32.jar SE %s %s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (read1, out_reads[0], adapters, qual_string, minlen)
     jobid = _submit_job('PBS', command, job_params)
-    #jobid=1
-    #print(command)
-    return (sample, jobid, out_reads)
+    return TrimmedRead(sample, jobid, out_reads)
+
+def alignReadsToReference(sample, reads, reference, outdir, jobid=None, aligner="bwa", args=None):
+    return _run_bwa(sample, reads, reference, outdir, jobid, bwapath=aligner, args=args)
 
 if __name__ == '__main__':
     pass
