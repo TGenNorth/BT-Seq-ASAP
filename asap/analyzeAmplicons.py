@@ -82,7 +82,7 @@ USAGE
         required_group.add_argument("-j", "--json", required=True, help="JSON file of assay descriptions. [REQUIRED]")
         optional_group = parser.add_argument_group("optional arguments")
         optional_group.add_argument("-r", "--read-dir", dest="rdir", metavar="DIR", help="directory of read files to analyze. [default: `pwd`]")
-        optional_group.add_argument("-o", "--out-dir", dest="wdir", metavar="DIR", help="directory to write output files to. [default: `pwd`]")
+        optional_group.add_argument("-o", "--out-dir", dest="odir", metavar="DIR", help="directory to write output files to. [default: `pwd`]")
         trim_group = parser.add_argument_group("read trimming options")
         on_off_group = trim_group.add_mutually_exclusive_group()
         on_off_group.add_argument("--trim", action="store_true", default=True, help="perform adapter trimming on reads. [default: True]")
@@ -100,7 +100,7 @@ USAGE
         run_name = args.name
         json_fp = args.json
         read_dir = args.rdir
-        out_dir = args.wdir
+        out_dir = args.odir
         trim = args.trim
         qual = args.qual
         minlen = args.minlen
@@ -138,17 +138,21 @@ USAGE
         reference = assayInfo.generateReference(assay_list)
         ref_fasta = os.path.join(out_dir, "reference.fasta")
         reference.write(ref_fasta, 'fasta')
-        jobid = dispatcher.indexFasta(ref_fasta)        
+        index_job = dispatcher.indexFasta(ref_fasta)        
         
         read_list = dispatcher.findReads(read_dir)
-        #trimmed_reads = []
-        if trim:
-            for read in read_list:
+        output_files = []
+        final_jobs = []
+        for read in read_list:
+            if trim:
                 trimmed_reads = dispatcher.trimAdapters(*read, outdir=out_dir, quality=qual, minlen=minlen)
-                dispatcher.alignReadsToReference(trimmed_reads.sample, trimmed_reads.reads, ref_fasta, out_dir, jobid=trimmed_reads.jobid, aligner=aligner, args=aligner_args)
-        else:            
-            dispatcher.alignReadsToReference(read_list.sample, read_list.reads, ref_fasta, out_dir, aligner=aligner, args=aligner_args)        
-                
+                (bam_file, job_id) = dispatcher.alignReadsToReference(trimmed_reads.sample, trimmed_reads.reads, ref_fasta, out_dir, jobid=trimmed_reads.jobid, aligner=aligner, args=aligner_args)
+            else:            
+                (bam_file, job_id) = dispatcher.alignReadsToReference(read_list.sample, read_list.reads, ref_fasta, out_dir, jobid=index_job, aligner=aligner, args=aligner_args)        
+        
+            (xml_file, job_id) = dispatcher.processBam(read_list.sample, json_fp, bam_file, out_dir, job_id)
+            output_files.append(xml_file)
+            final_jobs.append(job_id)
 
         return 0
     except KeyboardInterrupt:

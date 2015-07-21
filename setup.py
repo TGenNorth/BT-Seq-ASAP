@@ -49,6 +49,7 @@ setup(
     entry_points = {
         'console_scripts': [
             'analyzeAmplicons = asap.analyzeAmplicons:main',
+            'bamProcessor = asap.bamProcessor:main',
         ]
     },
     scripts = [

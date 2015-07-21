@@ -6,14 +6,6 @@ Created on Jul 8, 2015
 
 import logging
 
-def expandPath(path):
-    import re
-    import os
-    user_match = re.match('^(~)(.*)$', path)
-    if user_match:
-        path = os.path.expanduser(path)
-    return os.path.abspath(path)
-
 def _submit_job(job_submitter, command, job_parms, waitfor_id=None, hold=False, notify=False):
     import subprocess
     import re
@@ -150,7 +142,7 @@ def _run_bwa(sample, reads, reference, outdir='', dependency=None, sampath='samt
         os.makedirs(work_dir)
     final_file = os.path.join(work_dir, "%s.bam" % bam_nickname)
     job_id = _submit_job('PBS', command, job_params, (dependency,))
-    return bam_nickname, job_id, final_file
+    return (final_file, job_id)
 
 def findReads(path):
     import os
@@ -184,6 +176,14 @@ def findReads(path):
                 logging.info(read)
     return read_list
 
+def expandPath(path):
+    import re
+    import os
+    user_match = re.match('^(~)(.*)$', path)
+    if user_match:
+        path = os.path.expanduser(path)
+    return os.path.abspath(path)
+
 def indexFasta(fasta):
     import os
     job_params = {'queue':'', 'mem_requested':2, 'num_cpus':1, 'walltime':4, 'args':''}
@@ -206,7 +206,7 @@ def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adap
         out_reads1 = [sample+"_R1_trimmed.fastq", sample+"_R1_unpaired.fastq"]
         out_reads2 = [sample+"_R2_trimmed.fastq", sample+"_R2_unpaired.fastq"]
         out_reads = [os.path.join(outdir, out_reads1[0]), os.path.join(outdir, out_reads2[0])]
-        command = "java -jar /scratch/bin/trimmomatic-0.32.jar PE %s %s %s %s %s $%s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (read1, read2, out_reads1[0], out_reads1[1], out_reads2[0], out_reads2[1], adapters, qual_string, minlen)
+        command = "java -jar /scratch/bin/trimmomatic-0.32.jar PE %s %s %s %s %s %s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (read1, read2, out_reads1[0], out_reads1[1], out_reads2[0], out_reads2[1], adapters, qual_string, minlen)
     else:
         out_reads = [os.path.join(outdir, sample+"_trimmed.fastq")]
         command = "java -jar /scratch/bin/trimmomatic-0.32.jar SE %s %s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (read1, out_reads[0], adapters, qual_string, minlen)
@@ -215,6 +215,16 @@ def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adap
 
 def alignReadsToReference(sample, reads, reference, outdir, jobid=None, aligner="bwa", args=None):
     return _run_bwa(sample, reads, reference, outdir, jobid, bwapath=aligner, args=args)
+
+def processBam(sample_name, json_file, bam_file, out_dir, dependency):
+    import os
+    job_params = {'queue':'', 'mem_requested':2, 'num_cpus':1, 'walltime':4, 'args':''}
+    job_params['name'] = "asap_bamprocesser_%s" % sample_name
+    job_params['work_dir'] = out_dir
+    out_file = os.path.join(out_dir, sample_name+".xml")
+    command = "bamProcessor -j %s -b %s -o %s" % (json_file, bam_file, out_file)
+    jobid = _submit_job('PBS', command, job_params, (dependency,))
+    return (out_file, jobid)
 
 if __name__ == '__main__':
     pass
