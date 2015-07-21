@@ -53,7 +53,7 @@ def _process_pileup(pileup, amplicon):
         base_counter = Counter()
         for pileupread in pileupcolumn.pileups:
             if pileupread.is_del:
-                base_counter.update("-")
+                base_counter.update("_")
             else:
                 base_counter.update(pileupread.alignment.query_sequence[pileupread.query_position])
 #                    print ('\tbase in read %s = %s' % (pileupread.alignment.query_name, pileupread.alignment.query_sequence[pileupread.query_position]))
@@ -77,10 +77,13 @@ def _process_pileup(pileup, amplicon):
 
 def _write_xml(root, xml_file):
     from xml.dom import minidom
-#    dom = minidom.parseString(str(ElementTree.tostring(root, 'utf-8')))
+    xml_string = ElementTree.tostring(root)
+    print(xml_string)
+    print(str(xml_string))
+    dom = minidom.parseString(xml_string)
     output = open(xml_file, 'w')
-#    output.write(dom.toprettyxml(indent="    "))
-    print(str(ElementTree.tostring(root, 'utf-8')))
+    output.write(dom.toprettyxml(indent="    "))
+#    output.write(str(ElementTree.tostring(root, 'utf-8')))
     output.close()
     return xml_file
 
