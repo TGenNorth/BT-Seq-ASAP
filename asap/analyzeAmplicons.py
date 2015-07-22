@@ -98,7 +98,7 @@ USAGE
         args = parser.parse_args()
 
         run_name = args.name
-        json_fp = args.json
+        json_fp = dispatcher.expandPath(args.json)
         read_dir = args.rdir
         out_dir = args.odir
         trim = args.trim
@@ -148,9 +148,9 @@ USAGE
                 trimmed_reads = dispatcher.trimAdapters(*read, outdir=out_dir, quality=qual, minlen=minlen)
                 (bam_file, job_id) = dispatcher.alignReadsToReference(trimmed_reads.sample, trimmed_reads.reads, ref_fasta, out_dir, jobid=trimmed_reads.jobid, aligner=aligner, args=aligner_args)
             else:            
-                (bam_file, job_id) = dispatcher.alignReadsToReference(read_list.sample, read_list.reads, ref_fasta, out_dir, jobid=index_job, aligner=aligner, args=aligner_args)        
+                (bam_file, job_id) = dispatcher.alignReadsToReference(read.sample, read.reads, ref_fasta, out_dir, jobid=index_job, aligner=aligner, args=aligner_args)        
         
-            (xml_file, job_id) = dispatcher.processBam(read_list.sample, json_fp, bam_file, out_dir, job_id)
+            (xml_file, job_id) = dispatcher.processBam(read.sample, json_fp, bam_file, out_dir, job_id)
             output_files.append(xml_file)
             final_jobs.append(job_id)
 

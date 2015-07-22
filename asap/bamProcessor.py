@@ -77,13 +77,9 @@ def _process_pileup(pileup, amplicon):
 
 def _write_xml(root, xml_file):
     from xml.dom import minidom
-    xml_string = ElementTree.tostring(root)
-    print(xml_string)
-    print(str(xml_string))
-    dom = minidom.parseString(xml_string)
+    dom = minidom.parseString(ElementTree.tostring(root))
     output = open(xml_file, 'w')
     output.write(dom.toprettyxml(indent="    "))
-#    output.write(str(ElementTree.tostring(root, 'utf-8')))
     output.close()
     return xml_file
 
