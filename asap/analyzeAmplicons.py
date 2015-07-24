@@ -87,14 +87,14 @@ USAGE
         on_off_group = trim_group.add_mutually_exclusive_group()
         on_off_group.add_argument("--trim", action="store_true", default=True, help="perform adapter trimming on reads. [default: True]")
         on_off_group.add_argument("--no-trim", dest="trim", action="store_false", help="do not perform adapter trimming.")
-        trim_group.add_argument("-s", "--adapter-sequences", dest="adapters", nargs=1, default="/scratch/dlemmer/ASAP/illumina_adapters_all.fasta", help="location of the adapter sequence file to use for trimming. [default: /scratch/dlemmer/ASAP/illumina_adapters_all.fasta]")
+        trim_group.add_argument("-s", "--adapter-sequences", dest="adapters", default="/scratch/dlemmer/ASAP/illumina_adapters_all.fasta", help="location of the adapter sequence file to use for trimming. [default: /scratch/dlemmer/ASAP/illumina_adapters_all.fasta]")
         trim_group.add_argument("-q", "--qual", nargs="?", const="SLIDINGWINDOW:5:20", help="perform quality trimming [default: False], optional parameter can be used to customize quality trimming parameters to trimmomatic. [default: SLIDINGWINDOW:5:20]")
-        trim_group.add_argument("-m", "--minlen", nargs=1, metavar="LEN", default=80, type=int, help="minimum read length to keep after trimming. [default: 80]")
+        trim_group.add_argument("-m", "--minlen", metavar="LEN", default=80, type=int, help="minimum read length to keep after trimming. [default: 80]")
         align_group = parser.add_argument_group("read mapping options")
-        align_group.add_argument("-a", "--aligner", nargs=1, default="bwa", help="aligner to use for read mapping. [default: bwa (mem)]")
-        align_group.add_argument("--aligner-args", dest="aargs", metavar="ARGS", nargs=1, default='', help="additional arguments to pass to the aligner, enclosed in \"\".")
-        align_group.add_argument("-d", "--depth", nargs=1, default=100, type=int, help="minimum read depth required to consider a position covered. [default: 100]")
-        align_group.add_argument("-p", "--proportion", nargs=1, default=0.1, type=float, help="minimum proportion required to call a SNP at a given position. [default: 0.1]")
+        align_group.add_argument("-a", "--aligner", default="bwa", help="aligner to use for read mapping. [default: bwa (mem)]")
+        align_group.add_argument("--aligner-args", dest="aargs", metavar="ARGS", default='', help="additional arguments to pass to the aligner, enclosed in \"\".")
+        align_group.add_argument("-d", "--depth", default=100, type=int, help="minimum read depth required to consider a position covered. [default: 100]")
+        align_group.add_argument("-p", "--proportion", default=0.1, type=float, help="minimum proportion required to call a SNP at a given position. [default: 0.1]")
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
      
         # Process arguments
@@ -111,7 +111,7 @@ USAGE
         aligner_args = args.aargs
         depth = args.depth
         proportion = args.proportion
-        adapters = args.adapters
+        adapters = dispatcher.expandPath(args.adapters)
         
         if not read_dir:
             read_dir = os.getcwd()

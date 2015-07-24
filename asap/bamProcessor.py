@@ -169,8 +169,8 @@ USAGE
         #parser.add_argument("-o", "--out-dir", dest="odir", metavar="DIR", help="directory to write output files to. [default: `pwd`]")
         required_group.add_argument("-o", "--out", metavar="FILE", required=True, help="XML file to write output to. [REQUIRED]")
         #parser.add_argument("-n", "--name", help="sample name, if not provided it will be derived from BAM file")
-        parser.add_argument("-d", "--depth", nargs=1, default=100, type=int, help="minimum read depth required to consider a position covered. [default: 100]")
-        parser.add_argument("-p", "--proportion", nargs=1, default=0.1, type=float, help="minimum proportion required to call a SNP at a given position. [default: 0.1]")
+        parser.add_argument("-d", "--depth", default=100, type=int, help="minimum read depth required to consider a position covered. [default: 100]")
+        parser.add_argument("-p", "--proportion", default=0.1, type=float, help="minimum proportion required to call a SNP at a given position. [default: 0.1]")
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
      
         # Process arguments

@@ -125,7 +125,7 @@ def _submit_job(job_submitter, command, job_parms, waitfor_id=None, hold=False, 
 def _run_bwa(sample, reads, reference, outdir='', dependency=None, sampath='samtools', bwapath='bwa', ncpus=4, args=''):
     import os
     read1 = reads[0]
-    read2 = reads[1] if len(reads) > 1 else None
+    read2 = reads[1] if len(reads) > 1 else ""
     bam_string = "\'@RG\\tID:%s\\tSM:%s\'" % (sample, sample)
     job_params = {'queue':'', 'mem_requested':10, 'num_cpus':ncpus, 'walltime':36, 'args':''}
     job_params['name'] = "asap_bwa_%s" % sample
@@ -199,6 +199,8 @@ def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adap
     read2 = reads[1] if len(reads) > 1 else None
     TrimmedRead = namedtuple('TrimmedRead', ['sample', 'jobid', 'reads'])
     trim_dir = os.path.join(outdir, 'trimmed')
+    if not os.path.exists(trim_dir):
+        os.makedirs(trim_dir)
     job_params = {'queue':'', 'mem_requested':3, 'num_cpus':1, 'walltime':8, 'args':''}
     job_params['name'] = "asap_trim_%s" % sample
     job_params['work_dir'] = trim_dir
@@ -220,6 +222,8 @@ def alignReadsToReference(sample, reads, reference, outdir, jobid=None, aligner=
 def processBam(sample_name, json_file, bam_file, out_dir, dependency, depth, proportion):
     import os
     xml_dir = os.path.join(out_dir, "xml")
+    if not os.path.exists(xml_dir):
+        os.makedirs(xml_dir)
     job_params = {'queue':'', 'mem_requested':2, 'num_cpus':1, 'walltime':4, 'args':''}
     job_params['name'] = "asap_bamprocesser_%s" % sample_name
     job_params['work_dir'] = xml_dir
