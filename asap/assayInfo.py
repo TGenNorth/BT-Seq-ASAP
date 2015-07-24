@@ -182,13 +182,14 @@ class SNP(object):
     classdocs
     '''
 
-    def __init__(self, position, reference, variant, significance=None):
+    def __init__(self, position, reference, variant, name=None, significance=None):
         '''
         Constructor
         '''
         self.position = position
         self.reference = reference
         self.variant = variant
+        self.name = name
         self.significance = significance
         
     def __str__(self):
@@ -246,11 +247,12 @@ class AND(object):
     classdocs
     '''
 
-    def __init__(self, significance, target=None, snp=None, regionofinterest=None):
+    def __init__(self, significance, name=None, target=None, snp=None, regionofinterest=None):
         '''
         Constructor
         '''
         self.significance = significance
+        self.name = name
         self.operands = []
         if target:
             if isinstance(target, list):
@@ -303,7 +305,7 @@ def _json_decode(json_dict):
         return Amplicon(**json_dict)
     elif "function" in json_dict:
         return Target(**json_dict)
-    elif "name" in json_dict:
+    elif "assay_type" in json_dict:
         return Assay(**json_dict)
     elif "snp" in json_dict or "regionofinterest" in json_dict or "target" in json_dict:
         return AND(**json_dict)

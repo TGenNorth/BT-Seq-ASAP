@@ -12,40 +12,45 @@
           "position" : 1268,
           "reference" : "C",
           "variant" : "T",
+          "name" : "-10A",
           "Significance" : {
-            "message" : "-10A mutation found"
+            "message" : "Mutation that may be associated with KAN resistance."
           }
         },
         {
           "position" : 1270,
           "reference" : "G",
           "variant" : "A",
+          "name" : "-12T",
           "Significance" : {
-            "message" : "-12T mutation found"
+            "message" : "Mutation that may be associated with KAN resistance."
           }
         },
         {
           "position" : 1272,
           "reference" : "G",
           "variant" : "A",
+          "name" : "-14T",
           "Significance" : {
-            "message" : "-14T mutation found"
+            "message" : "KAN resistance."
           }
         },
         {
           "position" : 1273,
           "reference" : "G",
           "variant" : "C",
+          "name" : "-15G",
           "Significance" : {
-            "message" : "-15G mutation found"
+            "message" : "Mutation that may be associated with KAN resistance."
           }
         },
         {
           "position" : 1295,
           "reference" : "C",
           "variant" : "A",
+          "name" : "-37T",
           "Significance" : {
-            "message" : "-37T mutation found"
+            "message" : "Mutation that may be associated with KAN resistance."
           }
         }]
       }
@@ -63,72 +68,81 @@
           "position" : 1102,
           "reference" : "G",
           "variant" : "C",
+          "name" : "88GCC",
           "Significance" : {
-            "message" : "88GCC mutation found"
+            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         },
         {
           "position" : 1101,
           "reference" : "G",
           "variant" : "T",
+          "name" : "88TGC",
           "Significance" : {
-            "message" : "88TGC mutation found"
+            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         },
         {
           "position" : 1108,
           "reference" : "C",
           "variant" : "T",
+          "name" : "90GTG",
           "Significance" : {
-            "message" : "90GTG mutation found"
+            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         },
         {
           "position" : 1110,
           "reference" : "T",
           "variant" : "C",
+          "name" : "91CCG",
           "Significance" : {
-            "message" : "91CCG mutation found"
+            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         },
         {
           "position" : 1120,
           "reference" : "A",
           "variant" : "G",
+          "name" : "94GGC",
           "Significance" : {
-            "message" : "94GGC mutation found"
+            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         },
         {
           "position" : 1119,
           "reference" : "G",
           "variant" : "C",
+          "name" : "94CAC",
           "Significance" : {
-            "message" : "94CAC mutation found"
+            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         },
         {
           "position" : 1119,
           "reference" : "G",
           "variant" : "A",
+          "name" : "94AAC",
           "Significance" : {
-            "message" : "94AAC mutation found"
+            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         },
         {
           "position" : 1120,
           "reference" : "A",
           "variant" : "C",
+          "name" : "94GCC",
           "Significance" : {
-            "message" : "94GCC mutation found"
+            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         },
         {
           "position" : 1119,
           "reference" : "G",
           "variant" : "T",
+          "name" : "94TAC",
           "Significance" : {
-            "message" : "94TAC mutation found"
+            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         }],
         "AND" : {
@@ -143,8 +157,9 @@
             "reference" : "G",
             "variant" : "T"
           }],
+          "name" : "88CTG",
           "Significance" : {
-            "message" : "88CTG mutation found"
+            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         }
       }
@@ -162,40 +177,45 @@
           "position" : 1150,
           "reference" : "T",
           "variant" : "A",
+          "name" : "-8A",
           "Significance" : {
-            "message" : "-8A mutation found"
+            "message" : "Mutation associated with INH resistance."
           }
         },
         {
           "position" : 1150,
           "reference" : "T",
           "variant" : "C",
+          "name" : "-8C",
           "Significance" : {
-            "message" : "-8C mutation found"
+            "message" : "Mutation associated with INH resistance."
           }
         },
         {
           "position" : 1150,
           "reference" : "T",
           "variant" : "G",
+          "name" : "-8G",
           "Significance" : {
-            "message" : "-8G mutation found"
+            "message" : "Mutation associated with INH resistance."
           }
         },
         {
           "position" : 1143,
           "reference" : "C",
           "variant" : "T",
+          "name" : "-15T",
           "Significance" : {
-            "message" : "-15T mutation found"
+            "message" : "Mutation associated with INH resistance."
           }
         },
         {
           "position" : 1141,
           "reference" : "G",
           "variant" : "T",
+          "name" : "-17T",
           "Significance" : {
-            "message" : "-17T mutation found"
+            "message" : "Mutation associated with INH resistance."
           }
         }]
       }
@@ -213,24 +233,27 @@
           "position" : 1094,
           "reference" : "C",
           "variant" : "G",
+          "name" : "315ACC",
           "Significance" : {
-            "message" : "315ACC mutation found"
+            "message" : "Mutation associated with INH resistance."
           }
         },
         {
           "position" : 1094,
           "reference" : "C",
           "variant" : "T",
+          "name" : "315AAC",
           "Significance" : {
-            "message" : "315AAC mutation found"
+            "message" : "Mutation associated with INH resistance."
           }
         },
         {
           "position" : 1093,
           "reference" : "G",
           "variant" : "T",
+          "name" : "315AGA",
           "Significance" : {
-            "message" : "315AGA mutation found"
+            "message" : "Mutation associated with INH resistance."
           }
         }],
         "AND" : {
@@ -245,8 +268,9 @@
             "reference" : "G",
             "variant" : "T"
           }],
+          "name" : "315ACA",
           "Significance" : {
-            "message" : "315ACA mutation found"
+            "message" : "Mutation associated with INH resistance."
           }
         }
       }
@@ -264,112 +288,126 @@
           "position" : 1089,
           "reference" : "C",
           "variant" : "A",
+          "name" : "513AAA",
           "Significance" : {
-            "message" : "513AAA mutation found"
+            "message" : "Mutation associated with rifampin resistance."
           }
         },
         {
           "position" : 1090,
           "reference" : "A",
           "variant" : "T",
+          "name" : "513CTA",
           "Significance" : {
-            "message" : "513CTA mutation found"
+            "message" : "Mutation associated with rifampin resistance."
           }
         },
         {
           "position" : 1098,
           "reference" : "G",
           "variant" : "T",
+          "name" : "516TAC",
           "Significance" : {
-            "message" : "516TAC mutation found"
+            "message" : "Mutation associated with rifampin resistance."
           }
         },
         {
           "position" : 1099,
           "reference" : "A",
           "variant" : "T",
+          "name" : "516GTC",
           "Significance" : {
-            "message" : "516GTC mutation found"
+            "message" : "Mutation associated with rifampin resistance."
           }
         },
         {
           "position" : 1099,
           "reference" : "A",
           "variant" : "G",
+          "name" : "516GGC",
           "Significance" : {
-            "message" : "516GGC mutation found"
+            "message" : "Mutation associated with rifampin resistance."
           }
         },
         {
           "position" : 1117,
           "reference" : "C",
           "variant" : "T",
+          "name" : "522TTG",
           "Significance" : {
-            "message" : "522TTG mutation found"
+            "message" : "Mutation associated with rifampin resistance."
           }
         },
         {
           "position" : 1128,
           "reference" : "C",
           "variant" : "G",
+          "name" : "526GAC",
           "Significance" : {
-            "message" : "526GAC mutation found"
+            "message" : "Mutation associated with rifampin resistance."
           }
         },
         {
           "position" : 1128,
           "reference" : "C",
           "variant" : "T",
+          "name" : "526TAC",
           "Significance" : {
-            "message" : "526TAC mutation found"
+            "message" : "Mutation associated with rifampin resistance."
           }
         },
         {
           "position" : 1129,
           "reference" : "A",
           "variant" : "G",
+          "name" : "526CGC",
           "Significance" : {
-            "message" : "526CGC mutation found"
+            "message" : "Mutation associated with rifampin resistance."
           }
         },
         {
           "position" : 1129,
           "reference" : "A",
           "variant" : "T",
+          "name" : "526CTC",
           "Significance" : {
-            "message" : "526CTC mutation found"
+            "message" : "Mutation associated with rifampin resistance."
           }
         },
         {
           "position" : 1128,
           "reference" : "C",
           "variant" : "A",
+          "name" : "526AAC",
           "Significance" : {
-            "message" : "526AAC mutation found"
+            "message" : "Mutation associated with rifampin resistance."
           }
         },
         {
           "position" : 1144,
           "reference" : "C",
           "variant" : "T",
+          "name" : "531TTG",
           "Significance" : {
-            "message" : "531TTG mutation found"
+            "message" : "Mutation associated with rifampin resistance."
           }
         },
         {
           "position" : 1144,
           "reference" : "C",
           "variant" : "G",
+          "name" : "531TGG",
           "Significance" : {
-            "message" : "531TGG mutation found"
+            "message" : "Mutation associated with rifampin resistance."
           }
         },
         {
           "position" : 1150,
           "reference" : "T",
           "variant" : "C",
+          "name" : "533CCG",
           "Significance" : {
-            "message" : "533CCG mutation found"
+            "message" : "Mutation associated with rifampin resistance."
           }
         }],
         "AND" : {
@@ -384,8 +422,9 @@
             "reference" : "A",
             "variant" : "G"
           }],
+          "name" : "526TGC",
           "Significance" : {
-            "message" : "526TGC mutation found"
+            "message" : "Mutation associated with rifampin resistance."
           }
         }
       }
@@ -404,24 +443,27 @@
           "position" : 1063,
           "reference" : "A",
           "variant" : "G",
+          "name" : "1401G",
           "Significance" : {
-            "message" : "1401G mutation found"
+            "message" : "Mutation associated with KAN, CAP, and AMK resistance, Specificity for Capreomycin is about 96%, 3-4% of isolates with this mutation may be sensitive to CAP."
           }
         },
         {
           "position" : 1064,
           "reference" : "C",
           "variant" : "T",
+          "name" : "1402T",
           "Significance" : {
-            "message" : "1402T mutation found"
+            "message" : "Mutation associated with CAP & KAN resistance."
           }
         },
         {
           "position" : 1146,
           "reference" : "G",
           "variant" : "T",
+          "name" : "1484T",
           "Significance" : {
-            "message" : "1484T mutation found"
+            "message" : "Mutation associated with CAP & KAN resistance."
           }
         }]
       }

@@ -42,14 +42,20 @@ def _write_parameters(node, data):
         subnode.text = v
     return node
 
-def _process_pileup(pileup, amplicon):
+def _process_pileup(pileup, amplicon, depth, proportion):
     pileup_dict = {}
     snp_dict = _create_snp_dict(amplicon)
     consensus_seq = ""
     snp_list = []
+    breadth_positions = 0
+    amplicon_length = len(amplicon.sequence)
     for pileupcolumn in pileup:
         #print("\ncoverage at base %s = %s" % (pileupcolumn.pos, pileupcolumn.n))
         position = pileupcolumn.pos+1
+        depth_passed = False
+        if pileupcolumn.n >= depth:
+            breadth_positions += 1
+            depth_passed = True
         base_counter = Counter()
         for pileupread in pileupcolumn.pileups:
             if pileupread.is_del:
@@ -63,15 +69,19 @@ def _process_pileup(pileup, amplicon):
         reference_call = amplicon.sequence[pileupcolumn.pos]
         consensus_seq += alignment_call
         if position in snp_dict:
-            snp = {'type':'position of interest', 'position':str(position), 'depth':str(pileupcolumn.n), 'reference':reference_call, 'variant':snp_dict[position][1], 'basecalls':base_counter}
-            snp_list.append(snp)
-            #print("Found position of interest %d, reference: %s, distribution:%s" % (position, snp_dict[position][0], base_counter))
-        elif alignment_call != reference_call:
-            snp = {'type':'unknown', 'position':str(position), 'depth':str(pileupcolumn.n), 'reference':reference_call, 'variant':alignment_call, 'basecalls':base_counter}
+            for (name, reference, variant, significance) in snp_dict[position]:
+                snp = {'name':name, 'position':str(position), 'depth':str(pileupcolumn.n), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
+                if depth_passed and base_counter[variant]/pileupcolumn.n*100 >= proportion:
+                    snp[significance] = significance
+                snp_list.append(snp)
+                #print("Found position of interest %d, reference: %s, distribution:%s" % (position, snp_dict[position][0], base_counter))
+        elif alignment_call != reference_call and depth_passed:
+            snp = {'name':'unknown', 'position':str(position), 'depth':str(pileupcolumn.n), 'reference':reference_call, 'variant':alignment_call, 'basecalls':base_counter}
             snp_list.append(snp)
             #print("SNP found at position %d: %s->%s" % (position, reference_call, alignment_call))
     
     pileup_dict['consensus_sequence'] = consensus_seq
+    pileup_dict['breadth'] = str(breadth_positions/amplicon_length * 100)
     pileup_dict['SNPs'] = snp_list
     return pileup_dict 
 
@@ -86,11 +96,14 @@ def _write_xml(root, xml_file):
 def _create_snp_dict(amplicon):
     snp_dict = {}
     for snp in amplicon.SNPs:
-        snp_dict[snp.position] = (snp.reference, snp.variant)
+        if snp.position in snp_dict:
+            snp_dict[snp.position].append((snp.name, snp.reference, snp.variant, snp.significance))
+        else:
+            snp_dict[snp.position] = [(snp.name, snp.reference, snp.variant, snp.significance)]
     return snp_dict
 
 def _add_snp_node(parent, snp):
-    snp_attributes = {k:snp[k] for k in ('type', 'position', 'depth', 'reference')}
+    snp_attributes = {k:snp[k] for k in ('name', 'position', 'depth', 'reference')}
     snp_node = ElementTree.SubElement(parent, 'snp', snp_attributes)
     base_counter = snp['basecalls']
     snpcall = snp['variant']
@@ -98,8 +111,10 @@ def _add_snp_node(parent, snp):
     snpcount = base_counter[snpcall]
     snpcall_node = ElementTree.SubElement(snp_node, 'snp_call', {'count':str(snpcount), 'percent':str(snpcount/depth*100)})
     snpcall_node.text = snpcall
-    dist_node = ElementTree.SubElement(snp_node, 'base_distribution', {k:str(v) for k,v in base_counter.items()})
-    #print(ElementTree.tostring(snp_node))
+    if 'significance' in snp:
+        significance_node = ElementTree.SubElement(snp_node, 'significance')
+        significance_node.text = snp['significance']
+    ElementTree.SubElement(snp_node, 'base_distribution', {k:str(v) for k,v in base_counter.items()})
     return snp_node
 
 class CLIError(Exception):
@@ -154,6 +169,8 @@ USAGE
         #parser.add_argument("-o", "--out-dir", dest="odir", metavar="DIR", help="directory to write output files to. [default: `pwd`]")
         required_group.add_argument("-o", "--out", metavar="FILE", required=True, help="XML file to write output to. [REQUIRED]")
         #parser.add_argument("-n", "--name", help="sample name, if not provided it will be derived from BAM file")
+        parser.add_argument("-d", "--depth", nargs=1, default=100, type=int, help="minimum read depth required to consider a position covered. [default: 100]")
+        parser.add_argument("-p", "--proportion", nargs=1, default=0.1, type=float, help="minimum proportion required to call a SNP at a given position. [default: 0.1]")
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
      
         # Process arguments
@@ -162,6 +179,8 @@ USAGE
         json_fp = args.json
         bam_fp = args.bam
         out_fp = args.out
+        depth = args.depth
+        proportion = args.proportion
         #ref_fp = args.ref
         #out_dir = args.odir
         #if not out_dir:
@@ -196,7 +215,7 @@ USAGE
                 amplicon_node = ElementTree.SubElement(assay_node, "amplicon", amplicon_dict)
                 pileup = samdata.pileup(ref_name)
                 #ref = reference.fetch(ref_name)
-                amplicon_data = _process_pileup(pileup, amplicon)
+                amplicon_data = _process_pileup(pileup, amplicon, depth, proportion)
                 for snp in amplicon_data['SNPs']:
                     _add_snp_node(amplicon_node, snp)
                     # This would be helpful, but count_coverage is broken in python3

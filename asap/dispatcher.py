@@ -198,17 +198,18 @@ def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adap
     read1 = reads[0]
     read2 = reads[1] if len(reads) > 1 else None
     TrimmedRead = namedtuple('TrimmedRead', ['sample', 'jobid', 'reads'])
+    trim_dir = os.path.join(outdir, 'trimmed')
     job_params = {'queue':'', 'mem_requested':3, 'num_cpus':1, 'walltime':8, 'args':''}
     job_params['name'] = "asap_trim_%s" % sample
-    job_params['work_dir'] = outdir
+    job_params['work_dir'] = trim_dir
     qual_string = quality if quality else ''
     if read2:
         out_reads1 = [sample+"_R1_trimmed.fastq", sample+"_R1_unpaired.fastq"]
         out_reads2 = [sample+"_R2_trimmed.fastq", sample+"_R2_unpaired.fastq"]
-        out_reads = [os.path.join(outdir, out_reads1[0]), os.path.join(outdir, out_reads2[0])]
+        out_reads = [os.path.join(trim_dir, out_reads1[0]), os.path.join(trim_dir, out_reads2[0])]
         command = "java -jar /scratch/bin/trimmomatic-0.32.jar PE %s %s %s %s %s %s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (read1, read2, out_reads1[0], out_reads1[1], out_reads2[0], out_reads2[1], adapters, qual_string, minlen)
     else:
-        out_reads = [os.path.join(outdir, sample+"_trimmed.fastq")]
+        out_reads = [os.path.join(trim_dir, sample+"_trimmed.fastq")]
         command = "java -jar /scratch/bin/trimmomatic-0.32.jar SE %s %s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (read1, out_reads[0], adapters, qual_string, minlen)
     jobid = _submit_job('PBS', command, job_params)
     return TrimmedRead(sample, jobid, out_reads)
@@ -216,13 +217,14 @@ def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adap
 def alignReadsToReference(sample, reads, reference, outdir, jobid=None, aligner="bwa", args=None):
     return _run_bwa(sample, reads, reference, outdir, jobid, bwapath=aligner, args=args)
 
-def processBam(sample_name, json_file, bam_file, out_dir, dependency):
+def processBam(sample_name, json_file, bam_file, out_dir, dependency, depth, proportion):
     import os
+    xml_dir = os.path.join(out_dir, "xml")
     job_params = {'queue':'', 'mem_requested':2, 'num_cpus':1, 'walltime':4, 'args':''}
     job_params['name'] = "asap_bamprocesser_%s" % sample_name
-    job_params['work_dir'] = out_dir
-    out_file = os.path.join(out_dir, sample_name+".xml")
-    command = "bamProcessor -j %s -b %s -o %s" % (json_file, bam_file, out_file)
+    job_params['work_dir'] = xml_dir
+    out_file = os.path.join(xml_dir, sample_name+".xml")
+    command = "bamProcessor -j %s -b %s -o %s -d %d -p %f" % (json_file, bam_file, out_file, depth, proportion)
     jobid = _submit_job('PBS', command, job_params, (dependency,))
     return (out_file, jobid)
 
