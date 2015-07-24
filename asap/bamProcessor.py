@@ -71,8 +71,8 @@ def _process_pileup(pileup, amplicon, depth, proportion):
         if position in snp_dict:
             for (name, reference, variant, significance) in snp_dict[position]:
                 snp = {'name':name, 'position':str(position), 'depth':str(pileupcolumn.n), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
-                if depth_passed and base_counter[variant]/pileupcolumn.n*100 >= proportion:
-                    snp[significance] = significance
+                if depth_passed and base_counter[variant]/pileupcolumn.n >= proportion:
+                    snp['significance'] = significance
                 snp_list.append(snp)
                 #print("Found position of interest %d, reference: %s, distribution:%s" % (position, snp_dict[position][0], base_counter))
         elif alignment_call != reference_call and depth_passed:
@@ -113,7 +113,7 @@ def _add_snp_node(parent, snp):
     snpcall_node.text = snpcall
     if 'significance' in snp:
         significance_node = ElementTree.SubElement(snp_node, 'significance')
-        significance_node.text = snp['significance']
+        significance_node.text = snp['significance'].message
     ElementTree.SubElement(snp_node, 'base_distribution', {k:str(v) for k,v in base_counter.items()})
     return snp_node
 
