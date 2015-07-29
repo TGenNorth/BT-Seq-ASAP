@@ -50,6 +50,8 @@ setup(
         'console_scripts': [
             'analyzeAmplicons = asap.analyzeAmplicons:main',
             'bamProcessor = asap.bamProcessor:main',
+            'outputCombiner = asap.outputCombiner:main',
+            'formatOutput = asap.formatOutput:main',
         ]
     },
     scripts = [
