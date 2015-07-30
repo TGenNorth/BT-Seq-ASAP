@@ -219,17 +219,25 @@ def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adap
 def alignReadsToReference(sample, reads, reference, outdir, jobid=None, aligner="bwa", args=None):
     return _run_bwa(sample, reads, reference, outdir, jobid, bwapath=aligner, args=args)
 
-def processBam(sample_name, json_file, bam_file, out_dir, dependency, depth, proportion):
+def processBam(sample_name, json_file, bam_file, xml_dir, dependency, depth, proportion):
     import os
-    xml_dir = os.path.join(out_dir, "xml")
-    if not os.path.exists(xml_dir):
-        os.makedirs(xml_dir)
     job_params = {'queue':'', 'mem_requested':2, 'num_cpus':1, 'walltime':4, 'args':''}
     job_params['name'] = "asap_bamprocesser_%s" % sample_name
     job_params['work_dir'] = xml_dir
     out_file = os.path.join(xml_dir, sample_name+".xml")
     command = "bamProcessor -j %s -b %s -o %s -d %d -p %f" % (json_file, bam_file, out_file, depth, proportion)
     jobid = _submit_job('PBS', command, job_params, (dependency,))
+    return (out_file, jobid)
+
+def combineOutputFiles(run_name, xml_dir, out_dir, dependencies):
+    import os
+    job_params = {'queue':'', 'mem_requested':2, 'num_cpus':1, 'walltime':4, 'args':''}
+    job_params['name'] = "asap_final_%s" % run_name
+    job_params['work_dir'] = out_dir
+    out_file = os.path.join(out_dir, run_name+"_analysis.xml")
+    dependency_string = ":".join(dependencies)
+    command = "outputCombiner -n %s -x %s -o %s" % (run_name, xml_dir, out_file)
+    jobid = _submit_job('PBS', command, job_params, (dependency_string, 'afterany'), notify=True)
     return (out_file, jobid)
 
 if __name__ == '__main__':

@@ -87,7 +87,7 @@ USAGE
         required_group = parser.add_argument_group("required arguments")
         required_group.add_argument("-n", "--name", required=True, help="name for this run. [REQUIRED]")
         required_group.add_argument("-x", "--xml-dir", dest="xdir", metavar="DIR", required=True, help="directory containing XML files to combine. [REQUIRED]")
-        parser.add_argument("-o", "--out-dir", dest="odir", metavar="DIR", help="directory to write output file to. [default: `pwd`]")
+        parser.add_argument("-o", "--out", metavar="FILE", help="file to write final output to. [default: ./{name}_analysis.xml]")
         parser.add_argument('-V', '--version', action='version', version=program_version_message)
 
         # Process arguments
@@ -95,17 +95,10 @@ USAGE
 
         run_name = args.name
         xml_dir = args.xdir
-        out_dir = args.odir
+        out_file = args.out
 
-        if not out_dir:
-            out_dir = os.getcwd()
-       
-        out_dir = dispatcher.expandPath(out_dir)
         xml_dir = dispatcher.expandPath(xml_dir)
 
-        if not os.path.exists(out_dir):
-            os.makedirs(out_dir)
-        
         root_node = ElementTree.Element("analysis", {'run_name':run_name})
             
         for file in os.listdir(xml_dir):
@@ -115,7 +108,9 @@ USAGE
                 sample_node = sample_tree.getroot()
                 root_node.append(sample_node)
 
-        out_file = os.path.join(out_dir, run_name+"_analysis.xml")
+        if not out_file:
+            out_file = os.path.join(".", run_name+"_analysis.xml")
+            
         _write_xml(root_node, out_file)
 
         return 0

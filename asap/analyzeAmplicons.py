@@ -149,6 +149,10 @@ USAGE
         read_list = dispatcher.findReads(read_dir)
         output_files = []
         final_jobs = []
+        xml_dir = os.path.join(out_dir, "xml")
+        if not os.path.exists(xml_dir):
+            os.makedirs(xml_dir)
+            
         for read in read_list:
             if trim:
                 trimmed_reads = dispatcher.trimAdapters(*read, outdir=out_dir, adapters=adapters, quality=qual, minlen=minlen)
@@ -156,9 +160,12 @@ USAGE
             else:            
                 (bam_file, job_id) = dispatcher.alignReadsToReference(read.sample, read.reads, ref_fasta, out_dir, jobid=index_job, aligner=aligner, args=aligner_args)        
         
-            (xml_file, job_id) = dispatcher.processBam(read.sample, json_fp, bam_file, out_dir, job_id, depth, proportion)
+            (xml_file, job_id) = dispatcher.processBam(read.sample, json_fp, bam_file, xml_dir, job_id, depth, proportion)
             output_files.append(xml_file)
             final_jobs.append(job_id)
+            
+            (final_output, job) = dispatcher.combineOutputFiles(run_name, xml_dir, out_dir, final_jobs)
+            print("All jobs are submitted, the final job id is: %s. Output will be in %s when ready." % (job, final_output))
 
         return 0
     except KeyboardInterrupt:
