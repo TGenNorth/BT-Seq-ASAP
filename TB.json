@@ -14,7 +14,7 @@
           "variant" : "T",
           "name" : "-10A",
           "Significance" : {
-            "message" : "Mutation that may be associated with KAN resistance."
+            "message" : "eis -10 mutation present which is associated with kanamycin resistance"
           }
         },
         {
@@ -23,7 +23,7 @@
           "variant" : "A",
           "name" : "-12T",
           "Significance" : {
-            "message" : "Mutation that may be associated with KAN resistance."
+            "message" : "eis -12 mutation present which is associated with kanamycin resistance"
           }
         },
         {
@@ -32,7 +32,7 @@
           "variant" : "A",
           "name" : "-14T",
           "Significance" : {
-            "message" : "KAN resistance."
+            "message" : "eis -14 mutation present which is associated with kanamycin resistance"
           }
         },
         {
@@ -41,7 +41,7 @@
           "variant" : "C",
           "name" : "-15G",
           "Significance" : {
-            "message" : "Mutation that may be associated with KAN resistance."
+            "message" : "eis -15 mutation present which is associated with kanamycin resistance"
           }
         },
         {
@@ -50,7 +50,7 @@
           "variant" : "A",
           "name" : "-37T",
           "Significance" : {
-            "message" : "Mutation that may be associated with KAN resistance."
+            "message" : "eis -37 mutation present which is associated with kanamycin resistance"
           }
         }]
       }
@@ -70,7 +70,7 @@
           "variant" : "C",
           "name" : "88GCC",
           "Significance" : {
-            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
+            "message" : "gyrA 88 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         },
         {
@@ -79,7 +79,7 @@
           "variant" : "T",
           "name" : "88TGC",
           "Significance" : {
-            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
+            "message" : "gyrA 88 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         },
         {
@@ -88,7 +88,7 @@
           "variant" : "T",
           "name" : "90GTG",
           "Significance" : {
-            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
+            "message" : "gyrA 90 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         },
         {
@@ -97,7 +97,7 @@
           "variant" : "C",
           "name" : "91CCG",
           "Significance" : {
-            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
+            "message" : "gyrA 91 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         },
         {
@@ -106,7 +106,7 @@
           "variant" : "G",
           "name" : "94GGC",
           "Significance" : {
-            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
+            "message" : "gyrA 94 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         },
         {
@@ -115,7 +115,7 @@
           "variant" : "C",
           "name" : "94CAC",
           "Significance" : {
-            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
+            "message" : "gyrA 94 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         },
         {
@@ -124,7 +124,7 @@
           "variant" : "A",
           "name" : "94AAC",
           "Significance" : {
-            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
+            "message" : "gyrA 94 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         },
         {
@@ -133,7 +133,7 @@
           "variant" : "C",
           "name" : "94GCC",
           "Significance" : {
-            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
+            "message" : "gyrA 94 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         },
         {
@@ -142,7 +142,7 @@
           "variant" : "T",
           "name" : "94TAC",
           "Significance" : {
-            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
+            "message" : "gyrA 94 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         }],
         "AND" : {
@@ -159,7 +159,7 @@
           }],
           "name" : "88CTG",
           "Significance" : {
-            "message" : "Mutation associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
+            "message" : "gyrA 88 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
           }
         }
       }
@@ -179,7 +179,7 @@
           "variant" : "A",
           "name" : "-8A",
           "Significance" : {
-            "message" : "Mutation associated with INH resistance."
+            "message" : "inhA -8 mutation present which is associated with isoniazid resistance"
           }
         },
         {
@@ -188,7 +188,7 @@
           "variant" : "C",
           "name" : "-8C",
           "Significance" : {
-            "message" : "Mutation associated with INH resistance."
+            "message" : "inhA -8 mutation present which is associated with isoniazid resistance"
           }
         },
         {
@@ -197,7 +197,7 @@
           "variant" : "G",
           "name" : "-8G",
           "Significance" : {
-            "message" : "Mutation associated with INH resistance."
+            "message" : "inhA -8 mutation present which is associated with isoniazid resistance"
           }
         },
         {
@@ -206,7 +206,7 @@
           "variant" : "T",
           "name" : "-15T",
           "Significance" : {
-            "message" : "Mutation associated with INH resistance."
+            "message" : "inhA -15 mutation present which is associated with isoniazid resistance"
           }
         },
         {
@@ -215,7 +215,7 @@
           "variant" : "T",
           "name" : "-17T",
           "Significance" : {
-            "message" : "Mutation associated with INH resistance."
+            "message" : "inhA -17 mutation present which is associated with isoniazid resistance"
           }
         }]
       }
@@ -235,7 +235,7 @@
           "variant" : "G",
           "name" : "315ACC",
           "Significance" : {
-            "message" : "Mutation associated with INH resistance."
+            "message" : "katG 315 mutation present which is associated with isoniazid resistance"
           }
         },
         {
@@ -244,7 +244,7 @@
           "variant" : "T",
           "name" : "315AAC",
           "Significance" : {
-            "message" : "Mutation associated with INH resistance."
+            "message" : "katG 315 mutation present which is associated with isoniazid resistance"
           }
         },
         {
@@ -253,7 +253,7 @@
           "variant" : "T",
           "name" : "315AGA",
           "Significance" : {
-            "message" : "Mutation associated with INH resistance."
+            "message" : "katG 315 mutation present which is associated with isoniazid resistance"
           }
         }],
         "AND" : {
@@ -270,7 +270,7 @@
           }],
           "name" : "315ACA",
           "Significance" : {
-            "message" : "Mutation associated with INH resistance."
+            "message" : "katG 315 mutation present which is associated with isoniazid resistance"
           }
         }
       }
@@ -290,7 +290,7 @@
           "variant" : "A",
           "name" : "513AAA",
           "Significance" : {
-            "message" : "Mutation associated with rifampin resistance."
+            "message" : "rpoB 513 mutation present which is associated with rifampin resistance"
           }
         },
         {
@@ -299,7 +299,7 @@
           "variant" : "T",
           "name" : "513CTA",
           "Significance" : {
-            "message" : "Mutation associated with rifampin resistance."
+            "message" : "rpoB 513 mutation present which is associated with rifampin resistance"
           }
         },
         {
@@ -308,7 +308,7 @@
           "variant" : "T",
           "name" : "516TAC",
           "Significance" : {
-            "message" : "Mutation associated with rifampin resistance."
+            "message" : "rpoB 516 mutation present which is associated with rifampin resistance"
           }
         },
         {
@@ -317,7 +317,7 @@
           "variant" : "T",
           "name" : "516GTC",
           "Significance" : {
-            "message" : "Mutation associated with rifampin resistance."
+            "message" : "rpoB 516 mutation present which is associated with rifampin resistance"
           }
         },
         {
@@ -326,7 +326,7 @@
           "variant" : "G",
           "name" : "516GGC",
           "Significance" : {
-            "message" : "Mutation associated with rifampin resistance."
+            "message" : "rpoB 516 mutation present which is associated with rifampin resistance"
           }
         },
         {
@@ -335,7 +335,7 @@
           "variant" : "T",
           "name" : "522TTG",
           "Significance" : {
-            "message" : "Mutation associated with rifampin resistance."
+            "message" : "rpoB 522 mutation present which is associated with rifampin resistance"
           }
         },
         {
@@ -344,7 +344,7 @@
           "variant" : "G",
           "name" : "526GAC",
           "Significance" : {
-            "message" : "Mutation associated with rifampin resistance."
+            "message" : "rpoB 526 mutation present which is associated with rifampin resistance"
           }
         },
         {
@@ -353,7 +353,7 @@
           "variant" : "T",
           "name" : "526TAC",
           "Significance" : {
-            "message" : "Mutation associated with rifampin resistance."
+            "message" : "rpoB 526 mutation present which is associated with rifampin resistance"
           }
         },
         {
@@ -362,7 +362,7 @@
           "variant" : "G",
           "name" : "526CGC",
           "Significance" : {
-            "message" : "Mutation associated with rifampin resistance."
+            "message" : "rpoB 526 mutation present which is associated with rifampin resistance"
           }
         },
         {
@@ -371,7 +371,7 @@
           "variant" : "T",
           "name" : "526CTC",
           "Significance" : {
-            "message" : "Mutation associated with rifampin resistance."
+            "message" : "rpoB 526 mutation present which is associated with rifampin resistance"
           }
         },
         {
@@ -380,7 +380,7 @@
           "variant" : "A",
           "name" : "526AAC",
           "Significance" : {
-            "message" : "Mutation associated with rifampin resistance."
+            "message" : "rpoB 526 mutation present which is associated with rifampin resistance"
           }
         },
         {
@@ -389,7 +389,7 @@
           "variant" : "T",
           "name" : "531TTG",
           "Significance" : {
-            "message" : "Mutation associated with rifampin resistance."
+            "message" : "rpoB 531 mutation present which is associated with rifampin resistance"
           }
         },
         {
@@ -398,7 +398,7 @@
           "variant" : "G",
           "name" : "531TGG",
           "Significance" : {
-            "message" : "Mutation associated with rifampin resistance."
+            "message" : "rpoB 531 mutation present which is associated with rifampin resistance"
           }
         },
         {
@@ -407,7 +407,7 @@
           "variant" : "C",
           "name" : "533CCG",
           "Significance" : {
-            "message" : "Mutation associated with rifampin resistance."
+            "message" : "rpoB 533 mutation present which is associated with rifampin resistance"
           }
         }],
         "AND" : {
@@ -424,7 +424,7 @@
           }],
           "name" : "526TGC",
           "Significance" : {
-            "message" : "Mutation associated with rifampin resistance."
+            "message" : "rpoB 526 mutation present which is associated with rifampin resistance"
           }
         }
       }
@@ -445,7 +445,7 @@
           "variant" : "G",
           "name" : "1401G",
           "Significance" : {
-            "message" : "Mutation associated with KAN, CAP, and AMK resistance, Specificity for Capreomycin is about 96%, 3-4% of isolates with this mutation may be sensitive to CAP."
+            "message" : "rrs -1401 mutation present which is associated with kanamycin, capreomycin, and amikacin resistance. Specificity for Capreomycin is about 96%, 3-4% of isolates with this mutation may be sensitive to CAP."
           }
         },
         {
@@ -454,7 +454,7 @@
           "variant" : "T",
           "name" : "1402T",
           "Significance" : {
-            "message" : "Mutation associated with CAP & KAN resistance."
+            "message" : "rrs -1402 mutation present which is associated with capreomycin and kanamycin resistance"
           }
         },
         {
@@ -463,7 +463,7 @@
           "variant" : "T",
           "name" : "1484T",
           "Significance" : {
-            "message" : "Mutation associated with CAP & KAN resistance."
+            "message" : "rrs -1484 mutation present which is associated with capreomycin and kanamycin resistance"
           }
         }]
       }

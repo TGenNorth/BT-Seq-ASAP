@@ -8,7 +8,7 @@
 	    	<title>Clinical Results for Sample: <xsl:value-of select="@name"/></title>
 	    </head>
 	    <body>
-	        <center><h1>ASAP Results for Sample: <xsl:value-of select="@name"/></h1></center>
+	        <center><h1>TB Clinical ASAP Results for Sample: <xsl:value-of select="@name"/></h1></center>
 	        <br />
 	    	<table border="2" rules="rows">
 	    	    <tr><th colspan="2">Clinical Summary for Sample: <xsl:value-of select="@name"/></th></tr>
@@ -21,7 +21,7 @@
 	    	</table>
 	    	<br />
 	    	<br />
-	    	<h3>Resistant Mutations Present in Sample <xsl:value-of select="@name"/></h3>
+	    	<h3>Resistance Mutations Present in Sample <xsl:value-of select="@name"/></h3>
 	    	<table border="2" width="100%">
 	    		<tr>
 	    		<th>Gene Target:</th>
@@ -45,6 +45,7 @@
 	    		</xsl:for-each>
 	    		</tr>
 	    	</table>
+	    	<em>Percentages indicate the percentage of the sample containing that mutation</em>
 	    </body>
 	    </html>
 	</xsl:template>
