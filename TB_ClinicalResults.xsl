@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- <!DOCTYPE some_name [ <!ENTITY nbsp "&#160;"> ]>  -->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:output method="xhtml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" omit-xml-declaration="yes" encoding="UTF-8" indent="yes"/>
 	<xsl:template match="/sample">
@@ -21,7 +20,7 @@
 	    	</table>
 	    	<br />
 	    	<br />
-	    	<h3>Resistance Mutations Present in Sample <xsl:value-of select="@name"/></h3>
+	    	<h3>Resistance Mutations Present in Sample: <xsl:value-of select="@name"/></h3>
 	    	<table border="2" width="100%">
 	    		<tr>
 	    		<th>Gene Target:</th>
