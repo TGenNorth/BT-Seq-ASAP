@@ -103,7 +103,7 @@ USAGE
         transform = ET.XSLT(xslt)
         newdom = transform(dom)
         
-        output = open(out_file, 'w')
+        output = open(out_file, 'wb')
         output.write(ET.tostring(newdom, pretty_print=True))
         output.close()
 
