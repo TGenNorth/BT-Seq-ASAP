@@ -104,7 +104,7 @@ USAGE
         for file in os.listdir(xml_dir):
             is_xml = re.search('(.*)\.xml$', file, re.IGNORECASE)
             if is_xml:
-                sample_tree = ElementTree.parse(file)
+                sample_tree = ElementTree.parse(os.path.join(xml_dir, file))
                 sample_node = sample_tree.getroot()
                 root_node.append(sample_node)
 
