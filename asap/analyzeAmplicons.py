@@ -164,8 +164,8 @@ USAGE
             output_files.append(xml_file)
             final_jobs.append(job_id)
             
-            (final_output, job) = dispatcher.combineOutputFiles(run_name, xml_dir, out_dir, final_jobs)
-            print("All jobs are submitted, the final job id is: %s. Output will be in %s when ready." % (job, final_output))
+        (final_output, job) = dispatcher.combineOutputFiles(run_name, xml_dir, out_dir, final_jobs)
+        print("All jobs are submitted, the final job id is: %s. Output will be in %s when ready." % (job, final_output))
 
         return 0
     except KeyboardInterrupt:
