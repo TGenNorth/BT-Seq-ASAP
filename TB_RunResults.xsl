@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-    <xsl:output name="run_summary" method="xhtml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" omit-xml-declaration="yes" encoding="UTF-8" indent="yes"/>
-    <xsl:output name="clinical_summary" method="xhtml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" omit-xml-declaration="yes" encoding="UTF-8" indent="yes"/>
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:exsl="http://exslt.org/common" extension-element-prefixes="exsl">
+    <xsl:output method="xhtml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" omit-xml-declaration="yes" encoding="UTF-8" indent="yes"/>
     <xsl:template match="/analysis">
-<!-- 	<xsl:result-document method="xhtml" format="run_summary" href="{@run_name}_index.html"> -->
+    <exsl:document method="html" href="{@run_name}.html">
         <html>
         <head>
             <title>Run Summary for: <xsl:value-of select="@run_name"/></title>
@@ -41,13 +40,11 @@
 	    	<em>Percentages indicate the percentage of the sample containing that mutation</em>
         </body>
         </html>
-<!--         </xsl:result-document> -->
+        </exsl:document>
 <!-- 	</xsl:template> -->
 <!-- 	<xsl:template match="sample"> -->
-<!-- 	<xsl:result-document href="{/analysis/@run_name}/{@name}.html"> -->
     <xsl:for-each select="sample">
-    <xsl:if test="element-available('xsl:result-document')">
-	<xsl:result-document method="xhtml" format="clinical_summary" href="{@name}.html">
+	<exsl:document method="html" href="{/analysis/@run_name}/{@name}.html">
 	    <html>
 	    <head>
 	    	<title>Clinical Results for Sample: <xsl:value-of select="@name"/></title>
@@ -57,7 +54,7 @@
 	        <br />
 	    	<table border="2" rules="rows">
 	    	    <tr><th colspan="2">Clinical Summary for Sample: <xsl:value-of select="@name"/></th></tr>
-	    	    <xsl:for-each select="//significance">
+	    	    <xsl:for-each select=".//significance">
 	    		    <tr>
 	    		    <td><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]]></xsl:text></td>
 	    		    <td><xsl:value-of select="."/></td>
@@ -93,8 +90,7 @@
 	    	<em>Percentages indicate the percentage of the sample containing that mutation</em>
 	    </body>
 	    </html>
-	</xsl:result-document>
-	</xsl:if>
+	</exsl:document>
 	</xsl:for-each>
     </xsl:template>
 </xsl:stylesheet>
