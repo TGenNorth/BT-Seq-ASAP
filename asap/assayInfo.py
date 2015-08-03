@@ -138,6 +138,7 @@ class Amplicon(object):
             output += "%s = %s\n" % (self.variant_name, self.significance)
         else:
             output += "{"
+            output += self.sequence+" "
             for snp in self.SNPs:
                 output += "%s, " % snp
             for roi in self.ROIs:
@@ -311,12 +312,36 @@ def _json_decode(json_dict):
         return AND(**json_dict)
     else:
         return json_dict
+
+# This needs to be beefed up a lot, but fine for converting fasta to json    
+def _json_encode(obj):
+    import json
+    if isinstance(obj, Assay):
+        assay_dict = {"name":obj.name, "assay_type":obj.assay_type}
+        if obj.target:
+            assay_dict["Target"] = obj.target
+        return assay_dict
+    if isinstance(obj, Target):
+        target_dict = {"function":obj.function}
+        if obj.amplicons:
+            target_dict["Amplicon"] = obj.amplicons if len(obj.amplicons) > 1 else obj.amplicons[0]
+        return target_dict
+    if isinstance(obj, Amplicon):
+        amplicon_dict = {"sequence":obj.sequence}
+        return amplicon_dict
+    else: 
+        return json.JSONEncoder.default(obj)
     
 def parseJSON(filename):
     import json
     with open(filename) as json_fh:
         assay_data = json.load(json_fh, object_hook=_json_decode)
         return assay_data['assay']
+    
+def writeJSON(assay_data, filename):
+    import json
+    with open(filename, 'w') as json_fh:
+        json.dump(assay_data, json_fh, indent=2, default=_json_encode)
     
 def generateReference(assay_list):
     from skbio import DNA

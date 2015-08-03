@@ -48,6 +48,7 @@ setup(
     #tests_require=test_requirements,
     entry_points = {
         'console_scripts': [
+            'prepareJSONInput = asap.prepareJSONInput:main'
             'analyzeAmplicons = asap.analyzeAmplicons:main',
             'bamProcessor = asap.bamProcessor:main',
             'outputCombiner = asap.outputCombiner:main',
