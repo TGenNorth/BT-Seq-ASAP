@@ -144,7 +144,7 @@ USAGE
         reference = assayInfo.generateReference(assay_list)
         ref_fasta = os.path.join(out_dir, "reference.fasta")
         reference.write(ref_fasta, 'fasta')
-        index_job = dispatcher.indexFasta(ref_fasta)        
+        index_job = dispatcher.indexFasta(ref_fasta, aligner)        
         
         read_list = dispatcher.findReads(read_dir)
         output_files = []

@@ -144,6 +144,30 @@ def _run_bwa(sample, reads, reference, outdir='', dependency=None, sampath='samt
     job_id = _submit_job('PBS', command, job_params, (dependency,))
     return (final_file, job_id)
 
+def _run_novoalign(sample, reads, reference, outdir='', dependency=None, sampath='samtools', novopath='bwa', ncpus=4, args=''):
+    import os
+    read1 = reads[0]
+    read2 = reads[1] if len(reads) > 1 else ""
+    #paired_string = "-i PE 500,100" if read2 else ""
+    paired_string = ""
+    bam_string = "\'@RG\\tID:%s\\tSM:%s\'" % (sample, sample)
+    job_params = {'queue':'', 'mem_requested':10, 'num_cpus':ncpus, 'walltime':36, 'args':''}
+    job_params['name'] = "asap_novo_%s" % sample
+    aligner_name = "novo"
+    aligner_command = "%s -f %s %s %s -c %s -o SAM %s -d %s.idx %s" % (novopath, read1, read2, paired_string, ncpus, bam_string, reference, args)
+    bam_nickname = "%s-%s" % (sample, aligner_name)
+    samview_command = "%s view -S -b -h -" % sampath
+    samsort_command = "%s sort - %s" % (sampath, bam_nickname)
+    samindex_command = "%s index %s.bam" % (sampath, bam_nickname)
+    command = "%s | %s | %s \n %s" % (aligner_command, samview_command, samsort_command, samindex_command)
+    work_dir = os.path.join(outdir, aligner_name)
+    job_params['work_dir'] = work_dir
+    if not os.path.exists(work_dir):
+        os.makedirs(work_dir)
+    final_file = os.path.join(work_dir, "%s.bam" % bam_nickname)
+    job_id = _submit_job('PBS', command, job_params, (dependency,))
+    return (final_file, job_id)
+
 def findReads(path):
     import os
     import re
@@ -184,12 +208,16 @@ def expandPath(path):
         path = os.path.expanduser(path)
     return os.path.abspath(path)
 
-def indexFasta(fasta):
+def indexFasta(fasta, aligner="bwa"):
     import os
+    import re
     job_params = {'queue':'', 'mem_requested':2, 'num_cpus':1, 'walltime':4, 'args':''}
     job_params['name'] = "asap_index_%s" % fasta
     job_params['work_dir'] = os.path.dirname(fasta)
-    command = "bwa index %s" % (fasta)
+    if re.search('novo', aligner, re.IGNORECASE):
+        command = "novoindex %s.idx %s" % (fasta, fasta)
+    else:
+        command = "bwa index %s" % (fasta)
     return _submit_job('PBS', command, job_params)
 
 def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adapters_all.fasta", minlen=80):
@@ -217,7 +245,11 @@ def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adap
     return TrimmedRead(sample, jobid, out_reads)
 
 def alignReadsToReference(sample, reads, reference, outdir, jobid=None, aligner="bwa", args=None):
-    return _run_bwa(sample, reads, reference, outdir, jobid, bwapath=aligner, args=args)
+    import re
+    if re.search('novo', aligner, re.IGNORECASE):
+        return _run_novoalign(sample, reads, reference, outdir, jobid, novopath=aligner, args=args)
+    else:
+        return _run_bwa(sample, reads, reference, outdir, jobid, bwapath=aligner, args=args)
 
 def processBam(sample_name, json_file, bam_file, xml_dir, dependency, depth, proportion):
     import os
