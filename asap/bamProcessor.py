@@ -198,6 +198,7 @@ USAGE
         sample_dict['name'] = samdata.header['RG'][0]['ID']
         sample_dict['mapped_reads'] = str(samdata.mapped)
         sample_dict['unmapped_reads'] = str(samdata.unmapped)
+        sample_dict['unassigned_reads'] = str(samdata.nocoordinate)
         sample_node = ElementTree.Element("sample", sample_dict)
 
         #out_fp = os.path.join(out_dir, sample_dict['name']+".xml")
