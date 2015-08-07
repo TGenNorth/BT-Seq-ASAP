@@ -104,7 +104,7 @@ USAGE
         newdom = transform(dom)
         
         output = open(out_file, 'wb')
-        output.write(ET.tostring(newdom, pretty_print=True))
+        output.write(ET.tostring(newdom, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
         output.close()
 
         return 0
