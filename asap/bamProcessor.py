@@ -67,7 +67,7 @@ def _process_pileup(pileup, amplicon, depth, proportion):
         alignment_call = base_counter.most_common(1)[0][0]
         #reference_call = chr(reference[pileupcolumn.pos])
         reference_call = amplicon.sequence[pileupcolumn.pos]
-        consensus_seq += alignment_call
+        consensus_seq += alignment_call if base_counter[alignment_call]/pileupcolumn.n >= proportion else "N"
         if position in snp_dict:
             for (name, reference, variant, significance) in snp_dict[position]:
                 snp = {'name':name, 'position':str(position), 'depth':str(pileupcolumn.n), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
