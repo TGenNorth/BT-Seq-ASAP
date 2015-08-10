@@ -71,8 +71,10 @@ def _process_pileup(pileup, amplicon, depth, proportion):
         if position in snp_dict:
             for (name, reference, variant, significance) in snp_dict[position]:
                 snp = {'name':name, 'position':str(position), 'depth':str(pileupcolumn.n), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
-                if depth_passed and base_counter[variant]/pileupcolumn.n >= proportion:
+                if base_counter[variant]/pileupcolumn.n >= proportion:
                     snp['significance'] = significance
+                if not depth_passed:
+                    snp['flag'] = "low coverage"
                 snp_list.append(snp)
                 #print("Found position of interest %d, reference: %s, distribution:%s" % (position, snp_dict[position][0], base_counter))
         elif alignment_call != reference_call and depth_passed:
@@ -111,9 +113,12 @@ def _add_snp_node(parent, snp):
     snpcount = base_counter[snpcall]
     snpcall_node = ElementTree.SubElement(snp_node, 'snp_call', {'count':str(snpcount), 'percent':str(snpcount/depth*100)})
     snpcall_node.text = snpcall
-    if 'significance' in snp:
+    if 'significance' in snp or 'flag' in snp:
         significance_node = ElementTree.SubElement(snp_node, 'significance')
-        significance_node.text = snp['significance'].message
+        if 'significance' in snp:
+            significance_node.text = snp['significance'].message
+        if 'flag' in snp:
+            significance_node.set('flag', snp['flag'])
     ElementTree.SubElement(snp_node, 'base_distribution', {k:str(v) for k,v in base_counter.items()})
     return snp_node
 
