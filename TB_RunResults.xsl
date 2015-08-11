@@ -2,7 +2,7 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:exsl="http://exslt.org/common" extension-element-prefixes="exsl">
     <xsl:output method="xhtml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" omit-xml-declaration="yes" encoding="UTF-8" indent="yes"/>
     <xsl:template match="/analysis">
-    <exsl:document method="html" href="{@run_name}.html">
+<!--     <exsl:document method="html" href="{@run_name}.html"> -->
         <html>
         <head>
             <title>Run Summary for: <xsl:value-of select="@run_name"/></title>
@@ -25,6 +25,7 @@
 			    		<xsl:for-each select="assay">
 			    		    <td align="center"><xsl:for-each select="amplicon">
 			    		        <xsl:choose>
+			    		            <xsl:when test="snp/significance/@flag"><em><xsl:value-of select="significance/@flag"/></em></xsl:when>
 			    		            <xsl:when test="snp/significance">
 			    		                <xsl:for-each select="snp">
 			    		                    <xsl:if test="significance"><xsl:value-of select="@name"/> (<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/></xsl:if>
@@ -40,10 +41,10 @@
 	    	<em>Percentages indicate the percentage of the sample containing that mutation</em>
         </body>
         </html>
-        </exsl:document>
-<!-- 	</xsl:template> -->
-<!-- 	<xsl:template match="sample"> -->
-    <xsl:for-each select="sample">
+<!--         </exsl:document> -->
+	</xsl:template>
+	<xsl:template match="sample">
+<!--     <xsl:for-each select="sample"> -->
 	<exsl:document method="html" href="{/analysis/@run_name}/{@name}.html">
 	    <html>
 	    <head>
@@ -91,6 +92,6 @@
 	    </body>
 	    </html>
 	</exsl:document>
-	</xsl:for-each>
+<!-- 	</xsl:for-each> -->
     </xsl:template>
 </xsl:stylesheet>
