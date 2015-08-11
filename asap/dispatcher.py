@@ -127,7 +127,7 @@ def _run_bwa(sample, reads, reference, outdir='', dependency=None, sampath='samt
     read1 = reads[0]
     read2 = reads[1] if len(reads) > 1 else ""
     bam_string = "\'@RG\\tID:%s\\tSM:%s\'" % (sample, sample)
-    job_params = {'queue':'', 'mem_requested':10, 'num_cpus':ncpus, 'walltime':36, 'args':''}
+    job_params = {'queue':'', 'mem_requested':4, 'num_cpus':ncpus, 'walltime':8, 'args':''}
     job_params['name'] = "asap_bwa_%s" % sample
     aligner_name = "bwamem"
     aligner_command = "%s mem -R %s %s -t %s %s %s %s" % (bwapath, bam_string, args, ncpus, reference, read1, read2)
@@ -151,7 +151,7 @@ def _run_novoalign(sample, reads, reference, outdir='', dependency=None, sampath
     #paired_string = "-i PE 500,100" if read2 else ""
     paired_string = ""
     bam_string = "\'@RG\\tID:%s\\tSM:%s\'" % (sample, sample)
-    job_params = {'queue':'', 'mem_requested':10, 'num_cpus':ncpus, 'walltime':36, 'args':''}
+    job_params = {'queue':'', 'mem_requested':4, 'num_cpus':ncpus, 'walltime':8, 'args':''}
     job_params['name'] = "asap_novo_%s" % sample
     aligner_name = "novo"
     aligner_command = "%s -f %s %s %s -c %s -o SAM %s -d %s.idx %s" % (novopath, read1, read2, paired_string, ncpus, bam_string, reference, args)
@@ -229,7 +229,7 @@ def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adap
     trim_dir = os.path.join(outdir, 'trimmed')
     if not os.path.exists(trim_dir):
         os.makedirs(trim_dir)
-    job_params = {'queue':'', 'mem_requested':3, 'num_cpus':1, 'walltime':8, 'args':''}
+    job_params = {'queue':'', 'mem_requested':6, 'num_cpus':4, 'walltime':8, 'args':''}
     job_params['name'] = "asap_trim_%s" % sample
     job_params['work_dir'] = trim_dir
     qual_string = quality if quality else ''
@@ -237,10 +237,10 @@ def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adap
         out_reads1 = [sample+"_R1_trimmed.fastq", sample+"_R1_unpaired.fastq"]
         out_reads2 = [sample+"_R2_trimmed.fastq", sample+"_R2_unpaired.fastq"]
         out_reads = [os.path.join(trim_dir, out_reads1[0]), os.path.join(trim_dir, out_reads2[0])]
-        command = "java -jar /scratch/bin/trimmomatic-0.32.jar PE %s %s %s %s %s %s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (read1, read2, out_reads1[0], out_reads1[1], out_reads2[0], out_reads2[1], adapters, qual_string, minlen)
+        command = "java -jar /scratch/bin/trimmomatic-0.32.jar PE -threads %d %s %s %s %s %s %s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (job_params['num_cpus'], read1, read2, out_reads1[0], out_reads1[1], out_reads2[0], out_reads2[1], adapters, qual_string, minlen)
     else:
         out_reads = [os.path.join(trim_dir, sample+"_trimmed.fastq")]
-        command = "java -jar /scratch/bin/trimmomatic-0.32.jar SE %s %s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (read1, out_reads[0], adapters, qual_string, minlen)
+        command = "java -jar /scratch/bin/trimmomatic-0.32.jar SE -threads %d %s %s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (job_params['num_cpus'], read1, out_reads[0], adapters, qual_string, minlen)
     jobid = _submit_job('PBS', command, job_params)
     return TrimmedRead(sample, jobid, out_reads)
 

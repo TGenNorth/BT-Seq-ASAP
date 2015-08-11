@@ -25,7 +25,7 @@
 			    		<xsl:for-each select="assay">
 			    		    <td align="center"><xsl:for-each select="amplicon">
 			    		        <xsl:choose>
-			    		            <xsl:when test="snp/significance/@flag"><em><xsl:value-of select="significance/@flag"/></em></xsl:when>
+			    		            <xsl:when test="snp/significance/@flag"><em><xsl:value-of select="snp/significance/@flag"/></em></xsl:when>
 			    		            <xsl:when test="snp/significance">
 			    		                <xsl:for-each select="snp">
 			    		                    <xsl:if test="significance"><xsl:value-of select="@name"/> (<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/></xsl:if>
@@ -36,6 +36,7 @@
 			    		    </xsl:for-each></td>
 			    		</xsl:for-each>
                     </tr>
+                    <xsl:apply-templates select="."/>
                 </xsl:for-each>
             </table>
 	    	<em>Percentages indicate the percentage of the sample containing that mutation</em>
@@ -56,11 +57,13 @@
 	    	<table border="2" rules="rows">
 	    	    <tr><th colspan="2">Clinical Summary for Sample: <xsl:value-of select="@name"/></th></tr>
 	    	    <xsl:for-each select=".//significance">
+                        <xsl:if test="not(./@flag)">
 	    		    <tr>
 	    		    <td><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]]></xsl:text></td>
 	    		    <td><xsl:value-of select="."/></td>
 	    		    </tr>
-	    		</xsl:for-each>
+                        </xsl:if>
+	            </xsl:for-each>
 	    	</table>
 	    	<br />
 	    	<br />
@@ -77,6 +80,7 @@
 	    		<xsl:for-each select="assay">
 	    		    <td align="center"><xsl:for-each select="amplicon">
 	    		        <xsl:choose>
+			    	    <xsl:when test="snp/significance/@flag"><em><xsl:value-of select="snp/significance/@flag"/></em></xsl:when>
 	    		            <xsl:when test="snp/significance">
 	    		                <xsl:for-each select="snp">
 	    		                    <xsl:if test="significance"><xsl:value-of select="@name"/> (<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/></xsl:if>
