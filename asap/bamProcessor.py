@@ -219,6 +219,8 @@ USAGE
                 amplicon_dict = {}
                 amplicon_dict['reads'] = str(samdata.count(ref_name))
                 amplicon_node = ElementTree.SubElement(assay_node, "amplicon", amplicon_dict)
+                if samdata.count(ref_name) == 0:
+                    ElementTree.SubElement(amplicon_node, "significance", {"flag":"no coverage"})
                 pileup = samdata.pileup(ref_name)
                 #ref = reference.fetch(ref_name)
                 amplicon_data = _process_pileup(pileup, amplicon, depth, proportion)
