@@ -50,7 +50,7 @@
                             <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
                             <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2"/>
                        </Borders>
-                        <Font ss:Size="14" ss:Bold="1" />
+                        <Font ss:Size="12" ss:Bold="1" />
                 </Style>
                 <Style ss:ID="s23">
                         <Alignment ss:Horizontal="Center" ss:Vertical="Bottom" ss:Rotate="-90"/>
@@ -60,7 +60,7 @@
                             <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
                             <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2"/>
                        </Borders>
-                        <Font ss:Size="14" ss:Bold="1" />
+                        <Font ss:Size="11" ss:Bold="1" />
                 </Style>
                 <Style ss:ID="s24">
                         <Font ss:Size="12" ss:Bold="0" />
@@ -77,9 +77,10 @@
         <Worksheet ss:Name="{substring(//analysis/@run_name, 0, 27)}...">
             
                 <Table>
-                        <Column ss:AutoFitWidth="0" ss:Width="170" />
-                        <Column ss:AutoFitWidth="0" ss:Width="170" />
+                        <Column ss:AutoFitWidth="0" ss:Width="210" />
                         <Column ss:AutoFitWidth="0" ss:Width="130" />
+                        <Column ss:AutoFitWidth="0" ss:Width="130" />
+                        <Column ss:AutoFitWidth="0" ss:Width="90" />
 
                         <Row>
                                 <Cell>
@@ -88,6 +89,10 @@
                                 </Cell>
                         </Row>
                         <Row ss:AutoFitHeight="0" ss:Height="18">
+                                <Cell>
+                                        <Data ss:Type="String">
+                                        </Data>
+                                </Cell>
                                 <Cell>
                                         <Data ss:Type="String">
                                         </Data>
@@ -126,6 +131,10 @@
                         <Row ss:AutoFitHeight="0" ss:Height="120">
                                 <Cell ss:StyleID="s22">
                                         <Data ss:Type="String">Sample Name					
+                                        </Data>
+                                </Cell>
+                                <Cell ss:StyleID="s22">
+                                        <Data ss:Type="String">Total Reads					
                                         </Data>
                                 </Cell>
                                 <Cell ss:StyleID="s22">
@@ -190,6 +199,11 @@
                                 <Cell>
                                         <Data ss:Type="String"> 
                                             <xsl:value-of select="@name" />
+                                        </Data>
+                                </Cell>
+                                <Cell>
+                                        <Data ss:Type="String"> 
+                                            <xsl:value-of select="@mapped_reads + @unmapped_reads + @unassigned_reads" />
                                         </Data>
                                 </Cell>
                                 <Cell>
