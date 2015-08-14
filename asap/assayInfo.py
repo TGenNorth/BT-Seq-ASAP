@@ -171,6 +171,18 @@ class Amplicon(object):
         return return_dict
     
     @property
+    def sequence(self):
+        return self._sequence
+    
+    @sequence.setter
+    def sequence(self, value):
+        if value:
+            value = value.replace('\n', '')
+            value = value.replace(' ', '')
+            value = value.upper()
+        self._sequence = value
+        
+    @property
     def significance(self):
         return self._significance
     
