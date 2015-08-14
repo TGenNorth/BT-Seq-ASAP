@@ -22,9 +22,11 @@ import logging
 import skbio.io
 from skbio import DNA
 from skbio import SequenceCollection
+from openpyxl import load_workbook
 
 import asap.dispatcher as dispatcher
 import asap.assayInfo as assayInfo
+from asap.assayInfo import SNP
 
 __all__ = []
 __version__ = 0.1
@@ -98,14 +100,48 @@ USAGE
         if fasta_file:
             sc = skbio.io.registry.read(fasta_file, format='fasta', into=SequenceCollection, constructor=DNA)
             for seq in sc:
-                amplicon = assayInfo.Amplicon(sequence=str(seq))
+                significance = assayInfo.Significance(seq.metadata['description']) if seq.metadata['description'] else None
+                amplicon = assayInfo.Amplicon(sequence=str(seq), significance=significance)
                 target = assayInfo.Target(function='species ID', amplicon=amplicon)
                 assay = assayInfo.Assay(name=seq.metadata['id'], assay_type='presence/absence', target=target)
                 assay_list.append(assay)
         else:
-            print ("Generating JSON from an Excel file hasn't been implemented yet. Go bug Darrin about it.")
-        
-        assay_data = {"Assay":assay_list}    
+            wb = load_workbook(excel_file, read_only=True)
+            ws = wb.active
+            amplicon = None
+            target = None
+            assay = None
+            for row in ws.iter_rows(row_offset=2):
+                
+                if row[0].value: #Create a new assay
+                    if assay:
+                        assay_list.append(assay)
+                        target = None
+                        amplicon = None
+                    assay = assayInfo.Assay(name=row[0].value, assay_type=row[1].value)
+                
+                significance = assayInfo.Significance(message=row[15].value)
+                element = None
+                if row[12].value: #Significance gets attached to ROI
+                    element = assayInfo.RegionOfInterest(position_range=row[12].value, aa_sequence=row[13].value, significance=significance)
+                elif row[9].value: #Significance gets attached to SNP
+                    element = assayInfo.SNP(position=row[9].value, reference=row[10].value, variant=row[11].value, significance=significance)
+                if row[8].value: #Process amplicon
+                    amplicon = assayInfo.Amplicon(sequence=row[8].value, variant_name=row[7].value)
+                if element:
+                    amplicon.add_SNP(element) if isinstance(element, assayInfo.SNP) else amplicon.add_ROI(element)
+                else:
+                    amplicon.significance = significance
+                
+                if target:
+                    target.add_amplicon(amplicon)
+                    amplicon = None
+                else:
+                    target = assayInfo.Target(function=row[2].value, gene_name=row[3].value, start_position=row[4].value, end_position=row[5].value, reverse_comp=row[6].value, amplicon=amplicon)
+                    assay.target = target
+                                                
+        assay_list.append(assay) #get the last one
+        assay_data = {"Assay":assay_list} 
         assayInfo.writeJSON(assay_data, out_file)
 
         return 0

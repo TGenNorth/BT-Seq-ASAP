@@ -89,6 +89,18 @@ class Target(object):
             output += "\n\t%s" % amplicon
         return output
     
+    def as_dict(self):
+        return_dict = {'function':self._function}
+        if self.gene_name:
+            return_dict['gene_name'] = self.gene_name
+        if self.start_position:
+            return_dict['start_position'] = self.start_position
+        if self.end_position:
+            return_dict['end_position'] = self.end_position
+        if self.reverse_comp:
+            return_dict['reverse_comp'] = True
+        return return_dict
+    
     @property
     def function(self):
         return self._function
@@ -145,8 +157,18 @@ class Amplicon(object):
                 output += "%s, " % roi
             if self.AND:
                 output += "%s" % self.AND
+            if self.significance:
+                output += "= %s" % self.significance
             output += "}\n"
         return output    
+    
+    def as_dict(self):
+        return_dict = {'sequence':self.sequence}
+        if self.variant_name:
+            return_dict['variant_name'] = self.variant_name
+        if self._significance:
+            return_dict['Significance'] = self._significance
+        return return_dict
     
     @property
     def significance(self):
@@ -183,7 +205,7 @@ class SNP(object):
     classdocs
     '''
 
-    def __init__(self, position, reference, variant, name=None, significance=None):
+    def __init__(self, position, reference, variant=None, name=None, significance=None):
         '''
         Constructor
         '''
@@ -196,6 +218,16 @@ class SNP(object):
     def __str__(self):
         return "SNP: %d%s->%s = %s" % (self.position, self.reference, self.variant, self.significance)
         
+    def as_dict(self):
+        return_dict = {'position':self.position, 'reference':self.reference}
+        if self.variant:
+            return_dict['variant'] = self.variant
+        if self.name:
+            return_dict['name'] = self.name
+        if self._significance:
+            return_dict['Significance'] = self._significance
+        return return_dict
+    
     @property
     def significance(self):
         return self._significance
@@ -219,6 +251,14 @@ class RegionOfInterest(object):
         self.aa_sequence = aa_sequence
         self.significance = significance
         
+    def as_dict(self):
+        return_dict = {'position_range':self.position_range}
+        if self.aa_sequence:
+            return_dict['aa_sequence'] = self.aa_sequence
+        if self._significance:
+            return_dict['Significance'] = self._significance
+        return return_dict
+    
     @property
     def significance(self):
         return self._significance
@@ -322,13 +362,26 @@ def _json_encode(obj):
             assay_dict["Target"] = obj.target
         return assay_dict
     if isinstance(obj, Target):
-        target_dict = {"function":obj.function}
+        target_dict = obj.as_dict()
         if obj.amplicons:
             target_dict["Amplicon"] = obj.amplicons if len(obj.amplicons) > 1 else obj.amplicons[0]
         return target_dict
     if isinstance(obj, Amplicon):
-        amplicon_dict = {"sequence":obj.sequence}
+        amplicon_dict = obj.as_dict()
+        if obj.SNPs:
+            amplicon_dict["SNP"] = obj.SNPs if len(obj.SNPs) > 1 else obj.SNPs[0]
+        if obj.ROIs:
+            amplicon_dict["RegionOfInterest"] = obj.ROIs if len(obj.ROIs) > 1 else obj.ROIs[0]
         return amplicon_dict
+    if isinstance(obj, SNP):
+        snp_dict = obj.as_dict()
+        return snp_dict
+    if isinstance(obj, RegionOfInterest):
+        roi_dict = obj.as_dict()
+        return roi_dict
+    if isinstance(obj, Significance):
+        sig_dict = {"message":obj.message}
+        return sig_dict
     else: 
         return json.JSONEncoder.default(obj)
     
