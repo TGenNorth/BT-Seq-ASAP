@@ -133,7 +133,7 @@ USAGE
                 else:
                     amplicon.significance = significance
                 
-                if target:
+                if target and row[8].value:
                     target.add_amplicon(amplicon)
                     amplicon = None
                 else:
