@@ -52,7 +52,7 @@ def _process_pileup(pileup, amplicon, depth, proportion):
     amplicon_length = len(amplicon.sequence)
     depth_array = [0] * amplicon_length
     for pileupcolumn in pileup:
-        depth_array[pileupcolumn.pos] = pileupcolumn.n
+        depth_array[pileupcolumn.pos] = str(pileupcolumn.n)
         position = pileupcolumn.pos+1
         depth_passed = False
         if pileupcolumn.n >= depth:
