@@ -130,8 +130,8 @@ def _process_roi(roi, consensus):
     range_match = re.search('(\d*)-(\d*)', roi.position_range)
     if not range_match:
         return roi_dict
-    start = range_match.group(1) - 1
-    end = range_match.group(2)
+    start = int(range_match.group(1)) - 1
+    end = int(range_match.group(2))
     reference = roi.aa_sequence
     nt_sequence = DNA(consensus[start:end])
     aa_sequence = nt_sequence.translate()
