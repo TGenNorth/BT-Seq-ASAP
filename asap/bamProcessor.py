@@ -23,6 +23,7 @@ import logging
 import pysam
 from collections import Counter
 from xml.etree import ElementTree
+from skbio import DNA
 
 import asap.dispatcher as dispatcher
 import asap.assayInfo as assayInfo
@@ -49,8 +50,9 @@ def _process_pileup(pileup, amplicon, depth, proportion):
     snp_list = []
     breadth_positions = 0
     amplicon_length = len(amplicon.sequence)
+    depth_array = [0] * amplicon_length
     for pileupcolumn in pileup:
-        #print("\ncoverage at base %s = %s" % (pileupcolumn.pos, pileupcolumn.n))
+        depth_array[pileupcolumn.pos] = pileupcolumn.n
         position = pileupcolumn.pos+1
         depth_passed = False
         if pileupcolumn.n >= depth:
@@ -84,6 +86,7 @@ def _process_pileup(pileup, amplicon, depth, proportion):
     
     pileup_dict['consensus_sequence'] = consensus_seq
     pileup_dict['breadth'] = str(breadth_positions/amplicon_length * 100)
+    pileup_dict['depths'] = ",".join(depth_array)
     pileup_dict['SNPs'] = snp_list
     return pileup_dict 
 
@@ -121,6 +124,25 @@ def _add_snp_node(parent, snp):
             significance_node.set('flag', snp['flag'])
     ElementTree.SubElement(snp_node, 'base_distribution', {k:str(v) for k,v in base_counter.items()})
     return snp_node
+
+def _process_roi(roi, consensus):
+    roi_dict = {'region':roi.position_range}
+    range_match = re.search('(\d*)-(\d*)', roi.position_range)
+    if not range_match:
+        return roi_dict
+    start = range_match.group(1) - 1
+    end = range_match.group(2)
+    reference = roi.aa_sequence
+    nt_sequence = DNA(consensus[start:end])
+    aa_sequence = nt_sequence.translate()
+    num_changes = 0
+    for i in range(len(reference)):
+        if reference[i] != aa_sequence.values[i]:
+            num_changes += 1
+    roi_dict['reference'] = reference
+    roi_dict['sequence'] = str(aa_sequence)
+    roi_dict['changes'] = num_changes
+    return roi_dict
 
 class CLIError(Exception):
     '''Generic exception to raise and log different fatal errors.'''
@@ -221,8 +243,12 @@ USAGE
                 amplicon_node = ElementTree.SubElement(assay_node, "amplicon", amplicon_dict)
                 if samdata.count(ref_name) == 0:
                     ElementTree.SubElement(amplicon_node, "significance", {"flag":"no coverage"})
+                elif amplicon.significance:
+                    significance_node = ElementTree.SubElement(amplicon_node, "significance")
+                    significance_node.text = amplicon.significance.message
+                    if samdata.count(ref_name) < depth:
+                        significance_node.set("flag", "low coverage")
                 pileup = samdata.pileup(ref_name)
-                #ref = reference.fetch(ref_name)
                 amplicon_data = _process_pileup(pileup, amplicon, depth, proportion)
                 for snp in amplicon_data['SNPs']:
                     _add_snp_node(amplicon_node, snp)
@@ -230,8 +256,12 @@ USAGE
                     #print(samdata.count_coverage(ref_name, snp.position-1, snp.position))
                 del amplicon_data['SNPs']
                 _write_parameters(amplicon_node, amplicon_data)
-        
-#        samdata.count_coverage("eis", 1100, 1101)
+                for roi in amplicon.ROIs:
+                    roi_dict = _process_roi(roi, amplicon_data['consensus_sequence'])
+                    roi_node = ElementTree.SubElement(amplicon_node, "regionofinterest", roi_dict)
+                    if roi_dict['changes'] > 0:
+                        significance_node = ElementTree.SubElement(roi_node, "significance")
+                        significance_node.text = roi.significance.message                       
 
         samdata.close()
         _write_xml(sample_node, out_fp)
