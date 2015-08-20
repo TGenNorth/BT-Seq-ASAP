@@ -50,7 +50,7 @@ def _process_pileup(pileup, amplicon, depth, proportion):
     snp_list = []
     breadth_positions = 0
     amplicon_length = len(amplicon.sequence)
-    depth_array = [0] * amplicon_length
+    depth_array = ["0"] * amplicon_length
     for pileupcolumn in pileup:
         depth_array[pileupcolumn.pos] = str(pileupcolumn.n)
         position = pileupcolumn.pos+1
