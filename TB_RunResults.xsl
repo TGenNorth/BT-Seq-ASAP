@@ -25,7 +25,7 @@
 			    		<xsl:for-each select="assay">
 			    		    <td align="center"><xsl:for-each select="amplicon">
 			    		        <xsl:choose>
-			    		            <xsl:when test="snp/significance/@flag"><em><xsl:value-of select="snp/significance/@flag"/></em></xsl:when>
+			    		            <xsl:when test=".//significance/@flag"><em><xsl:value-of select=".//significance/@flag"/></em></xsl:when>
 			    		            <xsl:when test="snp/significance">
 			    		                <xsl:for-each select="snp">
 			    		                    <xsl:if test="significance"><xsl:value-of select="@name"/> (<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/></xsl:if>
@@ -80,7 +80,7 @@
 	    		<xsl:for-each select="assay">
 	    		    <td align="center"><xsl:for-each select="amplicon">
 	    		        <xsl:choose>
-			    	    <xsl:when test="snp/significance/@flag"><em><xsl:value-of select="snp/significance/@flag"/></em></xsl:when>
+			    	    <xsl:when test=".//significance/@flag"><em><xsl:value-of select=".//significance/@flag"/></em></xsl:when>
 	    		            <xsl:when test="snp/significance">
 	    		                <xsl:for-each select="snp">
 	    		                    <xsl:if test="significance"><xsl:value-of select="@name"/> (<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/></xsl:if>
