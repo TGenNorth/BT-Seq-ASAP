@@ -260,7 +260,7 @@ USAGE
                         if samdata.count(ref_name) < depth:
                             significance_node.set("flag", "low coverage")
 
-                    pileup = samdata.pileup(ref_name)
+                    pileup = samdata.pileup(ref_name, max_depth=1000000)
                     amplicon_data = _process_pileup(pileup, amplicon, depth, proportion)
                     for snp in amplicon_data['SNPs']:
                         _add_snp_node(amplicon_node, snp)
