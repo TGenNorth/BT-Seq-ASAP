@@ -127,32 +127,49 @@ def _add_snp_node(parent, snp):
     ElementTree.SubElement(snp_node, 'base_distribution', {k:str(v) for k,v in base_counter.items()})
     return snp_node
 
-def _process_roi(roi, consensus):
-    roi_dict = {'region':roi.position_range}
-    if not consensus:
-        roi_dict['flag'] = "region not found"
-        return roi_dict
+def _process_roi(roi, samdata, amplicon_ref):
+    roi_dict = {'region':roi.position_range, 'reference':roi.aa_sequence}
     range_match = re.search('(\d*)-(\d*)', roi.position_range)
     if not range_match:
         return roi_dict
     start = int(range_match.group(1)) - 1
     end = int(range_match.group(2))
     reference = roi.aa_sequence
-    nt_sequence = DNA(consensus[start:end])
-    if not nt_sequence:
+    sequence_counter = Counter()
+    depth = 0
+    for read in samdata.fetch(amplicon_ref, start, end):
+        depth += 1
+        nt_sequence = DNA(read.query_alignment_sequence[start:end])
+        aa_sequence = nt_sequence.translate()
+        aa_string = str(aa_sequence).replace('*', 'x')
+        sequence_counter.update([aa_string])
+    if len(sequence_counter) == 0:
         roi_dict['flag'] = "region not found"
         return roi_dict
-    aa_sequence = nt_sequence.translate()
-    #for pro in nt_sequence.translate_six_frames():
-    #    print("\t"+str(pro))
+    consensus = sequence_counter.most_common(1)[0][0]
     num_changes = 0
     for i in range(len(reference)):
-        if reference[i] != str(aa_sequence)[i]:
+        if reference[i] != consensus[i]:
             num_changes += 1
-    roi_dict['reference'] = reference
-    roi_dict['sequence'] = str(aa_sequence)
+    roi_dict['most_common_sequence'] = consensus
     roi_dict['changes'] = str(num_changes)
+    roi_dict['sequence_distribution'] = sequence_counter
+    roi_dict['depth'] = str(depth)
     return roi_dict
+
+def _add_roi_node(parent, roi, roi_dict):
+    roi_attributes = {k:roi_dict[k] for k in ('region', 'reference', 'depth')}
+    roi_node = ElementTree.SubElement(parent, "region_of_interest", roi_attributes)
+    seq_counter = roi_dict['sequence_distribution']
+    aa_seq_node = ElementTree.SubElement(roi_node, "amino_acid_sequence")
+    aa_seq_node.text = roi_dict['most_common_sequence']
+    if 'flag' in roi_dict:
+        significance_node = ElementTree.SubElement(roi_node, "significance", {'flag':roi_dict['flag']})
+    elif 'changes' in roi_dict and int(roi_dict['changes']) > 0:
+        significance_node = ElementTree.SubElement(roi_node, "significance", {'changes':roi_dict['changes']})
+        significance_node.text = roi.significance.message                       
+    ElementTree.SubElement(roi_node, 'sequence_distribution', {k:str(v) for k,v in seq_counter.items()})
+    return roi_node
 
 class CLIError(Exception):
     '''Generic exception to raise and log different fatal errors.'''
@@ -270,13 +287,8 @@ USAGE
                     _write_parameters(amplicon_node, amplicon_data)
 
                     for roi in amplicon.ROIs:
-                        roi_dict = _process_roi(roi, amplicon_data['consensus_sequence'])
-                        roi_node = ElementTree.SubElement(amplicon_node, "region_of_interest", roi_dict)
-                        if 'flag' in roi_dict:
-                            significance_node = ElementTree.SubElement(roi_node, "significance", {'flag':roi_dict['flag']})
-                        elif 'changes' in roi_dict and int(roi_dict['changes']) > 0:
-                            significance_node = ElementTree.SubElement(roi_node, "significance")
-                            significance_node.text = roi.significance.message                       
+                        roi_dict = _process_roi(roi, samdata, ref_name)
+                        _add_roi_node(amplicon_node, roi, roi_dict)
 
         samdata.close()
         _write_xml(sample_node, out_fp)
