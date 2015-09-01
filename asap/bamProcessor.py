@@ -138,18 +138,21 @@ def _process_roi(roi, samdata, amplicon_ref):
     sequence_counter = Counter()
     depth = 0
     for read in samdata.fetch(amplicon_ref, start, end):
-        depth += 1
-        nt_sequence = DNA(read.query_alignment_sequence[start:end])
-        aa_sequence = nt_sequence.translate()
-        aa_string = str(aa_sequence).replace('*', 'x')
-        sequence_counter.update([aa_string])
+        rstart = read.reference_start
+        if rstart <= start:
+            nt_sequence = DNA(read.query_alignment_sequence[start-rstart:end-rstart])
+            aa_sequence = nt_sequence.translate()
+            aa_string = str(aa_sequence).replace('*', 'x')
+            if aa_string:
+                sequence_counter.update([aa_string])
+                depth += 1
     if len(sequence_counter) == 0:
         roi_dict['flag'] = "region not found"
         return roi_dict
     consensus = sequence_counter.most_common(1)[0][0]
     num_changes = 0
     for i in range(len(reference)):
-        if reference[i] != consensus[i]:
+        if len(consensus) <= i or reference[i] != consensus[i]:
             num_changes += 1
     roi_dict['most_common_sequence'] = consensus
     roi_dict['changes'] = str(num_changes)
