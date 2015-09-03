@@ -38,7 +38,7 @@
         </html>
 	</xsl:template>
 	<xsl:template match="sample">
-<!-- 	<exsl:document method="html" href="{/analysis/@run_name}/{@name}.html"> -->
+	<exsl:document method="html" href="{/analysis/@run_name}/{@name}.html">
 	    <html>
 	    <head>
 	    	<title>ASAP Results for Sample: <xsl:value-of select="@name"/></title>
@@ -97,7 +97,7 @@
 	    		<th>Other SNPs found(% reads containing SNP)</th>
 	    		</tr>
 	    		<xsl:for-each select="assay">
-	    		    <xsl:if test="@type = 'SNP'">
+	    		    <xsl:if test="@type = 'SNP' or @type = 'mixed'">
 	    		    <tr>
 	    		        <td><xsl:value-of select="@name"/></td>
 	    		        <td><xsl:value-of select="amplicon/@reads"/></td>
@@ -131,7 +131,7 @@
 	    		<th>SNPs found(% reads containing SNP)</th>
 	    		</tr>
 	    		<xsl:for-each select="assay">
-	    		    <xsl:if test="@type = 'ROI'">
+	    		    <xsl:if test="@type = 'ROI' or @type = 'mixed' and amplicon/region_of_interest">
 	    		    <tr>
 	    		        <td><xsl:value-of select="@name"/></td>
 	    		        <td><xsl:value-of select="amplicon/@reads"/></td>
@@ -180,6 +180,6 @@
 	    	</table>
 	    </body>
 	    </html>
-<!-- 	</exsl:document> -->
+	</exsl:document>
     </xsl:template>
 </xsl:stylesheet>

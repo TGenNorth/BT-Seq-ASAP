@@ -4,7 +4,7 @@ Created on Jun 4, 2015
 @author: dlemmer
 '''
 
-ASSAY_TYPES = ("presence/absence", "SNP", "gene variant", "ROI")
+ASSAY_TYPES = ("presence/absence", "SNP", "gene variant", "ROI", "mixed")
 
 TARGET_FUNCTIONS = ("species ID", "strain ID", "resistance type", "virulence factor")
 
