@@ -135,7 +135,8 @@ def _process_roi(roi, samdata, amplicon_ref):
     start = int(range_match.group(1)) - 1
     end = int(range_match.group(2))
     reference = roi.aa_sequence
-    sequence_counter = Counter()
+    aa_sequence_counter = Counter()
+    nt_sequence_counter = Counter()
     depth = 0
     for read in samdata.fetch(amplicon_ref, start, end):
         rstart = read.reference_start
@@ -144,34 +145,44 @@ def _process_roi(roi, samdata, amplicon_ref):
             aa_sequence = nt_sequence.translate()
             aa_string = str(aa_sequence).replace('*', 'x')
             if aa_string:
-                sequence_counter.update([aa_string])
+                nt_sequence_counter.update([str(nt_sequence)])
+                aa_sequence_counter.update([aa_string])
                 depth += 1
-    if len(sequence_counter) == 0:
+    if len(aa_sequence_counter) == 0:
         roi_dict['flag'] = "region not found"
         return roi_dict
-    consensus = sequence_counter.most_common(1)[0][0]
+    aa_consensus = aa_sequence_counter.most_common(1)[0][0]
+    nt_consensus = nt_sequence_counter.most_common(1)[0][0]
     num_changes = 0
     for i in range(len(reference)):
-        if len(consensus) <= i or reference[i] != consensus[i]:
+        if len(aa_consensus) <= i or reference[i] != aa_consensus[i]:
             num_changes += 1
-    roi_dict['most_common_sequence'] = consensus
+    roi_dict['most_common_aa_sequence'] = aa_consensus
+    roi_dict['most_common_nt_sequence'] = nt_consensus
     roi_dict['changes'] = str(num_changes)
-    roi_dict['sequence_distribution'] = sequence_counter
+    roi_dict['aa_sequence_distribution'] = aa_sequence_counter
+    roi_dict['nt_sequence_distribution'] = nt_sequence_counter
     roi_dict['depth'] = str(depth)
     return roi_dict
 
 def _add_roi_node(parent, roi, roi_dict):
     roi_attributes = {k:roi_dict[k] for k in ('region', 'reference', 'depth')}
     roi_node = ElementTree.SubElement(parent, "region_of_interest", roi_attributes)
-    seq_counter = roi_dict['sequence_distribution']
-    aa_seq_node = ElementTree.SubElement(roi_node, "amino_acid_sequence")
-    aa_seq_node.text = roi_dict['most_common_sequence']
+    aa_seq_counter = roi_dict['aa_sequence_distribution']
+    aa_seq_count = aa_seq_counter[roi_dict['most_common_aa_sequence']]
+    aa_seq_node = ElementTree.SubElement(roi_node, "amino_acid_sequence", {'count':str(aa_seq_count), 'percent':str(aa_seq_count/int(roi_dict['depth'])*100)})
+    aa_seq_node.text = roi_dict['most_common_aa_sequence']
+    nt_seq_counter = roi_dict['nt_sequence_distribution']
+    nt_seq_count = nt_seq_counter[roi_dict['most_common_nt_sequence']]
+    nt_seq_node = ElementTree.SubElement(roi_node, "nucleotide_sequence", {'count':str(nt_seq_count), 'percent':str(nt_seq_count/int(roi_dict['depth'])*100)})
+    nt_seq_node.text = roi_dict['most_common_nt_sequence']
     if 'flag' in roi_dict:
         significance_node = ElementTree.SubElement(roi_node, "significance", {'flag':roi_dict['flag']})
     elif 'changes' in roi_dict and int(roi_dict['changes']) > 0:
         significance_node = ElementTree.SubElement(roi_node, "significance", {'changes':roi_dict['changes']})
         significance_node.text = roi.significance.message                       
-    ElementTree.SubElement(roi_node, 'sequence_distribution', {k:str(v) for k,v in seq_counter.items()})
+    ElementTree.SubElement(roi_node, 'aa_sequence_distribution', {k:str(v) for k,v in aa_seq_counter.items()})
+    ElementTree.SubElement(roi_node, 'nt_sequence_distribution', {k:str(v) for k,v in nt_seq_counter.items()})
     return roi_node
 
 class CLIError(Exception):
@@ -270,6 +281,8 @@ USAGE
                 ref_name = ref_name + "_%s" % amplicon.variant_name if amplicon.variant_name else ref_name
                 amplicon_dict = {}
                 amplicon_dict['reads'] = str(samdata.count(ref_name))
+                if amplicon.variant_name:
+                    amplicon_dict['variant'] = amplicon.variant_name
                 amplicon_node = ElementTree.SubElement(assay_node, "amplicon", amplicon_dict)
                 if samdata.count(ref_name) == 0:
                     ElementTree.SubElement(amplicon_node, "significance", {"flag":"no coverage"})
