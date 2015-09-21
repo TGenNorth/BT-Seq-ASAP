@@ -142,6 +142,7 @@ def _process_roi(roi, samdata, amplicon_ref):
         rstart = read.reference_start
         if rstart <= start:
             nt_sequence = DNA(read.query_alignment_sequence[start-rstart:end-rstart])
+            #nt_sequence = nt_sequence.reverse_complement() #TODO: This is temporary, make it smarter
             aa_sequence = nt_sequence.translate()
             aa_string = str(aa_sequence).replace('*', 'x')
             if aa_string:
@@ -295,6 +296,11 @@ USAGE
 
                     pileup = samdata.pileup(ref_name, max_depth=1000000)
                     amplicon_data = _process_pileup(pileup, amplicon, depth, proportion)
+                    if float(amplicon_data['breadth']) < proportion*100:
+                        significance_node = amplicon_node.find("significance")
+                        if significance_node is None:
+                            significance_node = ElementTree.SubElement(amplicon_node, "significance")
+                        significance_node.set("flag", "insufficient breadth of coverage")
                     for snp in amplicon_data['SNPs']:
                         _add_snp_node(amplicon_node, snp)
                         # This would be helpful, but count_coverage is broken in python3
