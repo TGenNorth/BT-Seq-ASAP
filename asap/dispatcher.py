@@ -240,6 +240,8 @@ def indexFasta(fasta, aligner="bwa"):
     job_params['work_dir'] = os.path.dirname(fasta)
     if re.search('novo', aligner, re.IGNORECASE):
         command = "novoindex %s.idx %s" % (fasta, fasta)
+    if re.search('b(ow)?t(ie)?2', aligner, re.IGNORECASE):
+        command = "bowtie2-build %s %s" % (fasta, os.path.basename(fasta))
     else:
         command = "bwa index %s" % (fasta)
     return _submit_job('PBS', command, job_params)
