@@ -67,9 +67,10 @@ def _process_pileup(pileup, amplicon, depth, proportion):
 #                    print ('\tbase in read %s = %s' % (pileupread.alignment.query_name, pileupread.alignment.query_sequence[pileupread.query_position]))
         #print(base_counter)
         alignment_call = base_counter.most_common(1)[0][0]
+        alignment_call_proportion = base_counter[alignment_call] / pileupcolumn.n
         #reference_call = chr(reference[pileupcolumn.pos])
         reference_call = amplicon.sequence[pileupcolumn.pos]
-        consensus_seq += alignment_call if base_counter[alignment_call]/pileupcolumn.n >= proportion else "N"
+        consensus_seq += alignment_call if alignment_call_proportion >= proportion else "N"
         if position in snp_dict:
             for (name, reference, variant, significance) in snp_dict[position]:
                 snp = {'name':name, 'position':str(position), 'depth':str(pileupcolumn.n), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
@@ -79,7 +80,7 @@ def _process_pileup(pileup, amplicon, depth, proportion):
                     snp['flag'] = "low coverage"
                 snp_list.append(snp)
                 #print("Found position of interest %d, reference: %s, distribution:%s" % (position, snp_dict[position][0], base_counter))
-        elif alignment_call != reference_call and depth_passed:
+        elif depth_passed and (alignment_call != reference_call or alignment_call_proportion <= 1.0-proportion):
             snp = {'name':'unknown', 'position':str(position), 'depth':str(pileupcolumn.n), 'reference':reference_call, 'variant':alignment_call, 'basecalls':base_counter}
             snp_list.append(snp)
             #print("SNP found at position %d: %s->%s" % (position, reference_call, alignment_call))

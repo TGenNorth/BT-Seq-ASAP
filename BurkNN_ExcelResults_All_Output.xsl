@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 
 <!--
-    Document   : TB_ExcelResults.xsl
+    Document   : BurkNN_ExcelResults_All_Output.xsl
     Created on : July 28, 2015, 11:20 AM
     Author     : Matthew Enright
     Description:
         Transform xml to excel xml for user friendly viewing of information (based on Jim Schupp's Burk spreadsheet format)
+        Raw Data Output Results
 -->
 
 <xsl:stylesheet
@@ -64,6 +65,16 @@
                 </Style>
                 <Style ss:ID="s24">
                         <Font ss:Size="12" ss:Bold="0" />
+                </Style>
+                <Style ss:ID="s25">
+                        <Alignment ss:Horizontal="Center"/>
+                        <Borders>
+                            <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2"/>
+                            <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+                            <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+                            <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2"/>
+                       </Borders>
+                        <Font ss:Size="11" ss:Bold="1" />
                 </Style>
         </Styles>
         
@@ -127,6 +138,70 @@
                                         <Data ss:Type="String">Breadth					
                                         </Data>
                                 </Cell>
+                        </Row>
+                        <Row ss:AutoFitHeight="0" ss:Height="18">
+                                <Cell>
+                                        <Data ss:Type="String">
+                                        </Data>
+                                </Cell>
+                                <Cell>
+                                        <Data ss:Type="String">
+                                        </Data>
+                                </Cell>
+                                <Cell>
+                                        <Data ss:Type="String">
+                                        </Data>
+                                </Cell>
+                                <Cell ss:StyleID="s22">
+                                        <Data ss:Type="String">Target ID
+                                        </Data>
+                                </Cell>
+                                <!-- Increment target id for each species -->
+                                <xsl:for-each select="//sample[position()=1]/assay">
+                                    
+                                    <xsl:variable name="i" select="position()-1" />
+                   
+                                    <Cell ss:StyleID="s25">
+                                            <Data ss:Type="String">
+                                                <xsl:value-of select="$i"/>				
+                                            </Data>
+                                    </Cell>
+                                
+                                </xsl:for-each>
+                                
+                                <Cell ss:StyleID="s22">
+                                        <Data ss:Type="String">
+                                        </Data>
+                                </Cell>
+                                <!-- Increment target id for each species -->
+                                <xsl:for-each select="//sample[position()=1]/assay">
+                                    
+                                    <xsl:variable name="i" select="position()-1" />
+                   
+                                    <Cell ss:StyleID="s25">
+                                            <Data ss:Type="String">
+                                                <xsl:value-of select="$i"/>				
+                                            </Data>
+                                    </Cell>
+                                
+                                </xsl:for-each>
+                                
+                                <Cell ss:StyleID="s22">
+                                        <Data ss:Type="String">
+                                        </Data>
+                                </Cell>
+                                <!-- Increment target id for each species -->
+                                <xsl:for-each select="//sample[position()=1]/assay">
+                                    
+                                    <xsl:variable name="i" select="position()-1" />
+                   
+                                    <Cell ss:StyleID="s25">
+                                            <Data ss:Type="String">
+                                                <xsl:value-of select="$i"/>				
+                                            </Data>
+                                    </Cell>
+                                
+                                </xsl:for-each>
                         </Row>
                         <Row ss:AutoFitHeight="0" ss:Height="120">
                                 <Cell ss:StyleID="s22">
