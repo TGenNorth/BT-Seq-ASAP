@@ -273,7 +273,7 @@ def alignReadsToReference(sample, reads, reference, outdir, jobid=None, aligner=
     if re.search('novo', aligner, re.IGNORECASE):
         return _run_novoalign(sample, reads, reference, outdir, jobid, novopath=aligner, args=args)
     if re.search('b(ow)?t(ie)?2', aligner, re.IGNORECASE):
-        return _run_bowtie2(sample, reads, reference, outdir, jobid, b2path=aligner, args=args)
+        return _run_bowtie2(sample, reads, reference, outdir, jobid, bt2path=aligner, args=args)
     else:
         return _run_bwa(sample, reads, reference, outdir, jobid, bwapath=aligner, args=args)
 
