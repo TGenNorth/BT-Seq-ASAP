@@ -144,6 +144,30 @@ def _run_bwa(sample, reads, reference, outdir='', dependency=None, sampath='samt
     job_id = _submit_job('PBS', command, job_params, (dependency,))
     return (final_file, job_id)
 
+def _run_bowtie2(sample, reads, reference, outdir='', dependency=None, sampath='samtools', bt2path='bowtie2', ncpus=4, args=''):
+    import os
+    read1 = reads[0]
+    read2 = reads[1] if len(reads) > 1 else ""
+    read_string = "-1 %s -2 %s" % (read1, read2) if read2 else "-U %s" % read1
+    ref_string = os.path.splitext(reference)[0]
+    bam_string = "--rg-id \'%s\' --rg \'SM:%s\'" % (sample, sample)
+    job_params = {'queue':'', 'mem_requested':4, 'num_cpus':ncpus, 'walltime':8, 'args':''}
+    job_params['name'] = "asap_bt2_%s" % sample
+    aligner_name = "bowtie2"
+    aligner_command = "%s %s -p %s %s -x %s %s" % (bt2path, args, ncpus, bam_string, ref_string, read_string)
+    bam_nickname = "%s-%s" % (sample, aligner_name)
+    samview_command = "%s view -S -b -h -" % sampath
+    samsort_command = "%s sort - %s" % (sampath, bam_nickname)
+    samindex_command = "%s index %s.bam" % (sampath, bam_nickname)
+    command = "%s | %s | %s \n %s" % (aligner_command, samview_command, samsort_command, samindex_command)
+    work_dir = os.path.join(outdir, aligner_name)
+    if not os.path.exists(work_dir):
+        os.makedirs(work_dir)
+    final_file = os.path.join(work_dir, "%s.bam" % bam_nickname)
+    job_params['work_dir'] = work_dir
+    job_id = _submit_job('PBS', command, job_params, (dependency,))
+    return (final_file, job_id)
+
 def _run_novoalign(sample, reads, reference, outdir='', dependency=None, sampath='samtools', novopath='bwa', ncpus=4, args=''):
     import os
     read1 = reads[0]
@@ -248,6 +272,8 @@ def alignReadsToReference(sample, reads, reference, outdir, jobid=None, aligner=
     import re
     if re.search('novo', aligner, re.IGNORECASE):
         return _run_novoalign(sample, reads, reference, outdir, jobid, novopath=aligner, args=args)
+    if re.search('b(ow)?t(ie)?2', aligner, re.IGNORECASE):
+        return _run_bowtie2(sample, reads, reference, outdir, jobid, b2path=aligner, args=args)
     else:
         return _run_bwa(sample, reads, reference, outdir, jobid, bwapath=aligner, args=args)
 
