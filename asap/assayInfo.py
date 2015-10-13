@@ -255,22 +255,41 @@ class RegionOfInterest(object):
     classdocs
     '''
 
-    def __init__(self, position_range, aa_sequence=None, significance=None):
+    def __init__(self, position_range, aa_sequence=None, nt_sequence=None, mutations=None, significance=None):
         '''
         Constructor
         '''
         self.position_range = position_range
         self.aa_sequence = aa_sequence
+        self.nt_sequence = nt_sequence
+        self.mutations = mutations
         self.significance = significance
         
     def as_dict(self):
         return_dict = {'position_range':self.position_range}
         if self.aa_sequence:
             return_dict['aa_sequence'] = self.aa_sequence
+        if self.aa_sequence:
+            return_dict['nt_sequence'] = self.nt_sequence
+        if self.aa_sequence:
+            return_dict['mutations'] = self.mutations
         if self._significance:
             return_dict['Significance'] = self._significance
         return return_dict
     
+    @property
+    def mutations(self):
+        return self._mutations
+    
+    @mutations.setter
+    def mutations(self, value):
+        import re
+        if not value or re.match('any', value, re.IGNORECASE):
+            value = []
+        else:
+            value = value.split(',')
+        self._mutations = value
+        
     @property
     def significance(self):
         return self._significance

@@ -70,6 +70,8 @@ def _process_pileup(pileup, amplicon, depth, proportion):
         alignment_call_proportion = base_counter[alignment_call] / pileupcolumn.n
         #reference_call = chr(reference[pileupcolumn.pos])
         reference_call = amplicon.sequence[pileupcolumn.pos]
+        snp_call = alignment_call if alignment_call != reference_call else base_counter.most_common(2)[1][0] 
+        snp_call_proportion = base_counter[snp_call] / pileupcolumn.n
         consensus_seq += alignment_call if alignment_call_proportion >= proportion else "N"
         if position in snp_dict:
             for (name, reference, variant, significance) in snp_dict[position]:
@@ -80,8 +82,8 @@ def _process_pileup(pileup, amplicon, depth, proportion):
                     snp['flag'] = "low coverage"
                 snp_list.append(snp)
                 #print("Found position of interest %d, reference: %s, distribution:%s" % (position, snp_dict[position][0], base_counter))
-        elif depth_passed and (alignment_call != reference_call or alignment_call_proportion <= 1.0-proportion):
-            snp = {'name':'unknown', 'position':str(position), 'depth':str(pileupcolumn.n), 'reference':reference_call, 'variant':alignment_call, 'basecalls':base_counter}
+        elif depth_passed and (alignment_call != reference_call or snp_call_proportion >= proportion):
+            snp = {'name':'unknown', 'position':str(position), 'depth':str(pileupcolumn.n), 'reference':reference_call, 'variant':snp_call, 'basecalls':base_counter}
             snp_list.append(snp)
             #print("SNP found at position %d: %s->%s" % (position, reference_call, alignment_call))
     
@@ -129,13 +131,12 @@ def _add_snp_node(parent, snp):
     return snp_node
 
 def _process_roi(roi, samdata, amplicon_ref):
-    roi_dict = {'region':roi.position_range, 'reference':roi.aa_sequence}
+    roi_dict = {'region':roi.position_range}
     range_match = re.search('(\d*)-(\d*)', roi.position_range)
     if not range_match:
         return roi_dict
     start = int(range_match.group(1)) - 1
     end = int(range_match.group(2))
-    reference = roi.aa_sequence
     aa_sequence_counter = Counter()
     nt_sequence_counter = Counter()
     depth = 0
@@ -156,18 +157,24 @@ def _process_roi(roi, samdata, amplicon_ref):
     aa_consensus = aa_sequence_counter.most_common(1)[0][0]
     nt_consensus = nt_sequence_counter.most_common(1)[0][0]
     num_changes = 0
+    reference = roi.aa_sequence
+    consensus = aa_consensus
+    if roi.nt_sequence:
+        reference = roi.nt_sequence
+        consensus = nt_consensus
     for i in range(len(reference)):
-        if len(aa_consensus) <= i or reference[i] != aa_consensus[i]:
+        if len(consensus) <= i or reference[i] != consensus[i]:
             num_changes += 1
     roi_dict['most_common_aa_sequence'] = aa_consensus
     roi_dict['most_common_nt_sequence'] = nt_consensus
+    roi_dict['reference'] = reference
     roi_dict['changes'] = str(num_changes)
     roi_dict['aa_sequence_distribution'] = aa_sequence_counter
     roi_dict['nt_sequence_distribution'] = nt_sequence_counter
     roi_dict['depth'] = str(depth)
     return roi_dict
 
-def _add_roi_node(parent, roi, roi_dict):
+def _add_roi_node(parent, roi, roi_dict, proportion):
     roi_attributes = {k:roi_dict[k] for k in ('region', 'reference', 'depth')}
     roi_node = ElementTree.SubElement(parent, "region_of_interest", roi_attributes)
     aa_seq_counter = roi_dict['aa_sequence_distribution']
@@ -178,6 +185,16 @@ def _add_roi_node(parent, roi, roi_dict):
     nt_seq_count = nt_seq_counter[roi_dict['most_common_nt_sequence']]
     nt_seq_node = ElementTree.SubElement(roi_node, "nucleotide_sequence", {'count':str(nt_seq_count), 'percent':str(nt_seq_count/int(roi_dict['depth'])*100)})
     nt_seq_node.text = roi_dict['most_common_nt_sequence']
+    significant = False
+    for mutation in roi.mutations:
+        if roi.nt_sequence:
+            count = nt_seq_counter[mutation]
+            mutant_proportion = count/int(roi_dict['depth'])
+        else:
+            count = aa_seq_counter[mutation]
+            mutant_proportion = count/int(roi_dict['depth'])
+        mutation_node = ElementTree.SubElement(roi_node, 'mutation', {'count':str(count), 'percent':str(mutant_proportion*100)})
+            
     if 'flag' in roi_dict:
         significance_node = ElementTree.SubElement(roi_node, "significance", {'flag':roi_dict['flag']})
     elif 'changes' in roi_dict and int(roi_dict['changes']) > 0:

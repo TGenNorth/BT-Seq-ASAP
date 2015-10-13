@@ -123,7 +123,7 @@ USAGE
                 significance = assayInfo.Significance(message=row[15].value)
                 element = None
                 if row[12].value: #Significance gets attached to ROI
-                    element = assayInfo.RegionOfInterest(position_range=row[12].value, aa_sequence=row[13].value, significance=significance)
+                    element = assayInfo.RegionOfInterest(position_range=row[12].value, aa_sequence=row[13].value, mutations=row[14].value, significance=significance)
                 elif row[9].value: #Significance gets attached to SNP
                     element = assayInfo.SNP(position=row[9].value, reference=row[10].value, variant=row[11].value, significance=significance)
                 if row[8].value: #Process amplicon
