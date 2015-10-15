@@ -66,12 +66,19 @@ def _process_pileup(pileup, amplicon, depth, proportion):
                 base_counter.update(pileupread.alignment.query_sequence[pileupread.query_position])
 #                    print ('\tbase in read %s = %s' % (pileupread.alignment.query_name, pileupread.alignment.query_sequence[pileupread.query_position]))
         #print(base_counter)
-        alignment_call = base_counter.most_common(1)[0][0]
-        alignment_call_proportion = base_counter[alignment_call] / pileupcolumn.n
+        ordered_list = base_counter.most_common()
+        alignment_call = ordered_list[0][0]
+        alignment_call_proportion = ordered_list[0][1] / pileupcolumn.n
         #reference_call = chr(reference[pileupcolumn.pos])
         reference_call = amplicon.sequence[pileupcolumn.pos]
-        snp_call = alignment_call if alignment_call != reference_call else base_counter.most_common(2)[1][0] 
-        snp_call_proportion = base_counter[snp_call] / pileupcolumn.n
+        if alignment_call != reference_call:
+            snp_call = alignment_call
+            snp_call_proportion = alignment_call_proportion
+        elif len(ordered_list) > 1:
+            snp_call = ordered_list[1][0]
+            snp_call_proportion = ordered_list[1][1] / pileupcolumn.n
+        else:
+            snp_call = snp_call_proportion = None
         consensus_seq += alignment_call if alignment_call_proportion >= proportion else "N"
         if position in snp_dict:
             for (name, reference, variant, significance) in snp_dict[position]:
@@ -82,7 +89,7 @@ def _process_pileup(pileup, amplicon, depth, proportion):
                     snp['flag'] = "low coverage"
                 snp_list.append(snp)
                 #print("Found position of interest %d, reference: %s, distribution:%s" % (position, snp_dict[position][0], base_counter))
-        elif depth_passed and (alignment_call != reference_call or snp_call_proportion >= proportion):
+        elif depth_passed and snp_call and snp_call_proportion >= proportion:
             snp = {'name':'unknown', 'position':str(position), 'depth':str(pileupcolumn.n), 'reference':reference_call, 'variant':snp_call, 'basecalls':base_counter}
             snp_list.append(snp)
             #print("SNP found at position %d: %s->%s" % (position, reference_call, alignment_call))
@@ -328,7 +335,7 @@ USAGE
 
                     for roi in amplicon.ROIs:
                         roi_dict = _process_roi(roi, samdata, ref_name)
-                        _add_roi_node(amplicon_node, roi, roi_dict)
+                        _add_roi_node(amplicon_node, roi, roi_dict, proportion)
 
         samdata.close()
         _write_xml(sample_node, out_fp)

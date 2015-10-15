@@ -240,7 +240,7 @@ def indexFasta(fasta, aligner="bwa"):
     job_params['work_dir'] = os.path.dirname(fasta)
     if re.search('novo', aligner, re.IGNORECASE):
         command = "novoindex %s.idx %s" % (fasta, fasta)
-    if re.search('b(ow)?t(ie)?2', aligner, re.IGNORECASE):
+    elif re.search('b(ow)?t(ie)?2', aligner, re.IGNORECASE):
         command = "bowtie2-build %s %s" % (fasta, os.path.splitext(fasta)[0])
     else:
         command = "bwa index %s" % (fasta)
@@ -274,7 +274,7 @@ def alignReadsToReference(sample, reads, reference, outdir, jobid=None, aligner=
     import re
     if re.search('novo', aligner, re.IGNORECASE):
         return _run_novoalign(sample, reads, reference, outdir, jobid, novopath=aligner, args=args)
-    if re.search('b(ow)?t(ie)?2', aligner, re.IGNORECASE):
+    elif re.search('b(ow)?t(ie)?2', aligner, re.IGNORECASE):
         return _run_bowtie2(sample, reads, reference, outdir, jobid, bt2path=aligner, args=args)
     else:
         return _run_bwa(sample, reads, reference, outdir, jobid, bwapath=aligner, args=args)
