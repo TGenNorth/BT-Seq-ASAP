@@ -98,138 +98,43 @@
   },
   {
     "name" : "gyrA",
-    "assay_type" : "mixed",
+    "assay_type" : "ROI",
     "Target" : {
       "function" : "resistance type",
       "Amplicon" : {
         "sequence" : "CAAGGCTGTGTCCTCGGCGCAAGCCCGTATCGCGGCACGTAAGGCACGAGAGTTGGTGCGGCGTAAGAGCGCCACCGACATCGGTGGATTGCCCGGCAAGCTGGCCGATTGCCGTTCCACGGATCCGCGCAAGTCCGAACTGTATGTCGTAGAAGGTGACTCGGCCGGCGGTTCTGCAAAAAGCGGTCGCGATTCGATGTTCCAGGCGATACTTCCGCTGCGCGGCAAGATCATCAATGTGGAGAAAGCGCGCATCGACCGGGTGCTAAAGAACACCGAAGTTCAGGCGATCATCACGGCGCTGGGCACCGGGATCCACGACGAGTTCGATATCGGCAAGCTGCGCTACCACAAGATCGTGCTGATGGCCGACGCCGATGTTGACGGCCAACATATTTCCACGCTGTTGTTGACGTTGTTGTTCCGGTTCATGCGGCCGCTCATCGAGAACGGGCATGTGTTTTTGGCACAACCGCCGCTGTACAAACTCAAGTGGCAGCGCAGTGACCCGGAATTCGCATACTCCGACCGCGAGCGCGACGGTCTGCTGGAGGCGGGGCTGAAGGCCGGGAAGAAGATCAACAAGGAAGACGGCATTCAGCGGTACAAGGGTCTAGGTGAAATGGACGCTAAGGAGTTGTGGGAGACCACCATGGATCCCTCGGTTCGTGTGTTGCGTCAAGTGACGCTGGACGACGCCGCCGCCGCCGACGAGTTGTTCTCCATCCTGATGGGCGAGGACGTCGACGCGCGGCGCAGCTTTATCACCCGCAACGCCAAGGATGTTCGGTTCCTGGATGTCTAACGCAACCCTGCGTTCGATTGCAAACGAGGAATAGATGACAGACACGACGTTGCCGCCTGACGACTCGCTCGACCGGATCGAACCGGTTGACATCGAGCAGGAGATGCAGCGCAGCTACATCGACTATGCGATGAGCGTGATCGTCGGCCGCGCGCTGCCGGAGGTGCGCGACGGGCTCAAGCCCGTGCATCGCCGGGTGCTCTATGCAATGTTCGATTCCGGCTTCCGCCCGGACCGCAGCCACGCCAAGTCGGCCCGGTCGGTTGCCGAGACCATGGGCAACTACCACCCGCACGGCGACGCGTCGATCTACGACAGCCTGGTGCGCATGGCCCAGCCCTGGTCGCTGCGCTACCCGCTGGTGGACGGCCAGGGCAACTTCGGCTCGCCAGGCAATGACCCACCGGCGGCGATGAGGTACACCGAAGCCCGGCTGACCCCGTTGGCGATGGAGATGCTGAGGGAAATCGACGAGGAGACAGTCGATTTCATCCCTAACTACGACGGCCGGGTGCAAGAGCCGACGGTGCTACCCAGCCGGTTCCCCAACCTGCTGGCCAACGGGTCAGGCGGCATCGCGGTCGGCATGGCAACCAATATCCCGCCGCACAACCTGCGTGAGCTGGCCGACGCGGTGTTCTGGGCGCTGGAGAATCACGACGCCGACGAAGAGGAGACCCTGGCCGCGGTCATGGGGCGGGTTAAAGGCCCGGACTTCCCGACCGCCGGACTGATCGTCGGATCCCAGGGCACCGCTGATGCCTACAAAACTGGCCGCGGCTCCATTCGAATGCGCGGAGTTGTTGAGGTAGAAGAGGATTCCCGCGGTCGTACCTCGCTGGTGATCACCGAGTTGCCGTATCAGGTCAACCACGACAACTTCATCACTTCGATCGCCGAACAGGTCCGAGACGGCAAGCTGGCCGGCATTTCCAACATTGAGGACCAGTCTAGCGATCGGGTCGGTTTACGCATCGTCATCGAGATCAAGCGCGATGCGGTGGCCAAGGTGGTGATCAATAACCTTTACAAGCACACCCAGCTGCAGACCAGCTTTGGCGCCAACATGCTAGCGATCGTCGACGGGGTGCCGCGCACGCTGCGGCTGGACCAGCTGATCCGCTATTACGTTGACCACCAACTCGACGTCATTGTGCGGCGCACCACCTACCGGCTGCGCAAGGCAAACGAGCGAGCCCACATTCTGCGCGGCCTGGTTAAAGCGCTCGACGCGCTGGACGAGGTCATTGCACTGATCCGGGCGTCGGAGACCGTCGATATCGCCCGGGCCGGACTGATCGAGCTGCTCGACATCGACGAGATCCAGGCCCAGGCAATCCTGGACATGCAGTTGCGGCGCCTGGCCGCACTGGAACGCCAGCGCATCATCGACGACCTGGCCAAAATCGAGGCCGAGATCGCCGATCTG",
-        "SNP" : [
-        {
-          "position" : 1102,
-          "reference" : "G",
-          "variant" : "C",
-          "name" : "88GCC",
-          "Significance" : {
-            "message" : "gyrA 88 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
-          }
-        },
-        {
-          "position" : 1101,
-          "reference" : "G",
-          "variant" : "T",
-          "name" : "88TGC",
-          "Significance" : {
-            "message" : "gyrA 88 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
-          }
-        },
-        {
-          "position" : 1108,
-          "reference" : "C",
-          "variant" : "T",
-          "name" : "90GTG",
-          "Significance" : {
-            "message" : "gyrA 90 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
-          }
-        },
-        {
-          "position" : 1110,
-          "reference" : "T",
-          "variant" : "C",
-          "name" : "91CCG",
-          "Significance" : {
-            "message" : "gyrA 91 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
-          }
-        },
-        {
-          "position" : 1120,
-          "reference" : "A",
-          "variant" : "G",
-          "name" : "94GGC",
-          "Significance" : {
-            "message" : "gyrA 94 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
-          }
-        },
-        {
-          "position" : 1119,
-          "reference" : "G",
-          "variant" : "C",
-          "name" : "94CAC",
-          "Significance" : {
-            "message" : "gyrA 94 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
-          }
-        },
-        {
-          "position" : 1119,
-          "reference" : "G",
-          "variant" : "A",
-          "name" : "94AAC",
-          "Significance" : {
-            "message" : "gyrA 94 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
-          }
-        },
-        {
-          "position" : 1120,
-          "reference" : "A",
-          "variant" : "C",
-          "name" : "94GCC",
-          "Significance" : {
-            "message" : "gyrA 94 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
-          }
-        },
-        {
-          "position" : 1119,
-          "reference" : "G",
-          "variant" : "T",
-          "name" : "94TAC",
-          "Significance" : {
-            "message" : "gyrA 94 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
-          }
-        }],
-        "AND" : {
-          "SNP" : [
-          {
-            "position" : 1102,
-            "reference" : "G",
-            "variant" : "T"
-          },
-          {
-            "position" : 1103,
-            "reference" : "C",
-            "variant" : "G"
-          }],
-          "name" : "88CTG",
-          "Significance" : {
-            "message" : "gyrA 88 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
-          }
-        },
         "RegionOfInterest": [
           {
             "position_range": "1101-1103",
             "Significance": {
               "message": "gyrA 88 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
             },
-            "aa_sequence": "G"
+            "nt_sequence": "GGC",
+            "mutations": "GCC, GTG, TGC"
           },
           {
             "position_range": "1107-1109",
             "Significance": {
               "message": "gyrA 90 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
             },
-            "aa_sequence": "A"
+            "nt_sequence": "GCG",
+            "mutations": "GTG"
           },
           {
             "position_range": "1110-1112",
             "Significance": {
               "message": "gyrA 91 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
             },
-            "aa_sequence": "S"
+            "nt_sequence": "TCG",
+            "mutations": "CCG"
           },
           {
             "position_range": "1119-1121",
             "Significance": {
               "message": "gyrA 94 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
             },
-            "aa_sequence": "D"
+            "nt_sequence": "GAC",
+            "mutations": "GGC, AAC, CAC, GCC, TAC"
           }
         ]
       }
@@ -293,259 +198,77 @@
   },
   {
     "name" : "katG",
-    "assay_type" : "mixed",
+    "assay_type" : "ROI",
     "Target" : {
       "function" : "resistance type",
       "Amplicon" : {
         "sequence" : "CTGGTAGGTCCCGTCATCTGCTGGCGAGGGCTCCCAGGTGATACCCATGTCGAGCAGGTTCACGAAGAAGTCGTTGGTCAGTGACTCGGAGGCCTCGGTGAACACGCCCAGCGGTAAGCGCTTGTAGTTTGCGCCGAGGACGCGCAGGCCACCTACCAGCACCGTCATCTCAGGGGCACTGAGCGTAAGCAGGTTCGCCTTGTCGAGCAGCATGTACTCGGCCGGCAACGGGTTGCCCTTTCCGAGGTAGTTTCGGAAGCCATCTGCCTTGGGCTCCAGCACGGCAAAGGATTCCACGTCGGTTTGTTCCTGCGACGCATCCGTGCGGCCCGGGGTGAAGGGCACCGTGATGTTGTGGCCAGCCGCCTTTGCTGCTTTCTCTATGGCGGCACAGCCACCGAGCACGACGAGGTCGGCGAAGGACACTTTGATGTTCCCCGGCGCCGCGGAGTTGAATGACTCCTGGATCTCTTCCAGGGTGCGAATGACCTTGCGCAGATCCCCGTCGGGGTCGTTGACCTCCCACCCGACTTGTGGCTGCAGGCGGATGCGACCACCGTTGGCGCCGCCGCGCTTGTCGCTACCACGGAACGACGACGCCGCCGCCCATGCGGTCGAAACTAGCTGTGAGACAGTCAATCCCGATGCCCGGATCTGGCTCTTAAGGCTGGCAATCTCGGCTTCGCCGACGAGGTCGTGGCTGACCGCAGGGACCGGATCCTGCCACAGCAGGGTCTGCTTGGGGACCAGCGGCCCAAGGTATCTCGCAACGGGACCCATGTCTCGGTGGATCAGCTTGTACCAGGCCTTGGCGAACTCGTCGGCCAATTCCTCGGGGTGTTCCAGCCAGCGACGCGTGATCCGCTCATAGATCGGATCCACCCGCAGCGAGAGGTCAGTGGCCAGCATCGTCGGGGAGCGCCCTGGCCCGCCGAACGGGTCCGGGATGGTGCCGGCACCGGCGCCGTCCTTGGCGGTGTATTGCCAAGCGCCAGCAGGGCTCTTCGTCAGCTCCCACTCGTAGCCGTACAGGATCTCGAGGAAACTGTTGTCCCATTTCGTCGGGGTGTTCGTCCATACGACCTCGATGCCGCTGGTGATCGCGTCCTTACCGGTTCCGGTGCCATACGAGCTCTTCCAGCCCAAGCCCATCTGCTCCAGCGGAGCAGCCTCGGGTTCGGGGCCGACCAGATCGGCCGGGCCGGCGCCATGGGTCTTACCGAAAGTGTGACCGCCGACGATCAGCGCCGCTGTTTCGACGTCGTTCATGGCCATGCGCCGAAACGTCTCGCGAATGTCGACCGCCGCGGCCATGGGGTCCGGGTTGCCGTTCGGCCCCTCCGGGTTCACGTAGATCAGCCCCATCTGCACCGCGGCCAGCGGGTTCTCCAGATCCCGCTTACCGCTGTAACGCTCATCGCCGAGCCAGGTGGCTTCCTTGCCCCAATAGACCTCATCGGGCTCCCACTGGTCGACCCGGCCGAAGCCGAACCCGAACGTCTTGAAGCCCATCGATTCCAGCGCGCAGTTGCCGGCGAAAACAATCAGGTCCGCCCATGAGAGCTTCTTGCCGTACTTCTTCTTGACCGGCCACAGCAGCCGGCGCGCCTTGTCCAAGCTGGCGTTGTCGGGCCAGCTGTTAAGCGGCGCGAACCGCTGCATGCCGCCCCCGGCGCCGCCGCGGCCGTCGTGGATGCGGTAGGTGCCGGCAGCGTGCCACGCCATCCGGATAAACAGCGGCCCGTAGTGGCCGTAGTCGGCGGGCCACCACGGCTGCGAGGTGGTCATCACTTCCTCGATGTCCCGCGTCAGGGCGTCAACGTCGATGGTCGCGACCTCCGCGGCATAGTCGAACGCCGCACCCATCGGGTCAGCGACGGCCGGGTTTTGGTGCAGTACCTTCAGATTGAGCCGGTTGGGCCACCAGTCCTGGTTTCCGCCGCCCTCGACGGGGTATTTCATATGACCCACGACGGGACAGCCGTTGCTAGCGGCTCCGGTGGTGGTTTCTGTAATGGGTGGGTGTTGCTCGGGCACAGCATTCCTTCCAGGAGTTGGTGTTATCGGGCTGTGATCACGGATGTGATCGCGAAGTGTCGGATATCGAACAATCAGGACATAGACCCCAGTAGATGACCTCCGCCTCGTCCAACAGGAAGCCGTTATGGTCCGAGGCCGTCAGACAGGGTGCCTCGCCAACAGCACAGTCGACATCGGCGATAACCCCGCAAGACCGGCAGACGATGTGATGGTGGTTGTCGCCGACCCTG",
-        "SNP" : [
-        {
-          "position" : 1094,
-          "reference" : "C",
-          "variant" : "G",
-          "name" : "315ACC",
-          "Significance" : {
-            "message" : "katG 315 mutation present which is associated with isoniazid resistance"
-          }
-        },
-        {
-          "position" : 1094,
-          "reference" : "C",
-          "variant" : "T",
-          "name" : "315AAC",
-          "Significance" : {
-            "message" : "katG 315 mutation present which is associated with isoniazid resistance"
-          }
-        },
-        {
-          "position" : 1093,
-          "reference" : "G",
-          "variant" : "T",
-          "name" : "315AGA",
-          "Significance" : {
-            "message" : "katG 315 mutation present which is associated with isoniazid resistance"
-          }
-        }],
-        "AND" : {
-          "SNP" : [
-          {
-            "position" : 1094,
-            "reference" : "C",
-            "variant" : "G"
-          },
-          {
-            "position" : 1093,
-            "reference" : "G",
-            "variant" : "T"
-          }],
-          "name" : "315ACA",
-          "Significance" : {
-            "message" : "katG 315 mutation present which is associated with isoniazid resistance"
-          }
-        },
         "RegionOfInterest": {
           "position_range": "1093-1095",
           "Significance": {
             "message": "katG 315 mutation present which is associated with isoniazid resistance."
           },
-          "aa_sequence": "A"
+          "nt_sequence": "AGC",
+          "mutations": "ACC, AAC, ACA, AGA"
         }
       }
     }
   },
   {
     "name" : "rpoB",
-    "assay_type" : "mixed",
+    "assay_type" : "ROI",
     "Target" : {
       "function" : "resistance type",
       "Amplicon" : {
         "sequence" : "CCGAGCGGGGTGATGTCAACCCAGTGGGTGGCCTGGAAGAGGTGCTCTACGAGCTGTCTCCGATCGAGGACTTCTCCGGGTCGATGTCGTTGTCGTTCTCTGACCCTCGTTTCGACGATGTCAAGGCACCCGTCGACGAGTGCAAAGACAAGGACATGACGTACGCGGCTCCACTGTTCGTCACCGCCGAGTTCATCAACAACAACACCGGTGAGATCAAGAGTCAGACGGTGTTCATGGGTGACTTCCCGATGATGACCGAGAAGGGCACGTTCATCATCAACGGGACCGAGCGTGTGGTGGTCAGCCAGCTGGTGCGGTCGCCCGGGGTGTACTTCGACGAGACCATTGACAAGTCCACCGACAAGACGCTGCACAGCGTCAAGGTGATCCCGAGCCGCGGCGCGTGGCTCGAGTTTGACGTCGACAAGCGCGACACCGTCGGCGTGCGCATCGACCGCAAACGCCGGCAACCGGTCACCGTGCTGCTCAAGGCGCTGGGCTGGACCAGCGAGCAGATTGTCGAGCGGTTCGGGTTCTCCGAGATCATGCGATCGACGCTGGAGAAGGACAACACCGTCGGCACCGACGAGGCGCTGTTGGACATCTACCGCAAGCTGCGTCCGGGCGAGCCCCCGACCAAAGAGTCAGCGCAGACGCTGTTGGAAAACTTGTTCTTCAAGGAGAAGCGCTACGACCTGGCCCGCGTCGGTCGCTATAAGGTCAACAAGAAGCTCGGGCTGCATGTCGGCGAGCCCATCACGTCGTCGACGCTGACCGAAGAAGACGTCGTGGCCACCATCGAATATCTGGTCCGCTTGCACGAGGGTCAGACCACGATGACCGTTCCGGGCGGCGTCGAGGTGCCGGTGGAAACCGACGACATCGACCACTTCGGCAACCGCCGCCTGCGTACGGTCGGCGAGCTGATCCAAAACCAGATCCGGGTCGGCATGTCGCGGATGGAGCGGGTGGTCCGGGAGCGGATGACCACCCAGGACGTGGAGGCGATCACACCGCAGACGTTGATCAACATCCGGCCGGTGGTCGCCGCGATCAAGGAGTTCTTCGGCACCAGCCAGCTGAGCCAATTCATGGACCAGAACAACCCGCTGTCGGGGTTGACCCACAAGCGCCGACTGTCGGCGCTGGGGCCCGGCGGTCTGTCACGTGAGCGTGCCGGGCTGGAGGTCCGCGACGTGCACCCGTCGCACTACGGCCGGATGTGCCCGATCGAAACCCCTGAGGGGCCCAACATCGGTCTGATCGGCTCGCTGTCGGTGTACGCGCGGGTCAACCCGTTCGGGTTCATCGAAACGCCGTACCGCAAGGTGGTCGACGGCGTGGTTAGCGACGAGATCGTGTACCTGACCGCCGACGAGGAGGACCGCCACGTGGTGGCACAGGCCAATTCGCCGATCGATGCGGACGGTCGCTTCGTCGAGCCGCGCGTGCTGGTCCGCCGCAAGGCGGGCGAGGTGGAGTACGTGCCCTCGTCTGAGGTGGACTACATGGACGTCTCGCCCCGCCAGATGGTGTCGGTGGCCACCGCGATGATTCCCTTCCTGGAGCACGACGACGCCAACCGTGCCCTCATGGGGGCAAACATGCAGCGCCAGGCGGTGCCGCTGGTCCGTAGCGAGGCCCCGCTGGTGGGCACCGGGATGGAGCTGCGCGCGGCGATCGACGCCGGCGACGTCGTCGTCGCCGAAGAAAGCGGCGTCATCGAGGAGGTGTCGGCCGACTACATCACTGTGATGCACGACAACGGCACCCGGCGTACCTACCGGATGCGCAAGTTTGCCCGGTCCAACCACGGCACTTGCGCCAACCAGTGCCCCATCGTGGACGCGGGCGACCGAGTCGAGGCCGGTCAGGTGATCGCCGACGGTCCCTGTACTGACGACGGCGAGATGGCGCTGGGCAAGAACCTGCTGGTGGCCATCATGCCGTGGGAGGGCCACAACTACGAGGACGCGATCATCCTGTCCAACCGCCTGGTCGAAGAGGACGTGCTCACCTCGATCCACATCGAGGAGCATGAGATCGATGCTCGCGACACCAAGCTGGGTGCGGAGGAGATCACCCGCGACATCCCGAACATCTCCGACGAGGTGCTCGCCGACCTGGATGAGCGGGGCATCGTGCGCATCGGTGCCGAGGTTCGCGACGGGGACATCCTGGTCGGCAAGGTCACCCCGAAGGGTGAGACCGA",
-        "SNP" : [
-        {
-          "position" : 1089,
-          "reference" : "C",
-          "variant" : "A",
-          "name" : "513AAA",
-          "Significance" : {
-            "message" : "rpoB 513 mutation present which is associated with rifampin resistance"
-          }
-        },
-        {
-          "position" : 1090,
-          "reference" : "A",
-          "variant" : "T",
-          "name" : "513CTA",
-          "Significance" : {
-            "message" : "rpoB 513 mutation present which is associated with rifampin resistance"
-          }
-        },
-        {
-          "position" : 1098,
-          "reference" : "G",
-          "variant" : "T",
-          "name" : "516TAC",
-          "Significance" : {
-            "message" : "rpoB 516 mutation present which is associated with rifampin resistance"
-          }
-        },
-        {
-          "position" : 1099,
-          "reference" : "A",
-          "variant" : "T",
-          "name" : "516GTC",
-          "Significance" : {
-            "message" : "rpoB 516 mutation present which is associated with rifampin resistance"
-          }
-        },
-        {
-          "position" : 1099,
-          "reference" : "A",
-          "variant" : "G",
-          "name" : "516GGC",
-          "Significance" : {
-            "message" : "rpoB 516 mutation present which is associated with rifampin resistance"
-          }
-        },
-        {
-          "position" : 1117,
-          "reference" : "C",
-          "variant" : "T",
-          "name" : "522TTG",
-          "Significance" : {
-            "message" : "rpoB 522 mutation present which is associated with rifampin resistance"
-          }
-        },
-        {
-          "position" : 1128,
-          "reference" : "C",
-          "variant" : "G",
-          "name" : "526GAC",
-          "Significance" : {
-            "message" : "rpoB 526 mutation present which is associated with rifampin resistance"
-          }
-        },
-        {
-          "position" : 1128,
-          "reference" : "C",
-          "variant" : "T",
-          "name" : "526TAC",
-          "Significance" : {
-            "message" : "rpoB 526 mutation present which is associated with rifampin resistance"
-          }
-        },
-        {
-          "position" : 1129,
-          "reference" : "A",
-          "variant" : "G",
-          "name" : "526CGC",
-          "Significance" : {
-            "message" : "rpoB 526 mutation present which is associated with rifampin resistance"
-          }
-        },
-        {
-          "position" : 1129,
-          "reference" : "A",
-          "variant" : "T",
-          "name" : "526CTC",
-          "Significance" : {
-            "message" : "rpoB 526 mutation present which is associated with rifampin resistance"
-          }
-        },
-        {
-          "position" : 1128,
-          "reference" : "C",
-          "variant" : "A",
-          "name" : "526AAC",
-          "Significance" : {
-            "message" : "rpoB 526 mutation present which is associated with rifampin resistance"
-          }
-        },
-        {
-          "position" : 1144,
-          "reference" : "C",
-          "variant" : "T",
-          "name" : "531TTG",
-          "Significance" : {
-            "message" : "rpoB 531 mutation present which is associated with rifampin resistance"
-          }
-        },
-        {
-          "position" : 1144,
-          "reference" : "C",
-          "variant" : "G",
-          "name" : "531TGG",
-          "Significance" : {
-            "message" : "rpoB 531 mutation present which is associated with rifampin resistance"
-          }
-        },
-        {
-          "position" : 1150,
-          "reference" : "T",
-          "variant" : "C",
-          "name" : "533CCG",
-          "Significance" : {
-            "message" : "rpoB 533 mutation present which is associated with rifampin resistance"
-          }
-        }],
-        "AND" : {
-          "SNP" : [
-          {
-            "position" : 1128,
-            "reference" : "C",
-            "variant" : "T"
-          },
-          {
-            "position" : 1129,
-            "reference" : "A",
-            "variant" : "G"
-          }],
-          "name" : "526TGC",
-          "Significance" : {
-            "message" : "rpoB 526 mutation present which is associated with rifampin resistance"
-          }
-        },
         "RegionOfInterest": [
           {
             "position_range": "1089-1091",
             "Significance": {
               "message": "rpoB 513 mutation present which is associated with rifampin resistance."
             },
-            "aa_sequence": "Q"
+            "nt_sequence": "CAA",
+            "mutations": "AAA, CTA"
           },
           {
             "position_range": "1098-1100",
             "Significance": {
               "message": "rpoB 516 mutation present which is associated with rifampin resistance."
             },
-            "aa_sequence": "D"
+            "nt_sequence": "GAC",
+            "mutations": "TAC, GTC, GGC"
           },
           {
             "position_range": "1116-1118",
             "Significance": {
               "message": "rpoB 522 mutation present which is associated with rifampin resistance."
             },
-            "aa_sequence": "S"
+            "nt_sequence": "TCG",
+            "mutations": "TTG"
           },
           {
             "position_range": "1128-1130",
             "Significance": {
               "message": "rpoB 526 mutation present which is associated with rifampin resistance."
             },
-            "aa_sequence": "H"
+            "nt_sequence": "CAC",
+            "mutations": "GAC, TAC, CGC, CTC, AAC, TGC"
           },
           {
             "position_range": "1143-1145",
             "Significance": {
               "message": "rpoB 531 mutation present which is associated with rifampin resistance."
             },
-            "aa_sequence": "S"
+            "nt_sequence": "TCG",
+            "mutations": "TTG, TGG"
           },
           {
             "position_range": "1149-1151",
             "Significance": {
               "message": "rpoB 533 mutation present which is associated with rifampin resistance."
             },
-            "aa_sequence": "L"
+            "nt_sequence": "CTG",
+            "mutations": "CCG"
           }
         ]
       }
