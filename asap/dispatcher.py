@@ -301,7 +301,7 @@ def processBam(sample_name, json_file, bam_file, xml_dir, dependency, depth, pro
     job_params['work_dir'] = xml_dir
     out_file = os.path.join(xml_dir, sample_name+".xml")
     command = "bamProcessor -j %s -b %s -o %s -d %d -p %f" % (json_file, bam_file, out_file, depth, proportion)
-    jobid = _submit_job('PBS', command, job_params, (dependency,))
+    jobid = _submit_job('PBS', command, job_params, (dependency,)) if dependency else _submit_job('PBS', command, job_params)
     return (out_file, jobid)
 
 def combineOutputFiles(run_name, xml_dir, out_dir, dependencies):

@@ -105,7 +105,7 @@ USAGE
         run_name = args.name
         json_fp = dispatcher.expandPath(args.json)
         read_dir = args.rdir
-        bam_dir = args.rdir
+        bam_dir = args.bdir
         out_dir = args.odir
         trim = args.trim
         qual = args.qual
