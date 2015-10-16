@@ -80,8 +80,10 @@ USAGE
         required_group = parser.add_argument_group("required arguments")
         required_group.add_argument("-n", "--name", required=True, help="name for this run. [REQUIRED]")
         required_group.add_argument("-j", "--json", required=True, help="JSON file of assay descriptions. [REQUIRED]")
+        reads_bams_group = required_group.add_mutually_exclusive_group()
+        reads_bams_group.add_argument("-r", "--read-dir", dest="rdir", metavar="DIR", help="directory of read files to analyze.")
+        reads_bams_group.add_argument("-b", "--bam-dir", dest="bdir", metavar="DIR", help="directory of bam files to analyze.")
         optional_group = parser.add_argument_group("optional arguments")
-        optional_group.add_argument("-r", "--read-dir", dest="rdir", metavar="DIR", help="directory of read files to analyze. [default: `pwd`]")
         optional_group.add_argument("-o", "--out-dir", dest="odir", metavar="DIR", help="directory to write output files to. [default: `pwd`]")
         trim_group = parser.add_argument_group("read trimming options")
         on_off_group = trim_group.add_mutually_exclusive_group()
@@ -103,6 +105,7 @@ USAGE
         run_name = args.name
         json_fp = dispatcher.expandPath(args.json)
         read_dir = args.rdir
+        bam_dir = args.rdir
         out_dir = args.odir
         trim = args.trim
         qual = args.qual
@@ -113,13 +116,16 @@ USAGE
         proportion = args.proportion
         adapters = dispatcher.expandPath(args.adapters)
         
-        if not read_dir:
-            read_dir = os.getcwd()
         if not out_dir:
             out_dir = os.getcwd()
+        if not (read_dir or bam_dir):
+            read_dir = os.getcwd()
        
         out_dir = dispatcher.expandPath(out_dir)
-        read_dir = dispatcher.expandPath(read_dir)
+        if read_dir:
+            read_dir = dispatcher.expandPath(read_dir)
+        if bam_dir:
+            bam_dir = dispatcher.expandPath(bam_dir)
 
         if os.path.exists(out_dir):
             response = input(
@@ -146,21 +152,28 @@ USAGE
         reference.write(ref_fasta, 'fasta')
         index_job = dispatcher.indexFasta(ref_fasta, aligner)        
         
-        read_list = dispatcher.findReads(read_dir)
+        bam_files = []
         output_files = []
         final_jobs = []
         xml_dir = os.path.join(out_dir, "xml")
         if not os.path.exists(xml_dir):
             os.makedirs(xml_dir)
-            
-        for read in read_list:
-            if trim:
-                trimmed_reads = dispatcher.trimAdapters(*read, outdir=out_dir, adapters=adapters, quality=qual, minlen=minlen)
-                (bam_file, job_id) = dispatcher.alignReadsToReference(trimmed_reads.sample, trimmed_reads.reads, ref_fasta, out_dir, jobid=trimmed_reads.jobid, aligner=aligner, args=aligner_args)
-            else:            
-                (bam_file, job_id) = dispatcher.alignReadsToReference(read.sample, read.reads, ref_fasta, out_dir, jobid=index_job, aligner=aligner, args=aligner_args)        
         
-            (xml_file, job_id) = dispatcher.processBam(read.sample, json_fp, bam_file, xml_dir, job_id, depth, proportion)
+        if bam_dir:
+            bam_list = dispatcher.findBams(bam_dir)
+                   
+        if read_dir:
+            read_list = dispatcher.findReads(read_dir)
+            for read in read_list:
+                if trim:
+                    trimmed_reads = dispatcher.trimAdapters(*read, outdir=out_dir, adapters=adapters, quality=qual, minlen=minlen)
+                    (bam_file, job_id) = dispatcher.alignReadsToReference(trimmed_reads.sample, trimmed_reads.reads, ref_fasta, out_dir, jobid=trimmed_reads.jobid, aligner=aligner, args=aligner_args)
+                else:            
+                    (bam_file, job_id) = dispatcher.alignReadsToReference(read.sample, read.reads, ref_fasta, out_dir, jobid=index_job, aligner=aligner, args=aligner_args)
+                bam_list.append((read.sample, bam_file, job_id))    
+         
+        for sample, bam, job in bam_list:
+            (xml_file, job_id) = dispatcher.processBam(sample, json_fp, bam, xml_dir, job, depth, proportion)
             output_files.append(xml_file)
             final_jobs.append(job_id)
             
