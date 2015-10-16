@@ -15,7 +15,11 @@
 	    		<th>Sample</th>
 	    		<xsl:for-each select="sample[position()&lt;=1]">
 	    		<xsl:for-each select="assay">
-	    		    <th><xsl:value-of select='@name'/> codon (% res)</th>
+	    		    <xsl:choose>
+	    		        <xsl:when test="@type = 'SNP'"><th><xsl:value-of select="@name"/> SNP (% res)</th></xsl:when>
+	    		        <xsl:when test="@type = 'ROI'"><th><xsl:value-of select="@name"/> codon (% res)</th></xsl:when>
+	    		        <xsl:otherwise><th><xsl:value-of select="@name"/></th></xsl:otherwise>
+	    		    </xsl:choose>
 	    		</xsl:for-each>
 	    		</xsl:for-each>
 	    		</tr>
@@ -33,7 +37,7 @@
 			    		            </xsl:when>
 			    		            <xsl:when test="region_of_interest/significance">
 			    		                <xsl:for-each select="region_of_interest">
-			    		                    <xsl:if test="significance">
+			    		                    <xsl:if test="significance and not(significance/@changes)">
 			    		                        <xsl:for-each select="mutation">
 			    		                            <xsl:if test="@percent &gt; 10"><xsl:value-of select="@name"/> (<xsl:value-of select='format-number(@percent, "##.##")'/>%)<br/></xsl:if>
 			    		                        </xsl:for-each>
@@ -66,7 +70,7 @@
 	    	<table border="2" rules="rows">
 	    	    <tr><th colspan="2">Clinical Summary for Sample: <xsl:value-of select="@name"/></th></tr>
 	    	    <xsl:for-each select=".//significance">
-                        <xsl:if test="not(./@flag)">
+                        <xsl:if test="not(./@flag) and not(./@changes)">
 	    		    <tr>
 	    		    <td><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]]></xsl:text></td>
 	    		    <td><xsl:value-of select="."/></td>
@@ -81,7 +85,11 @@
 	    		<tr>
 	    		<th>Gene Target:</th>
 	    		<xsl:for-each select="assay">
-	    		    <th><xsl:value-of select="@name"/> codon (% res)</th>
+	    		    <xsl:choose>
+	    		        <xsl:when test="@type = 'SNP'"><th><xsl:value-of select="@name"/> SNP (% res)</th></xsl:when>
+	    		        <xsl:when test="@type = 'ROI'"><th><xsl:value-of select="@name"/> codon (% res)</th></xsl:when>
+	    		        <xsl:otherwise><th><xsl:value-of select="@name"/></th></xsl:otherwise>
+	    		    </xsl:choose>
 	    		</xsl:for-each>
 	    		</tr>
 	    		<tr>
@@ -97,7 +105,7 @@
 	    		            </xsl:when>
 	    		            <xsl:when test="region_of_interest/significance">
 	    		                <xsl:for-each select="region_of_interest">
-	    		                    <xsl:if test="significance">
+	    		                    <xsl:if test="significance and not(significance/@changes)">
 	    		                        <xsl:for-each select="mutation">
 	    		                            <xsl:if test="@percent &gt; 10"><xsl:value-of select="@name"/> (<xsl:value-of select='format-number(@percent, "##.##")'/>%)<br/></xsl:if>
 	    		                        </xsl:for-each>

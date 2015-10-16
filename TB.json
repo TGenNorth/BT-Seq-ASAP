@@ -270,7 +270,7 @@
               "message": "rpoB 531 mutation present which is associated with rifampin resistance."
             },
             "nt_sequence": "TCG",
-            "mutations": "TTG, TGG"
+            "mutations": "TTG,TGG"
           },
           {
             "position_range": "1149-1151",

@@ -202,9 +202,13 @@ def _add_roi_node(parent, roi, roi_dict, proportion):
             mutant_proportion = count/int(roi_dict['depth'])
         mutation_node = ElementTree.SubElement(roi_node, 'mutation', {'name':str(roi.name)+mutation, 'count':str(count), 'percent':str(mutant_proportion*100)})
         mutation_node.text = mutation
-            
+        if mutant_proportion >= proportion:
+            significant = True
     if 'flag' in roi_dict:
         significance_node = ElementTree.SubElement(roi_node, "significance", {'flag':roi_dict['flag']})
+    elif significant:
+        significance_node = ElementTree.SubElement(roi_node, "significance")
+        significance_node.text = roi.significance.message                       
     elif 'changes' in roi_dict and int(roi_dict['changes']) > 0:
         significance_node = ElementTree.SubElement(roi_node, "significance", {'changes':roi_dict['changes']})
         significance_node.text = roi.significance.message                       
