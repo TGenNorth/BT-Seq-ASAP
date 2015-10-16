@@ -200,7 +200,7 @@ def _add_roi_node(parent, roi, roi_dict, proportion):
         else:
             count = aa_seq_counter[mutation]
             mutant_proportion = count/int(roi_dict['depth'])
-        mutation_node = ElementTree.SubElement(roi_node, 'mutation', {'count':str(count), 'percent':str(mutant_proportion*100)})
+        mutation_node = ElementTree.SubElement(roi_node, 'mutation', {'name':str(roi.name)+mutation, 'count':str(count), 'percent':str(mutant_proportion*100)})
         mutation_node.text = mutation
             
     if 'flag' in roi_dict:
