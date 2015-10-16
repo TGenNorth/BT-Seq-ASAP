@@ -255,7 +255,7 @@ class RegionOfInterest(object):
     classdocs
     '''
 
-    def __init__(self, position_range, aa_sequence=None, nt_sequence=None, mutations=None, significance=None):
+    def __init__(self, position_range, aa_sequence=None, nt_sequence=None, mutations=None, name = None, significance=None):
         '''
         Constructor
         '''
@@ -263,16 +263,19 @@ class RegionOfInterest(object):
         self.aa_sequence = aa_sequence
         self.nt_sequence = nt_sequence
         self.mutations = mutations
+        self.name = name
         self.significance = significance
         
     def as_dict(self):
         return_dict = {'position_range':self.position_range}
         if self.aa_sequence:
             return_dict['aa_sequence'] = self.aa_sequence
-        if self.aa_sequence:
+        if self.nt_sequence:
             return_dict['nt_sequence'] = self.nt_sequence
-        if self.aa_sequence:
+        if self.mutations:
             return_dict['mutations'] = self.mutations
+        if self.name:
+            return_dict['name'] = self.name
         if self._significance:
             return_dict['Significance'] = self._significance
         return return_dict

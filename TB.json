@@ -106,14 +106,16 @@
         "RegionOfInterest": [
           {
             "position_range": "1101-1103",
+            "name": "88",
             "Significance": {
               "message": "gyrA 88 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
             },
             "nt_sequence": "GGC",
-            "mutations": "GCC, GTG, TGC"
+            "mutations": "GCC,GTG,TGC"
           },
           {
             "position_range": "1107-1109",
+            "name": "90",
             "Significance": {
               "message": "gyrA 90 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
             },
@@ -122,6 +124,7 @@
           },
           {
             "position_range": "1110-1112",
+            "name": "91",
             "Significance": {
               "message": "gyrA 91 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
             },
@@ -130,11 +133,12 @@
           },
           {
             "position_range": "1119-1121",
+            "name": "94",
             "Significance": {
               "message": "gyrA 94 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
             },
             "nt_sequence": "GAC",
-            "mutations": "GGC, AAC, CAC, GCC, TAC"
+            "mutations": "GGC,AAC,CAC,GCC,TAC"
           }
         ]
       }
@@ -205,11 +209,12 @@
         "sequence" : "CTGGTAGGTCCCGTCATCTGCTGGCGAGGGCTCCCAGGTGATACCCATGTCGAGCAGGTTCACGAAGAAGTCGTTGGTCAGTGACTCGGAGGCCTCGGTGAACACGCCCAGCGGTAAGCGCTTGTAGTTTGCGCCGAGGACGCGCAGGCCACCTACCAGCACCGTCATCTCAGGGGCACTGAGCGTAAGCAGGTTCGCCTTGTCGAGCAGCATGTACTCGGCCGGCAACGGGTTGCCCTTTCCGAGGTAGTTTCGGAAGCCATCTGCCTTGGGCTCCAGCACGGCAAAGGATTCCACGTCGGTTTGTTCCTGCGACGCATCCGTGCGGCCCGGGGTGAAGGGCACCGTGATGTTGTGGCCAGCCGCCTTTGCTGCTTTCTCTATGGCGGCACAGCCACCGAGCACGACGAGGTCGGCGAAGGACACTTTGATGTTCCCCGGCGCCGCGGAGTTGAATGACTCCTGGATCTCTTCCAGGGTGCGAATGACCTTGCGCAGATCCCCGTCGGGGTCGTTGACCTCCCACCCGACTTGTGGCTGCAGGCGGATGCGACCACCGTTGGCGCCGCCGCGCTTGTCGCTACCACGGAACGACGACGCCGCCGCCCATGCGGTCGAAACTAGCTGTGAGACAGTCAATCCCGATGCCCGGATCTGGCTCTTAAGGCTGGCAATCTCGGCTTCGCCGACGAGGTCGTGGCTGACCGCAGGGACCGGATCCTGCCACAGCAGGGTCTGCTTGGGGACCAGCGGCCCAAGGTATCTCGCAACGGGACCCATGTCTCGGTGGATCAGCTTGTACCAGGCCTTGGCGAACTCGTCGGCCAATTCCTCGGGGTGTTCCAGCCAGCGACGCGTGATCCGCTCATAGATCGGATCCACCCGCAGCGAGAGGTCAGTGGCCAGCATCGTCGGGGAGCGCCCTGGCCCGCCGAACGGGTCCGGGATGGTGCCGGCACCGGCGCCGTCCTTGGCGGTGTATTGCCAAGCGCCAGCAGGGCTCTTCGTCAGCTCCCACTCGTAGCCGTACAGGATCTCGAGGAAACTGTTGTCCCATTTCGTCGGGGTGTTCGTCCATACGACCTCGATGCCGCTGGTGATCGCGTCCTTACCGGTTCCGGTGCCATACGAGCTCTTCCAGCCCAAGCCCATCTGCTCCAGCGGAGCAGCCTCGGGTTCGGGGCCGACCAGATCGGCCGGGCCGGCGCCATGGGTCTTACCGAAAGTGTGACCGCCGACGATCAGCGCCGCTGTTTCGACGTCGTTCATGGCCATGCGCCGAAACGTCTCGCGAATGTCGACCGCCGCGGCCATGGGGTCCGGGTTGCCGTTCGGCCCCTCCGGGTTCACGTAGATCAGCCCCATCTGCACCGCGGCCAGCGGGTTCTCCAGATCCCGCTTACCGCTGTAACGCTCATCGCCGAGCCAGGTGGCTTCCTTGCCCCAATAGACCTCATCGGGCTCCCACTGGTCGACCCGGCCGAAGCCGAACCCGAACGTCTTGAAGCCCATCGATTCCAGCGCGCAGTTGCCGGCGAAAACAATCAGGTCCGCCCATGAGAGCTTCTTGCCGTACTTCTTCTTGACCGGCCACAGCAGCCGGCGCGCCTTGTCCAAGCTGGCGTTGTCGGGCCAGCTGTTAAGCGGCGCGAACCGCTGCATGCCGCCCCCGGCGCCGCCGCGGCCGTCGTGGATGCGGTAGGTGCCGGCAGCGTGCCACGCCATCCGGATAAACAGCGGCCCGTAGTGGCCGTAGTCGGCGGGCCACCACGGCTGCGAGGTGGTCATCACTTCCTCGATGTCCCGCGTCAGGGCGTCAACGTCGATGGTCGCGACCTCCGCGGCATAGTCGAACGCCGCACCCATCGGGTCAGCGACGGCCGGGTTTTGGTGCAGTACCTTCAGATTGAGCCGGTTGGGCCACCAGTCCTGGTTTCCGCCGCCCTCGACGGGGTATTTCATATGACCCACGACGGGACAGCCGTTGCTAGCGGCTCCGGTGGTGGTTTCTGTAATGGGTGGGTGTTGCTCGGGCACAGCATTCCTTCCAGGAGTTGGTGTTATCGGGCTGTGATCACGGATGTGATCGCGAAGTGTCGGATATCGAACAATCAGGACATAGACCCCAGTAGATGACCTCCGCCTCGTCCAACAGGAAGCCGTTATGGTCCGAGGCCGTCAGACAGGGTGCCTCGCCAACAGCACAGTCGACATCGGCGATAACCCCGCAAGACCGGCAGACGATGTGATGGTGGTTGTCGCCGACCCTG",
         "RegionOfInterest": {
           "position_range": "1093-1095",
+            "name": "315",
           "Significance": {
             "message": "katG 315 mutation present which is associated with isoniazid resistance."
           },
           "nt_sequence": "AGC",
-          "mutations": "ACC, AAC, ACA, AGA"
+          "mutations": "ACC,AAC,ACA,AGA"
         }
       }
     }
@@ -224,22 +229,25 @@
         "RegionOfInterest": [
           {
             "position_range": "1089-1091",
+            "name": "513",
             "Significance": {
               "message": "rpoB 513 mutation present which is associated with rifampin resistance."
             },
             "nt_sequence": "CAA",
-            "mutations": "AAA, CTA"
+            "mutations": "AAA,CTA"
           },
           {
             "position_range": "1098-1100",
+            "name": "516",
             "Significance": {
               "message": "rpoB 516 mutation present which is associated with rifampin resistance."
             },
             "nt_sequence": "GAC",
-            "mutations": "TAC, GTC, GGC"
+            "mutations": "TAC,GTC,GGC"
           },
           {
             "position_range": "1116-1118",
+            "name": "522",
             "Significance": {
               "message": "rpoB 522 mutation present which is associated with rifampin resistance."
             },
@@ -248,14 +256,16 @@
           },
           {
             "position_range": "1128-1130",
+            "name": "526",
             "Significance": {
               "message": "rpoB 526 mutation present which is associated with rifampin resistance."
             },
             "nt_sequence": "CAC",
-            "mutations": "GAC, TAC, CGC, CTC, AAC, TGC"
+            "mutations": "GAC,TAC,CGC,CTC,AAC,TGC"
           },
           {
             "position_range": "1143-1145",
+            "name": "531",
             "Significance": {
               "message": "rpoB 531 mutation present which is associated with rifampin resistance."
             },
@@ -264,6 +274,7 @@
           },
           {
             "position_range": "1149-1151",
+            "name": "533",
             "Significance": {
               "message": "rpoB 533 mutation present which is associated with rifampin resistance."
             },
