@@ -224,6 +224,21 @@ def findReads(path):
                 logging.info(read)
     return read_list
 
+def findBams(path):
+    import os
+    import re
+    from collections import namedtuple
+    bam_list = []
+    Bam = namedtuple('Bam', ['sample', 'bam', 'job'])
+    for file in os.listdir(path):
+        is_bam = re.search('(.*)-(.*)(\.bam)$', file, re.IGNORECASE)
+        if is_bam:
+            sample_name = is_bam.group(1)
+            bam = Bam(sample_name, os.path.join(path, file), None)
+            bam_list.append(bam)
+            logging.info(bam)
+    return bam_list
+
 def expandPath(path):
     import re
     import os
