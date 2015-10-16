@@ -15,7 +15,7 @@
 	    		<th>Sample</th>
 	    		<xsl:for-each select="sample[position()&lt;=1]">
 	    		<xsl:for-each select="assay">
-	    		    <th><xsl:value-of select='@name'/></th>
+	    		    <th><xsl:value-of select='@name'/> codon (% res)</th>
 	    		</xsl:for-each>
 	    		</xsl:for-each>
 	    		</tr>
@@ -31,6 +31,15 @@
 			    		                    <xsl:if test="significance"><xsl:value-of select="@name"/> (<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/></xsl:if>
 			    		                </xsl:for-each>
 			    		            </xsl:when>
+			    		            <xsl:when test="region_of_interest/significance">
+			    		                <xsl:for-each select="region_of_interest">
+			    		                    <xsl:if test="significance">
+			    		                        <xsl:for-each select="mutation">
+			    		                            <xsl:if test="@percent &gt; 10"><xsl:value-of select="@name"/> (<xsl:value-of select='format-number(@percent, "##.##")'/>%)<br/></xsl:if>
+			    		                        </xsl:for-each>
+			    		                    </xsl:if>
+			    		                </xsl:for-each>
+			    		            </xsl:when>
 			    		            <xsl:otherwise><em>none</em></xsl:otherwise>
 			    		        </xsl:choose>
 			    		    </xsl:for-each></td>
@@ -39,7 +48,7 @@
                     <xsl:apply-templates select="."/>
                 </xsl:for-each>
             </table>
-	    	<em>Percentages indicate the percentage of the sample containing that mutation</em>
+	    	<em>Percentages indicate the percentage of the sample containing that mutation, a value of 'none' indicates that no resistant mutations were present in that gene.</em>
         </body>
         </html>
 <!--         </exsl:document> -->
@@ -72,7 +81,7 @@
 	    		<tr>
 	    		<th>Gene Target:</th>
 	    		<xsl:for-each select="assay">
-	    		    <th><xsl:value-of select="@name"/></th>
+	    		    <th><xsl:value-of select="@name"/> codon (% res)</th>
 	    		</xsl:for-each>
 	    		</tr>
 	    		<tr>
@@ -86,13 +95,22 @@
 	    		                    <xsl:if test="significance"><xsl:value-of select="@name"/> (<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/></xsl:if>
 	    		                </xsl:for-each>
 	    		            </xsl:when>
+	    		            <xsl:when test="region_of_interest/significance">
+	    		                <xsl:for-each select="region_of_interest">
+	    		                    <xsl:if test="significance">
+	    		                        <xsl:for-each select="mutation">
+	    		                            <xsl:if test="@percent &gt; 10"><xsl:value-of select="@name"/> (<xsl:value-of select='format-number(@percent, "##.##")'/>%)<br/></xsl:if>
+	    		                        </xsl:for-each>
+	    		                    </xsl:if>
+	    		                </xsl:for-each>
+	    		            </xsl:when>
 	    		            <xsl:otherwise><em>none</em></xsl:otherwise>
 	    		        </xsl:choose>
 	    		    </xsl:for-each></td>
 	    		</xsl:for-each>
 	    		</tr>
 	    	</table>
-	    	<em>Percentages indicate the percentage of the sample containing that mutation</em>
+	    	<em>Percentages indicate the percentage of the sample containing that mutation, a value of 'none' indicates that no resistant mutations were present in that gene.</em>
 	    </body>
 	    </html>
 	</exsl:document>
