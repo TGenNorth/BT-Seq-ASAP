@@ -80,10 +80,10 @@ USAGE
         required_group = parser.add_argument_group("required arguments")
         required_group.add_argument("-n", "--name", required=True, help="name for this run. [REQUIRED]")
         required_group.add_argument("-j", "--json", required=True, help="JSON file of assay descriptions. [REQUIRED]")
-        reads_bams_group = required_group.add_mutually_exclusive_group()
+        optional_group = parser.add_argument_group("optional arguments")
+        reads_bams_group = optional_group.add_mutually_exclusive_group()
         reads_bams_group.add_argument("-r", "--read-dir", dest="rdir", metavar="DIR", help="directory of read files to analyze.")
         reads_bams_group.add_argument("-b", "--bam-dir", dest="bdir", metavar="DIR", help="directory of bam files to analyze.")
-        optional_group = parser.add_argument_group("optional arguments")
         optional_group.add_argument("-o", "--out-dir", dest="odir", metavar="DIR", help="directory to write output files to. [default: `pwd`]")
         trim_group = parser.add_argument_group("read trimming options")
         on_off_group = trim_group.add_mutually_exclusive_group()
@@ -147,12 +147,7 @@ USAGE
         
         assay_list = assayInfo.parseJSON(json_fp)
         
-        reference = assayInfo.generateReference(assay_list)
-        ref_fasta = os.path.join(out_dir, "reference.fasta")
-        reference.write(ref_fasta, 'fasta')
-        index_job = dispatcher.indexFasta(ref_fasta, aligner)        
-        
-        bam_files = []
+        bam_list = []
         output_files = []
         final_jobs = []
         xml_dir = os.path.join(out_dir, "xml")
@@ -163,6 +158,11 @@ USAGE
             bam_list = dispatcher.findBams(bam_dir)
                    
         if read_dir:
+            reference = assayInfo.generateReference(assay_list)
+            ref_fasta = os.path.join(out_dir, "reference.fasta")
+            reference.write(ref_fasta, 'fasta')
+            index_job = dispatcher.indexFasta(ref_fasta, aligner)        
+        
             read_list = dispatcher.findReads(read_dir)
             for read in read_list:
                 if trim:
