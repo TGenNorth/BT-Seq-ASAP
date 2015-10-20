@@ -1,0 +1,1103 @@
+{
+  "Assay": [
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TCCGCAAACCTCAACTCATTTCTTTTAATCATCTTTGCAATATCGACAGCCAACTCAACAAAGTAAAACTAAATACTGAAGCCTTTGCAAAAGGCTTGTTGGCAAACAATGTACTCATGACAGGCTCACGTGGTACAGGCAAGTCGTCTATTGTAAAAGCCTGT-TTAAATGAATATC-ACCACTTAGGCCTTCGGGTGATTGAACTTGAGAAAAAGTATTTAGAAGATTTGCCTAAAATTATTAACTTACTGCAAGACCGTACTGAGCGTTTTATTATCTTTTGTGATGACTTGGCCTTTGAAGCAGGCGACTCAAGTTACGCAACTTTAAAAACTGTATTAGATGGTTCACTGGC",
+          "Significance": {
+            "message": "A. baumannii present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "ACICU-02424"
+      },
+      "name": "Ab_M2_UT2",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AAATTGCCAAAGCACAAGGTTTCAATGACTTAAAAAGTTTCCAACAATCCTTAAAAACAAATCCTGCTGTTTTCCCAAAATCTCGTGAAGAAATTTTAGAGATTTATCGGGGATATATTGCCCAAATGCAACCAGAGTTGCCGAAGCTATTTGGTTTATTACCCAAAAATAAAGTCGAAGTTTTGCCTGTAGAGCAATATCGAGAAAAAGAAGCGGCAGGTGCGGAGTATCACCAAGGCACGCCTGATGGTTCACGCCCCGGACAGGTATATGTGAATACTGGGGACTTCTCTGAACGTTCCAAAATATCAATGGAATCGACCGCTTACCATGAGGCAATTCCCG",
+          "Significance": {
+            "message": "Acb complex present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "ABAYE0080"
+      },
+      "name": "Acb_M2_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGCCTGGCTCTGTTTCATGGCGATCCGGAAAAGGCAAAAGAACTGACCAATGAAGCTTCCGCTTTGCTGTCAGATGATAGTACCGAATGGGCAAAGTTCGCTAAACCAGGTAAAAAGACCAACGTCAATGATGACCAATATATTGTCATTAATGCATCTGTCGGAATTTCTGAGAGTTATGTAGCGACACCCGAAAAAGAAGCCGCGATAAAAATTGCCAACGAAAAAATGGCGAAAGGGGATAAAAAGGGTGCAATGGAAGAGCTTCGCCTGGCCGGTGTTGGTGTAATGGAAAACCAATATTTGATGCCGCTTAAACAGACTCGTAATGCACTTGCT",
+          "Significance": {
+            "message": "E. coli present"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ec_M2_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TACCAGTCTGCGTCTGATTCCAATAAGGCGCAGAATGCTATTTCAGAAGTAATGAGCGCAACGT",
+          "Significance": {
+            "message": "presence detects EPEC"
+          }
+        },
+        "function": "virulence factor",
+        "gene_name": "adherence factor, plasmid-encoded, encodes bundle-forming pilus (bfpA-bfpL)"
+      },
+      "name": "bfpA_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GATACATTAAGACGCCTAAAGGATGCCCTGATGATAATATACGGAATATCAAAAGTAGATGCTTGCAGTTGTCCGAATTGGTCAAAAGG",
+          "Significance": {
+            "message": "presence denotes E. coli is EAEC (enteroaggregative)"
+          }
+        },
+        "function": "virulence factor",
+        "gene_name": "E. coli aggR"
+      },
+      "name": "EAEC_aggR_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TCGAGGATGATAGTGCAGGTCGGATCAAGGCTAAGTATATTTTCCGGAATGTGTGTGATGCGATTCTCGCGGCACCGGAAAAATATCTCGGTTTCCTCTGAGTGATGATTTCTTACAGGTACGGCTGGTAGGCTTTCCAGAAGATTAGTACTTACATCGAGCGCTTCCAGTGATTCAGGTAACTCA",
+          "Significance": {
+            "message": "presence denotes EIEC - invasive E. coli or Shigella"
+          }
+        },
+        "function": "virulence factor",
+        "gene_name": "E. coli (and Shigella) invasion antigen"
+      },
+      "name": "EIEC_lpaH3_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TGGAATAATCATCATCATTACAGCCATAAAGAAGAAGAGAGCCAGAATAAGATCGTGATATGACTC",
+          "Significance": {
+            "message": "presence denotes AEEC"
+          }
+        },
+        "function": "virulence factor",
+        "gene_name": "T3SS in E. coli"
+      },
+      "name": "escV_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CTGCGTTAGGTGGAATACCATATTCTCAGATATATGGATGGTATCGTGTTAATTTTGGTGTAATTGATGAACGATTACATCGTAACAGGGAATATAGAGACCGGTATTACAGAAATCTGAATATA",
+          "Significance": {
+            "message": "presence denotes ETEC"
+          }
+        },
+        "function": "virulence factor",
+        "gene_name": "eltA"
+      },
+      "name": "ETEC_eltA_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GTTCCAGCCTGCCATCTGCTGCCAGCACCAGGACCTGTTGCTTCTTCCCCTCATTTCTGTGCACTGCCTGAATGGGTACCAGCAGTGTATTTTGGGCTTCATCAGTAATCAGGGTAACCTGAGCA",
+          "Significance": {
+            "message": "presence denotes ETEC"
+          }
+        },
+        "function": "virulence factor",
+        "gene_name": "estA"
+      },
+      "name": "ETEC_estA_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "SNP": {
+            "variant": "T",
+            "position": 299,
+            "Significance": {
+              "message": "canSNP- 2 assays- Price Mbio 2013- differentiate the CTX-M carrying subclone of ST131."
+            },
+            "reference": "C"
+          },
+          "sequence": "GACACCATGCGTTTTGCTTCAACGCTGGAGAATATGGGCGTCAGCTTTATCAACGCTATCATGACGTTGATCGCCTTCCTGCCGGTGCTGGTAACGCTCTCCGCACATGTGCCGGAGCTGCCGATTGTCGGGCACATTCCGTATGGTCTGGTGATTGCCGCTATCGTCTGGTCGCTGATGGGGACCGGATTACTGGCAGTGGTAGGGATCAAACTGCCGGGGCTGGAGTTTAAAAACCAGCGTGTAGAGGCTGCCTACCGTAAAGAACTGGTTTATGGTGAAGACGATGCCACGCGCGCGACGCCGCCTACGGTACGCGAGCTTTTTAGCGCCGTACGGAAAAACTATTTCCGCCTCTATTTTCACTATATGTATTTCAATATCGCCCGCATTCTCTATTTGCAGGTCGATAACGTTTTCGGTTTGTTCTTGCTGTTTCCGTCAATTGTTGCCGGTACGA"
+        },
+        "function": "strain ID",
+        "gene_name": "CTX-M"
+      },
+      "name": "H30-Rx-snp200_UT",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "SNP": {
+            "variant": "A",
+            "position": 287,
+            "Significance": {
+              "message": "canSNP- 2 assays- Price Mbio 2013- differentiate the CTX-M carrying subclone of ST131."
+            },
+            "reference": "G"
+          },
+          "sequence": "GTGGCGATTTCACGCTGTTAGGCCTTTCTCTACCGGGATTAATTACTTTCTTACTCTTCTGGCTGGTTAACGTTGGTATTGGTTTTGGCGGCGGAAAAGTTTTAAATAAATTCACTGCCATTCTTAACCCGTGCATCTATATCGTTTTCGGCGGTATGGCGATTTGGGCGATTTCGCTGGTCGGGATCGGTCCAATCTTTGACTACATTCCGGGCGGTATTCAGAAAGCAGAAAACAGTGGCTTCCTGTTTCTGGTGGTGATAAACGCGGTGGTTGCGGTCTGGGCGGCACCGGCGGTGAGCGCATCCGACTTTACGCAAAACGCCCACTCGTTTCGTGAGCAGGCGCTGGGGCAAACGCTGGGTTTAGTTGTGGCCTATATTCTGTTTGCGGTCGCCGGGGTATGTATTATTGCCGGAGCCAGTATTCATTACGGCGCTGACACCTGGAACGTGCTGGATA"
+        },
+        "function": "strain ID",
+        "gene_name": "CTX-M"
+      },
+      "name": "H30-Rx-snp264_UT",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TCCAGCAGGTGCTGGATCGTGCAGACATTCGCCCAGCGCATAACGAAGATTTGCCATTTCAGGGCGGCGCGCTGGGGTTGTTTGGCTACGATCTGGGCCGCCGTTTTGAGTCACTGCCAGAAATTGCGGAACAAGATATCGTTCTGCCGGATATGGCAGTGGGTATCTACGACTGGGCGCTGGTTGTCGACCACCAGCGTCAAACAGTTTCTTTGCTGAGTCATAATGATGTCAATGCCCGTCGGGCCTGGCTGGAAAGCCAGCAATTCTCCCCGCAGGAAGATTTCACACTCACTTCCGACTGGCAATCCAATATGACCCGCGAACAGTACGGCGAAAAATTTCGC",
+          "Significance": {
+            "message": "multiplex for ST131 serotyping"
+          }
+        },
+        "function": "strain ID",
+        "gene_name": "pabB"
+      },
+      "name": "pabB_ST131_O25b",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ATACCGACTACGCCGATCTGTTGCTTGGACATTACATACTCCTGTCAGGTGTGATCACCGCGCTGAATGCTCGCGGCCTGGAATGTTCGCAAATAAGTATACAAAGTACTTATTAAAGTATAAATAGCTTATCCATGCTTATATGCTTACGGCTTTATATTACGGGTGAAAAACTGATGAAATTCGATCAAAGTTGCGATTTGATAAAATACGTTTTCTGGCTAAATATCTAAAAGTACTTTTTAAGTGCCATCTGAAGGCTTTTGAAAAAAAACTTCGATTGTCATGATGAGCATAATGTATCGCATGAAAAGCGGGAACATAATGAAGTCTGACACCAGCCAGGCTAAGCCTCAAGCACAGGTCAATATCTTCACAGTACATAAAGTAACCTTGATCGAAGCCATTTACACGCACAAAATCTGAAAAACGTACCAGCATAAATGATCC",
+          "Significance": {
+            "message": "multiplex for ST131 serotyping"
+          }
+        },
+        "function": "strain ID",
+        "gene_name": "rfbO16"
+      },
+      "name": "rfbO16_UT",
+      "assay_type": "gene variant"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ATACCGACGACGCCGATCTGTTGCTTTGACATTGTTTACTCCTGTCAGGGCGTTAAAAAATTGGTATATAAAGCAAAGATCTTTAAATAAAGATACCATTTCAGTAGTAAAATTAGGACTTTATTTAATCACTTTACCAGTTCGGATGTAATTTTTCTATAGTTTTTATAAGAAAGAATTGGTTTCCGTAATATGTAGCGCGTAATACTCCTTATATGCCATCGAAATGCTTTAGTAAATATTCTTCTATTTTCATGCTGCGCATAATGAATAGCA",
+          "Significance": {
+            "message": "multiplex for ST131 serotyping"
+          }
+        },
+        "function": "strain ID",
+        "gene_name": "rfbO25b"
+      },
+      "name": "rfbO25b_UT",
+      "assay_type": "gene variant"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ATGTCAGAGGGATAGATCCAGAGGAAGGGCGGTTTAATAATCTACGGCTTATTGTTGAACGAAATAATTTATATGTGACAGGATTTGTTAACAGGACAAATAATGTTTTTTATCGCTTTGCTGATTTTTCACATGTTACCTTTCCAGGTACAACAGCGGTTACATTGTCTGGTGACAGTAGCTATA",
+          "Significance": {
+            "message": "encodes Shiga toxin protein (STEC)"
+          }
+        },
+        "function": "virulence factor",
+        "gene_name": "Shiga toxin"
+      },
+      "name": "stx1_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AGTTCTGCGTTTTGTCACTGTCACAGCAGAAGCCTTACGCTTCAGGCAGATACAGAGAGAATTTCGTCAGGCACTGTCTGAAACTGCTCCTGTGTATACGATGACGCCGGGAGACGTGGACCTCACTCTGAACTGGGGGCGAATCAGCAATGTGCTTCCG",
+          "Significance": {
+            "message": "encodes Shiga toxin protein (STEC)"
+          }
+        },
+        "function": "virulence factor",
+        "gene_name": "Shiga toxin"
+      },
+      "name": "stx2_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CCAGAAATCGCGCCCGCAGTTCCTGCATCAATCGCTGCTTTTACCTGATCCGGGGCGGAAATACCAAATCCCTGCAATGGAGGTGCAGCGTTGTACTCTTTCAGCTTCGCAACCAGATGATTGAGAGGTAACGCGGCGCGGTTTT",
+          "Significance": {
+            "message": "multiplex for ST131 serotyping"
+          }
+        },
+        "function": "strain ID",
+        "gene_name": "trpA"
+      },
+      "name": "trpA_ST131_O16_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AAGCACGCTGGTGGTTACCGCCAGTAAACAATCTTCCCGCTCGGCATCAGCCAACAACGTCTCATCTACTGTTGTCAGCGCGCCGGAATTAAGCGACGCCGGCGTCACCGCCAGCGACAAACTCC",
+          "Significance": {
+            "message": "presence denotes UPEC"
+          }
+        },
+        "function": "virulence factor",
+        "gene_name": "fyuA"
+      },
+      "name": "UPEC_fyuA_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TGCCTATCGCCACTTTATTGAAAGCGTTAAAGATTATGCCATCTATATGCTGAGCGCCGACGGCACGGTCATTAGCTGGAATGAGGGCGCCCGCCGGGCAAAAGGGTACCTGAGCGACGAGATCATCGGTCGCTACTTCGGTCTCTTCTATAGCGAAGCTGAGCAACTCTCCGGTGTACCCGCAAAAAACCTGGAAATCGCCCTGCGTAGCGGGCAGTTTGAAGGGGAAGGCTGGCGGTATCGCAAAGACGGGTCCCGATTCTGGGCGCATGTCATGATCGATACCATCCGCGATGAGCAGAACACCCTGCTGGGTTTTGCCAAAATTACCCGCGACATTAGTGAACAGAAGGCGATTAACGACCG",
+          "Significance": {
+            "message": "K. pneumoniae present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": 2858
+      },
+      "name": "Kp_M2_UT1nv",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GAAGCGGTTGAGGAACAGGTGGATCACCAGCACCGTCATCAGCGTGATCAGCACCGCGAAGCACACCGAGGTAAATCGGTAGAGCACGCTGTACATCATGTCGTGGGT",
+          "Significance": {
+            "message": "P. aeruginosa present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "1,4-alpha-glucan branching protein"
+      },
+      "name": "PSAR_28621",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ATGGTTATGAAATTGTTGGTGATGAATTTGAAGTTCGCCGTTTCTTCATTAAGTTGATTGATCAAAGGTTAAATCATGATATTACTAAAAGTGAAGTTTTAAAGGCGCTCAACTTAACATTCGAAGATATCGCATATCAAAAAGACAAGATCAAACAGGTAGAACAATTTTTGAAGAGTCGCTTTATAGACAAATCACTGAGTTCATTGCCTTACGTCCTTTGTGTGATTCGTAGACGAATTCAAAGTGGTCATGTGATTAATCCATTAAATATTAATTATCAGTATTTGAGGGATACGAAAGAATATCAAGCAACGG",
+          "Significance": {
+            "message": "S. aureus present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "BglG family transcriptional antiterminator"
+      },
+      "name": "Sa_M2_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ACAGGCCGTGTTGAACGTGGTCAAATCAAAGTTGGTGAAGAAGTTGAAATCATCGGTTTACATGA---CACATCTAAAACAACTGTTACAGGTGTTGAAATGTTCCGTAAATTATTAGACTACGCTGAAGCTGGTG",
+          "Significance": {
+            "message": "Staph genus"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "tuf"
+      },
+      "name": "tuf_UT1",
+      "assay_type": "gene variant"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CTCAACTGGCATCATGAATGGTTTGTCAGAATCACGTTCTGGAGTTGGAATGTAAGTATCTACAGCTTCCATTAATTCTAAGATTTTTTCTTCGTATTGAGCATCGCCTTCTAAAGCTTTTAATGCTGAACCAGCGATTACAGGTACATCGTCACCT",
+          "Significance": {
+            "message": "Staph genus"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "tuf"
+      },
+      "name": "tuf_UT2",
+      "assay_type": "gene variant"
+    },
+    {
+      "Target": {
+        "Amplicon": [
+          {
+            "variant_name": "MRSA-orfX-1",
+            "sequence": "GGATCAAACGGCCTGCACAAGGACGTCTTACAACGCAGTAACTATGCACTATCATTCAGCAAAATGACATTTCCACATCAGATGATGCGGGTTGTGTTAATTGAGCAAGTGTATTAAGAAGCTTATCATAAGTAATGAGGTTCATGATTTTTGACTGCGGTTTTTTCAGCCGCTTCATAAAGGGATTTTGAATGTATCAGAACATATGAGGTTTATGTGAATTGCTGTTATGTTTTAGAGCATTTAAGATTATGCGTGGGGAAGCATATCATAAATGA",
+            "Significance": {
+              "message": "SCCmec integrated into S. aureus genome"
+            }
+          },
+          {
+            "variant_name": "MRSA-orfX-2",
+            "sequence": "GGATCAAACGGCCTGCACAAGGACGTCTTACAACGTAGTAACTACGCACTATCATTCAGCAAAATGACATTCCCACATCAAATGATGCGGGTTGTGTTAATTGAGCAAGTGTATAGAGCGTTTAAGATTATGCGTGGAGAAGCATATCATAAATAAAACTAAAAATTAGATTGTGTATAATTTAAAAATTTAATGAGATGTGGAGGAATTACATATATGAAAT",
+            "Significance": {
+              "message": "SCCmec integrated into S. aureus genome"
+            }
+          },
+          {
+            "variant_name": "MRSA-orfX-3",
+            "sequence": "GGATCAAACGGCCTGCACAAGGACGTCTTACAACGTAGTAACTACGCACTATCATTCAGCAAAATGACATTCCCACATCAAATGATGCGGGTTGTGTTAATTGAGCAAGTGTATAGAGCATTTAAGATTATGCGTGGAGAAGCGTACCACAAATGATGCGGTTTTTTATCCAGTTTTTTGTTTAATGAACAAGGTAAATTACGAGATAATATTTG",
+            "Significance": {
+              "message": "SCCmec integrated into S. aureus genome"
+            }
+          },
+          {
+            "variant_name": "MRSA-orfX-4",
+            "sequence": "GGATCAAACGGCCTGCACAAGGACGTCTTACAACGTAGTAACTACGCACTATCATTCAGCAAAATGACATTCCCACATCAAATGATGCGGGTTGTGTTAATTGAGCAAGTGTATAGAGCGTTTAAGATTATGCGTGGAGAAGCATATCATAAATGATGCGGTTATTTCAGCCGTAATTTTATAATATAAAGCAGAG",
+            "Significance": {
+              "message": "SCCmec integrated into S. aureus genome"
+            }
+          },
+          {
+            "variant_name": "MRSA-orfX-5",
+            "sequence": "GGATCAAACGGCCTGCACAAGGACGTCTTACAACGTAGTAACTACGCACTATCATTCAGCAAAATGACATTCCCACATCAAATGATGCGGGTTGTGTTAATTGAGCAAGTGTATAGAGCATTTAAGATTATGCGTGGAGAAGCGTACCACAAATAAAACTAAAAAATATGAGAAAATTATTAAATTAGCTCAAATCTTTGAAGAATAAAAAGTG",
+            "Significance": {
+              "message": "SCCmec integrated into S. aureus genome"
+            }
+          }
+        ],
+        "function": "strain ID",
+        "gene_name": "MRSA-orfX"
+      },
+      "name": "MRSA-orfX_UT1",
+      "assay_type": "gene variant"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "variant_name": "MRSE-orfX-1",
+          "sequence": "TGGCTCCAATGGTCTACACCAAGACGTCTTACAACGCAGCAACTATGCTTTATCATTCAGCAATATGACCTTCCCACACCAAATGATGCGCGTCATATTGATTGAACAAATTTATCGCGCATTTAAGATCATGAGAGGCGAAGCATATCATAAATGATGCGGTTTTTTCAGCCGCTTCATAAAGGGATTTTGAATGTATCAGAACATATGAGGTTTATGTGAATTGCTGTTATGTTTTTAAGAAGCTTATCATAAGTAATGAGGTTCATGATTTTTGAC",
+          "Significance": {
+            "message": "SCCmec integrated into S. epidermidis genome"
+          }
+        },
+        "function": "strain ID",
+        "gene_name": "MRSE-orfX"
+      },
+      "name": "MRSE-orfX_UT1",
+      "assay_type": "gene variant"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ACCACAAACACACTTAAAGATGGCACTAAAAACGTATTCGTTACTATTCGTGTAGTAATTTTCGAAATAAAGGCTCAAAGGTATGTTCTGCGAATAGTGTTAGAGCCGATGTCATTGAAAAATATGTTATGGACCAAATACTTGAAATTG",
+          "Significance": {
+            "message": "SCCmec cassette - type 1 ccr"
+          }
+        },
+        "function": "strain ID",
+        "gene_name": "SCCmec cassette"
+      },
+      "name": "SCCmec_ccrB1_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CTCATGTTACAGATACTTGCGAGTTTCTCAGAATTCGAACGTAATAACATTGTCGAGAACGTATTTATGGGTCAAACGAGACGTGCCCAAGAAGGCTATTATCAAGG",
+          "Significance": {
+            "message": "SCCmec cassette - type 2 ccr"
+          }
+        },
+        "function": "strain ID",
+        "gene_name": "SCCmec cassette"
+      },
+      "name": "SCCmec_ccrB2_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AACACAACGAACACATTGAAAGATGGTACCAAGAAGCGAATACGTTATTATTCTTGCAGTAACTTCCGAAACAAAGGCTCAAAAGTATGTTCTGCGAATAGCGTTAGAGCTGATGTGATTGAGAAATACG",
+          "Significance": {
+            "message": "SCCmec cassette - type 3 ccr"
+          }
+        },
+        "function": "strain ID",
+        "gene_name": "SCCmec cassette"
+      },
+      "name": "SCCmec_ccrB3_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GCGACTCTCTTGGCGTTTAAACTGTACTTTATCCCATAAAGCTTTATCAATAATAGGTGCATGCTTACCATCAGCAATAATGGGTTCCTCATTGAGTCCTTTTCGTCTCTTATCGCTCCAGTGTCTATACTTCGC",
+          "Significance": {
+            "message": "SCCmec cassette - type 4 ccr"
+          }
+        },
+        "function": "strain ID",
+        "gene_name": "SCCmec cassette"
+      },
+      "name": "SCCmec_ccrB4_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ACTTATAATGGCTTCATGCTTACCTTTGACCAATATCACATCATTTTTATCACTTTTACCACTTCTTCGCTGAACAGCCCAATTTTGATGGTTATTGAATCTGACATAGCCTTTATAGACTGGA",
+          "Significance": {
+            "message": "SCCmec cassette - type 5 ccr"
+          }
+        },
+        "function": "strain ID",
+        "gene_name": "SCCmec cassette"
+      },
+      "name": "SCCmec_ccrC_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GCACTGTCTCGTTTAGACCAATCAACACTCATGTTATCCTTAACTGTTTTAGTTAACTCATGTGCAATGGCTCTTAACTCTTTATCGCCCAAAGCTTC",
+          "Significance": {
+            "message": "SCCmec cassette - class B mec"
+          }
+        },
+        "function": "strain ID",
+        "gene_name": "SCCmec cassette"
+      },
+      "name": "SCCmec_IS1272J_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TCAGTTCATTGCTCACGATATGTGTAATTTTTTTAGTGAGAATGCTCTATATAAAATATACGGTTCTGTTGCAAAGTTGAATTTATAGTATAATTATAACCAAAAGGAGTCTTCTGTATGAACTATTTCAGATATAAACAATTTAACAAGGATGTTATCACTGTAGCCGTTGGC",
+          "Significance": {
+            "message": "SCCmec cassette - class C2 mec"
+          }
+        },
+        "function": "strain ID",
+        "gene_name": "SCCmec cassette"
+      },
+      "name": "SCCmec_mecC2_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGTTATAAGTGTACGAATGGTTTTTGGACTCCAGTCCTTTTGCATTTGTATTTCTTCTATTATATTATTCGCACTTGCATATTTTTTCATCCAAATGATATTCATAACTTCCCATTCTGCAGATGA",
+          "Significance": {
+            "message": "SCCmec cassette - class A mec"
+          }
+        },
+        "function": "strain ID",
+        "gene_name": "SCCmec cassette"
+      },
+      "name": "SCCmec_mecI_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CCTTTGAATGCCCTCCATGAATAAAATCTTCTTTATTTATTCTCATATTACCCGGATTATAAAACTCTATAAAATCTTCACAATTAACTATTTTAATACTTTGCTTAGTATCATAATACGCATGCATTAATGTATTAACCAGTGCTTCGCGAATTGCTACTTTTAAATCTCTTGCATAATTTTGTCTAGTCAAACCATCATTTAGGCTAAATGATTCCTCAATGTTATCAGTTAATTTTATCAATACTTTTTCAAAAAAACTATACACGTTTAAATCTTCATTACCTAAATCTCCACTTGATATTCTATCTTTCCAATCAGTATCTAGGTAATTTGTTTTCTTAAAATAATCTAATTGAAATCCTGGGAATCTATCACTAATCGCATTATACTTACCAAAGAATAATAAACATGCTGTAGTCATTTTATACTGTTTGTCTTTCGAACTTCTATCTTTTCTATATGC",
+          "Significance": {
+            "message": "SCCmec cassette - mecA present?"
+          }
+        },
+        "function": "strain ID",
+        "gene_name": "SCCmec cassette"
+      },
+      "name": "SCCmecIVa_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CAGGATATTTTTCAAACTCCTTCATTAAATCTTGTTTCCAAAGTACTACATTAGTGTCCATGTCCGTTAATTCTATTTCAGGCGTTTTAAGCTTATGTCTATTAACTACATCGAATATCCTTGGTCCTCCA",
+          "Significance": {
+            "message": "SCCmec cassette - subtype IVa"
+          }
+        },
+        "function": "strain ID",
+        "gene_name": "SCCmec cassette"
+      },
+      "name": "SCCmecIVa-J1_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TATGGCTAGACGGTAAACAAAATACAGTACCTTTGGAAACGGTTAAAACGAATAAGAAAAATGTAACTGTTCAGGAGTTGGATCTTCAAGCAAGACGTTATTTACAGGAAAAATATAATTTATATAACTCTGATGTTTTTGATGGGAAGGTTCAGAG",
+          "Significance": {
+            "message": "enterotoxin gene for USA typing"
+          }
+        },
+        "function": "virulence factor",
+        "gene_name": "MRSA sea"
+      },
+      "name": "sea_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TTACTGTTCGGGTATTTGAAGATGGTAAAAATTTATTATCTTTTGACGTACAAACTAATAAGAAAAAGGTGACTGCTCAAGAATTAGATTACCTAACTCGTCACTATTTGGTGAAAAATAAAAAACTCTATGAATTTAACAACTCGCCTTATGAAACGG",
+          "Significance": {
+            "message": "enterotoxin gene for USA typing"
+          }
+        },
+        "function": "virulence factor",
+        "gene_name": "MRSA seb"
+      },
+      "name": "seb_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "SNP": {
+            "variant": "A",
+            "position": 42,
+            "Significance": {
+              "message": "S. aureus USA300"
+            },
+            "reference": "G"
+          },
+          "sequence": "GCACGTTGATGACTTCTGACAGCATAAGCATCTTGATCTTCACGTGATACGTCAAATTGGGATGCTACATTTTCAGCAGTTAAACCCATAGGATATGACGCACCTATATCATCATATTGTAAGGTTGGATTGTTTGTGGGC"
+        },
+        "function": "strain ID"
+      },
+      "name": "USA300_UT1",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "SNP": {
+            "variant": "C",
+            "position": 37,
+            "Significance": {
+              "message": "S. aureus CC8 (excluding ST239)"
+            },
+            "reference": "T"
+          },
+          "sequence": "TGCCCATAACACATTTGACACTTTTGTAATCGGACCCGGTAACCGCTTTCCACATGCAGCGAGTTTAGCTGTGGCCGAA"
+        },
+        "function": "strain ID",
+        "gene_name": "dnaA: chromosomal replication initiator protein"
+      },
+      "name": "CC8_UT1",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "SNP": {
+            "variant": "C",
+            "position": 44,
+            "Significance": {
+              "message": "S. aureus USA300/500"
+            },
+            "reference": "T"
+          },
+          "sequence": "ACCTTATACGGAACATAGCAGACGTTATTTATTAGATGAAGGCCTCAATAAAGCGAATATCTTTGTGACAGGATCACCGATGACAGAAGTGATAGAAGCGCATCGA"
+        },
+        "function": "strain ID"
+      },
+      "name": "USA3-500_UT1",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "SNP": {
+            "variant": "C",
+            "position": 39,
+            "Significance": {
+              "message": "S. aureus Archaic Iberian"
+            },
+            "reference": "T"
+          },
+          "sequence": "CGCCAAATGACTCGCATTGTGAAATTACTGTAGCAGGGYTGCATGCTGGTAAACATGTGATGTGTGAAAAACCAATGGCTAAAACGACAGCAGAAGCTCAAAAAATGATAGATACAGCTAAATCAACAGGTAAAAAATTAACAATAGGTTATCAAAATCGTTTCCGAGCAGATAGTCAATTTTTACATCAAGCAGCGCAACGTGGCGACTTAGGAGACATTTACTTCGGAAAGGCACATGC"
+        },
+        "function": "strain ID"
+      },
+      "name": "ArchIber_UT_B+",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "SNP": {
+            "variant": "T",
+            "position": 58,
+            "Significance": {
+              "message": "S. aureus True Iberian"
+            },
+            "reference": "C"
+          },
+          "sequence": "GCGCAACAGGGAAGCAAGGTAATGCAGTTGTAAAACAGTTGTTAGAGGATGGATGGTATGTAAGTGCATTAACTAGAAATAAGAATAATCGTAAACTTTCAGACATAGGACATCCGCA"
+        },
+        "function": "strain ID"
+      },
+      "name": "TruIber_UT1",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "SNP": {
+            "variant": "C",
+            "position": 33,
+            "Significance": {
+              "message": "S. aureus ST239"
+            },
+            "reference": "T"
+          },
+          "sequence": "CATGACCGCCACTATAACCAGATACGACTGACCTGATGCCTGGATATGATGTAAATGGTTTAACCATGCACCAGAAACATCCTCCTGCTAATGTTGCAT"
+        },
+        "function": "strain ID"
+      },
+      "name": "ST239_UT1",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "SNP": {
+            "variant": "T",
+            "position": 30,
+            "Significance": {
+              "message": "S. aureus CC5"
+            },
+            "reference": "C"
+          },
+          "sequence": "CTGGCGCTCTCCAGCATCTTCTGGCAATTCAAAGGTATGTGTTTCTGTAACATTACCACCTAACACACTAATTGCAA"
+        },
+        "function": "strain ID",
+        "gene_name": "putative glucose inhibited division protein B"
+      },
+      "name": "CC5_UT1",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TCCTGATATAATCGGTGTCACAAGTTCTTCATCTATTGCAGCGGTCTTTTGCATATTGGTATTAAAAACAAATAGTTTAACTACTGGAATTATTTCAATAACTTGTGGACTAACATCATCTTTAATATTATTTTTACTAGCTAAAAAAGATGGTTTTTCAGCAGCAAGACTGATAATATTAGGCATTGGTTTTCAAGCTGTCACAAGAGCAGGCACCTCATTTTTATTGTTGAAAGTAGCAAGATATGAATTACAAGAAGTTATGAGATGGCTCAGTGGCTCTTTATCTTTTACAAAGTTAGATGACATACCTCTTGTTCT",
+          "Significance": {
+            "message": "S. pneumoniae present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "rRNA-23S ribosomal RNAiron ABC transporter"
+      },
+      "name": "Sp_M1_UT2",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TCTTCGTCATGGTGSGTTTCCAGATAATAAATCGTATGATTGACTAAATTTCGTTTTCTTTTTTCCGTTTTCGATAGCCGAGTTTCAATTTTATTTTCTTGATCAACTGCTAAGCTTCTTAAAATATAGACCAATAGTTCAATAACTAAAGCTTTAATTTGTAACGCTGATTCAACTTCTTGATGGTTTAATTCATGAACAATTTGCCAAGCTTTTTCTAAAAAAGCACCATGTAAATGACTTAAATCTAATAAAGCTGATTTATTTGGAAATACGTTTCGCGCTAAGCCTTCTAAATAGAGATTTGAAATGCCAATGTGTAGTTGATGTGAGTAAGTTCCTGCTTTTTGTTGCTCACCATGTTCCGTT",
+          "Significance": {
+            "message": "E. faecalis present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "araC family transcriptional regulator"
+      },
+      "name": "Efs_UT2",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GTTTTGATGGCTGGGTCAGTTTTCGTAATGCTTTTTTAGCTGAAACAGCCTATCTTGAAGGGAATTTTCAAGACGTAGATGCGAATCTTCCTTTTTCCACCACAGACGGTATTATGACGATCGCAAATAAAATGGCTTCTTTAGAACAGATGACGATTCATGATACACTTTCTCTCATTCATCATGACCAACTGCAAAAAGCCAAACA",
+          "Significance": {
+            "message": "E. faecium present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "phosphosugar-binding transcriptional regulator"
+      },
+      "name": "Efm_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TCAGTGAAAACAACCCACGATGATGTCCGTGGAGTAGCCGCAGGTGTCGTTCAGTCTTTTCAAAATTGTTTGCGGGAAAATAATATCAGTCCAGAAGATGTTGTGTTTGTTGCACATTCTACCACACAAGCGACTAATGCACTGATTGAAGGAGACGTAGCAAAAGTCGGCGTAATCGGGATGGCAAAAGGTGGATTAGAAGGTTTTTTAGCAAAACGACAAACTAGATTGAACGATATCGATTTAGGGAATAAGAAAAAAATAGAGATTGTCAATGCATTCTTACCTGTCAAACACTTAAATGTAGACCGTGTTTCAGAAACGATTTCTTCTTTAGAAAGAGAAAGAGCGGAGGTCTTGGTTTCTTCTATGGCATTTGGAGTAGATAATGGGGAACCAGAACGAGTTGTTTATGAAGCAGCATCG-GTAAAATCGATCCCTACAACGATGGCTTCTGACATCACAAAATTATATGGATTGACAAGAAGAACTCGGACAGCAGCAAT",
+          "Significance": {
+            "message": "E. faecium present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "phosphosugar-binding transcriptional regulator"
+      },
+      "name": "Efm_UT2",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CCGTCGCCGTATTACTGATCCACATTGACAGCAGCGCCGTCACGCCAAACAGCATAAAGACCGCGAGGCTCATTTTGCCCCTCGCCATCGCTAATACTTTATCGGCAATGACTTTATCCAGCCCCTGCACATGCATCGCCGCCGCCAGAGCAAAGCCGCCGAGGAAAAGGAATATCGTAGAGTTAGCGAAACTGTTTAGCGCCGCCTGGGTATTAAATACTCCCAACAGCACAGCCATAACGGGAACCATTATTGCCGTAACGGTCACGTGCAGCGCTTCCGTTAACCATAATACGGCGATAAAAGCGAGCATACTCAGTCCCATGACCACCTTCGGCTCATAGGGTAGCGTGTTGTAGAGA",
+          "Significance": {
+            "message": "K. oxytoca present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "DASS family transporter"
+      },
+      "name": "Koxy_UT2",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ACGAGCCAGCCTGATGAAAATGTGCTGACCATGTCAATTAATGCATTAGCCCCTATGAGTGATAAAGATATCGATATTTTGATATTTGCCTCAACGACGATGGAATATTTGTCACCACTTAATGCCCTCTATTTACATCATCATTTAGCCTTAAAAAATGAGTGTGTATGTATTGATATTAACGGTAATTGCCTCGGAATGCTAATGGCGTTAGAGCAGGCGGCAATCATGCTAAAGATGAAAAAAACAGCTAAAAAAGCCCTTATTGTTGCCTCGGATCATCTTTCAAATCTGTGTAATCAAAATGAGCTATTTCCATCGATTCTCTTTGGAGATGCAGCAGTTGCGATG",
+          "Significance": {
+            "message": "P. alcalifaciens present"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Pal_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GGGATATCCGTGGAATGCGTTTCATGCCTTACGCCATATATCATCATCATGGCTAAGCCGTGAGATTATCTTTGCTGCTCTTTACCTGGGCGCACTATGTTTATATACCTTGCTAGTACTAATAAAAGGTCATATGAATAAAACCCTCTTAGCCATTATCGGTTTACTGGGGTTAGTGGATATTTTCTGTATGGCTTCGCTTTATTACAGCACATCGATGATAACTTGGATGCATGTTAATACCTATTTTATGTTTATCGGCTCTGTTTTTTCTGCGGGAGCGGTGATCACATTA",
+          "Significance": {
+            "message": "P. mirabilis present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "anaerobic dimethyl sulfoxide reductase chain B"
+      },
+      "name": "Pmbs_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GCCTTGCGCCTTAGTTTGTTGGTTTTTTTACCAAAATAGCTTCAAACTTATGCCTATCGGTAAAACCAATTTAAATGAATTAAAACTCCCCATCTTGGCTATATTTGGCTTAATATTTCTCAATATGCTATTGGGAGCACAAGAAGAGTGGCTTGAAAGTATCAGTCACATGACTGGCTTTGCCTTTTTTCTCTATGTAATAACGATTATTATCGCAGCCCCGATTAGCGAAGAAATTATATTTAGAGGCTTTTTACTTAATGCGGGCATGTGGTATGGCACGGCTGGAAAATGGATAGCC",
+          "Significance": {
+            "message": "P. stuartii present"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Pst_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GATCAACAGGAAACGGTGACGGTGCGGCGGGAGACGCCGCTAGTGGAGGCGTTCGGGCTGATGGACGATATCGACGCCCGCTCGGTGACGGTGGTGGACGCCGACGGCAAACCGCTGGGCTACGTCAAACGCCGTGAGGCGCGCGGCGCGCCCGGGGTGTGCGCCGACAGCCTGCACCGCTTTCGCGTCACCGCCCGCGCGGAGGAGAACCTGCGCGTAGTGCTGTCCAAGCTGTACGAACACAACACCTCCTGGATGCCGATCGTCGATGAAGACGGCCGCTACAGCGGCGAAATCTCGCAGGATTATATCGCC",
+          "Significance": {
+            "message": "S. marcescens present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "glycine/betaine ABC transporter ATP-binding protein"
+      },
+      "name": "Smar_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ACCCAAAAGTATTCTGATTGTTGAGCTCGTCGGCATGGCGCTGCTGACGTTGGCCTGGCTGTCATTAAACCAGTATGTTCAGCTGCCTGCGCCATTTGCCAGCCCGACGGCGGCGCTCATCATGATCTTTGCCGGGATCCTGCTGATGATCCCGGCGGCGATAGCCTTAATGTGGCGAATAGCGAAAATTGTCGCGCCGCAGTTGACCGATAATAAGACCTCAT",
+          "Significance": {
+            "message": "Enterobacter aerogenes present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "Oxygen-insensitive NADPH nitroreductase"
+      },
+      "name": "Eaer_M1_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": [
+          {
+            "variant_name": "Encl_M1-1",
+            "sequence": "AACACCTGATTGCCGATGATGTTGCGCTTGTAGAACAGGCGGCGAGAGTATGGTGATTTCGGGTACAGCGGCAGGCTGGCAGGCTGCGAGTAAACCTCGCCCTGACAGACATAGTCGTTGGCATACAGGAAAGCGTGCGTGACCAGTTGTTCCTTGTGCGACAGGAAAATGGACAGCCGGTTTGGTGTCCACTCGTCATCGTCGTCGATGCCGGTCAGATACTGCCCTTTGGCCTGCATAATTGCCTGATTACGCACCGCACACGCCCCGGAGTTGATCGCGTTATGGGTATAGCTGACACGCGGGTCATTGAGGTCAGTGACAAACTTTTGCAGCTGCTCATACGAAGAGGAACAGTCATCAACAAT",
+            "Significance": {
+              "message": "Enterobacter cloacae group present"
+            }
+          },
+          {
+            "variant_name": "Encl_M1-2",
+            "sequence": "AACTTGTCCTTGTGCTTGCGGTAAAAGTGGAAGTAACCAGAGAATTTCTTCGGCGACGAGGTGATTTGCATCTCCCCGTGATTGATATGCAGGATCTGCGTCGCCTCTTCCACCTTCCACGGCTCGCCATACTCCATCACCATGCGCAGGAAGATGTCGTAATCCTGCGCAGCCTTCAGCTCGGTATCGAACAGGCACTCCTTAAAACGCCACGCCCAGGTAAAGACCTGATTACCGATGATGTTGCGTTTATAGAACAGGCGTCGTGAGTAAGGCGATTTCGGGTACAACGGCAGGCTGGCAGGCTGCGAGTAAACTTCACCCTGACAGACATAGTCGTTGGCATACAAAAACGCATGCGTCACCAGCTGTGCTTTGTGCGACAGGAAGATCGACAGACGGTTCGGCGTCCATTCGTCATCGTCGTCG",
+            "Significance": {
+              "message": "Enterobacter cloacae group present"
+            }
+          },
+          {
+            "variant_name": "Encl_M1-3",
+            "sequence": "ACATAGTCGTTGGCATACAGAAACGCATGAGTAACCAACTGATGTTGGTGTGACAGGAAGGTCGACAGACGGTTGGGGGTCCATTCGTCATCGTCGTCAATCCCGGTCAGATACTGCCCTTGCGCCTGCAATATCGCCTGGTTACGTACCGCACACGCCCCGGAGTTGATGGCGTTATGCGTGTACATAACCCGCGGGTCATTAAGGTCAGTCACGAATTTTTGCAGTTGTTCGTATGAAGAGGAGCAGTCATCAACGATGAGCAGTTCCCAGTTGTCGTAGTCCTGACGCAGGACCGACTTAATTGCG",
+            "Significance": {
+              "message": "Enterobacter cloacae group present"
+            }
+          }
+        ],
+        "function": "species ID",
+        "gene_name": "wcaA gene"
+      },
+      "name": "Encl_M1_UT",
+      "assay_type": "gene variant"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGTGGATGTGCTYGTTAACAACGCTGGTATTACTAATGATAAATTGATGCTTAAAATGACTGTTGAAGATTTTGAGAGCGTTCTTAAAATTAATTTAACAGGTGCATTTAATATGACACAATCAGTCTTGAAACCGATGACAAAAGCGCGTCAAGGTGCTATTATTAATATCTCTAGCGTCGTTGGATTAACTGGAAATGTAGGGCAAGCTAATTACGCAGCCTCTAAAGCAGGTTTAATTGGCTTTACAAAATCAGTTGCCAGAGAAGTAGCAGCACGAG",
+          "Significance": {
+            "message": "S. agalactiae present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "3-oxoacyl-[acyl-carrier-protein]\u00a0reductase\u00a0FabG"
+      },
+      "name": "GBS_UT2",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CCAGCCGGTAAAGAAACTCTGCCACACTAAAGTCTTCATTCCAGCATAGGAATTGGAAGACCCACGTCTTAACCGTTTTAACAGTTGAAGACAGACTTTGTCTAACTTATCGGACTCGGCTGCACGATAGACAAAGCCATAGTCAAGCCCTTTTTCTGCCGTCACCCCTTCGCCCGTCATGACAAGATAAGTGGCACGATTAAGACCAACAGCACGTGTTAGTAGAAACAGACCTCCCGCAT",
+          "Significance": {
+            "message": "Strep dysgalactiae present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "enoyl-CoA hydratase"
+      },
+      "name": "Sdys_UT2",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GCTTATTGCTAATGACTGTGCTTATGGGGTTAGGGTTGATGTTTGCAAAAGGGGTTTTTGATATTTCTACTAATAAAGCTAATTACAAACCAGCTGTTTCCCAAGCTTTTGATGGTCAAGAAACTCAAGATGGTACGAACATTCTGATTTTGGGTTCTGACCAACGAGTTACTCAAGGTTCTACAGATGCTCGCACAGATACCATTATGGTTGTCAATGTCGGCA",
+          "Significance": {
+            "message": "Strep pyogenes present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "LytR family transcriptional regulator"
+      },
+      "name": "Spyo_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AGAGGAGGAGATAGAGTAGGAGATCAAGAAAGAGATGATCCATATCAAAGAGGCGTGAGAGAGGGCCATGACGCAGGTTATAAGCGAGGCAAACAGGATAGACAACAAAATGGATCCCCAGATGCTTTTCCTACCCCTCCAGATAGAGTTCCTGAGCCTAAGAGTAACCCTTATACTACGGAGAGTGATAAGAAGAGATACAAAAATGGCTGGGATACTGCGTACCTCTCTTCTTATCATACTGGCTGGTA",
+          "Significance": {
+            "message": "Strep pyogenes M59 present"
+          }
+        },
+        "function": "strain ID",
+        "gene_name": "predicted secretion signal peptide"
+      },
+      "name": "M59_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TAGAGCAGCAACAAATCAACAAGATGTTGCTAACTTCATGTTAAGTGATAAGAAACTACATTTGGCAATTGCCAAGGCGACTCATAATAAAGCTTTACAGGCAACTTATGAGTATTTCTTAAACTCAAGCTATCAATACACCTTAGAGCTAGTGACTAATAAAAATTTACCTGACCCAAACCAGCAAATACATACTGAACTTGTTCAAGCTATTCAACACAAGTCTGAGTCAGAAGCCATGCGA",
+          "Significance": {
+            "message": "A. baumannii present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "ABAYE1316"
+      },
+      "name": "Ab_M3_UT2",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GGATTCACCACTTGCAAAGTCCCGCTGGTGCCCCCTTGTCCAGTTGCAACCACCTGTTGATCCGCATCACGCAGTTCAACGCTGACATCACCATTGGCCACCACCTGCCAGTCAACAGACGCGTGGTTACAGTCTTGCGCGACATGCGTCACCACGGTGATATCGTCCACCCAGGTGTTCGGCGTGGTGTAGAGCATTACGCTGCGATGGATCCCGGCGTAGTTAAAGAAATCATGGAAGTAAGACTGCTTTTTCTTGCCGTTTTCGTCGGTAATCACCATTCCCGGCGGGATAGTCTGCCAGTTCAGTTCGTTGTTCACACAAACTGTGATACG",
+          "Significance": {
+            "message": "Cindy's assay"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "uidA"
+      },
+      "name": "uidA_2_UT",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGTTCCTCACCGTAGTGGTGAACTACTATGCCCCCGCCAAGGTGTTTAAATTTCTCATCGACAGCTCCGGCGCCATCGCCCTGCTGGTCTATCTGGTGATTGCCGTTTCACAACTGCGGATGCGCAAAATCCTTCAGGCGCAAGGCGGCGAAATCCGTCTGAGAATGTGGCTCTATCCGTACCTGACCTGGCTGGTGATCGCCTTTATCACCTTCGTGCTGGTGGTGATGCTGTTCCGTCCGGCACAGCAGCTGGAGGTGATCTCTACCGGCCTGTTAGCTCTGGGAATTATTTGTACGGTACCGATTATGTCACGCTGGA",
+          "Significance": {
+            "message": "K. pneumoniae present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": 4240
+      },
+      "name": "Kp_M1_UT1nv",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "SNP": {
+            "variant": "T",
+            "position": 35,
+            "Significance": {
+              "message": "K. pneumoniae ST258 present"
+            },
+            "reference": "C"
+          },
+          "sequence": "ATGGTGGTGCGCCAGTGGCGCGCCATTATTGACTYCGCTATCACCGATACCGGACTCACCCAGTCCAGCTGGACGGTGCTGATGCAACTGCATCAGCTGGGAGACAACGTCTCGGTCAGC"
+        },
+        "function": "strain ID",
+        "gene_name": "MarR transcriptional regulator"
+      },
+      "name": "ST258_UT_FB",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "SNP": {
+            "variant": "A",
+            "position": 37,
+            "Significance": {
+              "message": "K. pneumoniae CG258 present"
+            },
+            "reference": "G"
+          },
+          "sequence": "ACGGCAGGCGATTTGATTTAACGTGGCGCTGAAGGTAGCGAGATCGGCCTCCGGGATGGTCTGGGTTACGCGCTCCTGATAGGTCTCGATCACGCAGCT"
+        },
+        "function": "strain ID",
+        "gene_name": "MarR transcriptional regulator"
+      },
+      "name": "CG258_UT_FB",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "variant_name": "wzi_1",
+          "sequence": "ATGATAAAAATTGCGCGCATTGCCGTTACGTTGGGTTTGCTTTCCTCACTGGGAGCCCAGGCTTACGCGGCCGGGTTAGTGGTAAATGACAACGACTTGCGTAACGACCTGGCCTGGCTTTCCGATCGCGGGGTCATCCATCTGAGCCTGTCGACATGGCCGCTAAGCCAGGAAGAGATCGCCCGGGCGCTTAAAAAGGCCAAGCCGTCCTATTCATCTGAGCAAGTGGTACTGGCCCGAATTAACCAGCGACTGTCTGCCTTAAAAGCGGATTTCCGGGTCACCGGCTACACTTCAACCGATCAACCGGGCACTCCGCAGGGGTTTGGTCAGACACAGCCAGCGGATAACTCGTTAGGCCTGGCGTTCAACAACAGCGGCGAGTGGTGGGATGTTCACCTGCAGGGCAACGTCGAAGGGGGGGAGCGGATCAGCAACGGATCACGC",
+          "Significance": {
+            "message": "Klebsiella capsule type"
+          }
+        },
+        "function": "strain ID",
+        "gene_name": "wzi gene of cps locus"
+      },
+      "name": "wzi_UT",
+      "assay_type": "gene variant"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GGACGATCCATTCCATACCGTGTTCGCGGTCCCATTCGCAGTTCAGCGACAGGTGGATCACCGCTTCGTC",
+          "Significance": {
+            "message": "P. aeruginosa present"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "PSAR_27569",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CTGATGGATATGGAGACATTAAGGATATAGTGTTTTCGGCTCATATTATAGTTAGGTATAATAATGGACATTGTGGAGGTATAGATCCGCATATAATTGGACTTTGTAAAAAGCAGATCAGAAGGATGTCTCTATATCCTATTTTGATAATCGTATCTAGAGATTCAAAGGTTATTGATGATTATAAAAATTTAGATATTGCCTATGTTGATTGTACTCAATGTTCAAATAATTTTGAAACTGCCTTACACGTTAAAAATATTTTAAAATTATTAAAAATCCGACTTATACACTGTCATGGCTACTCAACTAATT",
+          "Significance": {
+            "message": "S. pneumoniae present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "putative glycosyl transferase (pseudogene)"
+      },
+      "name": "Sp_M2_UT2",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": [
+          {
+            "variant_name": "Encl_M2-1",
+            "sequence": "CCTTCAACGTGGATGTTCAGCTTCGCTTCGATACCAAAACCGGTTGGCAGCGGGCCGATCCCTACTTCGCCTTCAATAAAGGCGTCTTTTGGCAGAGCGAATTTATCGCGTGCCGCAACGAACTTCATTGCGCCCAGGAAGCAGGCGGAGTAGCCCGCAGCGAACAGCTGTTCAGGGTTGGTTACTTCACCCCCCATGCCGCCCATCTCTTTTGGCACACCCAGTTTGACATCCAGAACGCCA",
+            "Significance": {
+              "message": "Enterobacter cloacae group present"
+            }
+          },
+          {
+            "variant_name": "Encl_M2-2",
+            "sequence": "CCTTCAACGTGGATGTTCAGCTTCGCTTCGATACCAAAACCGGTTGGCAGCGGGCCAATACCCACTTCGCCTTCAATAAAGGCATCTTTTGGCAGGGTAAATTTGTCGCGTGCGGCCACGAACTTCATCGCGCCCAGGAAGCAGGCAGAGTAGCCCGCAGCAAACAGCTGTTCAGGGTTCGTCACTTCTCCGCCCATGCCGCCCATCTCTTTCGGCACGCCCAGTTTTACGTCCAGTACGCCATCGGAAGAGGTCGCGCGGCCGTCACGGCCACCGGTTGCTTTTGCTTTGGCGGTATAAACAACT",
+            "Significance": {
+              "message": "Enterobacter cloacae group present"
+            }
+          }
+        ],
+        "function": "species ID",
+        "gene_name": "ohr gene"
+      },
+      "name": "Encl_M2_UT",
+      "assay_type": "gene variant"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GCCAACCGTGGTATGTCATTTGAAGCTGCTATCAATGCAACCAATGACTACTATTTGTCTCACGAATTAGCTGTCATTCATAAGAAACCAACGCCAGTACAAATCGTCAAGGTAGATTATCCTAAACGTAGTCGTGCTAAGATTGTAGAAGCTTATTTTAGACAAGCTTCTACTACTGATTATTCTGGTGTTTACAAAGGTTACTATATTGACTTTGAAGCCAAAGAAACCCGGCAGAA",
+          "Significance": {
+            "message": "S. agalactiae present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "pbp1A"
+      },
+      "name": "GBS_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GTCAAGCACCTTATCACCATCTAGCATACCATAATCAGCCATTGGGATAACAGCTATTGGAATGCCGTTTTCCTTACAGATAACCTCTGACTTATCCAAGGTATAAGCCACCTGTGGACCTAAGAGGGCAACATCAA-TAGCTGGTGCATAGTCTGCCAGCTTTCCTTGTGAGTAGGCTTCAATCTCACAAGCAATGCCCTTTTTCTCAGCAGCCACCTTCATGTTGTTCACAAGCATGCC",
+          "Significance": {
+            "message": "Strep equi present"
+          }
+        },
+        "function": "species ID",
+        "gene_name": "cytochrome C biogenesis protein CcmE"
+      },
+      "name": "Sequi_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GTGCCGATTGAGGATCTGGTTTCAGCCATTGAGGCAGGTGATTATCAGCGCTTGCTTGCAACGATGGGAAATTCCTTAGAGGATATTTCCATTGCTAAACGGCCGTTTATTCAAAAGGTTAAGGATAAAATGTTGCAGTCAGGAGCAGACATTGCCCTGATGACAGGAAGTGGTCCAACGG",
+          "Significance": {
+            "message": null
+          }
+        },
+        "function": null
+      },
+      "name": "Sequi_UT2",
+      "assay_type": "presence/absence"
+    }
+  ]
+}

@@ -1,0 +1,1036 @@
+{
+  "Assay": [
+    {
+      "Target": {
+        "Amplicon": {
+          "RegionOfInterest": {
+            "Significance": {
+              "message": "Fluoroquinolone resistance"
+            },
+            "aa_sequence": "SAVYD",
+            "position_range": "80-94"
+          },
+          "sequence": "CGTCGATGGAACCGAAGTTACCCTGACCGTCTACCAGCATGTAACGCAGCGAGAATGGCTGCGCCATACGGACGATCGTGTCATAAACTGCCGAGTCACCATGGGGATGGTATTTACCGATTACGTCACCAACGACACGGGCAGATTTTTTATAGGCTTTGTTCCAGTCATTGCCTAGTACGTTCATGGCGTAAAGTACGCGACGGTGTACCGGCTTCAGGCCATCTCGGACATCTGGCAGCGCACGGCCAACAATGACCGACATCGCATAATCCAGATAGGAG"
+        },
+        "gene_name": "gyrA",
+        "function": "resistance type"
+      },
+      "assay_type": "ROI",
+      "name": "gyrA_Ecoli_UT2"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "RegionOfInterest": {
+            "Significance": {
+              "message": "Fluoroquinolone resistance"
+            },
+            "aa_sequence": "YAVYD",
+            "position_range": "77-91"
+          },
+          "sequence": "CGATGGAACCAAAGTTACCCTGGCCGTCCACCAGCATGTAACGCAGCGAGAACGGCTGCGCCATACGCACGATGGTGTCGTATACCGCGTAGTCGCCGTGCGGGTGGTATTTACCGATTACGTCACCAACGACACGGGCTGATTTTTTATAGGCTTTGTTCCAGTCATTG"
+        },
+        "gene_name": "gyrA",
+        "function": "resistance type"
+      },
+      "assay_type": "ROI",
+      "name": "gyrA_Kleb_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TTGTAGTGTTCCAGGTCGTCGCCCTTGAGCGACAGGGTACGCTTTCCGGCCTGCAGGACCAACGTCGCCCCGGCTGGCAGAACAGCCAGGTCGGTGAGGTATTCCTCGCGGCTGGCCACGCGTTCGCCGGGGATGCCGATGATCTTGTTGCCCTTGCCCTTGCCGAGCTGCGGCAGGTCGGAGACCTTGAACAATAGCAGACGG",
+          "Significance": {
+            "message": "Fluoroquinolone resistance"
+          }
+        },
+        "gene_name": "parC",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "parC_PSAR_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "RegionOfInterest": {
+            "Significance": {
+              "message": "Fluoroquinolone resistance"
+            },
+            "aa_sequence": "CYE",
+            "position_range": "77-85"
+          },
+          "sequence": "CAGCGCGAAATTCAAAAAGTCCGCCCGCACCGTCGGCGACGTGTTGGGTAAATATCACCCGCACGGCGACAGCGCCTGCTATGAAGCGATGGTGCTGATGGCGCAGCCGTTCTCTTACCGCTATCCGCTGGTGGATGGTCAGGGAAACTGGGGGGCGCCGGACGATCCCAAATCTTTCGC"
+        },
+        "gene_name": "parC",
+        "function": "resistance type"
+      },
+      "assay_type": "ROI",
+      "name": "parC_Kleb_UT2"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "RegionOfInterest": {
+            "Significance": {
+              "message": "Fluoroquinolone resistance"
+            },
+            "aa_sequence": "NWGAP",
+            "position_range": "58-72"
+          },
+          "sequence": "ATATTTCGACAACCGGGATTCGGTGTAACGCATTGCCGCGAACGATTTCGGATCGTCCGGCGCGCCCCAGTTCCCCTGACCATCAACCAGCGGATAACGGTAAGAGAACGGTTGCGCCATCAGGACCATCGCTTCATAACAGGCGCTATCGCCGTGCGGATGGTATTTACCCAGTACGTCACCGACGGTACGGGCCGATTTTTTAAATTTGGCGCTGGCATTCAGGCCCAGTTCAGACATCGCATACACA"
+        },
+        "gene_name": "parC",
+        "function": "resistance type"
+      },
+      "assay_type": "ROI",
+      "name": "parC_Ecoli_UT2"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "RegionOfInterest": {
+            "Significance": {
+              "message": "Fluoroquinolone resistance"
+            },
+            "aa_sequence": "GDS",
+            "position_range": "164-172"
+          },
+          "sequence": "GTACGTCATTATGGACCGTGCATTGCCGCATATCAGTGATGGCTTAAAGCCCGTACAGCGCCGTATTGTCTATGCTATGAGCGAGCTAGGCTTAAAAAGCAGTGGCAAGCCAAAAAAATCAGCGCGTACAGTGGGTGATGTACTTGGTAAATACCACCCACATGGTGACTCGGCATGTTATGAAGCCATGGTACTCATGGCTCAGCCATTTAGTTACCGCTATCCTTTAATCGAAGGTCAGGGGAACTGGGGCTCACCTGATGATCCTAAGTCTTTTGCTGCGATGCGTTATACCGAAGCCAAACTCTCGGCTTATAG"
+        },
+        "gene_name": "parC",
+        "function": "resistance type"
+      },
+      "assay_type": "ROI",
+      "name": "parC_ACBA_UT2"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "RegionOfInterest": {
+            "Significance": {
+              "message": "Fluoroquinolone resistance"
+            },
+            "aa_sequence": "YEAMV",
+            "position_range": "109-123"
+          },
+          "sequence": "CCAGATGTTCGTGATGGTTTAAAACCAGTACAACGTCGTATTTTATATGCAATGTATTCAAGTGGTAATACACACGATAAAAATTTCCGTAAAAGTGCGAAAACAGTCGGTGATGTTATTGGTCAATATCATCCACATGGAGACTCCTCAGTGTACGAAGCAATGGTCCGTTTAAGTCAAGACTGGAAGTTACGACATGTCTTAATAGAAATGCATGGTAATAATGGTAGTATCGATAATGATCCGCCAGCGGCAATGCGTTACACTGAAGCTAAG"
+        },
+        "gene_name": "parC",
+        "function": "resistance type"
+      },
+      "assay_type": "ROI",
+      "name": "parC_staph_UT2"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GATTTGAGTGACAGCCGTTTTCGCCGCTGCCGCTTTTATCAGTGTGACTTCAGCCATTGCCAGCTAAGGGATGCCAGTTTCGAGGATTGCAGTTTCATTGAAAGCGGCGCCATCGAAGGGTGCCACTTCAGCTATGCCGATCTGCGCGATGCCAGTTTCAAGGCCTGCCGCCTGTCTTTGGCCAATTTCAGCGGTGCCAACTGCTTTGGCATAGAGTTCAGGGAGTGCGATCTCAAGGGCGCCAATTTTTCCCGGGCCCGTTTTTACAATCAAATCAGCCATAAGATGTACTTCTGC",
+          "Significance": {
+            "message": "Fluoroquinolone resistance"
+          }
+        },
+        "gene_name": "qnrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "qnrA_UT2"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GCTAATTTCTCACAGGCAAACTTTGTTAATCATGTTTCTAACAAAATGTATTTTTGCTCTGCTTACATTACGGGTTGT",
+          "Significance": {
+            "message": "Fluoroquinolone resistance"
+          }
+        },
+        "gene_name": "qnrC",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "qnrC_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGACAGGAATAGCTTGGAAGGGTGTGATTTTAATAGAGCCAAACTAAAAAACGCTAGCTTTAAAAGCTGCGATTTATCAATGAGTAATTTTAAAAACATTAGCGCCTTAGGTCTTGAAATTAGTGAGTGTTTAGCTCAAGGAGCTGATTTTCGAGGGGCTAATTTTATGAATATGATAACTACAAGGTCATGGTTTTGTAGTGCTTATATAACCAAGACAAATCTTAGTTACGCTAATTTTTCTAGAGTCATATTAGAAAAGTGCGAACTGTGGGAAAATCGCTGGAATGGCACTGTGATAACTGG",
+          "Significance": {
+            "message": "Fluoroquinolone resistance"
+          }
+        },
+        "gene_name": "qnrD",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "qnrD_UT2"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GTGCTAACTTGCGTGATACGACATTCGTCAACTGCAAGTTCATTGAACAGGGTGATATCGAAGGCTGCCACTTTGATGTCGCAGATCTTCGTGATGCAAGTTTCCAACAATGCCAACTTGCGATGGCAAACTTCAGTAATGCCAATTGCTACGGTATAGAGTTCCGTGCGTGTGATTTAAAAGGTGCCAACTTTTCCCGAACAAACTTTGCCCATCAAGTGAGTAATCGTATGTACTTTTGCTCAGCATTTATTTCTGGATGTAATCTTTCCTATGCCAATATGGA",
+          "Significance": {
+            "message": "Fluoroquinolone resistance"
+          }
+        },
+        "gene_name": "qnrS",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "qnrS_UT2"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGACGTTCAGTGGTTCAGATCTCTCCGGCGGCGAGTTTTCGACTTTCGACTGGCGAGCAGC",
+          "Significance": {
+            "message": "Fluoroquinolone resistance"
+          }
+        },
+        "gene_name": "qnrB",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "qnrB-C1_UT2"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ACCAATCTAAGCTATGCCAACTTTTCGAAGGCCGTGCTTGAAAAGTGCGAATTGTGGGAAAATCGCTGGATGGGAACTCAGA",
+          "Significance": {
+            "message": "Fluoroquinolone resistance"
+          }
+        },
+        "gene_name": "qnrB",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "qnrB-C2_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGCCTATATCACCAATACCAACTTAAGCTACGCCAACTTTTCAAAAGTCGTACTGGAAAAGTGCGAGCTGTGGGAAAACCGTTGGATGGGTACTCAGGTACTGGGGGCGACGTTCAGTGGTTCAGATCTTTCCGGCGGTGAGTTTTCGTCGTTCGACTGGCGGGCCGCAAACTTTACGCACTGTGATTTGACCAATTCAGAACTGGGCGATCTCGATGTCCGGGGTGTTGATTTGCAAGGCGTCAAACTGGACAGCTACCAGGCATCGTTGATCCTGGAAC",
+          "Significance": {
+            "message": "Fluoroquinolone resistance"
+          }
+        },
+        "gene_name": "qnrB",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "qnrB-C3_UT2"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GACGATGTCACTGGCTGAGCTTAGCGCGGCCGCGCTACAGTACAGCGATAACGTGGCGATGAATAAGCTGATTGCTCACGTTGGCGGCCCGGCTAGCGTCACCGCGTTCGCCCGACAGCTGGGAGACGAAACGTTCCGTCTCGACCGCACCGAGCCGACGTTAAACACAGCCATTCCGGGCGATCCGCGTGATACCACTTCACCTCGGGCAATGGCGCAAACGCTGCGTAATCTGACGCTGGGTAAAGCATTGGGTGACAGCCAACGGGCGCAGCTGGTGACGTGGATGAAAGGCAATACTACCGGTGCAGCGAGCATTCAGGCTGGACTGCCTGCTTCCTGGGTTGTGG",
+          "Significance": {
+            "message": "B-lactamase production"
+          }
+        },
+        "gene_name": "blaCTX-M",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "CTX-M-G1_UT2"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TGGCGCAGACCCTGAAAAATCTGACGCTGGGTAAAGCGCTGGCGGAAACTCAGCGGGCACAGTTGGTGACGTGGCTTAAGGGCAATACTACCGGTAGCGCGAGCATTCGGGCGGGTATGCCGAAATCATGGGGAGTGGGCGATAAAACCGGCAGCGGAGATTATGGCACCACCAACGATAT",
+          "Significance": {
+            "message": "B-lactamase production"
+          }
+        },
+        "gene_name": "blaCTX-M",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "CTX-M-G2_74-75_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GAGCCGACGCTCAACACCGCGATCCCCGGCGACCCGCGCGATACCACCACGCCGTTAGCGATGGCGCAGGCTCTGCGCAATCTGACGTTGGGCAATGCCCTGGGTGACACTCAGCGTGCGCAGCTGGTGATGTGGCTGAAAGGCAACACCACCGGCGCTGCCAGCATTCGGGCAGGGCTACCCACATCGTGGGTTGTCGGG",
+          "Significance": {
+            "message": "B-lactamase production"
+          }
+        },
+        "gene_name": "blaCTX-M",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "CTX-M-G8_G25_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TTCGTCTGGATCGCACTGAACCTACGCTGAATACCGCCATTCCCGGCGACCCGAGAGACACCACCACGCCGCGGGCGATGGCGCAGACGTTGCGTCAGCTTACGCTGGGTCATGCGCTGGGCGAAACCCAGCGGGCGCAGTTGGTGACGTGGCTCAAAGGCAATACGACCGGCGCAGCCAGCATTCGGGCCGGCTTACCGACGTCGTGGACTGTGGGTGATAGGACCGGCAGCGGCGACTACGGCACCACCAATGATATTGCGGTGATCTGGCCGCAGGGTCGTGCGCCGCTGGTTCTGGTGACCTATTTTACCCAGCCGCAACAGAACGCAGAGAGCCGCCACGATGTGCTGGCTTCAGCGGCGAGAATCATC",
+          "Significance": {
+            "message": "B-lactamase production"
+          }
+        },
+        "gene_name": "blaCTX-M",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "CTX-M-G9_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AATGGCTGTTGGTTGGACGCAAGACTTTT----------------------------------------------GAATCAATG------------GGAGCATTACCC---------------AACCGAAAGTA----TG",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA1_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AATA----TGCC--------GTTGTAAC---TCGTTCAAGCTTCACTTCCAGTGATG---------AGAATG----TATTGGTATTTCCATCT--------ATCGATGAAGCGCTAAA--TC-------------ATC-TGAAGACGATAACG-----------------------GA------TCATGT---GATTGTGT",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA15_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AGTA----TGCA--------GTTGTAAC---TCGCTCTAATTTTTCTACGAATGATG---------AGGGTG----TAATGGTTTTCTCCTCA--------ATTCAGGATGCCTTAAT---AA------------ATT-TAGAGGAAATCACG-----------------------GA------TCATGT---TATCGTTTCTGGTGGTGGTG",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA16_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GTGATTGGTTGCGGTCCACACATACCCTGGTCCGC---GAAAGGAGAGCAGCTACTCTTTAAAGCCTTGACGTACAA---CCAGTGGCTTTTGGTGGGCCGCAAGACGTTC----------------------------------------------GAATCTATG------------GGAGCACTCCCT---------------AATAGGAAATA----CGCG--------GTCGTTAC---TCGCTCAGCCTGGACGGCCGATAATG---------ACAACG----TAATAGTATTCCCGTCG--------ATCGAAGAGGCCATGTA--CG------------GGC-TGGCTGAACTCACC-----------------------GA------TCACGT---TATAGTGTCTGGTGGCGGG",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA14-30_UT2"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGAGAATGGAGTAATTGGCTCTGGATTGGATATACCTTGGCATGT---ACAAGGCGAGCAGCTCCTATTCAAAGCCATGACTTACAA---TCAATGGCTTCTAGTTGGTCGTAAAACCTTC----------------------------------------------GACTCAATG------------GGTAAACTTCCG---------------AATAGAAAATA----TGCA--------GTGGTTAC---TCGTTCTAAAATTATCTCGAATGACC---------CTGATG----TTGTGTATTTCGCAAGT--------GTTGAATCGGCATTAGC--TT------------ACC-TAAACAATGCGACA-----------------------GC------ACATAT---CTTTGTTTCTGGTGGTGGTGAAATA",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA6-31_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GGGTGCCAATCGGGTTATTGGCAATGGCCCCGATATTCCCTGGAAAAT---CCCGGGTGAGCAAAAGATCTTTCGCAGGCTCACCGAG",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA26-13_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AAAGA-------CTACGAGCAG-----AA-------TG-----------GCA-------TGGAAGAACATGAC-----------CTTCACA------------CTTA--------CTTCACTT------------AC---CGT",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA8_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AACGCTGCCATTGTTACCAACC-----AATAACAGACAGTT----TATT--------GTGGTAAG-----------------CAATACTGAGGAGCCTAG----CCT--TAATG------------TTCA----------TG----------TGGTA-TCTCC----------------------------------AGAACACTTCAAG------------------------GCTT",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA3b_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AAGACAGGAGGT-AT----CGGATTTGAAAATCAGATT-CCGTGG---CATGA---ACCAGAAGATTTAAAACACTTCAAAGCTGTTACAATGAA-------CTCAGTTTT-GATTATGGGTAGAAAAACTTTT-------------------------------------------------------------------------------------------------------------------------GCCTCACTG-------------CCTAAAGTGCTGCCC----------------GGACGACTTCA--------TGTG--------GTAGT-----------------------CAGTAAAACAGTACCACCCACCCAGAACACTG---------ATCAAG-------TTGTGTA---TGTAAGTACATACCAGA-------TCGCAGT------------------AAGAACTGCAAG-----------------------CT---------------TGT------------TGGTTGACAAACCA-----------------------GA-------GTATTCTCAAAT---TTTTGTAATTGGTGGGAAGAGTGCGTACGAG--A---------ACTTAG-----CTGCCTACG",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA9_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AA---------------GACCGCATCAA-------TATC--------GTCATCAC----------------------CAAGAAGTCAGAGA--TTTCTTGGACGGCTT--------GCTA----------TG",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA24_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AAGACTCTTACG-----------------------AA-------CCATGT-----T----GTTGTTTCTGGTGGTGGAGAGATCTACAAG--A---------GTCTGATCGC-CC----ATGC------------CGACAC-----------------GCTACATATCT-------CGACAATAGA------------TTCCG-----AGCCAG---------AGG",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA27-28_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AAGCACTGACCTATAA----CCA-ATGGCTT---TTGGTAGGGCGCAAAACATTT-------------------------------------------------------------------------------------------------------------------------GAGTCTATG----------------GGGCCGCTGCCC-----------------AATAGGAAATA-------CGCG--------GTTGTTAC-------------------CCGCTCAAACTGGACA----GCGGCTAATG------------AAAA----------CG-------TAGTGGTT-TTCCCGTCG--------ATTG------------------ACGAAGCGATGGG-----------------------TA---------------GAT------------TAGGCGAGATCACT-----------------------GA-------CCATGT-----C----ATCGTCGCCGGTGGTGGAGAAATCTACCAT--G---------AAACGAT-AC-CC----ATGGC-----------CTCTAC-----------------TCTGCATGTGT-------CGACAATCGA------------CGTTG-----AGCCAG---------AGGGAGACGTTTTCT-----------TT---CC---------------G----------------AACATTCCTGGG",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA25_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "A---------------------------------------AG---------------------------CAT---------------TC------------AGAGACACAACC-------------------------AA---------ACCAAT---C----AATGTCATTGGTGGTGTTG--GTT",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA10_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AAGGTGAGCAGCTAATCTTTAAGGCGCTCACATACAA----TCA-GTGGCTT---CTTGTTGGAAGGAAAACATTT-------------------------------------------------------------------------------------------------------------------------GACTCTATG----------------GGAGTTCTTCCA-----------------AATCGCAAATA-------TGCA--------GTAGTGTC-----------------AAAGAATGGAATTTCAGG----GTCA",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA32_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AAGTCGCACA------------------------AC--------------ATCT-----------TGAAGGAAAAAACT-----------------------TA-------ACATGC-----T-----TCATTATTGGTGGTGCTCAAATCT",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA20_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "A---------------ATC------------AATATCACGACAGC-----------------------GA------TCAACGAAT---A----GCTGTCATTGGTGGAGAAA--AGCTGT-ACGTGC--------AA---GCCC--TCGCATCTGC-------------CACAA----------------AAGTCCACATGA-------CGGTAATGCA------------CA--------AGCCATA------TAACTGCGATCGGAC-G-----------TTG--CC---------GATGTC---------------ATAC-ATCGACAAAAA------GTTT------------GT----TGCAG-------GTCAA-------------GGGTCTATC-----------ACCATTCAAACT-----GCGGTAGATGG----TGAGACCC-------ATCCCGT---GAAG",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA23_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AA----TCA-GTGGCTC---CTTGTTGGAAGGAAAACATTT-------------------------------------------------------------------------------------------------------------------------GACTCTATG----------------GGTGTTCTTCC",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA7_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AA----TCA-GTGGCTT---CTTGTCGGAAGAAAAACATTT-------------------------------------------------------------------------------------------------------------------------GAGTCAATG----------------GGTATTCTTCCT-----------------AATCGAAAGTA-------TGCT--------GTTCTTTC-----------------AAAAAATGGAATTTCACA----CCT--TCCTG------------AAAA----------CG-------TACTAGTT-TTTTCGTCT--------ATAG------------------AAAATGCATTATA-----------------------TG---------------AAC------------TGGCTAAGGTAACA-----------------------GA-------CCATTT----AT----AT-ATTTCTGGCGGTGGTCAAATATATAAT--A---------GTCTTA-----TTGAAAGTGC------------TGATAC-----------------CATCCACTTAT-------CTATCATCCA-",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA29_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AATGGCGTAAT----CGGTAGTGGTCCTGATATC-CCGTGG--TCAGT----AAAAGGTGAGCAACTACTCTTTAAAGCGCTCACATATAA----TCA-ATGGCTC---CTTGTCGGAAGAAAAACATTT-------------------------------------------------------------------------------------------------------------------------GACTCTATG----------------GGTGTTCTTCCA-----------------AATCGCAAATA-------TGCA--------GTAGTGTC-----------------AAAGAACGGAATTTCAAG-",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA17_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ACGCAT---T----GCTGTCATTGGTGGGGAGA--AGTTGT-ACATTC--------AA---GCTC--TTTCATCAGC-------------AACGA----------------AACTGCACATGA-------CCATAATTCC------------AAGAG-----AGTTCG---------ACTGTGATCGATTTA-----------TT---CC-----------TGTTG--------------ATCCGATCCAGAACAAT------TTTCACATTG-----AT----TCCAG------TGCCAGC------------GAG",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA18_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ACTCTATGCCGAG---------GCTCTGCC---CCGA----GC------------GGATCG-----------------CTTGTATCTAA------CCTAC-ATTGA------------CGCTC-----AGTTGA---------ACGGTGATACCCATT-----------TC---CC--------------------------------GGATTACCTATCGC-------TTGGGTGGCA-----GG----AGTTG---------GAGCGGT--------CAACGCATCCTG-----------CTGACG------------ATAAGAACAG--CTATGCCT------------G----CGAATTTGTTACC------TTGAGTCGTC------------AGCG",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrA3_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AATGGGAGATCGCGTGCGCAAGAAATCTGGCGCCGCTTGGCAAGGCCAGATTGTCGGGTGGTACTGC",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrB",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrB1-8_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GCAGGGTCAAGTTGTCGGCTGGTACAGCACAAAACTAACCCCAGAAGGCTATGCCGTCGAGTCCGA",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrB",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrB2-7_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AC-----CCGACAACTTGACCCTGCCAAGCGGCGCCAGATTTCTTG-------CGCACGCGATCTCCC-----AGGCCAAAC-GTGGCGTGCGATGGGAGCGCAAACTGGC-CAGCAACTAGAGT-ACTGACTCCATTGTTGTGTT------GGT",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrB",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrB3_1_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "A----ATCTCACCCAGGCTCAGT--CCAG----ATTTATCCCATGACTGCGCTTGAACGG",
+          "Significance": {
+            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
+          }
+        },
+        "gene_name": "dfrB",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "dfrB4_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GCTGGTGGTTATGCACTCAGCGCA--GCGGGATGGCATCGCCACCCGCACCG-GTCACCTTCGACCCGAAGACGCGC-TCGACGAGATTG-----TGCGGTTCTTCGAGGCGCGGGTTTCCGCCTTG----CGACGGAGCGGGGTCGCTGCC--GACCGGCTCATCCTCGA--TCCGGGGATGGGATTTTTCTTGAGCCCCGCACCGGAAACATCG--CTGCACGTGCTGTCGAACCTTCAAAAGCTGAAG------TCGGCGTTGGGGCTTCCGCTATTGGTCTCGGTGTCGCGGAAATCCTTCTTGGGCG",
+          "Significance": {
+            "message": "Dihydropteroate synthase (DNA synthesis) uninhibited by sulfonamides"
+          }
+        },
+        "gene_name": "sul",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "sul1_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CATCATTTTCGGCATCGTCAACATAACCTCGGACAGTTT--CTCCGATGGAGGCCGGTATCTGGCGCCAGACGCAGCCA----------TTGCGCAGGCGCGTAAGCTGATGGCCGAGGGGGCAGATGTGATCGACCTCGGTCCGGCATCCAGCAATCCCGACGCCGCGCCTGTTTCGTCCGACACAGAAATCGCGCGTATCGCGCCGGTGCTGGACGCGC--TCAAGGCAGATGGCATTCCCGTCTCGCTCGACAGTTATCAACCCGCGACGCAAGCCTATGCCTTGTCGC",
+          "Significance": {
+            "message": "Dihydropteroate synthase (DNA synthesis) uninhibited by sulfonamides"
+          }
+        },
+        "gene_name": "sul",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "sul2_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AAAGCCTTAATGACAGGTTTGAGTCTTTTGATTTCTTCCACAACGCCCACTTCAGTTGTATCAGGATTACTGGAAGCGGCTCCCAAATCAATCACATCTGCTCCATCTTC",
+          "Significance": {
+            "message": "Dihydropteroate synthase (DNA synthesis) uninhibited by sulfonamides"
+          }
+        },
+        "gene_name": "sul",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "sul3_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GTGAAGGCATCCAATCAACTTCTATTTTGTATCCGATATCTTCTAATTTTTGTATAACTTTTTGAGTGTGTTGAGCGTCAAAATCTATATCTATATCTCTGTGTTCTCTTTGTTGTTT",
+          "Significance": {
+            "message": "Lincosamide resistance"
+          }
+        },
+        "gene_name": "linA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "linA_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GGAACGATGCCTATCTCATATGCTGTTCCTGTATTGGCCAATTCCACATTGTTTCGGTCTAAAATTTTACCACGTTCTGATTTTAAATTTTCAATATGTATGCTTTGGTCTTTCTGCATTCCTGGAATAATGACGCTAT",
+          "Significance": {
+            "message": "B-lactam resistance"
+          }
+        },
+        "gene_name": "mecA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "mecA_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGGCTCGACTTCCTGATGAATACGAAAGATTCCGTACTGCAGCCTGATTTGGTCCACCTCGCCAACAACTAACGCGGCACTGTTTCCCAATACCGCACA",
+          "Significance": {
+            "message": "Vancomycin resistance"
+          }
+        },
+        "gene_name": "vanA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "vanA_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GCCACACTATCATAACCACTACCGATTATTTCAATACTATCTACTTTGAAATTATCAAAGTAATGCTCAATTAAATATTTCATTGCCTTAACATTTGTGGCATTATCATCATATCTATATTCCATTAAATAACAATCTTCTTTTTTGCCCTCGTGTAATTCATGTTCTGGCAAATCTTCAATAATTCTAAAACCAGATTTTTGGTATGCCCTTATTGCTCTTGGA",
+          "Significance": {
+            "message": "Aminoglycoside resistance"
+          }
+        },
+        "gene_name": "aacA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "aacA_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ACACTCTTGGCGGTTTCACTTATCAACTTATCATTTGGCTTATCACTTTTATTGTCTTTATTCGTAAAAATGACTAAAACAATAGGTTCAGATTGGCCCTTAGG",
+          "Significance": {
+            "message": "B-lactam resistance"
+          }
+        },
+        "gene_name": "blaZ",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "blaZ_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CAACCATTGATTTCAAAGAAGGACTACAAAAAGTATCGATCTTTTGTTTATAAGTGGGTAAACCGTGAATATCGTGTTCTTTTCACTAAAAACCAATTCCGACAGGCTTTGA",
+          "Significance": {
+            "message": "Macrolide resistance"
+          }
+        },
+        "gene_name": "ermA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "ermA_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ATTTAATCGTGGAATACGAGTTTGCTAAAAGATTATTAAATACAAAACGCTCATTGGCATTATTTTTAATGGCAGAAGTTGATATTTCTATATTAAGTATGGTTCCAAGAGAATATTTTCATCCTAAACCTAAAGTGAATAGCTCACTTATCAGATTAAATAGAAAAAAATCAAGAATATCACACAAAGATAAACAGAAGTATAATTATTTCGTTATGAAATGGGTTAACAAAGAATACAAGAAAATATTTACAAAAAATCAATTTAACAATTCCTTAAAACATGCAGGAATTGACG",
+          "Significance": {
+            "message": "Macrolide resistance"
+          }
+        },
+        "gene_name": "ermC",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "ermC_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AGTTTGAGCTGTCTTGGTTCATTGATTGCTTTTATTGGTCACAATCACTTTTTTATTTTGATTTTTGGTAGGTTAGTACAAGGAGTAGGATCTGCTGCA",
+          "Significance": {
+            "message": "Tetracycline resistance"
+          }
+        },
+        "gene_name": "tetK",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "tetK_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CTTTCTGGGCTTCCATTGGTTTATCTGTATCACCGCTTCCGTTGGGAAGTGGAATGCAGTATGAGAGCTCG",
+          "Significance": {
+            "message": "Tetracycline resistance"
+          }
+        },
+        "gene_name": "tetM",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "tetM_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CTTCTTCCAAATGTTCCATTCTTTTTTCAATATGCTTAGCTTGTTTTTGAGCAGCCTTCTCAACCGTGCCTTTTTGTTTTGATGCACTTAAACGATCTGGT",
+          "Significance": {
+            "message": "Macrolide resistance"
+          }
+        },
+        "gene_name": "msrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "msrA_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GTGAGGAACGCAGCAAATTGATGCCAATAAATGATAGATACCCAATAGATGAGGTAATGAATATACTCGATGAACATATAAGATTAACTTCAAGGAAAGTATATATAGCTTATATCATGTTGCCTGGTGTAAATGATTCTCTTGAGCATGCAAACGAAGTTGTTAGCCTTCTTAAAAGTCGCTATAAATCAGGGAAGTTATATCATGTAAATTTGATACGATACAATCCTACAATAAGTGCACCTGAGATGTATGGAGAAGCAAACGAAGGGCAGGTAGAAGC",
+          "Significance": {
+            "message": "Linezolid resistance"
+          }
+        },
+        "gene_name": "cfr",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "cfr_UT2"
+    },
+    {
+      "Target": {
+        "reverse_comp": true,
+        "Amplicon": {
+          "RegionOfInterest": [
+            {
+              "mutations": [
+                "L",
+                "N",
+                "Y"
+              ],
+              "Significance": {
+                "message": "Vancomycin intermediate resistance"
+              },
+              "aa_sequence": "H",
+              "position_range": "30-32"
+            },
+            {
+              "mutations": [
+                "P"
+              ],
+              "Significance": {
+                "message": "Rifampin resistance"
+              },
+              "aa_sequence": "S",
+              "position_range": "81-83"
+            }
+          ],
+          "sequence": "CCAGGTCCTAATGCTGATAGACGACGTTTATGCGTTAACTCAGCTAATGGGTTTGCTTGGTCCATGAATTGTGATAATTGAGAGCTACCAAAGAATTCTTTAATAGATGCAATAACAGGTCGAATATTAATTAATTGTTGAGGTGTGATAGACTCAGTATCTTGAATTGACATTCTTTCACGTACAACTCTTTCCATTCTTGATAAACCGATACGGAATTGGTTTTGTAGTAATTCACCTACAGAACGTAAACGACGGT"
+        },
+        "function": null
+      },
+      "assay_type": "ROI",
+      "name": "VISA_rpoB-481_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ACTATTCTGCCTATCCTAATTGGGATAAATTATTAAAAAAGTACAATCAGGGGCAGTTATCAATAGAAGATTTACTAAAGATTCATTCTTCGACGAATGAAAGAGTCGCAACATTAAATGA",
+          "Significance": {
+            "message": "Aminoglycoside resistance"
+          }
+        },
+        "gene_name": "mobile 16s rRNA methylase",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "armA"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CCGCTTGCTGGTACATATCTACGCCTGGTTTTAAGGGCGTGTGTCCTGTGGGCCTGTTCGTGAAGGTATGAAAACAATCCGGCAGATAGCGGACGAGATAGG",
+          "Significance": {
+            "message": "Aminoglycoside resistance"
+          }
+        },
+        "gene_name": "mobile 16s rRNA methylase",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "npmA"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GAATTGGACTGCCTCTACGATTTTATCTTTTCTGGCGGGGTGCCCCATCGTGTGTTGGATATCGCTTGCGGCCTAAACCCGCTGGCCCTCTTTATACGTGACATAACATCTGTATGGGCGTGC",
+          "Significance": {
+            "message": "Aminoglycoside resistance"
+          }
+        },
+        "gene_name": "mobile 16s rRNA methylase",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "rmtA_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AAGGCATGGAGGCGAACTACGCCGCATGGTTCGAGGGCGGCTTGCCCGCCGAGTTTGAGATTGAGGATAAAAAGACCATCGGAACAGAACTTATATACTT",
+          "Significance": {
+            "message": "Aminoglycoside resistance"
+          }
+        },
+        "gene_name": "mobile 16s rRNA methylase",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "rmtB_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AATACTCCACACTTTATCCACCAACTGTACGACGTGTAACTGAGAGGCTTTTCGATCGATACCCTCCCAAGCAGCTAGAGAAGGAGGTTCGCAAGAA",
+          "Significance": {
+            "message": "Aminoglycoside resistance"
+          }
+        },
+        "gene_name": "mobile 16s rRNA methylase",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "rmtC_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AACGATGCGACGATCCATTCCGCATTCACGCGCATTAGCGCATCCATCGCCGCGCCCGCACGCTGGCGCTCCAAAAGCGGCAGCACCTTAAACAGCAGCGCCGCATTCGCCTCGTCTTCCGGGATTTCGCACAGCAAATCGC",
+          "Significance": {
+            "message": "Aminoglycoside resistance"
+          }
+        },
+        "gene_name": "mobile 16s rRNA methylase",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "rmtD1_&_D2"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGTCTAGTTCTGCTGTCTTGTCTCTCATGGCCGCTGGCTGGCTTTTCTGCCACCGCGCTGACCAACCTCGTCGCGGAACCATTCGCTAAACTCGAACAGGACTTTGGCGGCTCCATCGGTGTGTACGCGATGGATACCGGCTCAGGCGCAACTGTAAGTTACCGCGCTGAGGAGCGCTTCCCACTGTGCAGCTCATTCAAGGGCTTTCTTGCTGCCGCTGTGCTGGCTCGCAGCCAGCAGCAGGCCGGCTTGCTGGACACACCCATCCGTTACGGCAAAAATGCGCTGGTTCCGTGGTCACCCATCTCGGAAAAATATCTGACAACAGGCATGACGGT",
+          "Significance": {
+            "message": "B-lactam resistance"
+          }
+        },
+        "gene_name": "blaKPC",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "KPC_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GGACAAGATGGGCGGTATGGACGCGCTGCATGCGGCGGGGATTGCGACTTATGCCAATGCGTTGTCGAACCAGCTTGCCCCGCAAGAGGGGATGGTTGCGGCGCAACACAGCCTGACTTTCGCCGCCAATGGCTGGGTCGAACCAGCAACCGCGCCCAACTTTGGCCCGCTCAAGGTATTTTACCCCGGCCCCGGCCACACCAGTGACAATATCACCGTTGGGATCGACGGCACCGACATCGCTTTTGGTGGCTGCCTGATCAAGGACAGCAAGGCCAAGTCGCTCGGCAATCTCGGTGATGCCGACACTGAGCACTACGCCG",
+          "Significance": {
+            "message": "B-lactam resistance"
+          }
+        },
+        "gene_name": "blaNDM",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "NDM_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ATGACTATAACAAAGCCTACAAGAAATCTGCTCGTGTCGTTGGGGACGTAATCGGTAAATATCACCCGCATGGTGACTTAGCTGTTTATGAAACCATTGT",
+          "Significance": {
+            "message": "Fluoroquinolone resistance"
+          }
+        },
+        "gene_name": "gyrA",
+        "function": "resistance type"
+      },
+      "assay_type": "presence/absence",
+      "name": "gyrA_ACBA_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "RegionOfInterest": {
+            "Significance": {
+              "message": "Fluoroquinolone resistance"
+            },
+            "aa_sequence": "TAVYD",
+            "position_range": "70-84"
+          },
+          "sequence": "AACAAGCCCTACAAGAAATCCGCCCGTGTGGTCGGCGACGTGATCGGTAAGTACCACCCGCACGGCGACACCGCGGTCTACGACACCATCGTGCGCATGGCGCAGCCGTTCTCGCTGCGCTACATGCTGGTAGACGGCCAGGGCAACTTCGGTTCGGTGGACGGCGACAACGCCGCAGCCATGCGATACACCGAAGTGCGCATGGCCAAGCTGGCCCACGAACTGCTGGCGGACCTGGAAAAGGAAACCGTCGACTGGGTGCCCAACTACGATGGCACCGAG"
+        },
+        "gene_name": "gyrA",
+        "function": "resistance type"
+      },
+      "assay_type": "ROI",
+      "name": "gyrA_PSAR_UT2"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "RegionOfInterest": {
+            "Significance": {
+              "message": "Fluoroquinolone resistance"
+            },
+            "aa_sequence": "DSSIY",
+            "position_range": "58-72"
+          },
+          "sequence": "GCCATCAACAAGCGGATAACGATAACTGAAATCTTGAGCCATACGTACCATTGCTTCATAAATAGATGAGTCACCATGAGGGTGATATTTACCCATTACGTCACCAACGATACGTGCTGATTTTTTATATGATTTATCCGGTGTCATACCTTGTTCATTTAATCCATATAGTATACGACGATGTACTGGTTTTAAACCGTCACGAACATCTGGCAATG"
+        },
+        "gene_name": "gyrA",
+        "function": "resistance type"
+      },
+      "assay_type": "ROI",
+      "name": "gyrA_staph_UT1"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CCGTCACGCTGTTGTTAGGAAGTGTGCCGCTGTATGCGCAAACGGTGGACGTACAGCAAAAACTTGCCGAATTAGAG--CAGCAGTCGGGAGGAAGGCTGGGTGTGGCATTGATTAACACGGCGGATAATTCGCAAATACTTTATCGTGCTGATGAGCG",
+          "Significance": {
+            "message": null
+          }
+        },
+        "function": null
+      },
+      "assay_type": "presence/absence",
+      "name": "CTX-M-G1_64_UT1"
+    }
+  ]
+}
