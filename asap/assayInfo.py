@@ -273,7 +273,7 @@ class RegionOfInterest(object):
         if self.nt_sequence:
             return_dict['nt_sequence'] = self.nt_sequence
         if self.mutations:
-            return_dict['mutations'] = self.mutations
+            return_dict['mutations'] = ','.join(self.mutations)
         if self.name:
             return_dict['name'] = self.name
         if self._significance:
