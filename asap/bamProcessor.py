@@ -182,6 +182,10 @@ def _process_roi(roi, samdata, amplicon_ref):
     return roi_dict
 
 def _add_roi_node(parent, roi, roi_dict, proportion):
+    if "flag" in roi_dict:
+        roi_node = ElementTree.SubElement(parent, "region_of_interest", {'region':roi_dict['region']})
+        significance_node = ElementTree.SubElement(roi_node, "significance", {'flag':roi_dict['flag']})
+        return roi_node
     roi_attributes = {k:roi_dict[k] for k in ('region', 'reference', 'depth')}
     roi_node = ElementTree.SubElement(parent, "region_of_interest", roi_attributes)
     aa_seq_counter = roi_dict['aa_sequence_distribution']
@@ -204,9 +208,7 @@ def _add_roi_node(parent, roi, roi_dict, proportion):
         mutation_node.text = mutation
         if mutant_proportion >= proportion:
             significant = True
-    if 'flag' in roi_dict:
-        significance_node = ElementTree.SubElement(roi_node, "significance", {'flag':roi_dict['flag']})
-    elif significant:
+    if significant:
         significance_node = ElementTree.SubElement(roi_node, "significance")
         significance_node.text = roi.significance.message                       
     elif 'changes' in roi_dict and int(roi_dict['changes']) > 0:
