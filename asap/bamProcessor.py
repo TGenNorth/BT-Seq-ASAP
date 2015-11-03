@@ -137,7 +137,7 @@ def _add_snp_node(parent, snp):
     ElementTree.SubElement(snp_node, 'base_distribution', {k:str(v) for k,v in base_counter.items()})
     return snp_node
 
-def _process_roi(roi, samdata, amplicon_ref):
+def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
     roi_dict = {'region':roi.position_range}
     range_match = re.search('(\d*)-(\d*)', roi.position_range)
     if not range_match:
@@ -151,7 +151,8 @@ def _process_roi(roi, samdata, amplicon_ref):
         rstart = read.reference_start
         if rstart <= start:
             nt_sequence = DNA(read.query_alignment_sequence[start-rstart:end-rstart])
-            #nt_sequence = nt_sequence.reverse_complement() #TODO: This is temporary, make it smarter
+            if reverse_comp:
+                nt_sequence = nt_sequence.reverse_complement()
             aa_sequence = nt_sequence.translate()
             aa_string = str(aa_sequence).replace('*', 'x')
             if aa_string:
@@ -310,6 +311,7 @@ USAGE
             assay_dict['type'] = assay.assay_type
             assay_node = ElementTree.SubElement(sample_node, "assay", assay_dict)
             ref_name = assay.name
+            reverse_comp = assay.target.reverse_comp
             for amplicon in assay.target.amplicons:
                 ref_name = ref_name + "_%s" % amplicon.variant_name if amplicon.variant_name else ref_name
                 amplicon_dict = {}
@@ -341,7 +343,7 @@ USAGE
                     _write_parameters(amplicon_node, amplicon_data)
 
                     for roi in amplicon.ROIs:
-                        roi_dict = _process_roi(roi, samdata, ref_name)
+                        roi_dict = _process_roi(roi, samdata, ref_name, reverse_comp)
                         _add_roi_node(amplicon_node, roi, roi_dict, proportion)
 
         samdata.close()
