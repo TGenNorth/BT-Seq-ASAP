@@ -153,6 +153,9 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
             nt_sequence = DNA(read.query_alignment_sequence[start-rstart:end-rstart])
             if reverse_comp:
                 nt_sequence = nt_sequence.reverse_complement()
+            #scikit-bio doesn't support translating degenerate bases currently, so we will just throw out reads with degenerates for now
+            if nt_sequence.has_degenerates(): 
+                continue
             aa_sequence = nt_sequence.translate()
             aa_string = str(aa_sequence).replace('*', 'x')
             if aa_string:
@@ -322,9 +325,10 @@ USAGE
                 if samdata.count(ref_name) == 0:
                     ElementTree.SubElement(amplicon_node, "significance", {"flag":"no coverage"})
                 else:
-                    if amplicon.significance:
+                    if amplicon.significance or samdata.count(ref_name) < depth:
                         significance_node = ElementTree.SubElement(amplicon_node, "significance")
-                        significance_node.text = amplicon.significance.message
+                        if amplicon.significance:
+                            significance_node.text = amplicon.significance.message
                         if samdata.count(ref_name) < depth:
                             significance_node.set("flag", "low coverage")
 
@@ -334,7 +338,8 @@ USAGE
                         significance_node = amplicon_node.find("significance")
                         if significance_node is None:
                             significance_node = ElementTree.SubElement(amplicon_node, "significance")
-                        significance_node.set("flag", "insufficient breadth of coverage")
+                        if not significance_node.get("flag"):
+                            significance_node.set("flag", "insufficient breadth of coverage")
                     for snp in amplicon_data['SNPs']:
                         _add_snp_node(amplicon_node, snp)
                         # This would be helpful, but count_coverage is broken in python3
