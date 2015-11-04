@@ -275,6 +275,7 @@ USAGE
         required_group.add_argument("-o", "--out", metavar="FILE", required=True, help="XML file to write output to. [REQUIRED]")
         #parser.add_argument("-n", "--name", help="sample name, if not provided it will be derived from BAM file")
         parser.add_argument("-d", "--depth", default=100, type=int, help="minimum read depth required to consider a position covered. [default: 100]")
+        parser.add_argument("--breadth", default=0.8, type=float, help="minimum breadth of coverage required to consider an amplicon as present. [default: 0.8]")
         parser.add_argument("-p", "--proportion", default=0.1, type=float, help="minimum proportion required to call a SNP at a given position. [default: 0.1]")
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
      
@@ -285,6 +286,7 @@ USAGE
         bam_fp = args.bam
         out_fp = args.out
         depth = args.depth
+        breadth = args.breadth
         proportion = args.proportion
         #ref_fp = args.ref
         #out_dir = args.odir
@@ -334,7 +336,7 @@ USAGE
 
                     pileup = samdata.pileup(ref_name, max_depth=1000000)
                     amplicon_data = _process_pileup(pileup, amplicon, depth, proportion)
-                    if float(amplicon_data['breadth']) < proportion*100:
+                    if float(amplicon_data['breadth']) < breadth*100:
                         significance_node = amplicon_node.find("significance")
                         if significance_node is None:
                             significance_node = ElementTree.SubElement(amplicon_node, "significance")

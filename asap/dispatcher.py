@@ -294,13 +294,13 @@ def alignReadsToReference(sample, reads, reference, outdir, jobid=None, aligner=
     else:
         return _run_bwa(sample, reads, reference, outdir, jobid, bwapath=aligner, args=args)
 
-def processBam(sample_name, json_file, bam_file, xml_dir, dependency, depth, proportion):
+def processBam(sample_name, json_file, bam_file, xml_dir, dependency, depth, breadth, proportion):
     import os
     job_params = {'queue':'', 'mem_requested':2, 'num_cpus':1, 'walltime':4, 'args':''}
     job_params['name'] = "asap_bamprocesser_%s" % sample_name
     job_params['work_dir'] = xml_dir
     out_file = os.path.join(xml_dir, sample_name+".xml")
-    command = "bamProcessor -j %s -b %s -o %s -d %d -p %f" % (json_file, bam_file, out_file, depth, proportion)
+    command = "bamProcessor -j %s -b %s -o %s -d %d --breadth %f -p %f" % (json_file, bam_file, out_file, depth, breadth, proportion)
     jobid = _submit_job('PBS', command, job_params, (dependency,)) if dependency else _submit_job('PBS', command, job_params)
     return (out_file, jobid)
 
