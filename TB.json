@@ -2,11 +2,30 @@
   "Assay" : [
   {
     "name" : "ahpC",
-    "assay_type" : "presence/absence",
+    "assay_type" : "SNP",
     "Target" : {
       "function" : "resistance type",
       "Amplicon" : {
         "sequence" : "CGATGCCGATAAATATGGTGTGATATATCACCTTTGCCTGACAGCGACTTCACGGCACGATGGAATGTCGCAACCAAATGCATTGTCCGCTTTGATGATGAGGAGAGTCATGCCACTGCTAACCATTGGCGATCAATTCCCCGCCTACCAGCTCACCGCTCTCATCGGCGGTGACCTGTCCAAGGTCGACGCCAAGCAGCCCGGCGACTACTTCACCACTATCACCAGTGACGAACACCCAGGCAAGTGGCGGGTGGTGTTCTTTTGGCCGAAAGACTTCACG"
+        "SNP" : [
+        {
+          "position" : 62,
+          "reference" : "G",
+          "variant" : "T",
+          "name" : "-6T",
+          "Significance" : {
+            "message" : "ahpC -6 mutation present which is associated with INH resistance"
+          }
+        },
+        {
+          "position" : 58,
+          "reference" : "C",
+          "variant" : "A",
+          "name" : "-10A",
+          "Significance" : {
+            "message" : "ahpC -10 mutation present which is associated with INH resistance"
+          }
+        }]
       }
     }
   },
@@ -17,6 +36,8 @@
       "function" : "resistance type",
       "Amplicon" : {
         "sequence" : "CCGCCAACTACGGTGTTTACGGTGCCCGCAAAGTGTGGCTAACCCTGAACCGTGAGGGCATCGAGGTGGCCAGATGCACCGTCGAACGGCTGATGACCAAACTCGGCCTGTCCGGGACCACCCGCGGCAAAGCCCGCAGGACCACGATCGCTGATCCGGCCACAGCCCGTCCCGCCGATCTCGTCCAGCGCCGCTTCGGACCACCAGCACCTAACCGGCTGTGGGTAGCAGACCTCACCTATGTGTCGACCTGGGCAGGGTTCGCCTACGTGGCCTTTGTCACCGACGCCTACGCTCGCAGGATCC"
+        "Significance" : {
+          "message" : "Mycobacterium tuberculosis confirmed"
       }
     }
   },
