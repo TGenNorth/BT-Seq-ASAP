@@ -103,9 +103,11 @@
 		    		            </xsl:if>
 		    		        </xsl:for-each>
 		    		        <xsl:for-each select="amplicon/region_of_interest">
-		    		            <xsl:value-of select="@name"/>(<xsl:value-of select='format-number(amino_acid_sequence/@percent, "##.##")'/>%)
-	    		                <xsl:if test="significance"> - <xsl:value-of select="significance"/><xsl:if test="significance/@flag">(<xsl:value-of select="significance/@flag"/>)</xsl:if></xsl:if>
-		    		            <br/>
+		    		            <xsl:for-each select="mutation">
+		    		                <xsl:value-of select="./@name"/>(<xsl:value-of select='format-number(./@percent, "##.##")'/>%)
+	    		                    <xsl:if test="../significance and ./@percent &gt; 10"> - <xsl:value-of select="significance"/><xsl:if test="significance/@flag">(<xsl:value-of select="significance/@flag"/>)</xsl:if></xsl:if>
+		    		                <br/>
+		    		            </xsl:for-each>
 		    		        </xsl:for-each>
 		    		        </td>
 		    		        <td>
