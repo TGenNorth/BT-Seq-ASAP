@@ -100,8 +100,9 @@ USAGE
         xml_dir = dispatcher.expandPath(xml_dir)
 
         root_node = ElementTree.Element("analysis", {'run_name':run_name})
-            
-        for file in os.listdir(xml_dir):
+        
+        sorted_files = sorted(os.listdir(xml_dir))    
+        for file in sorted_files:
             is_xml = re.search('(.*)\.xml$', file, re.IGNORECASE)
             if is_xml:
                 sample_tree = ElementTree.parse(os.path.join(xml_dir, file))
