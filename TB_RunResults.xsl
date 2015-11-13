@@ -14,17 +14,19 @@
 	    		<th>Sample</th>
 	    		<xsl:for-each select="sample[position()&lt;=1]">
 	    		<xsl:for-each select="assay">
+	    		    <th nowrap="true">
 	    		    <xsl:choose>
-	    		        <xsl:when test="@type = 'SNP'"><th><xsl:value-of select="@name"/> SNP (% res)</th></xsl:when>
-	    		        <xsl:when test="@type = 'ROI'"><th><xsl:value-of select="@name"/> codon (% res)</th></xsl:when>
-	    		        <xsl:otherwise><th><xsl:value-of select="@name"/></th></xsl:otherwise>
+	    		        <xsl:when test="@type = 'SNP'"><xsl:value-of select="@name"/> SNP (% res)</xsl:when>
+	    		        <xsl:when test="@type = 'ROI'"><xsl:value-of select="@name"/> codon (% res)</xsl:when>
+	    		        <xsl:otherwise><xsl:value-of select="@name"/></xsl:otherwise>
 	    		    </xsl:choose>
+	    		    </th>
 	    		</xsl:for-each>
 	    		</xsl:for-each>
 	    		</tr>
                 <xsl:for-each select="sample">
                     <tr>
-                        <td><a href="{/analysis/@run_name}/{./@name}.html"><xsl:value-of select="@name"/></a></td>
+                        <td nowrap="true"><a href="{/analysis/@run_name}/{./@name}.html"><xsl:value-of select="@name"/></a></td>
 			    		<xsl:for-each select="assay">
 			    		    <td align="center"><xsl:for-each select="amplicon">
 			    		        <xsl:choose>
@@ -53,6 +55,7 @@
             </table>
 	    	<em>Percentages indicate the percentage of the sample containing that mutation, a value of 'none' indicates that no resistant mutations were present in that gene.</em>
 	    	<br />
+	    	<br />
 	    	<a href="{@run_name}_details.html">Click here for more details</a>
         </body>
         </html>
@@ -70,7 +73,7 @@
 	    		<th>Sample</th>
 	    		<xsl:for-each select="sample[1]">
 	    		<xsl:for-each select="assay">
-	    		    <th><xsl:value-of select='@name'/></th>
+	    		    <th nowrap="true"><xsl:value-of select='@name'/></th>
 	    		</xsl:for-each>
 	    		</xsl:for-each>
 	    		</tr>
@@ -152,6 +155,7 @@
 	    		</tr>
 	    	</table>
 	    	<em>Percentages indicate the percentage of the sample containing that mutation, a value of 'none' indicates that no resistant mutations were present in that gene.</em>
+	    	<br />
 	    	<br />
 	    	<a href="{@name}_details.html">Click here for more details</a>
 	    </body>
