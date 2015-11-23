@@ -2,1619 +2,1088 @@
   "Assay": [
     {
       "assay_type": "presence/absence",
-      "name": "Kp_M1_UT1v",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "gamma-aminobutyrate transporter; DNA-binding transcriptional regulator CsiR; putative transcriptional regulator; gamma-aminobutyrate transport protein, RpoS-dependent (APC family); gamma-aminobutyrate (GABA) permease; CsiR, transcriptional repressor of CsiD; GABA permease; gab operon transcriptional repressor CsiR",
-        "Amplicon": {
-          "sequence": "CGTTTCACAACTGCGGATGCGCAAAATCCTT-CAGGCGCAAGGCGGCGAAATCCGTCTGAGAATGTGGCTCTATCCGTACCTGACCTGGCTGGTGATCGCCTTTATCACCTTCGTGCTGGTGGTGATGCTGTTCCGTCCGGCACAGCAGCTGGAGGTGATCTCTACCGGCCTGTTAGCTCTGGGAATTATTTGTACGGTACCGATTATGTCACGCTGGAAAAAGCTGGTATTGTGGCAAAAACTGCCGCTGCAAAATACGCGTTAACCCTGTT-CCCGGCGCCCGCCGGGA----------AGAGTATTCAGGAGTAAGAACATGACCGCCA",
-          "Significance": {
-            "message": "K. pneumoniae present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Kp_M1_UT1nv",
-      "Target": {
-        "function": "species ID",
-        "gene_name": 4240,
-        "Amplicon": {
-          "sequence": "CGTTCCTCACCGTAGTGGTGAACTACTATGCCCCCGCCAAGGTGTTTAAATTTCTCATCGACAGCTCCGGCGCCATCGCCCTGCTGGTCTATCTGGTGATTGCCGTTTCACAACTGCGGATGCGCAAAATCCTTCAGGCGCAAGGCGGCGAAATCCGTCTGAGAATGTGGCTCTATCCGTACCTGACCTGGCTGGTGATCGCCTTTATCACCTTCGTGCTGGTGGTGATGCTGTTCCGTCCGGCACAGCAGCTGGAGGTGATCTCTACCGGCCTGTTAGCTCTGGGAATTATTTGTACGGTACCGATTATGTCACGCTGGA",
-          "Significance": {
-            "message": "K. pneumoniae present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Kp_M2_UT1nv",
-      "Target": {
-        "function": "species ID",
-        "gene_name": 2858,
-        "Amplicon": {
-          "sequence": "TGCCTATCGCCACTTTATTGAAAGCGTTAAAGATTATGCCATCTATATGCTGAGCGCCGACGGCACGGTCATTAGCTGGAATGAGGGCGCCCGCCGGGCAAAAGGGTACCTGAGCGACGAGATCATCGGTCGCTACTTCGGTCTCTTCTATAGCGAAGCTGAGCAACTCTCCGGTGTACCCGCAAAAAACCTGGAAATCGCCCTGCGTAGCGGGCAGTTTGAAGGGGAAGGCTGGCGGTATCGCAAAGACGGGTCCCGATTCTGGGCGCATGTCATGATCGATACCATCCGCGATGAGCAGAACACCCTGCTGGGTTTTGCCAAAATTACCCGCGACATTAGTGAACAGAAGGCGATTAACGACCG",
-          "Significance": {
-            "message": "K. pneumoniae present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Kp_M2_UT2nv",
-      "Target": {
-        "function": "species ID",
-        "gene_name": 2858,
-        "Amplicon": {
-          "sequence": "CCTCAGGTACGCTCATTCGTGCGAGCCATTATTTCGCTGGGCAATTCGATCAATACGCCGCTTATCGCCGAGGGGGTGGAAACGGCTGGACAACTGCAGATCCTCGAAGAGGAGGGATGTGACGA",
-          "Significance": {
-            "message": "K. pneumoniae present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Smar_UT1",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "glycine/betaine ABC transporter ATP-binding protein",
-        "Amplicon": {
-          "sequence": "GATCAACAGGAAACGGTGACGGTGCGGCGGGAGACGCCGCTAGTGGAGGCGTTCGGGCTGATGGACGATATCGACGCCCGCTCGGTGACGGTGGTGGACGCCGACGGCAAACCGCTGGGCTACGTCAAACGCCGTGAGGCGCGCGGCGCGCCCGGGGTGTGCGCCGACAGCCTGCACCGCTTTCGCGTCACCGCCCGCGCGGAGGAGAACCTGCGCGTAGTGCTGTCCAAGCTGTACGAACACAACACCTCCTGGATGCCGATCGTCGATGAAGACGGCCGCTACAGCGGCGAAATCTCGCAGGATTATATCGCC",
-          "Significance": {
-            "message": "S. marcescens present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Pmbs_UT1",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "anaerobic dimethyl sulfoxide reductase chain B",
-        "Amplicon": {
-          "sequence": "GGGATATCCGTGGAATGCGTTTCATGCCTTACGCCATATATCATCATCATGGCTAAGCCGTGAGATTATCTTTGCTGCTCTTTACCTGGGCGCACTATGTTTATATACCTTGCTAGTACTAATAAAAGGTCATATGAATAAAACCCTCTTAGCCATTATCGGTTTACTGGGGTTAGTGGATATTTTCTGTATGGCTTCGCTTTATTACAGCACATCGATGATAACTTGGATGCATGTTAATACCTATTTTATGTTTATCGGCTCTGTTTTTTCTGCGGGAGCGGTGATCACATTA",
-          "Significance": {
-            "message": "P. mirabilis present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Pst_UT1",
-      "Target": {
-        "function": "species ID",
-        "Amplicon": {
-          "sequence": "GCCTTGCGCCTTAGTTTGTTGGTTTTTTTACCAAAATAGCTTCAAACTTATGCCTATCGGTAAAACCAATTTAAATGAATTAAAACTCCCCATCTTGGCTATATTTGGCTTAATATTTCTCAATATGCTATTGGGAGCACAAGAAGAGTGGCTTGAAAGTATCAGTCACATGACTGGCTTTGCCTTTTTTCTCTATGTAATAACGATTATTATCGCAGCCCCGATTAGCGAAGAAATTATATTTAGAGGCTTTTTACTTAATGCGGGCATGTGGTATGGCACGGCTGGAAAATGGATAGCC",
-          "Significance": {
-            "message": "P. stuartii present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Efs_UT2",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "araC family transcriptional regulator",
-        "Amplicon": {
-          "sequence": "TCTTCGTCATGGTGSGTTTCCAGATAATAAATCGTATGATTGACTAAATTTCGTTTTCTTTTTTCCGTTTTCGATAGCCGAGTTTCAATTTTATTTTCTTGATCAACTGCTAAGCTTCTTAAAATATAGACCAATAGTTCAATAACTAAAGCTTTAATTTGTAACGCTGATTCAACTTCTTGATGGTTTAATTCATGAACAATTTGCCAAGCTTTTTCTAAAAAAGCACCATGTAAATGACTTAAATCTAATAAAGCTGATTTATTTGGAAATACGTTTCGCGCTAAGCCTTCTAAATAGAGATTTGAAATGCCAATGTGTAGTTGATGTGAGTAAGTTCCTGCTTTTTGTTGCTCACCATGTTCCGTT",
-          "Significance": {
-            "message": "E. faecalis present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Efm_UT1",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "phosphosugar-binding transcriptional regulator",
-        "Amplicon": {
-          "sequence": "GTTTTGATGGCTGGGTCAGTTTTCGTAATGCTTTTTTAGCTGAAACAGCCTATCTTGAAGGGAATTTTCAAGACGTAGATGCGAATCTTCCTTTTTCCACCACAGACGGTATTATGACGATCGCAAATAAAATGGCTTCTTTAGAACAGATGACGATTCATGATACACTTTCTCTCATTCATCATGACCAACTGCAAAAAGCCAAACA",
-          "Significance": {
-            "message": "E. faecium present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Efm_UT2",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "phosphosugar-binding transcriptional regulator",
-        "Amplicon": {
-          "sequence": "TCAGTGAAAACAACCCACGATGATGTCCGTGGAGTAGCCGCAGGTGTCGTTCAGTCTTTTCAAAATTGTTTGCGGGAAAATAATATCAGTCCAGAAGATGTTGTGTTTGTTGCACATTCTACCACACAAGCGACTAATGCACTGATTGAAGGAGACGTAGCAAAAGTCGGCGTAATCGGGATGGCAAAAGGTGGATTAGAAGGTTTTTTAGCAAAACGACAAACTAGATTGAACGATATCGATTTAGGGAATAAGAAAAAAATAGAGATTGTCAATGCATTCTTACCTGTCAAACACTTAAATGTAGACCGTGTTTCAGAAACGATTTCTTCTTTAGAAAGAGAAAGAGCGGAGGTCTTGGTTTCTTCTATGGCATTTGGAGTAGATAATGGGGAACCAGAACGAGTTGTTTATGAAGCAGCATCG-GTAAAATCGATCCCTACAACGATGGCTTCTGACATCACAAAATTATATGGATTGACAAGAAGAACTCGGACAGCAGCAAT",
-          "Significance": {
-            "message": "E. faecium present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Koxy_UT2",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "DASS family transporter",
-        "Amplicon": {
-          "sequence": "CCGTCGCCGTATTACTGATCCACATTGACAGCAGCGCCGTCACGCCAAACAGCATAAAGACCGCGAGGCTCATTTTGCCCCTCGCCATCGCTAATACTTTATCGGCAATGACTTTATCCAGCCCCTGCACATGCATCGCCGCCGCCAGAGCAAAGCCGCCGAGGAAAAGGAATATCGTAGAGTTAGCGAAACTGTTTAGCGCCGCCTGGGTATTAAATACTCCCAACAGCACAGCCATAACGGGAACCATTATTGCCGTAACGGTCACGTGCAGCGCTTCCGTTAACCATAATACGGCGATAAAAGCGAGCATACTCAGTCCCATGACCACCTTCGGCTCATAGGGTAGCGTGTTGTAGAGA",
-          "Significance": {
-            "message": "K. oxytoca present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Koxy_UT3",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "Dimethylmenaquinone methyltransferase",
-        "Amplicon": {
-          "sequence": "GGTGAGAACGATGTGATTGTGGTCTCCAACGAAGGCGACCGTTCGCGAGCGCTGATGGGCGAGATCATGGTGGCCTACGCCCACTGCATGAAGAAAGTCGCCGGTATCGTGCTGGACGGGCCAATCCGTGACATCGATGCGCTGTCGGTTCTCGATTTTCCACTGTTCGCCACCGGCTCCAACCCCGCAGGCCCGTTTAAACAAGGTCCCGGCGAGGTGAACACGCCGATCGCCGTTGGCGGCGTCGCGGTTTGTCCGGGCGACCTGATCGTCGGCGATGCGGATGGCGTCATTGTTATCCCCCTCGGCGACGCAGAAGCCGTACTGAATAAAGCCAAAGATTATGCAAAATTCGATGCAAGCAAAGTAGAGGCCGCGAAAAACGGCACCGCGAATCGCCTTTGGGTCA",
-          "Significance": {
-            "message": "K. oxytoca present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "PSAR_28621",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "1,4-alpha-glucan branching protein",
-        "Amplicon": {
-          "sequence": "GAAGCGGTTGAGGAACAGGTGGATCACCAGCACCGTCATCAGCGTGATCAGCACCGCGAAGCACACCGAGGTAAATCGGTAGAGCACGCTGTACATCATGTCGTGGGT",
-          "Significance": {
-            "message": "P. aeruginosa present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "PSAR_27569",
-      "Target": {
-        "function": "species ID",
-        "Amplicon": {
-          "sequence": "GGACGATCCATTCCATACCGTGTTCGCGGTCCCATTCGCAGTTCAGCGACAGGTGGATCACCGCTTCGTC",
-          "Significance": {
-            "message": "P. aeruginosa present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Sa_M1_UT1",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "putative PTS transport system, IIC component",
-        "Amplicon": {
-          "sequence": "ATAGGTGTGGCTTTTGTAGGGATTTTCTTAGTCATCGATTTATTAGTTAAAAATTTAGGGCCAGCAGCACAAGCGATGGTTAAAAATTTAGGCGTCAGTCTGAATGTGATTGATGTAGGTTGGCCAGCAACATCATCTATCGCGTGGGCATCATCTGTCGCAGCATTTATAATTCCACTCGGAATCATAGTTAACGTTGTATTGCTAGTAACTAAAGTGACAAAGACGATGAATGTAGATATTTGGAATTTTTGGCATTATACGTTTACAGCAGCAATGGTTTATGCCGTATCAGGCAGTATTTGGCAAGCGTTATTAGCAGCAG",
-          "Significance": {
-            "message": "S. aureus present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Sa_M2_UT1",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "BglG family transcriptional antiterminator",
-        "Amplicon": {
-          "sequence": "ATGGTTATGAAATTGTTGGTGATGAATTTGAAGTTCGCCGTTTCTTCATTAAGTTGATTGATCAAAGGTTAAATCATGATATTACTAAAAGTGAAGTTTTAAAGGCGCTCAACTTAACATTCGAAGATATCGCATATCAAAAAGACAAGATCAAACAGGTAGAACAATTTTTGAAGAGTCGCTTTATAGACAAATCACTGAGTTCATTGCCTTACGTCCTTTGTGTGATTCGTAGACGAATTCAAAGTGGTCATGTGATTAATCCATTAAATATTAATTATCAGTATTTGAGGGATACGAAAGAATATCAAGCAACGG",
-          "Significance": {
-            "message": "S. aureus present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Sa_M4_UT1",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "RGD-containing lipoprotein",
-        "Amplicon": {
-          "sequence": "TACGAAATCAGAAGTGGCTCAAAAGTCATCGAAAGTTGAAGTGAAAGGCGAGCGACCAACGATACATTTCCTAGGACAAGCAAGTTATGAAAATGATATGAATATCGTCAAAGATCAATTGGAAAATGCAGGATTTAACGT",
-          "Significance": {
-            "message": "S. aureus present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Sa_M4_UT2",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "RGD-containing lipoprotein",
-        "Amplicon": {
-          "sequence": "TAGCGTTGGTATTAAGTGGTTGTGGTGTCCCTACGAAATCAGAAGTGGCTCAAAAGTCATCGAAAGTTGAAGTGAAAGGCGAGCGACCAACGATACATTTCCTAGGACAAGCAAGTTATGAAAATGATATGAATATCGTCAAAGATCAATTGGAAAATGCAGGATTTAACGTGAAGATGAATATCCAACCAGATTATGGTAGCTATCGTACACAACGTCAAGCCGGCAATTATGATATCCAAATCGATGACTGGATGACAGTATTCGGTGACCCGAACTATGCTATGAC",
-          "Significance": {
-            "message": "S. aureus present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Ec_M1_UT",
-      "Target": {
-        "function": "species ID",
-        "Amplicon": {
-          "sequence": "CGTTGTTTGCGACCCGTATATTTGTGTTAACTCAGATGGCATTTCCCCAGAGTTAACAAGGAAATATCTCGGCGAAAAAGCCGCTGAAAACTTACAATCATTACAAGGCTACGATCCCAGCGAATTTACATT",
-          "Significance": {
-            "message": "E. coli present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Ec_M2_UT",
-      "Target": {
-        "function": "species ID",
-        "Amplicon": {
-          "sequence": "CGCCTGGCTCTGTTTCATGGCGATCCGGAAAAGGCAAAAGAACTGACCAATGAAGCTTCCGCTTTGCTGTCAGATGATAGTACCGAATGGGCAAAGTTCGCTAAACCAGGTAAAAAGACCAACGTCAATGATGACCAATATATTGTCATTAATGCATCTGTCGGAATTTCTGAGAGTTATGTAGCGACACCCGAAAAAGAAGCCGCGATAAAAATTGCCAACGAAAAAATGGCGAAAGGGGATAAAAAGGGTGCAATGGAAGAGCTTCGCCTGGCCGGTGTTGGTGTAATGGAAAACCAATATTTGATGCCGCTTAAACAGACTCGTAATGCACTTGCT",
-          "Significance": {
-            "message": "E. coli present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Ab_M2_UT1",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "ACICU-02424",
-        "Amplicon": {
-          "sequence": "TTTAGCGGACAGATTTGGTTTACAAATTAATTTCTATGGCTTT---AGCCAACAAGAGTATTTAAAAACTGTTCAATACTGGCTAAATGAATACAAATGGCAGCAACGCGAAACTTGGGAAACGATTCAGTTAAAAGCTATTCAATATGCAACTCAGCAAGGCAACCG",
-          "Significance": {
-            "message": "A. baumannii present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
       "name": "Ab_M2_UT2",
       "Target": {
-        "function": "species ID",
         "gene_name": "ACICU-02424",
         "Amplicon": {
-          "sequence": "TCCGCAAACCTCAACTCATTTCTTTTAATCATCTTTGCAATATCGACAGCCAACTCAACAAAGTAAAACTAAATACTGAAGCCTTTGCAAAAGGCTTGTTGGCAAACAATGTACTCATGACAGGCTCACGTGGTACAGGCAAGTCGTCTATTGTAAAAGCCTGT-TTAAATGAATATC-ACCACTTAGGCCTTCGGGTGATTGAACTTGAGAAAAAGTATTTAGAAGATTTGCCTAAAATTATTAACTTACTGCAAGACCGTACTGAGCGTTTTATTATCTTTTGTGATGACTTGGCCTTTGAAGCAGGCGACTCAAGTTACGCAACTTTAAAAACTGTATTAGATGGTTCACTGGC",
           "Significance": {
-            "message": "A. baumannii present"
-          }
-        }
+            "message": "Acinetobacter baumannii present"
+          },
+          "sequence": "TCCGCAAACCTCAACTCATTTCTTTTAATCATCTTTGCAATATCGACAGCCAACTCAACAAAGTAAAACTAAATACTGAAGCCTTTGCAAAAGGCTTGTTGGCAAACAATGTACTCATGACAGGCTCACGTGGTACAGGCAAGTCGTCTATTGTAAAAGCCTGT-TTAAATGAATATC-ACCACTTAGGCCTTCGGGTGATTGAACTTGAGAAAAAGTATTTAGAAGATTTGCCTAAAATTATTAACTTACTGCAAGACCGTACTGAGCGTTTTATTATCTTTTGTGATGACTTGGCCTTTGAAGCAGGCGACTCAAGTTACGCAACTTTAAAAACTGTATTAGATGGTTCACTGGC"
+        },
+        "function": "species ID"
       }
     },
     {
       "assay_type": "presence/absence",
       "name": "Ab_M3_UT2",
       "Target": {
-        "function": "species ID",
         "gene_name": "ABAYE1316",
         "Amplicon": {
-          "sequence": "TAGAGCAGCAACAAATCAACAAGATGTTGCTAACTTCATGTTAAGTGATAAGAAACTACATTTGGCAATTGCCAAGGCGACTCATAATAAAGCTTTACAGGCAACTTATGAGTATTTCTTAAACTCAAGCTATCAATACACCTTAGAGCTAGTGACTAATAAAAATTTACCTGACCCAAACCAGCAAATACATACTGAACTTGTTCAAGCTATTCAACACAAGTCTGAGTCAGAAGCCATGCGA",
           "Significance": {
-            "message": "A. baumannii present"
-          }
-        }
+            "message": "Acinetobacter baumannii present"
+          },
+          "sequence": "TAGAGCAGCAACAAATCAACAAGATGTTGCTAACTTCATGTTAAGTGATAAGAAACTACATTTGGCAATTGCCAAGGCGACTCATAATAAAGCTTTACAGGCAACTTATGAGTATTTCTTAAACTCAAGCTATCAATACACCTTAGAGCTAGTGACTAATAAAAATTTACCTGACCCAAACCAGCAAATACATACTGAACTTGTTCAAGCTATTCAACACAAGTCTGAGTCAGAAGCCATGCGA"
+        },
+        "function": "species ID"
       }
     },
     {
       "assay_type": "presence/absence",
       "name": "Acb_M2_UT1",
       "Target": {
-        "function": "species ID",
         "gene_name": "ABAYE0080",
         "Amplicon": {
-          "sequence": "AAATTGCCAAAGCACAAGGTTTCAATGACTTAAAAAGTTTCCAACAATCCTTAAAAACAAATCCTGCTGTTTTCCCAAAATCTCGTGAAGAAATTTTAGAGATTTATCGGGGATATATTGCCCAAATGCAACCAGAGTTGCCGAAGCTATTTGGTTTATTACCCAAAAATAAAGTCGAAGTTTTGCCTGTAGAGCAATATCGAGAAAAAGAAGCGGCAGGTGCGGAGTATCACCAAGGCACGCCTGATGGTTCACGCCCCGGACAGGTATATGTGAATACTGGGGACTTCTCTGAACGTTCCAAAATATCAATGGAATCGACCGCTTACCATGAGGCAATTCCCG",
           "Significance": {
-            "message": "Acb complex present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Acb_M3_UT1",
-      "Target": {
-        "function": "species ID",
-        "Amplicon": {
-          "sequence": "GATAGCGATTACTCGGTTCCATCGACGTCGTTTGGCCATTTCAACGTGTTCCAACGCGATGCCTGCTCGTTTCTCACTCCTTATAGCCGCCGCGATTATTATAAAATTTCACTGGTTTTAGGCACAGG",
-          "Significance": {
-            "message": "Acb complex present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Sp_M1_UT2",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "rRNA-23S ribosomal RNAiron ABC transporter",
-        "Amplicon": {
-          "sequence": "TCCTGATATAATCGGTGTCACAAGTTCTTCATCTATTGCAGCGGTCTTTTGCATATTGGTATTAAAAACAAATAGTTTAACTACTGGAATTATTTCAATAACTTGTGGACTAACATCATCTTTAATATTATTTTTACTAGCTAAAAAAGATGGTTTTTCAGCAGCAAGACTGATAATATTAGGCATTGGTTTTCAAGCTGTCACAAGAGCAGGCACCTCATTTTTATTGTTGAAAGTAGCAAGATATGAATTACAAGAAGTTATGAGATGGCTCAGTGGCTCTTTATCTTTTACAAAGTTAGATGACATACCTCTTGTTCT",
-          "Significance": {
-            "message": "S. pneumoniae present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "Sp_M2_UT2",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "putative glycosyl transferase (pseudogene)",
-        "Amplicon": {
-          "sequence": "CTGATGGATATGGAGACATTAAGGATATAGTGTTTTCGGCTCATATTATAGTTAGGTATAATAATGGACATTGTGGAGGTATAGATCCGCATATAATTGGACTTTGTAAAAAGCAGATCAGAAGGATGTCTCTATATCCTATTTTGATAATCGTATCTAGAGATTCAAAGGTTATTGATGATTATAAAAATTTAGATATTGCCTATGTTGATTGTACTCAATGTTCAAATAATTTTGAAACTGCCTTACACGTTAAAAATATTTTAAAATTATTAAAAATCCGACTTATACACTGTCATGGCTACTCAACTAATT",
-          "Significance": {
-            "message": "S. pneumoniae present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "GBS_UT1",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "pbp1A",
-        "Amplicon": {
-          "sequence": "GCCAACCGTGGTATGTCATTTGAAGCTGCTATCAATGCAACCAATGACTACTATTTGTCTCACGAATTAGCTGTCATTCATAAGAAACCAACGCCAGTACAAATCGTCAAGGTAGATTATCCTAAACGTAGTCGTGCTAAGATTGTAGAAGCTTATTTTAGACAAGCTTCTACTACTGATTATTCTGGTGTTTACAAAGGTTACTATATTGACTTTGAAGCCAAAGAAACCCGGCAGAA",
-          "Significance": {
-            "message": "S. agalactiae present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "GBS_UT2",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "3-oxoacyl-[acyl-carrier-protein]\u00a0reductase\u00a0FabG",
-        "Amplicon": {
-          "sequence": "CGTGGATGTGCTYGTTAACAACGCTGGTATTACTAATGATAAATTGATGCTTAAAATGACTGTTGAAGATTTTGAGAGCGTTCTTAAAATTAATTTAACAGGTGCATTTAATATGACACAATCAGTCTTGAAACCGATGACAAAAGCGCGTCAAGGTGCTATTATTAATATCTCTAGCGTCGTTGGATTAACTGGAAATGTAGGGCAAGCTAATTACGCAGCCTCTAAAGCAGGTTTAATTGGCTTTACAAAATCAGTTGCCAGAGAAGTAGCAGCACGAG",
-          "Significance": {
-            "message": "S. agalactiae present"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "gene variant",
-      "name": "Encl_M1_UT",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "wcaA gene",
-        "Amplicon": [
-          {
-            "variant_name": "Encl_M1-1",
-            "sequence": "AACACCTGATTGCCGATGATGTTGCGCTTGTAGAACAGGCGGCGAGAGTATGGTGATTTCGGGTACAGCGGCAGGCTGGCAGGCTGCGAGTAAACCTCGCCCTGACAGACATAGTCGTTGGCATACAGGAAAGCGTGCGTGACCAGTTGTTCCTTGTGCGACAGGAAAATGGACAGCCGGTTTGGTGTCCACTCGTCATCGTCGTCGATGCCGGTCAGATACTGCCCTTTGGCCTGCATAATTGCCTGATTACGCACCGCACACGCCCCGGAGTTGATCGCGTTATGGGTATAGCTGACACGCGGGTCATTGAGGTCAGTGACAAACTTTTGCAGCTGCTCATACGAAGAGGAACAGTCATCAACAAT",
-            "Significance": {
-              "message": "Enterobacter cloacae group present"
-            }
+            "message": "Strain from the Acinetobacter calcoaceticus-Acinetobacter baumannii (ACB) complex present"
           },
-          {
-            "variant_name": "Encl_M1-2",
-            "sequence": "AACTTGTCCTTGTGCTTGCGGTAAAAGTGGAAGTAACCAGAGAATTTCTTCGGCGACGAGGTGATTTGCATCTCCCCGTGATTGATATGCAGGATCTGCGTCGCCTCTTCCACCTTCCACGGCTCGCCATACTCCATCACCATGCGCAGGAAGATGTCGTAATCCTGCGCAGCCTTCAGCTCGGTATCGAACAGGCACTCCTTAAAACGCCACGCCCAGGTAAAGACCTGATTACCGATGATGTTGCGTTTATAGAACAGGCGTCGTGAGTAAGGCGATTTCGGGTACAACGGCAGGCTGGCAGGCTGCGAGTAAACTTCACCCTGACAGACATAGTCGTTGGCATACAAAAACGCATGCGTCACCAGCTGTGCTTTGTGCGACAGGAAGATCGACAGACGGTTCGGCGTCCATTCGTCATCGTCGTCG",
-            "Significance": {
-              "message": "Enterobacter cloacae group present"
-            }
-          },
-          {
-            "variant_name": "Encl_M1-3",
-            "sequence": "ACATAGTCGTTGGCATACAGAAACGCATGAGTAACCAACTGATGTTGGTGTGACAGGAAGGTCGACAGACGGTTGGGGGTCCATTCGTCATCGTCGTCAATCCCGGTCAGATACTGCCCTTGCGCCTGCAATATCGCCTGGTTACGTACCGCACACGCCCCGGAGTTGATGGCGTTATGCGTGTACATAACCCGCGGGTCATTAAGGTCAGTCACGAATTTTTGCAGTTGTTCGTATGAAGAGGAGCAGTCATCAACGATGAGCAGTTCCCAGTTGTCGTAGTCCTGACGCAGGACCGACTTAATTGCG",
-            "Significance": {
-              "message": "Enterobacter cloacae group present"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "assay_type": "gene variant",
-      "name": "Encl_M2_UT",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "ohr gene",
-        "Amplicon": [
-          {
-            "variant_name": "Encl_M2-1",
-            "sequence": "CCTTCAACGTGGATGTTCAGCTTCGCTTCGATACCAAAACCGGTTGGCAGCGGGCCGATCCCTACTTCGCCTTCAATAAAGGCGTCTTTTGGCAGAGCGAATTTATCGCGTGCCGCAACGAACTTCATTGCGCCCAGGAAGCAGGCGGAGTAGCCCGCAGCGAACAGCTGTTCAGGGTTGGTTACTTCACCCCCCATGCCGCCCATCTCTTTTGGCACACCCAGTTTGACATCCAGAACGCCA",
-            "Significance": {
-              "message": "Enterobacter cloacae group present"
-            }
-          },
-          {
-            "variant_name": "Encl_M2-2",
-            "sequence": "CCTTCAACGTGGATGTTCAGCTTCGCTTCGATACCAAAACCGGTTGGCAGCGGGCCAATACCCACTTCGCCTTCAATAAAGGCATCTTTTGGCAGGGTAAATTTGTCGCGTGCGGCCACGAACTTCATCGCGCCCAGGAAGCAGGCAGAGTAGCCCGCAGCAAACAGCTGTTCAGGGTTCGTCACTTCTCCGCCCATGCCGCCCATCTCTTTCGGCACGCCCAGTTTTACGTCCAGTACGCCATCGGAAGAGGTCGCGCGGCCGTCACGGCCACCGGTTGCTTTTGCTTTGGCGGTATAAACAACT",
-            "Significance": {
-              "message": "Enterobacter cloacae group present"
-            }
-          }
-        ]
+          "sequence": "AAATTGCCAAAGCACAAGGTTTCAATGACTTAAAAAGTTTCCAACAATCCTTAAAAACAAATCCTGCTGTTTTCCCAAAATCTCGTGAAGAAATTTTAGAGATTTATCGGGGATATATTGCCCAAATGCAACCAGAGTTGCCGAAGCTATTTGGTTTATTACCCAAAAATAAAGTCGAAGTTTTGCCTGTAGAGCAATATCGAGAAAAAGAAGCGGCAGGTGCGGAGTATCACCAAGGCACGCCTGATGGTTCACGCCCCGGACAGGTATATGTGAATACTGGGGACTTCTCTGAACGTTCCAAAATATCAATGGAATCGACCGCTTACCATGAGGCAATTCCCG"
+        },
+        "function": "species ID"
       }
     },
     {
       "assay_type": "presence/absence",
       "name": "Eaer_M1_UT",
       "Target": {
-        "function": "species ID",
         "gene_name": "Oxygen-insensitive NADPH nitroreductase",
         "Amplicon": {
-          "sequence": "ACCCAAAAGTATTCTGATTGTTGAGCTCGTCGGCATGGCGCTGCTGACGTTGGCCTGGCTGTCATTAAACCAGTATGTTCAGCTGCCTGCGCCATTTGCCAGCCCGACGGCGGCGCTCATCATGATCTTTGCCGGGATCCTGCTGATGATCCCGGCGGCGATAGCCTTAATGTGGCGAATAGCGAAAATTGTCGCGCCGCAGTTGACCGATAATAAGACCTCAT",
           "Significance": {
             "message": "Enterobacter aerogenes present"
+          },
+          "sequence": "ACCCAAAAGTATTCTGATTGTTGAGCTCGTCGGCATGGCGCTGCTGACGTTGGCCTGGCTGTCATTAAACCAGTATGTTCAGCTGCCTGCGCCATTTGCCAGCCCGACGGCGGCGCTCATCATGATCTTTGCCGGGATCCTGCTGATGATCCCGGCGGCGATAGCCTTAATGTGGCGAATAGCGAAAATTGTCGCGCCGCAGTTGACCGATAATAAGACCTCAT"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "assay_type": "gene variant",
+      "name": "Encl_M1_UT",
+      "Target": {
+        "gene_name": "wcaA gene",
+        "Amplicon": [
+          {
+            "variant_name": "Encl_M1-1",
+            "Significance": {
+              "message": "Enterobacter cloacae group present"
+            },
+            "sequence": "AACACCTGATTGCCGATGATGTTGCGCTTGTAGAACAGGCGGCGAGAGTATGGTGATTTCGGGTACAGCGGCAGGCTGGCAGGCTGCGAGTAAACCTCGCCCTGACAGACATAGTCGTTGGCATACAGGAAAGCGTGCGTGACCAGTTGTTCCTTGTGCGACAGGAAAATGGACAGCCGGTTTGGTGTCCACTCGTCATCGTCGTCGATGCCGGTCAGATACTGCCCTTTGGCCTGCATAATTGCCTGATTACGCACCGCACACGCCCCGGAGTTGATCGCGTTATGGGTATAGCTGACACGCGGGTCATTGAGGTCAGTGACAAACTTTTGCAGCTGCTCATACGAAGAGGAACAGTCATCAACAAT"
+          },
+          {
+            "variant_name": "Encl_M1-2",
+            "Significance": {
+              "message": "Enterobacter cloacae group present"
+            },
+            "sequence": "AACTTGTCCTTGTGCTTGCGGTAAAAGTGGAAGTAACCAGAGAATTTCTTCGGCGACGAGGTGATTTGCATCTCCCCGTGATTGATATGCAGGATCTGCGTCGCCTCTTCCACCTTCCACGGCTCGCCATACTCCATCACCATGCGCAGGAAGATGTCGTAATCCTGCGCAGCCTTCAGCTCGGTATCGAACAGGCACTCCTTAAAACGCCACGCCCAGGTAAAGACCTGATTACCGATGATGTTGCGTTTATAGAACAGGCGTCGTGAGTAAGGCGATTTCGGGTACAACGGCAGGCTGGCAGGCTGCGAGTAAACTTCACCCTGACAGACATAGTCGTTGGCATACAAAAACGCATGCGTCACCAGCTGTGCTTTGTGCGACAGGAAGATCGACAGACGGTTCGGCGTCCATTCGTCATCGTCGTCG"
+          },
+          {
+            "variant_name": "Encl_M1-3",
+            "Significance": {
+              "message": "Enterobacter cloacae group present"
+            },
+            "sequence": "ACATAGTCGTTGGCATACAGAAACGCATGAGTAACCAACTGATGTTGGTGTGACAGGAAGGTCGACAGACGGTTGGGGGTCCATTCGTCATCGTCGTCAATCCCGGTCAGATACTGCCCTTGCGCCTGCAATATCGCCTGGTTACGTACCGCACACGCCCCGGAGTTGATGGCGTTATGCGTGTACATAACCCGCGGGTCATTAAGGTCAGTCACGAATTTTTGCAGTTGTTCGTATGAAGAGGAGCAGTCATCAACGATGAGCAGTTCCCAGTTGTCGTAGTCCTGACGCAGGACCGACTTAATTGCG"
           }
-        }
+        ],
+        "function": "species ID"
+      }
+    },
+    {
+      "assay_type": "gene variant",
+      "name": "Encl_M2_UT",
+      "Target": {
+        "gene_name": "ohr gene",
+        "Amplicon": [
+          {
+            "variant_name": "Encl_M2-1",
+            "Significance": {
+              "message": "Enterobacter cloacae group present"
+            },
+            "sequence": "CCTTCAACGTGGATGTTCAGCTTCGCTTCGATACCAAAACCGGTTGGCAGCGGGCCGATCCCTACTTCGCCTTCAATAAAGGCGTCTTTTGGCAGAGCGAATTTATCGCGTGCCGCAACGAACTTCATTGCGCCCAGGAAGCAGGCGGAGTAGCCCGCAGCGAACAGCTGTTCAGGGTTGGTTACTTCACCCCCCATGCCGCCCATCTCTTTTGGCACACCCAGTTTGACATCCAGAACGCCA"
+          },
+          {
+            "variant_name": "Encl_M2-2",
+            "Significance": {
+              "message": "Enterobacter cloacae group present"
+            },
+            "sequence": "CCTTCAACGTGGATGTTCAGCTTCGCTTCGATACCAAAACCGGTTGGCAGCGGGCCAATACCCACTTCGCCTTCAATAAAGGCATCTTTTGGCAGGGTAAATTTGTCGCGTGCGGCCACGAACTTCATCGCGCCCAGGAAGCAGGCAGAGTAGCCCGCAGCAAACAGCTGTTCAGGGTTCGTCACTTCTCCGCCCATGCCGCCCATCTCTTTCGGCACGCCCAGTTTTACGTCCAGTACGCCATCGGAAGAGGTCGCGCGGCCGTCACGGCCACCGGTTGCTTTTGCTTTGGCGGTATAAACAACT"
+          }
+        ],
+        "function": "species ID"
       }
     },
     {
       "assay_type": "presence/absence",
-      "name": "Eaer_M2_UT",
+      "name": "Efs_UT2",
       "Target": {
-        "function": "species ID",
-        "gene_name": "LysR family transcriptional regulator\u00ca",
+        "gene_name": "araC family transcriptional regulator",
         "Amplicon": {
-          "sequence": "AATCGGCAATACCAGCAGTTTACTTAATGCTTTCGATAGACACGAATATGATGCGGTCATTATTGGCGCGGGCTTCTCCTCCCCACAGCATACGCGCGCTATGTTGCTCACTAGTGAGTTAGTGATTATCACCGCGAAAGATCATCCAGCCATCACCGCGACCTCCGCTCTGGATGACAATGTCTTTTTATTGAGTAGTAAAAAATGCGCAACTTCAACGCGCAATCTGGATATGTTATTCCGTGAAGG",
           "Significance": {
-            "message": "Enterobacter aerogenes present"
-          }
-        }
+            "message": "Enterococcus faecalis present"
+          },
+          "sequence": "TCTTCGTCATGGTGSGTTTCCAGATAATAAATCGTATGATTGACTAAATTTCGTTTTCTTTTTTCCGTTTTCGATAGCCGAGTTTCAATTTTATTTTCTTGATCAACTGCTAAGCTTCTTAAAATATAGACCAATAGTTCAATAACTAAAGCTTTAATTTGTAACGCTGATTCAACTTCTTGATGGTTTAATTCATGAACAATTTGCCAAGCTTTTTCTAAAAAAGCACCATGTAAATGACTTAAATCTAATAAAGCTGATTTATTTGGAAATACGTTTCGCGCTAAGCCTTCTAAATAGAGATTTGAAATGCCAATGTGTAGTTGATGTGAGTAAGTTCCTGCTTTTTGTTGCTCACCATGTTCCGTT"
+        },
+        "function": "species ID"
       }
     },
     {
       "assay_type": "presence/absence",
-      "name": "Spyo_UT1",
+      "name": "Efm_UT1",
       "Target": {
-        "function": "species ID",
-        "gene_name": "LytR family transcriptional regulator",
+        "gene_name": "phosphosugar-binding transcriptional regulator",
         "Amplicon": {
-          "sequence": "GCTTATTGCTAATGACTGTGCTTATGGGGTTAGGGTTGATGTTTGCAAAAGGGGTTTTTGATATTTCTACTAATAAAGCTAATTACAAACCAGCTGTTTCCCAAGCTTTTGATGGTCAAGAAACTCAAGATGGTACGAACATTCTGATTTTGGGTTCTGACCAACGAGTTACTCAAGGTTCTACAGATGCTCGCACAGATACCATTATGGTTGTCAATGTCGGCA",
           "Significance": {
-            "message": "Strep pyogenes present"
-          }
-        }
+            "message": "Enterococcus faecium present"
+          },
+          "sequence": "GTTTTGATGGCTGGGTCAGTTTTCGTAATGCTTTTTTAGCTGAAACAGCCTATCTTGAAGGGAATTTTCAAGACGTAGATGCGAATCTTCCTTTTTCCACCACAGACGGTATTATGACGATCGCAAATAAAATGGCTTCTTTAGAACAGATGACGATTCATGATACACTTTCTCTCATTCATCATGACCAACTGCAAAAAGCCAAACA"
+        },
+        "function": "species ID"
       }
     },
     {
       "assay_type": "presence/absence",
-      "name": "M59_UT1",
+      "name": "Efm_UT2",
       "Target": {
-        "function": "strain ID",
-        "gene_name": "predicted secretion signal peptide",
+        "gene_name": "phosphosugar-binding transcriptional regulator",
         "Amplicon": {
-          "sequence": "AGAGGAGGAGATAGAGTAGGAGATCAAGAAAGAGATGATCCATATCAAAGAGGCGTGAGAGAGGGCCATGACGCAGGTTATAAGCGAGGCAAACAGGATAGACAACAAAATGGATCCCCAGATGCTTTTCCTACCCCTCCAGATAGAGTTCCTGAGCCTAAGAGTAACCCTTATACTACGGAGAGTGATAAGAAGAGATACAAAAATGGCTGGGATACTGCGTACCTCTCTTCTTATCATACTGGCTGGTA",
           "Significance": {
-            "message": "Strep pyogenes M59 present"
-          }
-        }
+            "message": "Enterococcus faecium present"
+          },
+          "sequence": "TCAGTGAAAACAACCCACGATGATGTCCGTGGAGTAGCCGCAGGTGTCGTTCAGTCTTTTCAAAATTGTTTGCGGGAAAATAATATCAGTCCAGAAGATGTTGTGTTTGTTGCACATTCTACCACACAAGCGACTAATGCACTGATTGAAGGAGACGTAGCAAAAGTCGGCGTAATCGGGATGGCAAAAGGTGGATTAGAAGGTTTTTTAGCAAAACGACAAACTAGATTGAACGATATCGATTTAGGGAATAAGAAAAAAATAGAGATTGTCAATGCATTCTTACCTGTCAAACACTTAAATGTAGACCGTGTTTCAGAAACGATTTCTTCTTTAGAAAGAGAAAGAGCGGAGGTCTTGGTTTCTTCTATGGCATTTGGAGTAGATAATGGGGAACCAGAACGAGTTGTTTATGAAGCAGCATCG-GTAAAATCGATCCCTACAACGATGGCTTCTGACATCACAAAATTATATGGATTGACAAGAAGAACTCGGACAGCAGCAAT"
+        },
+        "function": "species ID"
       }
     },
     {
       "assay_type": "presence/absence",
-      "name": "Sdys_UT1",
+      "name": "Ec_M2_UT",
       "Target": {
-        "function": "species ID",
-        "gene_name": "putative phosphatidylinositol-4-phosphate (membrane protein)",
         "Amplicon": {
-          "sequence": "GTGAGGCTAACACATCAAACTAGTCTGACCTACGAACAGGGAAAAATGCGGTATACAGGTTATGTTGTCAACCATAAGATGAATGGCAAAGGTAAGTTGATTTATCCCAATGGGGATACTTATGTTGGGACCTTCAAAAATGGTGTTTTTGAGGGAGAGGGCACTTTTACAGCTAAAACAGGCTGGTCTTATAAAGGTCAGTTTCATAAAGGTCAAGCAGATG",
           "Significance": {
-            "message": "Strep dysgalactiae present"
-          }
-        }
+            "message": "Escherichia coli present"
+          },
+          "sequence": "CGCCTGGCTCTGTTTCATGGCGATCCGGAAAAGGCAAAAGAACTGACCAATGAAGCTTCCGCTTTGCTGTCAGATGATAGTACCGAATGGGCAAAGTTCGCTAAACCAGGTAAAAAGACCAACGTCAATGATGACCAATATATTGTCATTAATGCATCTGTCGGAATTTCTGAGAGTTATGTAGCGACACCCGAAAAAGAAGCCGCGATAAAAATTGCCAACGAAAAAATGGCGAAAGGGGATAAAAAGGGTGCAATGGAAGAGCTTCGCCTGGCCGGTGTTGGTGTAATGGAAAACCAATATTTGATGCCGCTTAAACAGACTCGTAATGCACTTGCT"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "Koxy_UT2",
+      "Target": {
+        "gene_name": "DASS family transporter",
+        "Amplicon": {
+          "Significance": {
+            "message": "Klebsiella oxytoca present"
+          },
+          "sequence": "CCGTCGCCGTATTACTGATCCACATTGACAGCAGCGCCGTCACGCCAAACAGCATAAAGACCGCGAGGCTCATTTTGCCCCTCGCCATCGCTAATACTTTATCGGCAATGACTTTATCCAGCCCCTGCACATGCATCGCCGCCGCCAGAGCAAAGCCGCCGAGGAAAAGGAATATCGTAGAGTTAGCGAAACTGTTTAGCGCCGCCTGGGTATTAAATACTCCCAACAGCACAGCCATAACGGGAACCATTATTGCCGTAACGGTCACGTGCAGCGCTTCCGTTAACCATAATACGGCGATAAAAGCGAGCATACTCAGTCCCATGACCACCTTCGGCTCATAGGGTAGCGTGTTGTAGAGA"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "Kp_M1_UT1nv",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": "Klebsiella pneumoniae present"
+          },
+          "sequence": "CGTTCCTCACCGTAGTGGTGAACTACTATGCCCCCGCCAAGGTGTTTAAATTTCTCATCGACAGCTCCGGCGCCATCGCCCTGCTGGTCTATCTGGTGATTGCCGTTTCACAACTGCGGATGCGCAAAATCCTTCAGGCGCAAGGCGGCGAAATCCGTCTGAGAATGTGGCTCTATCCGTACCTGACCTGGCTGGTGATCGCCTTTATCACCTTCGTGCTGGTGGTGATGCTGTTCCGTCCGGCACAGCAGCTGGAGGTGATCTCTACCGGCCTGTTAGCTCTGGGAATTATTTGTACGGTACCGATTATGTCACGCTGGA"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "Kp_M2_UT1nv",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": "Klebsiella pneumoniae present"
+          },
+          "sequence": "TGCCTATCGCCACTTTATTGAAAGCGTTAAAGATTATGCCATCTATATGCTGAGCGCCGACGGCACGGTCATTAGCTGGAATGAGGGCGCCCGCCGGGCAAAAGGGTACCTGAGCGACGAGATCATCGGTCGCTACTTCGGTCTCTTCTATAGCGAAGCTGAGCAACTCTCCGGTGTACCCGCAAAAAACCTGGAAATCGCCCTGCGTAGCGGGCAGTTTGAAGGGGAAGGCTGGCGGTATCGCAAAGACGGGTCCCGATTCTGGGCGCATGTCATGATCGATACCATCCGCGATGAGCAGAACACCCTGCTGGGTTTTGCCAAAATTACCCGCGACATTAGTGAACAGAAGGCGATTAACGACCG"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "Pmbs_UT1",
+      "Target": {
+        "gene_name": "anaerobic dimethyl sulfoxide reductase chain B",
+        "Amplicon": {
+          "Significance": {
+            "message": "Proteus mirabilis present"
+          },
+          "sequence": "GGGATATCCGTGGAATGCGTTTCATGCCTTACGCCATATATCATCATCATGGCTAAGCCGTGAGATTATCTTTGCTGCTCTTTACCTGGGCGCACTATGTTTATATACCTTGCTAGTACTAATAAAAGGTCATATGAATAAAACCCTCTTAGCCATTATCGGTTTACTGGGGTTAGTGGATATTTTCTGTATGGCTTCGCTTTATTACAGCACATCGATGATAACTTGGATGCATGTTAATACCTATTTTATGTTTATCGGCTCTGTTTTTTCTGCGGGAGCGGTGATCACATTA"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "Pal_UT1",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": "Providencia alcalifaciens present"
+          },
+          "sequence": "ACGAGCCAGCCTGATGAAAATGTGCTGACCATGTCAATTAATGCATTAGCCCCTATGAGTGATAAAGATATCGATATTTTGATATTTGCCTCAACGACGATGGAATATTTGTCACCACTTAATGCCCTCTATTTACATCATCATTTAGCCTTAAAAAATGAGTGTGTATGTATTGATATTAACGGTAATTGCCTCGGAATGCTAATGGCGTTAGAGCAGGCGGCAATCATGCTAAAGATGAAAAAAACAGCTAAAAAAGCCCTTATTGTTGCCTCGGATCATCTTTCAAATCTGTGTAATCAAAATGAGCTATTTCCATCGATTCTCTTTGGAGATGCAGCAGTTGCGATG"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "Pst_UT1",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": "Providencia stuartii present"
+          },
+          "sequence": "GCCTTGCGCCTTAGTTTGTTGGTTTTTTTACCAAAATAGCTTCAAACTTATGCCTATCGGTAAAACCAATTTAAATGAATTAAAACTCCCCATCTTGGCTATATTTGGCTTAATATTTCTCAATATGCTATTGGGAGCACAAGAAGAGTGGCTTGAAAGTATCAGTCACATGACTGGCTTTGCCTTTTTTCTCTATGTAATAACGATTATTATCGCAGCCCCGATTAGCGAAGAAATTATATTTAGAGGCTTTTTACTTAATGCGGGCATGTGGTATGGCACGGCTGGAAAATGGATAGCC"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "PSAR_27569",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": "Pseudomonas aeruginosa present"
+          },
+          "sequence": "GGACGATCCATTCCATACCGTGTTCGCGGTCCCATTCGCAGTTCAGCGACAGGTGGATCACCGCTTCGTC"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "PSAR_28621",
+      "Target": {
+        "gene_name": "1,4-alpha-glucan branching protein",
+        "Amplicon": {
+          "Significance": {
+            "message": "Pseudomonas aeruginosa present"
+          },
+          "sequence": "GAAGCGGTTGAGGAACAGGTGGATCACCAGCACCGTCATCAGCGTGATCAGCACCGCGAAGCACACCGAGGTAAATCGGTAGAGCACGCTGTACATCATGTCGTGGGT"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "Smar_UT1",
+      "Target": {
+        "gene_name": "glycine/betaine ABC transporter ATP-binding protein",
+        "Amplicon": {
+          "Significance": {
+            "message": "Serratia marcescens present"
+          },
+          "sequence": "GATCAACAGGAAACGGTGACGGTGCGGCGGGAGACGCCGCTAGTGGAGGCGTTCGGGCTGATGGACGATATCGACGCCCGCTCGGTGACGGTGGTGGACGCCGACGGCAAACCGCTGGGCTACGTCAAACGCCGTGAGGCGCGCGGCGCGCCCGGGGTGTGCGCCGACAGCCTGCACCGCTTTCGCGTCACCGCCCGCGCGGAGGAGAACCTGCGCGTAGTGCTGTCCAAGCTGTACGAACACAACACCTCCTGGATGCCGATCGTCGATGAAGACGGCCGCTACAGCGGCGAAATCTCGCAGGATTATATCGCC"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "assay_type": "gene variant",
+      "name": "tuf_UT1",
+      "Target": {
+        "gene_name": "tuf",
+        "Amplicon": {
+          "Significance": {
+            "message": "Staph genus"
+          },
+          "sequence": "ACAGGCCGTGTTGAACGTGGTCAAATCAAAGTTGGTGAAGAAGTTGAAATCATCGGTTTACATGA---CACATCTAAAACAACTGTTACAGGTGTTGAAATGTTCCGTAAATTATTAGACTACGCTGAAGCTGGTG"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "assay_type": "gene variant",
+      "name": "tuf_UT2",
+      "Target": {
+        "gene_name": "tuf",
+        "Amplicon": {
+          "Significance": {
+            "message": "Staph genus"
+          },
+          "sequence": "CTCAACTGGCATCATGAATGGTTTGTCAGAATCACGTTCTGGAGTTGGAATGTAAGTATCTACAGCTTCCATTAATTCTAAGATTTTTTCTTCGTATTGAGCATCGCCTTCTAAAGCTTTTAATGCTGAACCAGCGATTACAGGTACATCGTCACCT"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "Sa_M2_UT1",
+      "Target": {
+        "gene_name": "BglG family transcriptional antiterminator",
+        "Amplicon": {
+          "Significance": {
+            "message": "Staphylococcus aureus present"
+          },
+          "sequence": "ATGGTTATGAAATTGTTGGTGATGAATTTGAAGTTCGCCGTTTCTTCATTAAGTTGATTGATCAAAGGTTAAATCATGATATTACTAAAAGTGAAGTTTTAAAGGCGCTCAACTTAACATTCGAAGATATCGCATATCAAAAAGACAAGATCAAACAGGTAGAACAATTTTTGAAGAGTCGCTTTATAGACAAATCACTGAGTTCATTGCCTTACGTCCTTTGTGTGATTCGTAGACGAATTCAAAGTGGTCATGTGATTAATCCATTAAATATTAATTATCAGTATTTGAGGGATACGAAAGAATATCAAGCAACGG"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "GBS_UT1",
+      "Target": {
+        "gene_name": "pbp1A",
+        "Amplicon": {
+          "Significance": {
+            "message": "Streptococcus agalactiae present"
+          },
+          "sequence": "GCCAACCGTGGTATGTCATTTGAAGCTGCTATCAATGCAACCAATGACTACTATTTGTCTCACGAATTAGCTGTCATTCATAAGAAACCAACGCCAGTACAAATCGTCAAGGTAGATTATCCTAAACGTAGTCGTGCTAAGATTGTAGAAGCTTATTTTAGACAAGCTTCTACTACTGATTATTCTGGTGTTTACAAAGGTTACTATATTGACTTTGAAGCCAAAGAAACCCGGCAGAA"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "GBS_UT2",
+      "Target": {
+        "gene_name": "3-oxoacyl-[acyl-carrier-protein]\u00a0reductase\u00a0FabG",
+        "Amplicon": {
+          "Significance": {
+            "message": "Streptococcus agalactiae present"
+          },
+          "sequence": "CGTGGATGTGCTYGTTAACAACGCTGGTATTACTAATGATAAATTGATGCTTAAAATGACTGTTGAAGATTTTGAGAGCGTTCTTAAAATTAATTTAACAGGTGCATTTAATATGACACAATCAGTCTTGAAACCGATGACAAAAGCGCGTCAAGGTGCTATTATTAATATCTCTAGCGTCGTTGGATTAACTGGAAATGTAGGGCAAGCTAATTACGCAGCCTCTAAAGCAGGTTTAATTGGCTTTACAAAATCAGTTGCCAGAGAAGTAGCAGCACGAG"
+        },
+        "function": "species ID"
       }
     },
     {
       "assay_type": "presence/absence",
       "name": "Sdys_UT2",
       "Target": {
-        "function": "species ID",
         "gene_name": "enoyl-CoA hydratase",
         "Amplicon": {
-          "sequence": "CCAGCCGGTAAAGAAACTCTGCCACACTAAAGTCTTCATTCCAGCATAGGAATTGGAAGACCCACGTCTTAACCGTTTTAACAGTTGAAGACAGACTTTGTCTAACTTATCGGACTCGGCTGCACGATAGACAAAGCCATAGTCAAGCCCTTTTTCTGCCGTCACCCCTTCGCCCGTCATGACAAGATAAGTGGCACGATTAAGACCAACAGCACGTGTTAGTAGAAACAGACCTCCCGCAT",
           "Significance": {
-            "message": "Strep dysgalactiae present"
-          }
-        }
+            "message": "Streptococcus dysgalactiae present"
+          },
+          "sequence": "CCAGCCGGTAAAGAAACTCTGCCACACTAAAGTCTTCATTCCAGCATAGGAATTGGAAGACCCACGTCTTAACCGTTTTAACAGTTGAAGACAGACTTTGTCTAACTTATCGGACTCGGCTGCACGATAGACAAAGCCATAGTCAAGCCCTTTTTCTGCCGTCACCCCTTCGCCCGTCATGACAAGATAAGTGGCACGATTAAGACCAACAGCACGTGTTAGTAGAAACAGACCTCCCGCAT"
+        },
+        "function": "species ID"
       }
     },
     {
       "assay_type": "presence/absence",
       "name": "Sequi_UT1",
       "Target": {
-        "function": "species ID",
         "gene_name": "cytochrome C biogenesis protein CcmE",
         "Amplicon": {
-          "sequence": "GTCAAGCACCTTATCACCATCTAGCATACCATAATCAGCCATTGGGATAACAGCTATTGGAATGCCGTTTTCCTTACAGATAACCTCTGACTTATCCAAGGTATAAGCCACCTGTGGACCTAAGAGGGCAACATCAA-TAGCTGGTGCATAGTCTGCCAGCTTTCCTTGTGAGTAGGCTTCAATCTCACAAGCAATGCCCTTTTTCTCAGCAGCCACCTTCATGTTGTTCACAAGCATGCC",
           "Significance": {
-            "message": "Strep equi present"
-          }
-        }
+            "message": "Streptococcus equi present"
+          },
+          "sequence": "GTCAAGCACCTTATCACCATCTAGCATACCATAATCAGCCATTGGGATAACAGCTATTGGAATGCCGTTTTCCTTACAGATAACCTCTGACTTATCCAAGGTATAAGCCACCTGTGGACCTAAGAGGGCAACATCAA-TAGCTGGTGCATAGTCTGCCAGCTTTCCTTGTGAGTAGGCTTCAATCTCACAAGCAATGCCCTTTTTCTCAGCAGCCACCTTCATGTTGTTCACAAGCATGCC"
+        },
+        "function": "species ID"
       }
     },
     {
       "assay_type": "presence/absence",
       "name": "Sequi_UT2",
       "Target": {
-        "function": "species ID",
         "gene_name": "4-diphosphocytidyl-2C-methyl-D-erythritol\u00cakinase",
         "Amplicon": {
-          "sequence": "GTGCCGATTGAGGATCTGGTTTCAGCCATTGAGGCAGGTGATTATCAGCGCTTGCTTGCAACGATGGGAAATTCCTTAGAGGATATTTCCATTGCTAAACGGCCGTTTATTCAAAAGGTTAAGGATAAAATGTTGCAGTCAGGAGCAGACATTGCCCTGATGACAGGAAGTGGTCCAACGG",
           "Significance": {
-            "message": "Strep equi present"
-          }
-        }
+            "message": "Streptococcus equi present"
+          },
+          "sequence": "GTGCCGATTGAGGATCTGGTTTCAGCCATTGAGGCAGGTGATTATCAGCGCTTGCTTGCAACGATGGGAAATTCCTTAGAGGATATTTCCATTGCTAAACGGCCGTTTATTCAAAAGGTTAAGGATAAAATGTTGCAGTCAGGAGCAGACATTGCCCTGATGACAGGAAGTGGTCCAACGG"
+        },
+        "function": "species ID"
       }
     },
     {
       "assay_type": "presence/absence",
-      "name": "KPC_UT1",
+      "name": "Sp_M1_UT2",
       "Target": {
-        "function": "resistance type",
-        "gene_name": "blaKPC",
+        "gene_name": "rRNA-23S ribosomal RNAiron ABC transporter",
         "Amplicon": {
-          "sequence": "CGTCTAGTTCTGCTGTCTTGTCTCTCATGGCCGCTGGCTGGCTTTTCTGCCACCGCGCTGACCAACCTCGTCGCGGAACCATTCGCTAAACTCGAACAGGACTTTGGCGGCTCCATCGGTGTGTACGCGATGGATACCGGCTCAGGCGCAACTGTAAGTTACCGCGCTGAGGAGCGCTTCCCACTGTGCAGCTCATTCAAGGGCTTTCTTGCTGCCGCTGTGCTGGCTCGCAGCCAGCAGCAGGCCGGCTTGCTGGACACACCCATCCGTTACGGCAAAAATGCGCTGGTTCCGTGGTCACCCATCTCGGAAAAATATCTGACAACAGGCATGACGGT",
           "Significance": {
-            "message": "B-lactam resistance"
-          }
-        }
+            "message": "Streptococcus pneumoniae present"
+          },
+          "sequence": "TCCTGATATAATCGGTGTCACAAGTTCTTCATCTATTGCAGCGGTCTTTTGCATATTGGTATTAAAAACAAATAGTTTAACTACTGGAATTATTTCAATAACTTGTGGACTAACATCATCTTTAATATTATTTTTACTAGCTAAAAAAGATGGTTTTTCAGCAGCAAGACTGATAATATTAGGCATTGGTTTTCAAGCTGTCACAAGAGCAGGCACCTCATTTTTATTGTTGAAAGTAGCAAGATATGAATTACAAGAAGTTATGAGATGGCTCAGTGGCTCTTTATCTTTTACAAAGTTAGATGACATACCTCTTGTTCT"
+        },
+        "function": "species ID"
       }
     },
     {
       "assay_type": "presence/absence",
-      "name": "KPC_UT2",
+      "name": "Sp_M2_UT2",
       "Target": {
-        "function": "resistance type",
-        "gene_name": "blaKPC",
+        "gene_name": "putative glycosyl transferase (pseudogene)",
         "Amplicon": {
-          "sequence": "TTGTTGATTGGCTAAAGGGAAACACGACCGGCAACCACCGCATCCGCGCGGCGGTGCCGGCAGACTGGGCAGTCGGAGACAAAACCGGAACCTGCGGAGTGTATGGCACGGCAAATGACTATGCCGTCGTCTG",
           "Significance": {
-            "message": "B-lactam resistance"
-          }
-        }
+            "message": "Streptococcus pneumoniae present"
+          },
+          "sequence": "CTGATGGATATGGAGACATTAAGGATATAGTGTTTTCGGCTCATATTATAGTTAGGTATAATAATGGACATTGTGGAGGTATAGATCCGCATATAATTGGACTTTGTAAAAAGCAGATCAGAAGGATGTCTCTATATCCTATTTTGATAATCGTATCTAGAGATTCAAAGGTTATTGATGATTATAAAAATTTAGATATTGCCTATGTTGATTGTACTCAATGTTCAAATAATTTTGAAACTGCCTTACACGTTAAAAATATTTTAAAATTATTAAAAATCCGACTTATACACTGTCATGGCTACTCAACTAATT"
+        },
+        "function": "species ID"
       }
     },
     {
       "assay_type": "presence/absence",
-      "name": "NDM_UT1",
+      "name": "Spyo_UT1",
       "Target": {
-        "function": "resistance type",
-        "gene_name": "blaNDM",
+        "gene_name": "LytR family transcriptional regulator",
         "Amplicon": {
-          "sequence": "GGACAAGATGGGCGGTATGGACGCGCTGCATGCGGCGGGGATTGCGACTTATGCCAATGCGTTGTCGAACCAGCTTGCCCCGCAAGAGGGGATGGTTGCGGCGCAACACAGCCTGACTTTCGCCGCCAATGGCTGGGTCGAACCAGCAACCGCGCCCAACTTTGGCCCGCTCAAGGTATTTTACCCCGGCCCCGGCCACACCAGTGACAATATCACCGTTGGGATCGACGGCACCGACATCGCTTTTGGTGGCTGCCTGATCAAGGACAGCAAGGCCAAGTCGCTCGGCAATCTCGGTGATGCCGACACTGAGCACTACGCCG",
           "Significance": {
-            "message": "B-lactam resistance"
-          }
-        }
+            "message": "Streptococcus pyogenes present"
+          },
+          "sequence": "GCTTATTGCTAATGACTGTGCTTATGGGGTTAGGGTTGATGTTTGCAAAAGGGGTTTTTGATATTTCTACTAATAAAGCTAATTACAAACCAGCTGTTTCCCAAGCTTTTGATGGTCAAGAAACTCAAGATGGTACGAACATTCTGATTTTGGGTTCTGACCAACGAGTTACTCAAGGTTCTACAGATGCTCGCACAGATACCATTATGGTTGTCAATGTCGGCA"
+        },
+        "function": "species ID"
       }
     },
     {
       "assay_type": "presence/absence",
-      "name": "NDM_UT2",
+      "name": "M59_UT1",
       "Target": {
-        "function": "resistance type",
-        "gene_name": "blaNDM",
+        "gene_name": "predicted secretion signal peptide",
         "Amplicon": {
-          "sequence": "CAACTGGATCAAGCAGGAGATCAACCTGCCGGTCGCGCTGGCGGTGGTGACTCACGCGCATCAGGACAAGATGGGCGGTATGGACGCGCTGCATGCGGCGGGGATTGCGACTTATGCCAATGCGTTGTCG",
           "Significance": {
-            "message": "B-lactam resistance"
-          }
-        }
+            "message": "Streptococcus pyogenes M59 present"
+          },
+          "sequence": "AGAGGAGGAGATAGAGTAGGAGATCAAGAAAGAGATGATCCATATCAAAGAGGCGTGAGAGAGGGCCATGACGCAGGTTATAAGCGAGGCAAACAGGATAGACAACAAAATGGATCCCCAGATGCTTTTCCTACCCCTCCAGATAGAGTTCCTGAGCCTAAGAGTAACCCTTATACTACGGAGAGTGATAAGAAGAGATACAAAAATGGCTGGGATACTGCGTACCTCTCTTCTTATCATACTGGCTGGTA"
+        },
+        "function": "strain ID"
       }
     },
     {
-      "assay_type": "presence/absence",
-      "name": "rmtA_UT1",
+      "assay_type": "SNP",
+      "name": "H30-Rx-snp200_UT",
       "Target": {
-        "function": "resistance type",
-        "gene_name": "mobile 16s rRNA methylase",
+        "gene_name": "CTX-M",
         "Amplicon": {
-          "sequence": "GAATTGGACTGCCTCTACGATTTTATCTTTTCTGGCGGGGTGCCCCATCGTGTGTTGGATATCGCTTGCGGCCTAAACCCGCTGGCCCTCTTTATACGTGACATAACATCTGTATGGGCGTGC",
-          "Significance": {
-            "message": "Aminoglycoside resistance"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "rmtB_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "mobile 16s rRNA methylase",
-        "Amplicon": {
-          "sequence": "AAGGCATGGAGGCGAACTACGCCGCATGGTTCGAGGGCGGCTTGCCCGCCGAGTTTGAGATTGAGGATAAAAAGACCATCGGAACAGAACTTATATACTT",
-          "Significance": {
-            "message": "Aminoglycoside resistance"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "ROI",
-      "name": "gyrA_PSAR_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "gyrA",
-        "Amplicon": {
-          "sequence": "AACAAGCCCTACAAGAAATCCGCCCGTGTGGTCGGCGACGTGATCGGTAAGTACCACCCGCACGGCGACACCGCGGTCTACGACACCATCGTGCGCATGGCGCAGCCGTTCTCGCTGCGCTACATGCTGGTAGACGGCCAGGGCAACTTCGGTTCGGTGGACGGCGACAACGCCGCAGCCATGCGATACACCGAAGTGCG",
-          "RegionOfInterest": {
-            "position_range": "70-84",
+          "SNP": {
             "Significance": {
-              "message": "Fluoroquinolone resistance"
+              "message": "E. coli - C299T in H30-Rx subclone of H30 (H30-Rx is CTX-M carrier)"
             },
-            "aa_sequence": "TAVYD"
-          }
-        }
+            "position": 299,
+            "reference": "C",
+            "variant": "T"
+          },
+          "sequence": "GACACCATGCGTTTTGCTTCAACGCTGGAGAATATGGGCGTCAGCTTTATCAACGCTATCATGACGTTGATCGCCTTCCTGCCGGTGCTGGTAACGCTCTCCGCACATGTGCCGGAGCTGCCGATTGTCGGGCACATTCCGTATGGTCTGGTGATTGCCGCTATCGTCTGGTCGCTGATGGGGACCGGATTACTGGCAGTGGTAGGGATCAAACTGCCGGGGCTGGAGTTTAAAAACCAGCGTGTAGAGGCTGCCTACCGTAAAGAACTGGTTTATGGTGAAGACGATGCCACGCGCGCGACGCCGCCTACGGTACGCGAGCTTTTTAGCGCCGTACGGAAAAACTATTTCCGCCTCTATTTTCACTATATGTATTTCAATATCGCCCGCATTCTCTATTTGCAGGTCGATAACGTTTTCGGTTTGTTCTTGCTGTTTCCGTCAATTGTTGCCGGTACGA"
+        },
+        "function": "strain ID"
       }
     },
     {
-      "assay_type": "ROI",
-      "name": "gyrA_PSAR_UT2",
+      "assay_type": "SNP",
+      "name": "H30-Rx-snp264_UT",
       "Target": {
-        "function": "resistance type",
-        "gene_name": "gyrA",
+        "gene_name": "CTX-M",
         "Amplicon": {
-          "sequence": "AACAAGCCCTACAAGAAATCCGCCCGTGTGGTCGGCGACGTGATCGGTAAGTACCACCCGCACGGCGACACCGCGGTCTACGACACCATCGTGCGCATGGCGCAGCCGTTCTCGCTGCGCTACATGCTGGTAGACGGCCAGGGCAACTTCGGTTCGGTGGACGGCGACAACGCCGCAGCCATGCGATACACCGAAGTGCGCATGGCCAAGCTGGCCCACGAACTGCTGGCGGACCTGGAAAAGGAAACCGTCGACTGGGTGCCCAACTACGATGGCACCGAG",
-          "RegionOfInterest": {
-            "position_range": "70-84",
+          "SNP": {
             "Significance": {
-              "message": "Fluoroquinolone resistance"
+              "message": "E. coli - G287A in H30-Rx subclone of H30 (H30-Rx is CTX-M carrier)"
             },
-            "aa_sequence": "TAVYD"
-          }
-        }
+            "position": 287,
+            "reference": "G",
+            "variant": "A"
+          },
+          "sequence": "GTGGCGATTTCACGCTGTTAGGCCTTTCTCTACCGGGATTAATTACTTTCTTACTCTTCTGGCTGGTTAACGTTGGTATTGGTTTTGGCGGCGGAAAAGTTTTAAATAAATTCACTGCCATTCTTAACCCGTGCATCTATATCGTTTTCGGCGGTATGGCGATTTGGGCGATTTCGCTGGTCGGGATCGGTCCAATCTTTGACTACATTCCGGGCGGTATTCAGAAAGCAGAAAACAGTGGCTTCCTGTTTCTGGTGGTGATAAACGCGGTGGTTGCGGTCTGGGCGGCACCGGCGGTGAGCGCATCCGACTTTACGCAAAACGCCCACTCGTTTCGTGAGCAGGCGCTGGGGCAAACGCTGGGTTTAGTTGTGGCCTATATTCTGTTTGCGGTCGCCGGGGTATGTATTATTGCCGGAGCCAGTATTCATTACGGCGCTGACACCTGGAACGTGCTGGATA"
+        },
+        "function": "strain ID"
       }
     },
     {
-      "assay_type": "ROI",
-      "name": "gyrA_staph_UT1",
+      "assay_type": "presence/absence",
+      "name": "pabB_ST131_O25b",
       "Target": {
-        "function": "resistance type",
-        "gene_name": "gyrA",
+        "gene_name": "pabB",
         "Amplicon": {
-          "sequence": "GCCATCAACAAGCGGATAACGATAACTGAAATCTTGAGCCATACGTACCATTGCTTCATAAATAGATGAGTCACCATGAGGGTGATATTTACCCATTACGTCACCAACGATACGTGCTGATTTTTTATATGATTTATCCGGTGTCATACCTTGTTCATTTAATCCATATAGTATACGACGATGTACTGGTTTTAAACCGTCACGAACATCTGGCAATG",
-          "RegionOfInterest": {
-            "position_range": "58-72",
+          "Significance": {
+            "message": "E. coli ST131 O25 clade present (includes the fluoroquinolone resistant H30 subclone)"
+          },
+          "sequence": "TCCAGCAGGTGCTGGATCGTGCAGACATTCGCCCAGCGCATAACGAAGATTTGCCATTTCAGGGCGGCGCGCTGGGGTTGTTTGGCTACGATCTGGGCCGCCGTTTTGAGTCACTGCCAGAAATTGCGGAACAAGATATCGTTCTGCCGGATATGGCAGTGGGTATCTACGACTGGGCGCTGGTTGTCGACCACCAGCGTCAAACAGTTTCTTTGCTGAGTCATAATGATGTCAATGCCCGTCGGGCCTGGCTGGAAAGCCAGCAATTCTCCCCGCAGGAAGATTTCACACTCACTTCCGACTGGCAATCCAATATGACCCGCGAACAGTACGGCGAAAAATTTCGC"
+        },
+        "function": "strain ID"
+      }
+    },
+    {
+      "assay_type": "gene variant",
+      "name": "rfbO16_UT",
+      "Target": {
+        "gene_name": "rfbO16",
+        "Amplicon": {
+          "Significance": {
+            "message": "E. coli ST131 O16 clade present (often fluoroquinolone and extended-spectrum cephalosporin susceptible)"
+          },
+          "sequence": "ATACCGACTACGCCGATCTGTTGCTTGGACATTACATACTCCTGTCAGGTGTGATCACCGCGCTGAATGCTCGCGGCCTGGAATGTTCGCAAATAAGTATACAAAGTACTTATTAAAGTATAAATAGCTTATCCATGCTTATATGCTTACGGCTTTATATTACGGGTGAAAAACTGATGAAATTCGATCAAAGTTGCGATTTGATAAAATACGTTTTCTGGCTAAATATCTAAAAGTACTTTTTAAGTGCCATCTGAAGGCTTTTGAAAAAAAACTTCGATTGTCATGATGAGCATAATGTATCGCATGAAAAGCGGGAACATAATGAAGTCTGACACCAGCCAGGCTAAGCCTCAAGCACAGGTCAATATCTTCACAGTACATAAAGTAACCTTGATCGAAGCCATTTACACGCACAAAATCTGAAAAACGTACCAGCATAAATGATCC"
+        },
+        "function": "strain ID"
+      }
+    },
+    {
+      "assay_type": "gene variant",
+      "name": "rfbO25b_UT",
+      "Target": {
+        "gene_name": "rfbO25b",
+        "Amplicon": {
+          "Significance": {
+            "message": "E. coli ST131 O25 clade present (includes the fluoroquinolone resistant H30 subclone)"
+          },
+          "sequence": "ATACCGACGACGCCGATCTGTTGCTTTGACATTGTTTACTCCTGTCAGGGCGTTAAAAAATTGGTATATAAAGCAAAGATCTTTAAATAAAGATACCATTTCAGTAGTAAAATTAGGACTTTATTTAATCACTTTACCAGTTCGGATGTAATTTTTCTATAGTTTTTATAAGAAAGAATTGGTTTCCGTAATATGTAGCGCGTAATACTCCTTATATGCCATCGAAATGCTTTAGTAAATATTCTTCTATTTTCATGCTGCGCATAATGAATAGCA"
+        },
+        "function": "strain ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "trpA_ST131_O16_UT",
+      "Target": {
+        "gene_name": "trpA",
+        "Amplicon": {
+          "Significance": {
+            "message": "E. coli ST131 O16 clade present (often fluoroquinolone and extended-spectrum cephalosporin susceptible)"
+          },
+          "sequence": "CCAGAAATCGCGCCCGCAGTTCCTGCATCAATCGCTGCTTTTACCTGATCCGGGGCGGAAATACCAAATCCCTGCAATGGAGGTGCAGCGTTGTACTCTTTCAGCTTCGCAACCAGATGATTGAGAGGTAACGCGGCGCGGTTTT"
+        },
+        "function": "strain ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "stx1_UT",
+      "Target": {
+        "gene_name": "Shiga toxin",
+        "Amplicon": {
+          "Significance": {
+            "message": "gene that encodes Shiga toxin protein (STEC) present"
+          },
+          "sequence": "ATGTCAGAGGGATAGATCCAGAGGAAGGGCGGTTTAATAATCTACGGCTTATTGTTGAACGAAATAATTTATATGTGACAGGATTTGTTAACAGGACAAATAATGTTTTTTATCGCTTTGCTGATTTTTCACATGTTACCTTTCCAGGTACAACAGCGGTTACATTGTCTGGTGACAGTAGCTATA"
+        },
+        "function": "virulence factor"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "stx2_UT",
+      "Target": {
+        "gene_name": "Shiga toxin",
+        "Amplicon": {
+          "Significance": {
+            "message": "gene that encodes Shiga toxin protein (STEC) present"
+          },
+          "sequence": "AGTTCTGCGTTTTGTCACTGTCACAGCAGAAGCCTTACGCTTCAGGCAGATACAGAGAGAATTTCGTCAGGCACTGTCTGAAACTGCTCCTGTGTATACGATGACGCCGGGAGACGTGGACCTCACTCTGAACTGGGGGCGAATCAGCAATGTGCTTCCG"
+        },
+        "function": "virulence factor"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "bfpA_UT",
+      "Target": {
+        "gene_name": "adherence factor, plasmid-encoded, encodes bundle-forming pilus (bfpA-bfpL)",
+        "Amplicon": {
+          "Significance": {
+            "message": "bfpA gene present: E. coli is EPEC (enteropathogenic)"
+          },
+          "sequence": "TACCAGTCTGCGTCTGATTCCAATAAGGCGCAGAATGCTATTTCAGAAGTAATGAGCGCAACGT"
+        },
+        "function": "virulence factor"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "EAEC_aggR_UT",
+      "Target": {
+        "gene_name": "E. coli aggR",
+        "Amplicon": {
+          "Significance": {
+            "message": "aggR gene present: E. coli is EAEC (enteroaggregative)"
+          },
+          "sequence": "GATACATTAAGACGCCTAAAGGATGCCCTGATGATAATATACGGAATATCAAAAGTAGATGCTTGCAGTTGTCCGAATTGGTCAAAAGG"
+        },
+        "function": "virulence factor"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "EIEC_lpaH3_UT",
+      "Target": {
+        "gene_name": "E. coli (and Shigella) invasion antigen",
+        "Amplicon": {
+          "Significance": {
+            "message": "lpaH3 gene present: E. coli is EIEC (invasive E. coli or Shigella)"
+          },
+          "sequence": "TCGAGGATGATAGTGCAGGTCGGATCAAGGCTAAGTATATTTTCCGGAATGTGTGTGATGCGATTCTCGCGGCACCGGAAAAATATCTCGGTTTCCTCTGAGTGATGATTTCTTACAGGTACGGCTGGTAGGCTTTCCAGAAGATTAGTACTTACATCGAGCGCTTCCAGTGATTCAGGTAACTCA"
+        },
+        "function": "virulence factor"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "escV_UT",
+      "Target": {
+        "gene_name": "T3SS in E. coli",
+        "Amplicon": {
+          "Significance": {
+            "message": "escV gene present: E. coli is AEEC "
+          },
+          "sequence": "TGGAATAATCATCATCATTACAGCCATAAAGAAGAAGAGAGCCAGAATAAGATCGTGATATGACTC"
+        },
+        "function": "virulence factor"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "ETEC_eltA_UT",
+      "Target": {
+        "gene_name": "eltA",
+        "Amplicon": {
+          "Significance": {
+            "message": "eltA gene present: E. coli is ETEC (enterotoxigenic)"
+          },
+          "sequence": "CTGCGTTAGGTGGAATACCATATTCTCAGATATATGGATGGTATCGTGTTAATTTTGGTGTAATTGATGAACGATTACATCGTAACAGGGAATATAGAGACCGGTATTACAGAAATCTGAATATA"
+        },
+        "function": "virulence factor"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "ETEC_estA_UT",
+      "Target": {
+        "gene_name": "estA",
+        "Amplicon": {
+          "Significance": {
+            "message": "estA gene present: E. coli is ETEC (enterotoxigenic)"
+          },
+          "sequence": "GTTCCAGCCTGCCATCTGCTGCCAGCACCAGGACCTGTTGCTTCTTCCCCTCATTTCTGTGCACTGCCTGAATGGGTACCAGCAGTGTATTTTGGGCTTCATCAGTAATCAGGGTAACCTGAGCA"
+        },
+        "function": "virulence factor"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "UPEC_fyuA_UT",
+      "Target": {
+        "gene_name": "fyuA",
+        "Amplicon": {
+          "Significance": {
+            "message": "fyuA gene present: E coli is UPEC (uropathogenic)"
+          },
+          "sequence": "AAGCACGCTGGTGGTTACCGCCAGTAAACAATCTTCCCGCTCGGCATCAGCCAACAACGTCTCATCTACTGTTGTCAGCGCGCCGGAATTAAGCGACGCCGGCGTCACCGCCAGCGACAAACTCC"
+        },
+        "function": "virulence factor"
+      }
+    },
+    {
+      "assay_type": "SNP",
+      "name": "ST258_UT_FB",
+      "Target": {
+        "gene_name": "MarR transcriptional regulator",
+        "Amplicon": {
+          "SNP": {
             "Significance": {
-              "message": "Fluoroquinolone resistance"
+              "message": "K. pneumoniae ST258 present"
             },
-            "aa_sequence": "DSSIY"
-          }
-        }
+            "position": 35,
+            "reference": "C",
+            "variant": "T"
+          },
+          "sequence": "ATGGTGGTGCGCCAGTGGCGCGCCATTATTGACTYCGCTATCACCGATACCGGACTCACCCAGTCCAGCTGGACGGTGCTGATGCAACTGCATCAGCTGGGAGACAACGTCTCGGTCAGC"
+        },
+        "function": "strain ID"
       }
     },
     {
-      "assay_type": "ROI",
-      "name": "gyrA_Ecoli_UT2",
+      "assay_type": "SNP",
+      "name": "CG258_UT_FB",
       "Target": {
-        "function": "resistance type",
-        "gene_name": "gyrA",
+        "gene_name": "MarR transcriptional regulator",
         "Amplicon": {
-          "sequence": "CGTCGATGGAACCGAAGTTACCCTGACCGTCTACCAGCATGTAACGCAGCGAGAATGGCTGCGCCATACGGACGATCGTGTCATAAACTGCCGAGTCACCATGGGGATGGTATTTACCGATTACGTCACCAACGACACGGGCAGATTTTTTATAGGCTTTGTTCCAGTCATTGCCTAGTACGTTCATGGCGTAAAGTACGCGACGGTGTACCGGCTTCAGGCCATCTCGGACATCTGGCAGCGCACGGCCAACAATGACCGACATCGCATAATCCAGATAGGAG",
-          "RegionOfInterest": {
-            "position_range": "80-94",
+          "SNP": {
             "Significance": {
-              "message": "Fluoroquinolone resistance"
+              "message": "K. pneumoniae CG258 present"
             },
-            "aa_sequence": "SAVYD"
-          }
-        }
+            "position": 37,
+            "reference": "G",
+            "variant": "A"
+          },
+          "sequence": "ACGGCAGGCGATTTGATTTAACGTGGCGCTGAAGGTAGCGAGATCGGCCTCCGGGATGGTCTGGGTTACGCGCTCCTGATAGGTCTCGATCACGCAGCT"
+        },
+        "function": "strain ID"
       }
     },
     {
-      "assay_type": "ROI",
-      "name": "gyrA_Kleb_UT1",
+      "assay_type": "gene variant",
+      "name": "wzi_UT",
       "Target": {
-        "function": "resistance type",
-        "gene_name": "gyrA",
+        "gene_name": "wzi gene of cps locus",
         "Amplicon": {
-          "sequence": "CGATGGAACCAAAGTTACCCTGGCCGTCCACCAGCATGTAACGCAGCGAGAACGGCTGCGCCATACGCACGATGGTGTCGTATACCGCGTAGTCGCCGTGCGGGTGGTATTTACCGATTACGTCACCAACGACACGGGCTGATTTTTTATAGGCTTTGTTCCAGTCATTG",
-          "RegionOfInterest": {
-            "position_range": "77-91",
+          "variant_name": "wzi_1",
+          "Significance": {
+            "message": "Klebsiella capsule type"
+          },
+          "sequence": "ATGATAAAAATTGCGCGCATTGCCGTTACGTTGGGTTTGCTTTCCTCACTGGGAGCCCAGGCTTACGCGGCCGGGTTAGTGGTAAATGACAACGACTTGCGTAACGACCTGGCCTGGCTTTCCGATCGCGGGGTCATCCATCTGAGCCTGTCGACATGGCCGCTAAGCCAGGAAGAGATCGCCCGGGCGCTTAAAAAGGCCAAGCCGTCCTATTCATCTGAGCAAGTGGTACTGGCCCGAATTAACCAGCGACTGTCTGCCTTAAAAGCGGATTTCCGGGTCACCGGCTACACTTCAACCGATCAACCGGGCACTCCGCAGGGGTTTGGTCAGACACAGCCAGCGGATAACTCGTTAGGCCTGGCGTTCAACAACAGCGGCGAGTGGTGGGATGTTCACCTGCAGGGCAACGTCGAAGGGGGGGAGCGGATCAGCAACGGATCACGC"
+        },
+        "function": "strain ID"
+      }
+    },
+    {
+      "assay_type": "gene variant",
+      "name": "MRSA-orfX_UT1",
+      "Target": {
+        "gene_name": "MRSA-orfX",
+        "Amplicon": [
+          {
+            "variant_name": "MRSA-orfX-1",
             "Significance": {
-              "message": "Fluoroquinolone resistance"
+              "message": "MRSA present"
             },
-            "aa_sequence": "YAVYD"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "ROI",
-      "name": "parC_Kleb_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "parC",
-        "Amplicon": {
-          "sequence": "GAAATTCAAAAAGTCCGCCCGCACCGTCGGCGACGTGTTGGGTAAATATCACCCGCACGGCGACAGCGCCTGCTATGAAGCGATGGTGCTGATGGCGCAGCCGTTCTCTTACCGCTATCC",
-          "RegionOfInterest": {
-            "position_range": "71-79",
+            "sequence": "GGATCAAACGGCCTGCACAAGGACGTCTTACAACGCAGTAACTATGCACTATCATTCAGCAAAATGACATTTCCACATCAGATGATGCGGGTTGTGTTAATTGAGCAAGTGTATTAAGAAGCTTATCATAAGTAATGAGGTTCATGATTTTTGACTGCGGTTTTTTCAGCCGCTTCATAAAGGGATTTTGAATGTATCAGAACATATGAGGTTTATGTGAATTGCTGTTATGTTTTAGAGCATTTAAGATTATGCGTGGGGAAGCATATCATAAATGA"
+          },
+          {
+            "variant_name": "MRSA-orfX-2",
             "Significance": {
-              "message": "Fluoroquinolone resistance"
+              "message": "MRSA present"
             },
-            "aa_sequence": "CYE"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "ROI",
-      "name": "parC_Kleb_UT2",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "parC",
-        "Amplicon": {
-          "sequence": "CAGCGCGAAATTCAAAAAGTCCGCCCGCACCGTCGGCGACGTGTTGGGTAAATATCACCCGCACGGCGACAGCGCCTGCTATGAAGCGATGGTGCTGATGGCGCAGCCGTTCTCTTACCGCTATCCGCTGGTGGATGGTCAGGGAAACTGGGGGGCGCCGGACGATCCCAAATCTTTCGC",
-          "RegionOfInterest": {
-            "position_range": "77-85",
+            "sequence": "GGATCAAACGGCCTGCACAAGGACGTCTTACAACGTAGTAACTACGCACTATCATTCAGCAAAATGACATTCCCACATCAAATGATGCGGGTTGTGTTAATTGAGCAAGTGTATAGAGCGTTTAAGATTATGCGTGGAGAAGCATATCATAAATAAAACTAAAAATTAGATTGTGTATAATTTAAAAATTTAATGAGATGTGGAGGAATTACATATATGAAAT"
+          },
+          {
+            "variant_name": "MRSA-orfX-3",
             "Significance": {
-              "message": "Fluoroquinolone resistance"
+              "message": "MRSA present"
             },
-            "aa_sequence": "CYE"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "ROI",
-      "name": "parC_Ecoli_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "parC",
-        "Amplicon": {
-          "sequence": "GTTCTCTTACCGTTATCCGCTGGTTGATGGTCAGGGGAACTGGGGCGCGCCGGACGATCCGAAATCGTTCGCGGCAATGCGTTACACCGAATCCCGGTTGTCGAAATA",
-          "RegionOfInterest": {
-            "position_range": "38-52",
+            "sequence": "GGATCAAACGGCCTGCACAAGGACGTCTTACAACGTAGTAACTACGCACTATCATTCAGCAAAATGACATTCCCACATCAAATGATGCGGGTTGTGTTAATTGAGCAAGTGTATAGAGCATTTAAGATTATGCGTGGAGAAGCGTACCACAAATGATGCGGTTTTTTATCCAGTTTTTTGTTTAATGAACAAGGTAAATTACGAGATAATATTTG"
+          },
+          {
+            "variant_name": "MRSA-orfX-4",
             "Significance": {
-              "message": "Fluoroquinolone resistance"
+              "message": "MRSA present"
             },
-            "aa_sequence": "NWGAP"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "ROI",
-      "name": "parC_Ecoli_UT2",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "parC",
-        "Amplicon": {
-          "sequence": "ATATTTCGACAACCGGGATTCGGTGTAACGCATTGCCGCGAACGATTTCGGATCGTCCGGCGCGCCCCAGTTCCCCTGACCATCAACCAGCGGATAACGGTAAGAGAACGGTTGCGCCATCAGGACCATCGCTTCATAACAGGCGCTATCGCCGTGCGGATGGTATTTACCCAGTACGTCACCGACGGTACGGGCCGATTTTTTAAATTTGGCGCTGGCATTCAGGCCCAGTTCAGACATCGCATACACA",
-          "RegionOfInterest": {
-            "position_range": "58-72",
+            "sequence": "GGATCAAACGGCCTGCACAAGGACGTCTTACAACGTAGTAACTACGCACTATCATTCAGCAAAATGACATTCCCACATCAAATGATGCGGGTTGTGTTAATTGAGCAAGTGTATAGAGCGTTTAAGATTATGCGTGGAGAAGCATATCATAAATGATGCGGTTATTTCAGCCGTAATTTTATAATATAAAGCAGAG"
+          },
+          {
+            "variant_name": "MRSA-orfX-5",
             "Significance": {
-              "message": "Fluoroquinolone resistance"
+              "message": "MRSA present"
             },
-            "aa_sequence": "NWGAP"
+            "sequence": "GGATCAAACGGCCTGCACAAGGACGTCTTACAACGTAGTAACTACGCACTATCATTCAGCAAAATGACATTCCCACATCAAATGATGCGGGTTGTGTTAATTGAGCAAGTGTATAGAGCATTTAAGATTATGCGTGGAGAAGCGTACCACAAATAAAACTAAAAAATATGAGAAAATTATTAAATTAGCTCAAATCTTTGAAGAATAAAAAGTG"
           }
-        }
+        ],
+        "function": "strain ID"
       }
     },
     {
-      "assay_type": "ROI",
-      "name": "parC_ACBA_UT1",
+      "assay_type": "gene variant",
+      "name": "MRSE-orfX_UT1",
       "Target": {
-        "function": "resistance type",
-        "gene_name": "parC",
+        "gene_name": "MRSE-orfX",
         "Amplicon": {
-          "sequence": "GAGCGAGCTAGGCTTAAAAAGCAGTGGCAAGCCAAAAAAATCAGCGCGTACAGTGGGTGATGTACTTGGTAAATACCACCCACATGGTGACTCGGCATGTTATGAAGCCATGGTACTCATGGCTCAGCCATTTAGTTACCGCTATCCTTTAATCGAAGGTCAGGGGA",
-          "RegionOfInterest": {
-            "position_range": "86-94",
+          "variant_name": "MRSE-orfX-1",
+          "Significance": {
+            "message": "MRSE (MR-Staphylococcus epidermidis) present "
+          },
+          "sequence": "TGGCTCCAATGGTCTACACCAAGACGTCTTACAACGCAGCAACTATGCTTTATCATTCAGCAATATGACCTTCCCACACCAAATGATGCGCGTCATATTGATTGAACAAATTTATCGCGCATTTAAGATCATGAGAGGCGAAGCATATCATAAATGATGCGGTTTTTTCAGCCGCTTCATAAAGGGATTTTGAATGTATCAGAACATATGAGGTTTATGTGAATTGCTGTTATGTTTTTAAGAAGCTTATCATAAGTAATGAGGTTCATGATTTTTGAC"
+        },
+        "function": "strain ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "SCCmec_ccrB1_UT",
+      "Target": {
+        "gene_name": "SCCmec cassette",
+        "Amplicon": {
+          "Significance": {
+            "message": "SCCmec cassette - type 1 ccr present"
+          },
+          "sequence": "ACCACAAACACACTTAAAGATGGCACTAAAAACGTATTCGTTACTATTCGTGTAGTAATTTTCGAAATAAAGGCTCAAAGGTATGTTCTGCGAATAGTGTTAGAGCCGATGTCATTGAAAAATATGTTATGGACCAAATACTTGAAATTG"
+        },
+        "function": "strain ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "SCCmec_ccrB2_UT",
+      "Target": {
+        "gene_name": "SCCmec cassette",
+        "Amplicon": {
+          "Significance": {
+            "message": "SCCmec cassette - type 2 ccr present"
+          },
+          "sequence": "CTCATGTTACAGATACTTGCGAGTTTCTCAGAATTCGAACGTAATAACATTGTCGAGAACGTATTTATGGGTCAAACGAGACGTGCCCAAGAAGGCTATTATCAAGG"
+        },
+        "function": "strain ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "SCCmec_ccrB3_UT",
+      "Target": {
+        "gene_name": "SCCmec cassette",
+        "Amplicon": {
+          "Significance": {
+            "message": "SCCmec cassette - type 3 ccr present"
+          },
+          "sequence": "AACACAACGAACACATTGAAAGATGGTACCAAGAAGCGAATACGTTATTATTCTTGCAGTAACTTCCGAAACAAAGGCTCAAAAGTATGTTCTGCGAATAGCGTTAGAGCTGATGTGATTGAGAAATACG"
+        },
+        "function": "strain ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "SCCmec_ccrB4_UT",
+      "Target": {
+        "gene_name": "SCCmec cassette",
+        "Amplicon": {
+          "Significance": {
+            "message": "SCCmec cassette - type 4 ccr present"
+          },
+          "sequence": "GCGACTCTCTTGGCGTTTAAACTGTACTTTATCCCATAAAGCTTTATCAATAATAGGTGCATGCTTACCATCAGCAATAATGGGTTCCTCATTGAGTCCTTTTCGTCTCTTATCGCTCCAGTGTCTATACTTCGC"
+        },
+        "function": "strain ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "SCCmec_ccrC_UT",
+      "Target": {
+        "gene_name": "SCCmec cassette",
+        "Amplicon": {
+          "Significance": {
+            "message": "SCCmec cassette - type 5 ccr present"
+          },
+          "sequence": "ACTTATAATGGCTTCATGCTTACCTTTGACCAATATCACATCATTTTTATCACTTTTACCACTTCTTCGCTGAACAGCCCAATTTTGATGGTTATTGAATCTGACATAGCCTTTATAGACTGGA"
+        },
+        "function": "strain ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "SCCmec_IS1272J_UT",
+      "Target": {
+        "gene_name": "SCCmec cassette",
+        "Amplicon": {
+          "Significance": {
+            "message": "SCCmec cassette - class B mec present"
+          },
+          "sequence": "GCACTGTCTCGTTTAGACCAATCAACACTCATGTTATCCTTAACTGTTTTAGTTAACTCATGTGCAATGGCTCTTAACTCTTTATCGCCCAAAGCTTC"
+        },
+        "function": "strain ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "SCCmec_mecC2_UT",
+      "Target": {
+        "gene_name": "SCCmec cassette",
+        "Amplicon": {
+          "Significance": {
+            "message": "SCCmec cassette - class C2 mec present"
+          },
+          "sequence": "TCAGTTCATTGCTCACGATATGTGTAATTTTTTTAGTGAGAATGCTCTATATAAAATATACGGTTCTGTTGCAAAGTTGAATTTATAGTATAATTATAACCAAAAGGAGTCTTCTGTATGAACTATTTCAGATATAAACAATTTAACAAGGATGTTATCACTGTAGCCGTTGGC"
+        },
+        "function": "strain ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "SCCmec_mecI_UT",
+      "Target": {
+        "gene_name": "SCCmec cassette",
+        "Amplicon": {
+          "Significance": {
+            "message": "SCCmec cassette - class A mec present"
+          },
+          "sequence": "CGTTATAAGTGTACGAATGGTTTTTGGACTCCAGTCCTTTTGCATTTGTATTTCTTCTATTATATTATTCGCACTTGCATATTTTTTCATCCAAATGATATTCATAACTTCCCATTCTGCAGATGA"
+        },
+        "function": "strain ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "SCCmecIVa_UT",
+      "Target": {
+        "gene_name": "SCCmec cassette",
+        "Amplicon": {
+          "Significance": {
+            "message": "SCCmec cassette - subtype IVa present"
+          },
+          "sequence": "CCTTTGAATGCCCTCCATGAATAAAATCTTCTTTATTTATTCTCATATTACCCGGATTATAAAACTCTATAAAATCTTCACAATTAACTATTTTAATACTTTGCTTAGTATCATAATACGCATGCATTAATGTATTAACCAGTGCTTCGCGAATTGCTACTTTTAAATCTCTTGCATAATTTTGTCTAGTCAAACCATCATTTAGGCTAAATGATTCCTCAATGTTATCAGTTAATTTTATCAATACTTTTTCAAAAAAACTATACACGTTTAAATCTTCATTACCTAAATCTCCACTTGATATTCTATCTTTCCAATCAGTATCTAGGTAATTTGTTTTCTTAAAATAATCTAATTGAAATCCTGGGAATCTATCACTAATCGCATTATACTTACCAAAGAATAATAAACATGCTGTAGTCATTTTATACTGTTTGTCTTTCGAACTTCTATCTTTTCTATATGC"
+        },
+        "function": "strain ID"
+      }
+    },
+    {
+      "assay_type": "presence/absence",
+      "name": "SCCmecIVa-J1_UT",
+      "Target": {
+        "gene_name": "SCCmec cassette",
+        "Amplicon": {
+          "Significance": {
+            "message": "SCCmec cassette - subtype IVa present"
+          },
+          "sequence": "CAGGATATTTTTCAAACTCCTTCATTAAATCTTGTTTCCAAAGTACTACATTAGTGTCCATGTCCGTTAATTCTATTTCAGGCGTTTTAAGCTTATGTCTATTAACTACATCGAATATCCTTGGTCCTCCA"
+        },
+        "function": "strain ID"
+      }
+    },
+    {
+      "assay_type": "SNP",
+      "name": "USA300_UT1",
+      "Target": {
+        "Amplicon": {
+          "SNP": {
             "Significance": {
-              "message": "Fluoroquinolone resistance"
+              "message": "S. aureus USA300 subtype present"
             },
-            "aa_sequence": "GDS"
-          }
-        }
+            "position": 42,
+            "reference": "G",
+            "variant": "A"
+          },
+          "sequence": "GCACGTTGATGACTTCTGACAGCATAAGCATCTTGATCTTCACGTGATACGTCAAATTGGGATGCTACATTTTCAGCAGTTAAACCCATAGGATATGACGCACCTATATCATCATATTGTAAGGTTGGATTGTTTGTGGGC"
+        },
+        "function": "strain ID"
       }
     },
     {
-      "assay_type": "ROI",
-      "name": "parC_ACBA_UT2",
+      "assay_type": "SNP",
+      "name": "CC8_UT1",
       "Target": {
-        "function": "resistance type",
-        "gene_name": "parC",
+        "gene_name": "dnaA: chromosomal replication initiator protein",
         "Amplicon": {
-          "sequence": "GTACGTCATTATGGACCGTGCATTGCCGCATATCAGTGATGGCTTAAAGCCCGTACAGCGCCGTATTGTCTATGCTATGAGCGAGCTAGGCTTAAAAAGCAGTGGCAAGCCAAAAAAATCAGCGCGTACAGTGGGTGATGTACTTGGTAAATACCACCCACATGGTGACTCGGCATGTTATGAAGCCATGGTACTCATGGCTCAGCCATTTAGTTACCGCTATCCTTTAATCGAAGGTCAGGGGAACTGGGGCTCACCTGATGATCCTAAGTCTTTTGCTGCGATGCGTTATACCGAAGCCAAACTCTCGGCTTATAG",
-          "RegionOfInterest": {
-            "position_range": "164-172",
+          "SNP": {
             "Significance": {
-              "message": "Fluoroquinolone resistance"
+              "message": "S. aureus CC8 (excluding ST239) subtype present"
             },
-            "aa_sequence": "GDS"
-          }
-        }
+            "position": 37,
+            "reference": "T",
+            "variant": "C"
+          },
+          "sequence": "TGCCCATAACACATTTGACACTTTTGTAATCGGACCCGGTAACCGCTTTCCACATGCAGCGAGTTTAGCTGTGGCCGAA"
+        },
+        "function": "strain ID"
       }
     },
     {
-      "assay_type": "ROI",
-      "name": "parC_staph_UT1",
+      "assay_type": "SNP",
+      "name": "USA3-500_UT1",
       "Target": {
-        "function": "resistance type",
-        "gene_name": "parC",
         "Amplicon": {
-          "sequence": "TCCGTAAAAGTGCGAAAACAGTCGGTGATGTTATTGGTCAATATCATCCACATGGAGACTCCTCAGTGTACGAAGCAATGGTCCGTTTAAGTCAAGACTGGAAGTTACGACATGTCTTAATAGAAATGCATGGTAATAATGGTAGTATCGATAATGATCCGCCAGCGGCAATGCGTTACACTGAAGCT",
-          "RegionOfInterest": {
-            "position_range": "69-83",
+          "SNP": {
             "Significance": {
-              "message": "Fluoroquinolone resistance"
+              "message": "S. aureus USA300/500 subtype present"
             },
-            "aa_sequence": "YEAMV"
-          }
-        }
+            "position": 44,
+            "reference": "T",
+            "variant": "C"
+          },
+          "sequence": "ACCTTATACGGAACATAGCAGACGTTATTTATTAGATGAAGGCCTCAATAAAGCGAATATCTTTGTGACAGGATCACCGATGACAGAAGTGATAGAAGCGCATCGA"
+        },
+        "function": "strain ID"
       }
     },
     {
-      "assay_type": "ROI",
-      "name": "parC_staph_UT2",
+      "assay_type": "SNP",
+      "name": "ArchIber_UT_B+",
       "Target": {
-        "function": "resistance type",
-        "gene_name": "parC",
         "Amplicon": {
-          "sequence": "CCAGATGTTCGTGATGGTTTAAAACCAGTACAACGTCGTATTTTATATGCAATGTATTCAAGTGGTAATACACACGATAAAAATTTCCGTAAAAGTGCGAAAACAGTCGGTGATGTTATTGGTCAATATCATCCACATGGAGACTCCTCAGTGTACGAAGCAATGGTCCGTTTAAGTCAAGACTGGAAGTTACGACATGTCTTAATAGAAATGCATGGTAATAATGGTAGTATCGATAATGATCCGCCAGCGGCAATGCGTTACACTGAAGCTAAG",
-          "RegionOfInterest": {
-            "position_range": "109-123",
+          "SNP": {
             "Significance": {
-              "message": "Fluoroquinolone resistance"
+              "message": "S. aureus Archaic Iberian subtype present"
             },
-            "aa_sequence": "YEAMV"
-          }
-        }
+            "position": 39,
+            "reference": "T",
+            "variant": "C"
+          },
+          "sequence": "CGCCAAATGACTCGCATTGTGAAATTACTGTAGCAGGGYTGCATGCTGGTAAACATGTGATGTGTGAAAAACCAATGGCTAAAACGACAGCAGAAGCTCAAAAAATGATAGATACAGCTAAATCAACAGGTAAAAAATTAACAATAGGTTATCAAAATCGTTTCCGAGCAGATAGTCAATTTTTACATCAAGCAGCGCAACGTGGCGACTTAGGAGACATTTACTTCGGAAAGGCACATGC"
+        },
+        "function": "strain ID"
       }
     },
     {
-      "assay_type": "presence/absence",
-      "name": "qnrA_UT1",
+      "assay_type": "SNP",
+      "name": "TruIber_UT1",
       "Target": {
-        "function": "resistance type",
-        "gene_name": "qnrA",
         "Amplicon": {
-          "sequence": "TAGAGTTCAGGGAGTGCGATCTCAAGGGCGCCAATTTTTCCCGGGCCCGTTTTTACAATCAAATCAGCCATAAGATGTACTTCTGCTCGG",
-          "Significance": {
-            "message": "Fluoroquinolone resistance"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "qnrA_UT2",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "qnrA",
-        "Amplicon": {
-          "sequence": "GATTTGAGTGACAGCCGTTTTCGCCGCTGCCGCTTTTATCAGTGTGACTTCAGCCATTGCCAGCTAAGGGATGCCAGTTTCGAGGATTGCAGTTTCATTGAAAGCGGCGCCATCGAAGGGTGCCACTTCAGCTATGCCGATCTGCGCGATGCCAGTTTCAAGGCCTGCCGCCTGTCTTTGGCCAATTTCAGCGGTGCCAACTGCTTTGGCATAGAGTTCAGGGAGTGCGATCTCAAGGGCGCCAATTTTTCCCGGGCCCGTTTTTACAATCAAATCAGCCATAAGATGTACTTCTGC",
-          "Significance": {
-            "message": "Fluoroquinolone resistance"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "qnrC_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "qnrC",
-        "Amplicon": {
-          "sequence": "GCTAATTTCTCACAGGCAAACTTTGTTAATCATGTTTCTAACAAAATGTATTTTTGCTCTGCTTACATTACGGGTTGT",
-          "Significance": {
-            "message": "Fluoroquinolone resistance"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "qnrD_UT2",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "qnrD",
-        "Amplicon": {
-          "sequence": "CGACAGGAATAGCTTGGAAGGGTGTGATTTTAATAGAGCCAAACTAAAAAACGCTAGCTTTAAAAGCTGCGATTTATCAATGAGTAATTTTAAAAACATTAGCGCCTTAGGTCTTGAAATTAGTGAGTGTTTAGCTCAAGGAGCTGATTTTCGAGGGGCTAATTTTATGAATATGATAACTACAAGGTCATGGTTTTGTAGTGCTTATATAACCAAGACAAATCTTAGTTACGCTAATTTTTCTAGAGTCATATTAGAAAAGTGCGAACTGTGGGAAAATCGCTGGAATGGCACTGTGATAACTGG",
-          "Significance": {
-            "message": "Fluoroquinolone resistance"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "qnrS_UT2",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "qnrS",
-        "Amplicon": {
-          "sequence": "GTGCTAACTTGCGTGATACGACATTCGTCAACTGCAAGTTCATTGAACAGGGTGATATCGAAGGCTGCCACTTTGATGTCGCAGATCTTCGTGATGCAAGTTTCCAACAATGCCAACTTGCGATGGCAAACTTCAGTAATGCCAATTGCTACGGTATAGAGTTCCGTGCGTGTGATTTAAAAGGTGCCAACTTTTCCCGAACAAACTTTGCCCATCAAGTGAGTAATCGTATGTACTTTTGCTCAGCATTTATTTCTGGATGTAATCTTTCCTATGCCAATATGGA",
-          "Significance": {
-            "message": "Fluoroquinolone resistance"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "qnrB-C1_UT2",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "qnrB",
-        "Amplicon": {
-          "sequence": "CGACGTTCAGTGGTTCAGATCTCTCCGGCGGCGAGTTTTCGACTTTCGACTGGCGAGCAGC",
-          "Significance": {
-            "message": "Fluoroquinolone resistance"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "qnrB-C2_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "qnrB",
-        "Amplicon": {
-          "sequence": "ACCAATCTAAGCTATGCCAACTTTTCGAAGGCCGTGCTTGAAAAGTGCGAATTGTGGGAAAATCGCTGGATGGGAACTCAGA",
-          "Significance": {
-            "message": "Fluoroquinolone resistance"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "qnrB-C3_UT2",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "qnrB",
-        "Amplicon": {
-          "sequence": "CGCCTATATCACCAATACCAACTTAAGCTACGCCAACTTTTCAAAAGTCGTACTGGAAAAGTGCGAGCTGTGGGAAAACCGTTGGATGGGTACTCAGGTACTGGGGGCGACGTTCAGTGGTTCAGATCTTTCCGGCGGTGAGTTTTCGTCGTTCGACTGGCGGGCCGCAAACTTTACGCACTGTGATTTGACCAATTCAGAACTGGGCGATCTCGATGTCCGGGGTGTTGATTTGCAAGGCGTCAAACTGGACAGCTACCAGGCATCGTTGATCCTGGAAC",
-          "Significance": {
-            "message": "Fluoroquinolone resistance"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "CTX-M-G1_64_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "blaCTX-M",
-        "Amplicon": {
-          "sequence": "CCGTCACGCTGTTGTTAGGAAGTGTGCCGCTGTATGCGCAAACGGTGGACGTACAGCAAAAACTTGCCGAATTAGAG--CAGCAGTCGGGAGGAAGGCTGGGTGTGGCATTGATTAACACGGCGGATAATTCGCAAATACTTTATCGTGCTGATGAGCG",
-          "Significance": {
-            "message": "B-lactamase production"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "CTX-M-G1_UT2",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "blaCTX-M",
-        "Amplicon": {
-          "sequence": "GACGATGTCACTGGCTGAGCTTAGCGCGGCCGCGCTACAGTACAGCGATAACGTGGCGATGAATAAGCTGATTGCTCACGTTGGCGGCCCGGCTAGCGTCACCGCGTTCGCCCGACAGCTGGGAGACGAAACGTTCCGTCTCGACCGCACCGAGCCGACGTTAAACACAGCCATTCCGGGCGATCCGCGTGATACCACTTCACCTCGGGCAATGGCGCAAACGCTGCGTAATCTGACGCTGGGTAAAGCATTGGGTGACAGCCAACGGGCGCAGCTGGTGACGTGGATGAAAGGCAATACTACCGGTGCAGCGAGCATTCAGGCTGGACTGCCTGCTTCCTGGGTTGTGG",
-          "Significance": {
-            "message": "B-lactamase production"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "CTX-M-G2_74-75_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "blaCTX-M",
-        "Amplicon": {
-          "sequence": "TGGCGCAGACCCTGAAAAATCTGACGCTGGGTAAAGCGCTGGCGGAAACTCAGCGGGCACAGTTGGTGACGTGGCTTAAGGGCAATACTACCGGTAGCGCGAGCATTCGGGCGGGTATGCCGAAATCATGGGGAGTGGGCGATAAAACCGGCAGCGGAGATTATGGCACCACCAACGATAT",
-          "Significance": {
-            "message": "B-lactamase production"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "CTX-M-G2_74-75_UT2",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "blaCTX-M",
-        "Amplicon": {
-          "sequence": "ATGGCGCAGACCCTGAAAAATCTGACGCTGGGTAAAGCGCTGGCGGAAACTCAGCGGGCACAGTTGGTGACGTGGCTTAAGGGCAATACTACCGGTAGCGCGAGCATTCGGGCGGGTATGCCGAAATCATGGGGAGTGGGCGATAAAACCGGCAGCGG",
-          "Significance": {
-            "message": "B-lactamase production"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "CTX-M-G8_G25_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "blaCTX-M",
-        "Amplicon": {
-          "sequence": "GAGCCGACGCTCAACACCGCGATCCCCGGCGACCCGCGCGATACCACCACGCCGTTAGCGATGGCGCAGGCTCTGCGCAATCTGACGTTGGGCAATGCCCTGGGTGACACTCAGCGTGCGCAGCTGGTGATGTGGCTGAAAGGCAACACCACCGGCGCTGCCAGCATTCGGGCAGGGCTACCCACATCGTGGGTTGTCGGG",
-          "Significance": {
-            "message": "B-lactamase production"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "CTX-M-G8_G25_UT2",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "blaCTX-M",
-        "Amplicon": {
-          "sequence": "GCTCAACACCGCGATCCCCGGCGACCCGCGCGATACCACCACGCCGTTAGCGATGGCGCAGGCTCTGCGCAATCTGACGTTGGGCAATGCCCTGGGTGACACTCAGCGTGCGCAGCTGGTGATGTGGCTGAAAGGCAACACCACCGGCGCTGCCAGCATTCGGGCAGGGCTACCCACATCGTGGGTTGTCGGG",
-          "Significance": {
-            "message": "B-lactamase production"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "CTX-M-G9_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "blaCTX-M",
-        "Amplicon": {
-          "sequence": "TTCGTCTGGATCGCACTGAACCTACGCTGAATACCGCCATTCCCGGCGACCCGAGAGACACCACCACGCCGCGGGCGATGGCGCAGACGTTGCGTCAGCTTACGCTGGGTCATGCGCTGGGCGAAACCCAGCGGGCGCAGTTGGTGACGTGGCTCAAAGGCAATACGACCGGCGCAGCCAGCATTCGGGCCGGCTTACCGACGTCGTGGACTGTGGGTGATAGGACCGGCAGCGGCGACTACGGCACCACCAATGATATTGCGGTGATCTGGCCGCAGGGTCGTGCGCCGCTGGTTCTGGTGACCTATTTTACCCAGCCGCAACAGAACGCAGAGAGCCGCCACGATGTGCTGGCTTCAGCGGCGAGAATCATC",
-          "Significance": {
-            "message": "B-lactamase production"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "CTX-M-G9_UT2",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "blaCTX-M",
-        "Amplicon": {
-          "sequence": "CGCTGGTTCTGGTGACCTATTTTACCCAGCCGCAACAGAACGCAGAGAGCCGCCACGATGTGCTGGCTTCAGCGGCGAGAATCATC",
-          "Significance": {
-            "message": "B-lactamase production"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA1_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "AATGGCTGTTGGTTGGACGCAAGACTTTT----------------------------------------------GAATCAATG------------GGAGCATTACCC---------------AACCGAAAGTA----TG",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA15_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "AATA----TGCC--------GTTGTAAC---TCGTTCAAGCTTCACTTCCAGTGATG---------AGAATG----TATTGGTATTTCCATCT--------ATCGATGAAGCGCTAAA--TC-------------ATC-TGAAGACGATAACG-----------------------GA------TCATGT---GATTGTGT",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA16_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "AGTA----TGCA--------GTTGTAAC---TCGCTCTAATTTTTCTACGAATGATG---------AGGGTG----TAATGGTTTTCTCCTCA--------ATTCAGGATGCCTTAAT---AA------------ATT-TAGAGGAAATCACG-----------------------GA------TCATGT---TATCGTTTCTGGTGGTGGTG",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA14-30_UT2",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "GTGATTGGTTGCGGTCCACACATACCCTGGTCCGC---GAAAGGAGAGCAGCTACTCTTTAAAGCCTTGACGTACAA---CCAGTGGCTTTTGGTGGGCCGCAAGACGTTC----------------------------------------------GAATCTATG------------GGAGCACTCCCT---------------AATAGGAAATA----CGCG--------GTCGTTAC---TCGCTCAGCCTGGACGGCCGATAATG---------ACAACG----TAATAGTATTCCCGTCG--------ATCGAAGAGGCCATGTA--CG------------GGC-TGGCTGAACTCACC-----------------------GA------TCACGT---TATAGTGTCTGGTGGCGGG",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA6-31_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "CGAGAATGGAGTAATTGGCTCTGGATTGGATATACCTTGGCATGT---ACAAGGCGAGCAGCTCCTATTCAAAGCCATGACTTACAA---TCAATGGCTTCTAGTTGGTCGTAAAACCTTC----------------------------------------------GACTCAATG------------GGTAAACTTCCG---------------AATAGAAAATA----TGCA--------GTGGTTAC---TCGTTCTAAAATTATCTCGAATGACC---------CTGATG----TTGTGTATTTCGCAAGT--------GTTGAATCGGCATTAGC--TT------------ACC-TAAACAATGCGACA-----------------------GC------ACATAT---CTTTGTTTCTGGTGGTGGTGAAATA",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA26-13_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "GGGTGCCAATCGGGTTATTGGCAATGGCCCCGATATTCCCTGGAAAAT---CCCGGGTGAGCAAAAGATCTTTCGCAGGCTCACCGAG",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA8_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "AAAGA-------CTACGAGCAG-----AA-------TG-----------GCA-------TGGAAGAACATGAC-----------CTTCACA------------CTTA--------CTTCACTT------------AC---CGT",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA3b_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "AACGCTGCCATTGTTACCAACC-----AATAACAGACAGTT----TATT--------GTGGTAAG-----------------CAATACTGAGGAGCCTAG----CCT--TAATG------------TTCA----------TG----------TGGTA-TCTCC----------------------------------AGAACACTTCAAG------------------------GCTT",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA9_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "AAGACAGGAGGT-AT----CGGATTTGAAAATCAGATT-CCGTGG---CATGA---ACCAGAAGATTTAAAACACTTCAAAGCTGTTACAATGAA-------CTCAGTTTT-GATTATGGGTAGAAAAACTTTT-------------------------------------------------------------------------------------------------------------------------GCCTCACTG-------------CCTAAAGTGCTGCCC----------------GGACGACTTCA--------TGTG--------GTAGT-----------------------CAGTAAAACAGTACCACCCACCCAGAACACTG---------ATCAAG-------TTGTGTA---TGTAAGTACATACCAGA-------TCGCAGT------------------AAGAACTGCAAG-----------------------CT---------------TGT------------TGGTTGACAAACCA-----------------------GA-------GTATTCTCAAAT---TTTTGTAATTGGTGGGAAGAGTGCGTACGAG--A---------ACTTAG-----CTGCCTACG",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA24_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "AA---------------GACCGCATCAA-------TATC--------GTCATCAC----------------------CAAGAAGTCAGAGA--TTTCTTGGACGGCTT--------GCTA----------TG",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA27-28_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "AAGACTCTTACG-----------------------AA-------CCATGT-----T----GTTGTTTCTGGTGGTGGAGAGATCTACAAG--A---------GTCTGATCGC-CC----ATGC------------CGACAC-----------------GCTACATATCT-------CGACAATAGA------------TTCCG-----AGCCAG---------AGG",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA25_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "AAGCACTGACCTATAA----CCA-ATGGCTT---TTGGTAGGGCGCAAAACATTT-------------------------------------------------------------------------------------------------------------------------GAGTCTATG----------------GGGCCGCTGCCC-----------------AATAGGAAATA-------CGCG--------GTTGTTAC-------------------CCGCTCAAACTGGACA----GCGGCTAATG------------AAAA----------CG-------TAGTGGTT-TTCCCGTCG--------ATTG------------------ACGAAGCGATGGG-----------------------TA---------------GAT------------TAGGCGAGATCACT-----------------------GA-------CCATGT-----C----ATCGTCGCCGGTGGTGGAGAAATCTACCAT--G---------AAACGAT-AC-CC----ATGGC-----------CTCTAC-----------------TCTGCATGTGT-------CGACAATCGA------------CGTTG-----AGCCAG---------AGGGAGACGTTTTCT-----------TT---CC---------------G----------------AACATTCCTGGG",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA10_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "A---------------------------------------AG---------------------------CAT---------------TC------------AGAGACACAACC-------------------------AA---------ACCAAT---C----AATGTCATTGGTGGTGTTG--GTT",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA32_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "AAGGTGAGCAGCTAATCTTTAAGGCGCTCACATACAA----TCA-GTGGCTT---CTTGTTGGAAGGAAAACATTT-------------------------------------------------------------------------------------------------------------------------GACTCTATG----------------GGAGTTCTTCCA-----------------AATCGCAAATA-------TGCA--------GTAGTGTC-----------------AAAGAATGGAATTTCAGG----GTCA",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA20_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "AAGTCGCACA------------------------AC--------------ATCT-----------TGAAGGAAAAAACT-----------------------TA-------ACATGC-----T-----TCATTATTGGTGGTGCTCAAATCT",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA23_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "A---------------ATC------------AATATCACGACAGC-----------------------GA------TCAACGAAT---A----GCTGTCATTGGTGGAGAAA--AGCTGT-ACGTGC--------AA---GCCC--TCGCATCTGC-------------CACAA----------------AAGTCCACATGA-------CGGTAATGCA------------CA--------AGCCATA------TAACTGCGATCGGAC-G-----------TTG--CC---------GATGTC---------------ATAC-ATCGACAAAAA------GTTT------------GT----TGCAG-------GTCAA-------------GGGTCTATC-----------ACCATTCAAACT-----GCGGTAGATGG----TGAGACCC-------ATCCCGT---GAAG",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA7_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "AA----TCA-GTGGCTC---CTTGTTGGAAGGAAAACATTT-------------------------------------------------------------------------------------------------------------------------GACTCTATG----------------GGTGTTCTTCC",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA29_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "AA----TCA-GTGGCTT---CTTGTCGGAAGAAAAACATTT-------------------------------------------------------------------------------------------------------------------------GAGTCAATG----------------GGTATTCTTCCT-----------------AATCGAAAGTA-------TGCT--------GTTCTTTC-----------------AAAAAATGGAATTTCACA----CCT--TCCTG------------AAAA----------CG-------TACTAGTT-TTTTCGTCT--------ATAG------------------AAAATGCATTATA-----------------------TG---------------AAC------------TGGCTAAGGTAACA-----------------------GA-------CCATTT----AT----AT-ATTTCTGGCGGTGGTCAAATATATAAT--A---------GTCTTA-----TTGAAAGTGC------------TGATAC-----------------CATCCACTTAT-------CTATCATCCA-",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA17_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "AATGGCGTAAT----CGGTAGTGGTCCTGATATC-CCGTGG--TCAGT----AAAAGGTGAGCAACTACTCTTTAAAGCGCTCACATATAA----TCA-ATGGCTC---CTTGTCGGAAGAAAAACATTT-------------------------------------------------------------------------------------------------------------------------GACTCTATG----------------GGTGTTCTTCCA-----------------AATCGCAAATA-------TGCA--------GTAGTGTC-----------------AAAGAACGGAATTTCAAG-",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA18_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "ACGCAT---T----GCTGTCATTGGTGGGGAGA--AGTTGT-ACATTC--------AA---GCTC--TTTCATCAGC-------------AACGA----------------AACTGCACATGA-------CCATAATTCC------------AAGAG-----AGTTCG---------ACTGTGATCGATTTA-----------TT---CC-----------TGTTG--------------ATCCGATCCAGAACAAT------TTTCACATTG-----AT----TCCAG------TGCCAGC------------GAG",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrA3_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrA",
-        "Amplicon": {
-          "sequence": "ACTCTATGCCGAG---------GCTCTGCC---CCGA----GC------------GGATCG-----------------CTTGTATCTAA------CCTAC-ATTGA------------CGCTC-----AGTTGA---------ACGGTGATACCCATT-----------TC---CC--------------------------------GGATTACCTATCGC-------TTGGGTGGCA-----GG----AGTTG---------GAGCGGT--------CAACGCATCCTG-----------CTGACG------------ATAAGAACAG--CTATGCCT------------G----CGAATTTGTTACC------TTGAGTCGTC------------AGCG",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrB1-8_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrB",
-        "Amplicon": {
-          "sequence": "AATGGGAGATCGCGTGCGCAAGAAATCTGGCGCCGCTTGGCAAGGCCAGATTGTCGGGTGGTACTGC",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrB2-7_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrB",
-        "Amplicon": {
-          "sequence": "GCAGGGTCAAGTTGTCGGCTGGTACAGCACAAAACTAACCCCAGAAGGCTATGCCGTCGAGTCCGA",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrB3_1_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrB",
-        "Amplicon": {
-          "sequence": "AC-----CCGACAACTTGACCCTGCCAAGCGGCGCCAGATTTCTTG-------CGCACGCGATCTCCC-----AGGCCAAAC-GTGGCGTGCGATGGGAGCGCAAACTGGC-CAGCAACTAGAGT-ACTGACTCCATTGTTGTGTT------GGT",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "dfrB4_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "dfrB",
-        "Amplicon": {
-          "sequence": "A----ATCTCACCCAGGCTCAGT--CCAG----ATTTATCCCATGACTGCGCTTGAACGG",
-          "Significance": {
-            "message": "Dihydrofolate reductase production (DNA synthesis) uninhibited by trimethoprim"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "sul1_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "sul",
-        "Amplicon": {
-          "sequence": "GCTGGTGGTTATGCACTCAGCGCA--GCGGGATGGCATCGCCACCCGCACCG-GTCACCTTCGACCCGAAGACGCGC-TCGACGAGATTG-----TGCGGTTCTTCGAGGCGCGGGTTTCCGCCTTG----CGACGGAGCGGGGTCGCTGCC--GACCGGCTCATCCTCGA--TCCGGGGATGGGATTTTTCTTGAGCCCCGCACCGGAAACATCG--CTGCACGTGCTGTCGAACCTTCAAAAGCTGAAG------TCGGCGTTGGGGCTTCCGCTATTGGTCTCGGTGTCGCGGAAATCCTTCTTGGGCG",
-          "Significance": {
-            "message": "Dihydropteroate synthase (DNA synthesis) uninhibited by sulfonamides"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "sul1_UT2",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "sul",
-        "Amplicon": {
-          "sequence": "CGTGCTGTCGAACCTTCAAAAGCTGAAG------TCGGCGTTGGGGCTTCCGCTATTGGTCTCGGTGTCGCGGAAATCCTTCTTGGGCGCCACCGCTGGCCTTCCTGTAAAGGATCTGGGTCCAGC",
-          "Significance": {
-            "message": "Dihydropteroate synthase (DNA synthesis) uninhibited by sulfonamides"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "sul2_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "sul",
-        "Amplicon": {
-          "sequence": "CATCATTTTCGGCATCGTCAACATAACCTCGGACAGTTT--CTCCGATGGAGGCCGGTATCTGGCGCCAGACGCAGCCA----------TTGCGCAGGCGCGTAAGCTGATGGCCGAGGGGGCAGATGTGATCGACCTCGGTCCGGCATCCAGCAATCCCGACGCCGCGCCTGTTTCGTCCGACACAGAAATCGCGCGTATCGCGCCGGTGCTGGACGCGC--TCAAGGCAGATGGCATTCCCGTCTCGCTCGACAGTTATCAACCCGCGACGCAAGCCTATGCCTTGTCGC",
-          "Significance": {
-            "message": "Dihydropteroate synthase (DNA synthesis) uninhibited by sulfonamides"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "sul2_UT2",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "sul",
-        "Amplicon": {
-          "sequence": "GTCAACATAACCTCGGACAGTTT--CTCCGATGGAGGCCGGTATCTGGCGCCAGACGCAGCCA----------TTGCGCAGGCGCGTAAGCTGATGGCCGAG",
-          "Significance": {
-            "message": "Dihydropteroate synthase (DNA synthesis) uninhibited by sulfonamides"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "sul3_UT1",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "sul",
-        "Amplicon": {
-          "sequence": "AAAGCCTTAATGACAGGTTTGAGTCTTTTGATTTCTTCCACAACGCCCACTTCAGTTGTATCAGGATTACTGGAAGCGGCTCCCAAATCAATCACATCTGCTCCATCTTC",
-          "Significance": {
-            "message": "Dihydropteroate synthase (DNA synthesis) uninhibited by sulfonamides"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "sul3_UT2",
-      "Target": {
-        "function": "resistance type",
-        "gene_name": "sul",
-        "Amplicon": {
-          "sequence": "GGCAAAGTCAGATTGCAAACTTGTGTTGATGCACTCCGTTCAGCGAATTGGTGCAGCTACTAAAGTTGAAACGAATCCGGAAGAGG",
-          "Significance": {
-            "message": "Dihydropteroate synthase (DNA synthesis) uninhibited by sulfonamides"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "ROI",
-      "name": "VISA_rpoB-481_UT1",
-      "Target": {
-        "function": null,
-        "Amplicon": {
-          "sequence": "CCAGGTCCTAATGCTGATAGACGACGTTTATGCGTTAACTCAGCTAATGGGTTTGCTTGGTCCATGAATTGTGATAATTGAGAGCTACCAAAGAATTCTTTAATAGATGCAATAACAGGTCGAATATTAATTAATTGTTGAGGTGTGATAGACTCAGTATCTTGAATTGACATTCTTTCACGTACAACTCTTTCCATTCTTGATAAACCGATACGGAATTGGTTTTGTAGTAATTCACCTACAGAACGTAAACGACGGT",
-          "RegionOfInterest": [
-            {
-              "position_range": "30-33",
-              "Significance": {
-                "message": "Vancomycin intermediate resistance"
-              },
-              "aa_sequence": "H"
+          "SNP": {
+            "Significance": {
+              "message": "S. aureus True Iberian subtype present"
             },
-            {
-              "position_range": "82-84",
-              "Significance": {
-                "message": "Rifampin resistance"
-              },
-              "aa_sequence": "X"
-            }
-          ]
-        }
+            "position": 58,
+            "reference": "C",
+            "variant": "T"
+          },
+          "sequence": "GCGCAACAGGGAAGCAAGGTAATGCAGTTGTAAAACAGTTGTTAGAGGATGGATGGTATGTAAGTGCATTAACTAGAAATAAGAATAATCGTAAACTTTCAGACATAGGACATCCGCA"
+        },
+        "function": "strain ID"
       }
     },
     {
-      "assay_type": "presence/absence",
-      "name": "linA_UT1",
+      "assay_type": "SNP",
+      "name": "ST239_UT1",
       "Target": {
-        "function": "resistance type",
-        "gene_name": "linA",
         "Amplicon": {
-          "sequence": "GTGAAGGCATCCAATCAACTTCTATTTTGTATCCGATATCTTCTAATTTTTGTATAACTTTTTGAGTGTGTTGAGCGTCAAAATCTATATCTATATCTCTGTGTTCTCTTTGTTGTTT",
-          "Significance": {
-            "message": "Lincosamide resistance"
-          }
-        }
+          "SNP": {
+            "Significance": {
+              "message": "S. aureus ST239 subtype present"
+            },
+            "position": 33,
+            "reference": "T",
+            "variant": "C"
+          },
+          "sequence": "CATGACCGCCACTATAACCAGATACGACTGACCTGATGCCTGGATATGATGTAAATGGTTTAACCATGCACCAGAAACATCCTCCTGCTAATGTTGCAT"
+        },
+        "function": "strain ID"
       }
     },
     {
-      "assay_type": "presence/absence",
-      "name": "mecA_UT1",
+      "assay_type": "SNP",
+      "name": "CC5_UT1",
       "Target": {
-        "function": "resistance type",
-        "gene_name": "mecA",
+        "gene_name": "putative glucose inhibited division protein B",
         "Amplicon": {
-          "sequence": "GGAACGATGCCTATCTCATATGCTGTTCCTGTATTGGCCAATTCCACATTGTTTCGGTCTAAAATTTTACCACGTTCTGATTTTAAATTTTCAATATGTATGCTTTGGTCTTTCTGCATTCCTGGAATAATGACGCTAT",
-          "Significance": {
-            "message": "B-lactam resistance"
-          }
-        }
+          "SNP": {
+            "Significance": {
+              "message": "S. aureus CC5 subtype present"
+            },
+            "position": 30,
+            "reference": "C",
+            "variant": "T"
+          },
+          "sequence": "CTGGCGCTCTCCAGCATCTTCTGGCAATTCAAAGGTATGTGTTTCTGTAACATTACCACCTAACACACTAATTGCAA"
+        },
+        "function": "strain ID"
       }
     },
     {
       "assay_type": "presence/absence",
-      "name": "vanA_UT1",
+      "name": "sea_UT",
       "Target": {
-        "function": "resistance type",
-        "gene_name": "vanA",
+        "gene_name": "MRSA sea",
         "Amplicon": {
-          "sequence": "CGGCTCGACTTCCTGATGAATACGAAAGATTCCGTACTGCAGCCTGATTTGGTCCACCTCGCCAACAACTAACGCGGCACTGTTTCCCAATACCGCACA",
           "Significance": {
-            "message": "Vancomycin resistance"
-          }
-        }
+            "message": "Staphylococcus enterotoxin A gene present"
+          },
+          "sequence": "TATGGCTAGACGGTAAACAAAATACAGTACCTTTGGAAACGGTTAAAACGAATAAGAAAAATGTAACTGTTCAGGAGTTGGATCTTCAAGCAAGACGTTATTTACAGGAAAAATATAATTTATATAACTCTGATGTTTTTGATGGGAAGGTTCAGAG"
+        },
+        "function": "virulence factor"
       }
     },
     {
       "assay_type": "presence/absence",
-      "name": "aacA_UT1",
+      "name": "seb_UT",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": null
+          },
+          "sequence": "TTACTGTTCGGGTATTTGAAGATGGTAAAAATTTATTATCTTTTGACGTACAAACTAATAAGAAAAAGGTGACTGCTCAAGAATTAGATTACCTAACTCGTCACTATTTGGTGAAAAATAAAAAACTCTATGAATTTAACAACTCGCCTTATGAAACGG"
+        },
+        "function": null
+      }
+    },
+    {
       "Target": {
         "function": "resistance type",
         "gene_name": "aacA",
@@ -1624,155 +1093,505 @@
             "message": "Aminoglycoside resistance"
           }
         }
-      }
+      },
+      "name": "aacA_UT1",
+      "assay_type": "presence/absence"
     },
     {
-      "assay_type": "presence/absence",
-      "name": "blaZ_UT1",
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "mobile 16s rRNA methylase",
+        "Amplicon": {
+          "sequence": "ACTATTCTGCCTATCCTAATTGGGATAAATTATTAAAAAAGTACAATCAGGGGCAGTTATCAATAGAAGATTTACTAAAGATTCATTCTTCGACGAATGAAAGAGTCGCAACATTAAATGA",
+          "Significance": {
+            "message": "Resistant to all aminoglycocides (e.g. Gentamicin, Amikacin, Tobramycin)"
+          }
+        }
+      },
+      "name": "armA",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "mobile 16s rRNA methylase",
+        "Amplicon": {
+          "sequence": "CCGCTTGCTGGTACATATCTACGCCTGGTTTTAAGGGCGTGTGTCCTGTGGGCCTGTTCGTGAAGGTATGAAAACAATCCGGCAGATAGCGGACGAGATAGG",
+          "Significance": {
+            "message": "Resistant to all aminoglycocides (e.g. Gentamicin, Amikacin, Tobramycin)"
+          }
+        }
+      },
+      "name": "npmA",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "mobile 16s rRNA methylase",
+        "Amplicon": {
+          "sequence": "GAATTGGACTGCCTCTACGATTTTATCTTTTCTGGCGGGGTGCCCCATCGTGTGTTGGATATCGCTTGCGGCCTAAACCCGCTGGCCCTCTTTATACGTGACATAACATCTGTATGGGCGTGC",
+          "Significance": {
+            "message": "Resistant to all aminoglycocides (e.g. Gentamicin, Amikacin, Tobramycin)"
+          }
+        }
+      },
+      "name": "rmtA_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "mobile 16s rRNA methylase",
+        "Amplicon": {
+          "sequence": "AAGGCATGGAGGCGAACTACGCCGCATGGTTCGAGGGCGGCTTGCCCGCCGAGTTTGAGATTGAGGATAAAAAGACCATCGGAACAGAACTTATATACTT",
+          "Significance": {
+            "message": "Resistant to all aminoglycocides (e.g. Gentamicin, Amikacin, Tobramycin)"
+          }
+        }
+      },
+      "name": "rmtB_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "mobile 16s rRNA methylase",
+        "Amplicon": {
+          "sequence": "AATACTCCACACTTTATCCACCAACTGTACGACGTGTAACTGAGAGGCTTTTCGATCGATACCCTCCCAAGCAGCTAGAGAAGGAGGTTCGCAAGAA",
+          "Significance": {
+            "message": "Resistant to all aminoglycocides (e.g. Gentamicin, Amikacin, Tobramycin)"
+          }
+        }
+      },
+      "name": "rmtC_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "mobile 16s rRNA methylase",
+        "Amplicon": {
+          "sequence": "AACGATGCGACGATCCATTCCGCATTCACGCGCATTAGCGCATCCATCGCCGCGCCCGCACGCTGGCGCTCCAAAAGCGGCAGCACCTTAAACAGCAGCGCCGCATTCGCCTCGTCTTCCGGGATTTCGCACAGCAAATCGC",
+          "Significance": {
+            "message": "Resistant to all aminoglycocides (e.g. Gentamicin, Amikacin, Tobramycin)"
+          }
+        }
+      },
+      "name": "rmtD1_&_D2",
+      "assay_type": "presence/absence"
+    },
+    {
       "Target": {
         "function": "resistance type",
         "gene_name": "blaZ",
         "Amplicon": {
           "sequence": "ACACTCTTGGCGGTTTCACTTATCAACTTATCATTTGGCTTATCACTTTTATTGTCTTTATTCGTAAAAATGACTAAAACAATAGGTTCAGATTGGCCCTTAGG",
           "Significance": {
-            "message": "B-lactam resistance"
+            "message": "\u03b2-lactam resistance"
           }
         }
-      }
+      },
+      "name": "blaZ_UT1",
+      "assay_type": "presence/absence"
     },
     {
-      "assay_type": "presence/absence",
-      "name": "ermA_UT1",
       "Target": {
         "function": "resistance type",
-        "gene_name": "ermA",
+        "gene_name": "mecA",
         "Amplicon": {
-          "sequence": "CAACCATTGATTTCAAAGAAGGACTACAAAAAGTATCGATCTTTTGTTTATAAGTGGGTAAACCGTGAATATCGTGTTCTTTTCACTAAAAACCAATTCCGACAGGCTTTGA",
+          "sequence": "GGAACGATGCCTATCTCATATGCTGTTCCTGTATTGGCCAATTCCACATTGTTTCGGTCTAAAATTTTACCACGTTCTGATTTTAAATTTTCAATATGTATGCTTTGGTCTTTCTGCATTCCTGGAATAATGACGCTAT",
           "Significance": {
-            "message": "Macrolide resistance"
+            "message": "mecA gene present: \u03b2-lactam resistance"
           }
         }
-      }
+      },
+      "name": "mecA_UT1",
+      "assay_type": "presence/absence"
     },
     {
-      "assay_type": "presence/absence",
-      "name": "ermC_UT1",
       "Target": {
         "function": "resistance type",
-        "gene_name": "ermC",
+        "gene_name": "blaKPC",
         "Amplicon": {
-          "sequence": "ATTTAATCGTGGAATACGAGTTTGCTAAAAGATTATTAAATACAAAACGCTCATTGGCATTATTTTTAATGGCAGAAGTTGATATTTCTATATTAAGTATGGTTCCAAGAGAATATTTTCATCCTAAACCTAAAGTGAATAGCTCACTTATCAGATTAAATAGAAAAAAATCAAGAATATCACACAAAGATAAACAGAAGTATAATTATTTCGTTATGAAATGGGTTAACAAAGAATACAAGAAAATATTTACAAAAAATCAATTTAACAATTCCTTAAAACATGCAGGAATTGACG",
+          "sequence": "CGTCTAGTTCTGCTGTCTTGTCTCTCATGGCCGCTGGCTGGCTTTTCTGCCACCGCGCTGACCAACCTCGTCGCGGAACCATTCGCTAAACTCGAACAGGACTTTGGCGGCTCCATCGGTGTGTACGCGATGGATACCGGCTCAGGCGCAACTGTAAGTTACCGCGCTGAGGAGCGCTTCCCACTGTGCAGCTCATTCAAGGGCTTTCTTGCTGCCGCTGTGCTGGCTCGCAGCCAGCAGCAGGCCGGCTTGCTGGACACACCCATCCGTTACGGCAAAAATGCGCTGGTTCCGTGGTCACCCATCTCGGAAAAATATCTGACAACAGGCATGACGGT",
           "Significance": {
-            "message": "Macrolide resistance"
+            "message": "KPC gene present, resistant to all \u03b2-lactams, including cephalosporins (e.g., cefalexin) and carbapenems (e.g., meropenem or imipenem)"
           }
         }
-      }
+      },
+      "name": "KPC_UT1",
+      "assay_type": "presence/absence"
     },
     {
-      "assay_type": "presence/absence",
-      "name": "tetK_UT1",
       "Target": {
         "function": "resistance type",
-        "gene_name": "tetK",
+        "gene_name": "blaNDM",
         "Amplicon": {
-          "sequence": "AGTTTGAGCTGTCTTGGTTCATTGATTGCTTTTATTGGTCACAATCACTTTTTTATTTTGATTTTTGGTAGGTTAGTACAAGGAGTAGGATCTGCTGCA",
+          "sequence": "GGACAAGATGGGCGGTATGGACGCGCTGCATGCGGCGGGGATTGCGACTTATGCCAATGCGTTGTCGAACCAGCTTGCCCCGCAAGAGGGGATGGTTGCGGCGCAACACAGCCTGACTTTCGCCGCCAATGGCTGGGTCGAACCAGCAACCGCGCCCAACTTTGGCCCGCTCAAGGTATTTTACCCCGGCCCCGGCCACACCAGTGACAATATCACCGTTGGGATCGACGGCACCGACATCGCTTTTGGTGGCTGCCTGATCAAGGACAGCAAGGCCAAGTCGCTCGGCAATCTCGGTGATGCCGACACTGAGCACTACGCCG",
           "Significance": {
-            "message": "Tetracycline resistance"
+            "message": "NDM gene present, resistant to all \u03b2-lactams, including cephalosporins (e.g., cefalexin) and carbapenems (e.g., meropenem or imipenem)"
           }
         }
-      }
+      },
+      "name": "NDM_UT1",
+      "assay_type": "presence/absence"
     },
     {
-      "assay_type": "presence/absence",
-      "name": "tetM_UT1",
       "Target": {
         "function": "resistance type",
-        "gene_name": "tetM",
+        "gene_name": "blaCTX-M",
         "Amplicon": {
-          "sequence": "CTTTCTGGGCTTCCATTGGTTTATCTGTATCACCGCTTCCGTTGGGAAGTGGAATGCAGTATGAGAGCTCG",
+          "sequence": "GACGATGTCACTGGCTGAGCTTAGCGCGGCCGCGCTACAGTACAGCGATAACGTGGCGATGAATAAGCTGATTGCTCACGTTGGCGGCCCGGCTAGCGTCACCGCGTTCGCCCGACAGCTGGGAGACGAAACGTTCCGTCTCGACCGCACCGAGCCGACGTTAAACACAGCCATTCCGGGCGATCCGCGTGATACCACTTCACCTCGGGCAATGGCGCAAACGCTGCGTAATCTGACGCTGGGTAAAGCATTGGGTGACAGCCAACGGGCGCAGCTGGTGACGTGGATGAAAGGCAATACTACCGGTGCAGCGAGCATTCAGGCTGGACTGCCTGCTTCCTGGGTTGTGG",
           "Significance": {
-            "message": "Tetracycline resistance"
+            "message": "ESBL present- resistant to extended-spectrum cephalosporins (e.g., cefotaxime amd ceftazidime) ansd monobactams (e.g., aztreonam)"
           }
         }
-      }
+      },
+      "name": "CTX-M-G1_UT2",
+      "assay_type": "presence/absence"
     },
     {
-      "assay_type": "presence/absence",
-      "name": "msrA_UT1",
       "Target": {
         "function": "resistance type",
-        "gene_name": "msrA",
+        "gene_name": "blaCTX-M",
         "Amplicon": {
-          "sequence": "CTTCTTCCAAATGTTCCATTCTTTTTTCAATATGCTTAGCTTGTTTTTGAGCAGCCTTCTCAACCGTGCCTTTTTGTTTTGATGCACTTAAACGATCTGGT",
+          "sequence": "CCGTCACGCTGTTGTTAGGAAGTGTGCCGCTGTATGCGCAAACGGTGGACGTACAGCAAAAACTTGCCGAATTAGAG--CAGCAGTCGGGAGGAAGGCTGGGTGTGGCATTGATTAACACGGCGGATAATTCGCAAATACTTTATCGTGCTGATGAGCG",
           "Significance": {
-            "message": "Macrolide resistance"
+            "message": "ESBL present- resistant to extended-spectrum cephalosporins (e.g., cefotaxime amd ceftazidime) ansd monobactams (e.g., aztreonam)"
           }
         }
-      }
+      },
+      "name": "CTX-M-G1_64_UT1",
+      "assay_type": "presence/absence"
     },
     {
-      "assay_type": "gene variant",
-      "name": "MRSA-orfX_UT1",
       "Target": {
-        "function": "strain ID",
-        "gene_name": "MRSA-orfX",
-        "Amplicon": [
-          {
-            "variant_name": "MRSA-orfX-1",
-            "sequence": "GGATCAAACGGCCTGCACAAGGACGTCTTACAACGCAGTAACTATGCACTATCATTCAGCAAAATGACATTTCCACATCAGATGATGCGGGTTGTGTTAATTGAGCAAGTGTATTAAGAAGCTTATCATAAGTAATGAGGTTCATGATTTTTGACTGCGGTTTTTTCAGCCGCTTCATAAAGGGATTTTGAATGTATCAGAACATATGAGGTTTATGTGAATTGCTGTTATGTTTTAGAGCATTTAAGATTATGCGTGGGGAAGCATATCATAAATGA",
-            "Significance": {
-              "message": "SCCmec integrated into S. aureus genome"
-            }
-          },
-          {
-            "variant_name": "MRSA-orfX-2",
-            "sequence": "GGATCAAACGGCCTGCACAAGGACGTCTTACAACGTAGTAACTACGCACTATCATTCAGCAAAATGACATTCCCACATCAAATGATGCGGGTTGTGTTAATTGAGCAAGTGTATAGAGCGTTTAAGATTATGCGTGGAGAAGCATATCATAAATAAAACTAAAAATTAGATTGTGTATAATTTAAAAATTTAATGAGATGTGGAGGAATTACATATATGAAAT",
-            "Significance": {
-              "message": "SCCmec integrated into S. aureus genome"
-            }
-          },
-          {
-            "variant_name": "MRSA-orfX-3",
-            "sequence": "GGATCAAACGGCCTGCACAAGGACGTCTTACAACGTAGTAACTACGCACTATCATTCAGCAAAATGACATTCCCACATCAAATGATGCGGGTTGTGTTAATTGAGCAAGTGTATAGAGCATTTAAGATTATGCGTGGAGAAGCGTACCACAAATGATGCGGTTTTTTATCCAGTTTTTTGTTTAATGAACAAGGTAAATTACGAGATAATATTTG",
-            "Significance": {
-              "message": "SCCmec integrated into S. aureus genome"
-            }
-          },
-          {
-            "variant_name": "MRSA-orfX-4",
-            "sequence": "GGATCAAACGGCCTGCACAAGGACGTCTTACAACGTAGTAACTACGCACTATCATTCAGCAAAATGACATTCCCACATCAAATGATGCGGGTTGTGTTAATTGAGCAAGTGTATAGAGCGTTTAAGATTATGCGTGGAGAAGCATATCATAAATGATGCGGTTATTTCAGCCGTAATTTTATAATATAAAGCAGAG",
-            "Significance": {
-              "message": "SCCmec integrated into S. aureus genome"
-            }
-          },
-          {
-            "variant_name": "MRSA-orfX-5",
-            "sequence": "GGATCAAACGGCCTGCACAAGGACGTCTTACAACGTAGTAACTACGCACTATCATTCAGCAAAATGACATTCCCACATCAAATGATGCGGGTTGTGTTAATTGAGCAAGTGTATAGAGCATTTAAGATTATGCGTGGAGAAGCGTACCACAAATAAAACTAAAAAATATGAGAAAATTATTAAATTAGCTCAAATCTTTGAAGAATAAAAAGTG",
-            "Significance": {
-              "message": "SCCmec integrated into S. aureus genome"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "assay_type": "gene variant",
-      "name": "MRSE-orfX_UT1",
-      "Target": {
-        "function": "strain ID",
-        "gene_name": "MRSE-orfX",
+        "function": "resistance type",
+        "gene_name": "blaCTX-M",
         "Amplicon": {
-          "variant_name": "MRSE-orfX-1",
-          "sequence": "TGGCTCCAATGGTCTACACCAAGACGTCTTACAACGCAGCAACTATGCTTTATCATTCAGCAATATGACCTTCCCACACCAAATGATGCGCGTCATATTGATTGAACAAATTTATCGCGCATTTAAGATCATGAGAGGCGAAGCATATCATAAATGATGCGGTTTTTTCAGCCGCTTCATAAAGGGATTTTGAATGTATCAGAACATATGAGGTTTATGTGAATTGCTGTTATGTTTTTAAGAAGCTTATCATAAGTAATGAGGTTCATGATTTTTGAC",
+          "sequence": "TGGCGCAGACCCTGAAAAATCTGACGCTGGGTAAAGCGCTGGCGGAAACTCAGCGGGCACAGTTGGTGACGTGGCTTAAGGGCAATACTACCGGTAGCGCGAGCATTCGGGCGGGTATGCCGAAATCATGGGGAGTGGGCGATAAAACCGGCAGCGGAGATTATGGCACCACCAACGATAT",
           "Significance": {
-            "message": "SCCmec integrated into S. epidermidis genome"
+            "message": "ESBL present- resistant to extended-spectrum cephalosporins (e.g., cefotaxime amd ceftazidime) ansd monobactams (e.g., aztreonam)"
           }
         }
-      }
+      },
+      "name": "CTX-M-G2_74-75_UT1",
+      "assay_type": "presence/absence"
     },
     {
-      "assay_type": "presence/absence",
-      "name": "cfr_UT2",
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "blaCTX-M",
+        "Amplicon": {
+          "sequence": "GAGCCGACGCTCAACACCGCGATCCCCGGCGACCCGCGCGATACCACCACGCCGTTAGCGATGGCGCAGGCTCTGCGCAATCTGACGTTGGGCAATGCCCTGGGTGACACTCAGCGTGCGCAGCTGGTGATGTGGCTGAAAGGCAACACCACCGGCGCTGCCAGCATTCGGGCAGGGCTACCCACATCGTGGGTTGTCGGG",
+          "Significance": {
+            "message": "ESBL present- resistant to extended-spectrum cephalosporins (e.g., cefotaxime amd ceftazidime) ansd monobactams (e.g., aztreonam)"
+          }
+        }
+      },
+      "name": "CTX-M-G8_G25_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "blaCTX-M",
+        "Amplicon": {
+          "sequence": "TTCGTCTGGATCGCACTGAACCTACGCTGAATACCGCCATTCCCGGCGACCCGAGAGACACCACCACGCCGCGGGCGATGGCGCAGACGTTGCGTCAGCTTACGCTGGGTCATGCGCTGGGCGAAACCCAGCGGGCGCAGTTGGTGACGTGGCTCAAAGGCAATACGACCGGCGCAGCCAGCATTCGGGCCGGCTTACCGACGTCGTGGACTGTGGGTGATAGGACCGGCAGCGGCGACTACGGCACCACCAATGATATTGCGGTGATCTGGCCGCAGGGTCGTGCGCCGCTGGTTCTGGTGACCTATTTTACCCAGCCGCAACAGAACGCAGAGAGCCGCCACGATGTGCTGGCTTCAGCGGCGAGAATCATC",
+          "Significance": {
+            "message": "ESBL present- resistant to extended-spectrum cephalosporins (e.g., cefotaxime amd ceftazidime) ansd monobactams (e.g., aztreonam)"
+          }
+        }
+      },
+      "name": "CTX-M-G9_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "linA",
+        "Amplicon": {
+          "sequence": "GTGAAGGCATCCAATCAACTTCTATTTTGTATCCGATATCTTCTAATTTTTGTATAACTTTTTGAGTGTGTTGAGCGTCAAAATCTATATCTATATCTCTGTGTTCTCTTTGTTGTTT",
+          "Significance": {
+            "message": "Clindamycin resistance"
+          }
+        }
+      },
+      "name": "linA_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "gyrA",
+        "Amplicon": {
+          "sequence": "CGTCGATGGAACCGAAGTTACCCTGACCGTCTACCAGCATGTAACGCAGCGAGAATGGCTGCGCCATACGGACGATCGTGTCATAAACTGCCGAGTCACCATGGGGATGGTATTTACCGATTACGTCACCAACGACACGGGCAGATTTTTTATAGGCTTTGTTCCAGTCATTGCCTAGTACGTTCATGGCGTAAAGTACGCGACGGTGTACCGGCTTCAGGCCATCTCGGACATCTGGCAGCGCACGGCCAACAATGACCGACATCGCATAATCCAGATAGGAG",
+          "RegionOfInterest": {
+            "aa_sequence": "SAVYD",
+            "position_range": "80-94",
+            "Significance": {
+              "message": "Fluoroquinolone resistance"
+            }
+          }
+        }
+      },
+      "name": "gyrA_Ecoli_UT2",
+      "assay_type": "ROI"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "gyrA",
+        "Amplicon": {
+          "sequence": "CGATGGAACCAAAGTTACCCTGGCCGTCCACCAGCATGTAACGCAGCGAGAACGGCTGCGCCATACGCACGATGGTGTCGTATACCGCGTAGTCGCCGTGCGGGTGGTATTTACCGATTACGTCACCAACGACACGGGCTGATTTTTTATAGGCTTTGTTCCAGTCATTG",
+          "RegionOfInterest": {
+            "aa_sequence": "YAVYD",
+            "position_range": "77-91",
+            "Significance": {
+              "message": "Fluoroquinolone resistance"
+            }
+          }
+        }
+      },
+      "name": "gyrA_Kleb_UT1",
+      "assay_type": "ROI"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "gyrA",
+        "Amplicon": {
+          "sequence": "ATGACTATAACAAAGCCTACAAGAAATCTGCTCGTGTCGTTGGGGACGTAATCGGTAAATATCACCCGCATGGTGACTTAGCTGTTTATGAAACCATTGT",
+          "Significance": {
+            "message": "Fluoroquinolone resistance"
+          }
+        }
+      },
+      "name": "gyrA_ACBA_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "gyrA",
+        "Amplicon": {
+          "sequence": "AACAAGCCCTACAAGAAATCCGCCCGTGTGGTCGGCGACGTGATCGGTAAGTACCACCCGCACGGCGACACCGCGGTCTACGACACCATCGTGCGCATGGCGCAGCCGTTCTCGCTGCGCTACATGCTGGTAGACGGCCAGGGCAACTTCGGTTCGGTGGACGGCGACAACGCCGCAGCCATGCGATACACCGAAGTGCGCATGGCCAAGCTGGCCCACGAACTGCTGGCGGACCTGGAAAAGGAAACCGTCGACTGGGTGCCCAACTACGATGGCACCGAG",
+          "RegionOfInterest": {
+            "aa_sequence": "TAVYD",
+            "position_range": "70-84",
+            "Significance": {
+              "message": "Fluoroquinolone resistance"
+            }
+          }
+        }
+      },
+      "name": "gyrA_PSAR_UT2",
+      "assay_type": "ROI"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "gyrA",
+        "Amplicon": {
+          "sequence": "GCCATCAACAAGCGGATAACGATAACTGAAATCTTGAGCCATACGTACCATTGCTTCATAAATAGATGAGTCACCATGAGGGTGATATTTACCCATTACGTCACCAACGATACGTGCTGATTTTTTATATGATTTATCCGGTGTCATACCTTGTTCATTTAATCCATATAGTATACGACGATGTACTGGTTTTAAACCGTCACGAACATCTGGCAATG",
+          "RegionOfInterest": {
+            "aa_sequence": "DSSIY",
+            "position_range": "58-72",
+            "Significance": {
+              "message": "Fluoroquinolone resistance"
+            }
+          }
+        }
+      },
+      "name": "gyrA_staph_UT1",
+      "assay_type": "ROI"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "parC",
+        "Amplicon": {
+          "sequence": "TTGTAGTGTTCCAGGTCGTCGCCCTTGAGCGACAGGGTACGCTTTCCGGCCTGCAGGACCAACGTCGCCCCGGCTGGCAGAACAGCCAGGTCGGTGAGGTATTCCTCGCGGCTGGCCACGCGTTCGCCGGGGATGCCGATGATCTTGTTGCCCTTGCCCTTGCCGAGCTGCGGCAGGTCGGAGACCTTGAACAATAGCAGACGG",
+          "Significance": {
+            "message": "Fluoroquinolone resistance"
+          }
+        }
+      },
+      "name": "parC_PSAR_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "parC",
+        "Amplicon": {
+          "sequence": "CAGCGCGAAATTCAAAAAGTCCGCCCGCACCGTCGGCGACGTGTTGGGTAAATATCACCCGCACGGCGACAGCGCCTGCTATGAAGCGATGGTGCTGATGGCGCAGCCGTTCTCTTACCGCTATCCGCTGGTGGATGGTCAGGGAAACTGGGGGGCGCCGGACGATCCCAAATCTTTCGC",
+          "RegionOfInterest": {
+            "aa_sequence": "CYE",
+            "position_range": "77-85",
+            "Significance": {
+              "message": "Fluoroquinolone resistance"
+            }
+          }
+        }
+      },
+      "name": "parC_Kleb_UT2",
+      "assay_type": "ROI"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "parC",
+        "Amplicon": {
+          "sequence": "ATATTTCGACAACCGGGATTCGGTGTAACGCATTGCCGCGAACGATTTCGGATCGTCCGGCGCGCCCCAGTTCCCCTGACCATCAACCAGCGGATAACGGTAAGAGAACGGTTGCGCCATCAGGACCATCGCTTCATAACAGGCGCTATCGCCGTGCGGATGGTATTTACCCAGTACGTCACCGACGGTACGGGCCGATTTTTTAAATTTGGCGCTGGCATTCAGGCCCAGTTCAGACATCGCATACACA",
+          "RegionOfInterest": {
+            "aa_sequence": "NWGAP",
+            "position_range": "58-72",
+            "Significance": {
+              "message": "Fluoroquinolone resistance"
+            }
+          }
+        }
+      },
+      "name": "parC_Ecoli_UT2",
+      "assay_type": "ROI"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "parC",
+        "Amplicon": {
+          "sequence": "GTACGTCATTATGGACCGTGCATTGCCGCATATCAGTGATGGCTTAAAGCCCGTACAGCGCCGTATTGTCTATGCTATGAGCGAGCTAGGCTTAAAAAGCAGTGGCAAGCCAAAAAAATCAGCGCGTACAGTGGGTGATGTACTTGGTAAATACCACCCACATGGTGACTCGGCATGTTATGAAGCCATGGTACTCATGGCTCAGCCATTTAGTTACCGCTATCCTTTAATCGAAGGTCAGGGGAACTGGGGCTCACCTGATGATCCTAAGTCTTTTGCTGCGATGCGTTATACCGAAGCCAAACTCTCGGCTTATAG",
+          "RegionOfInterest": {
+            "aa_sequence": "GDS",
+            "position_range": "164-172",
+            "Significance": {
+              "message": "Fluoroquinolone resistance"
+            }
+          }
+        }
+      },
+      "name": "parC_ACBA_UT2",
+      "assay_type": "ROI"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "parC",
+        "Amplicon": {
+          "sequence": "CCAGATGTTCGTGATGGTTTAAAACCAGTACAACGTCGTATTTTATATGCAATGTATTCAAGTGGTAATACACACGATAAAAATTTCCGTAAAAGTGCGAAAACAGTCGGTGATGTTATTGGTCAATATCATCCACATGGAGACTCCTCAGTGTACGAAGCAATGGTCCGTTTAAGTCAAGACTGGAAGTTACGACATGTCTTAATAGAAATGCATGGTAATAATGGTAGTATCGATAATGATCCGCCAGCGGCAATGCGTTACACTGAAGCTAAG",
+          "RegionOfInterest": {
+            "aa_sequence": "YEAMV",
+            "position_range": "109-123",
+            "Significance": {
+              "message": "Fluoroquinolone resistance"
+            }
+          }
+        }
+      },
+      "name": "parC_staph_UT2",
+      "assay_type": "ROI"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "qnrA",
+        "Amplicon": {
+          "sequence": "GATTTGAGTGACAGCCGTTTTCGCCGCTGCCGCTTTTATCAGTGTGACTTCAGCCATTGCCAGCTAAGGGATGCCAGTTTCGAGGATTGCAGTTTCATTGAAAGCGGCGCCATCGAAGGGTGCCACTTCAGCTATGCCGATCTGCGCGATGCCAGTTTCAAGGCCTGCCGCCTGTCTTTGGCCAATTTCAGCGGTGCCAACTGCTTTGGCATAGAGTTCAGGGAGTGCGATCTCAAGGGCGCCAATTTTTCCCGGGCCCGTTTTTACAATCAAATCAGCCATAAGATGTACTTCTGC",
+          "Significance": {
+            "message": "Low-level Fluoroquinolone resistance"
+          }
+        }
+      },
+      "name": "qnrA_UT2",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "qnrC",
+        "Amplicon": {
+          "sequence": "GCTAATTTCTCACAGGCAAACTTTGTTAATCATGTTTCTAACAAAATGTATTTTTGCTCTGCTTACATTACGGGTTGT",
+          "Significance": {
+            "message": "Low-level Fluoroquinolone resistance"
+          }
+        }
+      },
+      "name": "qnrC_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "qnrD",
+        "Amplicon": {
+          "sequence": "CGACAGGAATAGCTTGGAAGGGTGTGATTTTAATAGAGCCAAACTAAAAAACGCTAGCTTTAAAAGCTGCGATTTATCAATGAGTAATTTTAAAAACATTAGCGCCTTAGGTCTTGAAATTAGTGAGTGTTTAGCTCAAGGAGCTGATTTTCGAGGGGCTAATTTTATGAATATGATAACTACAAGGTCATGGTTTTGTAGTGCTTATATAACCAAGACAAATCTTAGTTACGCTAATTTTTCTAGAGTCATATTAGAAAAGTGCGAACTGTGGGAAAATCGCTGGAATGGCACTGTGATAACTGG",
+          "Significance": {
+            "message": "Low-level Fluoroquinolone resistance"
+          }
+        }
+      },
+      "name": "qnrD_UT2",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "qnrS",
+        "Amplicon": {
+          "sequence": "GTGCTAACTTGCGTGATACGACATTCGTCAACTGCAAGTTCATTGAACAGGGTGATATCGAAGGCTGCCACTTTGATGTCGCAGATCTTCGTGATGCAAGTTTCCAACAATGCCAACTTGCGATGGCAAACTTCAGTAATGCCAATTGCTACGGTATAGAGTTCCGTGCGTGTGATTTAAAAGGTGCCAACTTTTCCCGAACAAACTTTGCCCATCAAGTGAGTAATCGTATGTACTTTTGCTCAGCATTTATTTCTGGATGTAATCTTTCCTATGCCAATATGGA",
+          "Significance": {
+            "message": "Low-level Fluoroquinolone resistance"
+          }
+        }
+      },
+      "name": "qnrS_UT2",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "qnrB",
+        "Amplicon": {
+          "sequence": "CGACGTTCAGTGGTTCAGATCTCTCCGGCGGCGAGTTTTCGACTTTCGACTGGCGAGCAGC",
+          "Significance": {
+            "message": "Low-level Fluoroquinolone resistance"
+          }
+        }
+      },
+      "name": "qnrB-C1_UT2",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "qnrB",
+        "Amplicon": {
+          "sequence": "ACCAATCTAAGCTATGCCAACTTTTCGAAGGCCGTGCTTGAAAAGTGCGAATTGTGGGAAAATCGCTGGATGGGAACTCAGA",
+          "Significance": {
+            "message": "Low-level Fluoroquinolone resistance"
+          }
+        }
+      },
+      "name": "qnrB-C2_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "qnrB",
+        "Amplicon": {
+          "sequence": "CGCCTATATCACCAATACCAACTTAAGCTACGCCAACTTTTCAAAAGTCGTACTGGAAAAGTGCGAGCTGTGGGAAAACCGTTGGATGGGTACTCAGGTACTGGGGGCGACGTTCAGTGGTTCAGATCTTTCCGGCGGTGAGTTTTCGTCGTTCGACTGGCGGGCCGCAAACTTTACGCACTGTGATTTGACCAATTCAGAACTGGGCGATCTCGATGTCCGGGGTGTTGATTTGCAAGGCGTCAAACTGGACAGCTACCAGGCATCGTTGATCCTGGAAC",
+          "Significance": {
+            "message": "Low-level Fluoroquinolone resistance"
+          }
+        }
+      },
+      "name": "qnrB-C3_UT2",
+      "assay_type": "presence/absence"
+    },
+    {
       "Target": {
         "function": "resistance type",
         "gene_name": "cfr",
@@ -1782,433 +1601,514 @@
             "message": "Linezolid resistance"
           }
         }
-      }
+      },
+      "name": "cfr_UT2",
+      "assay_type": "presence/absence"
     },
     {
-      "assay_type": "SNP",
-      "name": "USA300_UT1",
       "Target": {
-        "function": "strain ID",
+        "function": "resistance type",
+        "gene_name": "ermA",
         "Amplicon": {
-          "sequence": "GCACGTTGATGACTTCTGACAGCATAAGCATCTTGATCTTCACGTGATACGTCAAATTGGGATGCTACATTTTCAGCAGTTAAACCCATAGGATATGACGCACCTATATCATCATATTGTAAGGTTGGATTGTTTGTGGGC",
-          "SNP": {
-            "variant": "A",
-            "position": 42,
-            "Significance": {
-              "message": "S. aureus USA300"
+          "sequence": "CAACCATTGATTTCAAAGAAGGACTACAAAAAGTATCGATCTTTTGTTTATAAGTGGGTAAACCGTGAATATCGTGTTCTTTTCACTAAAAACCAATTCCGACAGGCTTTGA",
+          "Significance": {
+            "message": "Macrolide resistance (e.g. Erythromycin)"
+          }
+        }
+      },
+      "name": "ermA_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "ermC",
+        "Amplicon": {
+          "sequence": "ATTTAATCGTGGAATACGAGTTTGCTAAAAGATTATTAAATACAAAACGCTCATTGGCATTATTTTTAATGGCAGAAGTTGATATTTCTATATTAAGTATGGTTCCAAGAGAATATTTTCATCCTAAACCTAAAGTGAATAGCTCACTTATCAGATTAAATAGAAAAAAATCAAGAATATCACACAAAGATAAACAGAAGTATAATTATTTCGTTATGAAATGGGTTAACAAAGAATACAAGAAAATATTTACAAAAAATCAATTTAACAATTCCTTAAAACATGCAGGAATTGACG",
+          "Significance": {
+            "message": "Macrolide resistance (e.g. Erythromycin)"
+          }
+        }
+      },
+      "name": "ermC_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "msrA",
+        "Amplicon": {
+          "sequence": "CTTCTTCCAAATGTTCCATTCTTTTTTCAATATGCTTAGCTTGTTTTTGAGCAGCCTTCTCAACCGTGCCTTTTTGTTTTGATGCACTTAAACGATCTGGT",
+          "Significance": {
+            "message": "Macrolide resistance (e.g. Erythromycin)"
+          }
+        }
+      },
+      "name": "msrA_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "tetK",
+        "Amplicon": {
+          "sequence": "AGTTTGAGCTGTCTTGGTTCATTGATTGCTTTTATTGGTCACAATCACTTTTTTATTTTGATTTTTGGTAGGTTAGTACAAGGAGTAGGATCTGCTGCA",
+          "Significance": {
+            "message": "Tetracycline resistance"
+          }
+        }
+      },
+      "name": "tetK_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "tetM",
+        "Amplicon": {
+          "sequence": "CTTTCTGGGCTTCCATTGGTTTATCTGTATCACCGCTTCCGTTGGGAAGTGGAATGCAGTATGAGAGCTCG",
+          "Significance": {
+            "message": "Tetracycline resistance"
+          }
+        }
+      },
+      "name": "tetM_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "AATGGCTGTTGGTTGGACGCAAGACTTTT----------------------------------------------GAATCAATG------------GGAGCATTACCC---------------AACCGAAAGTA----TG",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA1_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "AATA----TGCC--------GTTGTAAC---TCGTTCAAGCTTCACTTCCAGTGATG---------AGAATG----TATTGGTATTTCCATCT--------ATCGATGAAGCGCTAAA--TC-------------ATC-TGAAGACGATAACG-----------------------GA------TCATGT---GATTGTGT",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA15_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "AGTA----TGCA--------GTTGTAAC---TCGCTCTAATTTTTCTACGAATGATG---------AGGGTG----TAATGGTTTTCTCCTCA--------ATTCAGGATGCCTTAAT---AA------------ATT-TAGAGGAAATCACG-----------------------GA------TCATGT---TATCGTTTCTGGTGGTGGTG",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA16_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "GTGATTGGTTGCGGTCCACACATACCCTGGTCCGC---GAAAGGAGAGCAGCTACTCTTTAAAGCCTTGACGTACAA---CCAGTGGCTTTTGGTGGGCCGCAAGACGTTC----------------------------------------------GAATCTATG------------GGAGCACTCCCT---------------AATAGGAAATA----CGCG--------GTCGTTAC---TCGCTCAGCCTGGACGGCCGATAATG---------ACAACG----TAATAGTATTCCCGTCG--------ATCGAAGAGGCCATGTA--CG------------GGC-TGGCTGAACTCACC-----------------------GA------TCACGT---TATAGTGTCTGGTGGCGGG",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA14-30_UT2",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "CGAGAATGGAGTAATTGGCTCTGGATTGGATATACCTTGGCATGT---ACAAGGCGAGCAGCTCCTATTCAAAGCCATGACTTACAA---TCAATGGCTTCTAGTTGGTCGTAAAACCTTC----------------------------------------------GACTCAATG------------GGTAAACTTCCG---------------AATAGAAAATA----TGCA--------GTGGTTAC---TCGTTCTAAAATTATCTCGAATGACC---------CTGATG----TTGTGTATTTCGCAAGT--------GTTGAATCGGCATTAGC--TT------------ACC-TAAACAATGCGACA-----------------------GC------ACATAT---CTTTGTTTCTGGTGGTGGTGAAATA",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA6-31_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "GGGTGCCAATCGGGTTATTGGCAATGGCCCCGATATTCCCTGGAAAAT---CCCGGGTGAGCAAAAGATCTTTCGCAGGCTCACCGAG",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA26-13_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "AAAGA-------CTACGAGCAG-----AA-------TG-----------GCA-------TGGAAGAACATGAC-----------CTTCACA------------CTTA--------CTTCACTT------------AC---CGT",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA8_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "AACGCTGCCATTGTTACCAACC-----AATAACAGACAGTT----TATT--------GTGGTAAG-----------------CAATACTGAGGAGCCTAG----CCT--TAATG------------TTCA----------TG----------TGGTA-TCTCC----------------------------------AGAACACTTCAAG------------------------GCTT",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA3b_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "AAGACAGGAGGT-AT----CGGATTTGAAAATCAGATT-CCGTGG---CATGA---ACCAGAAGATTTAAAACACTTCAAAGCTGTTACAATGAA-------CTCAGTTTT-GATTATGGGTAGAAAAACTTTT-------------------------------------------------------------------------------------------------------------------------GCCTCACTG-------------CCTAAAGTGCTGCCC----------------GGACGACTTCA--------TGTG--------GTAGT-----------------------CAGTAAAACAGTACCACCCACCCAGAACACTG---------ATCAAG-------TTGTGTA---TGTAAGTACATACCAGA-------TCGCAGT------------------AAGAACTGCAAG-----------------------CT---------------TGT------------TGGTTGACAAACCA-----------------------GA-------GTATTCTCAAAT---TTTTGTAATTGGTGGGAAGAGTGCGTACGAG--A---------ACTTAG-----CTGCCTACG",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA9_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "AA---------------GACCGCATCAA-------TATC--------GTCATCAC----------------------CAAGAAGTCAGAGA--TTTCTTGGACGGCTT--------GCTA----------TG",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA24_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "AAGACTCTTACG-----------------------AA-------CCATGT-----T----GTTGTTTCTGGTGGTGGAGAGATCTACAAG--A---------GTCTGATCGC-CC----ATGC------------CGACAC-----------------GCTACATATCT-------CGACAATAGA------------TTCCG-----AGCCAG---------AGG",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA27-28_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "AAGCACTGACCTATAA----CCA-ATGGCTT---TTGGTAGGGCGCAAAACATTT-------------------------------------------------------------------------------------------------------------------------GAGTCTATG----------------GGGCCGCTGCCC-----------------AATAGGAAATA-------CGCG--------GTTGTTAC-------------------CCGCTCAAACTGGACA----GCGGCTAATG------------AAAA----------CG-------TAGTGGTT-TTCCCGTCG--------ATTG------------------ACGAAGCGATGGG-----------------------TA---------------GAT------------TAGGCGAGATCACT-----------------------GA-------CCATGT-----C----ATCGTCGCCGGTGGTGGAGAAATCTACCAT--G---------AAACGAT-AC-CC----ATGGC-----------CTCTAC-----------------TCTGCATGTGT-------CGACAATCGA------------CGTTG-----AGCCAG---------AGGGAGACGTTTTCT-----------TT---CC---------------G----------------AACATTCCTGGG",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA25_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "A---------------------------------------AG---------------------------CAT---------------TC------------AGAGACACAACC-------------------------AA---------ACCAAT---C----AATGTCATTGGTGGTGTTG--GTT",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA10_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "AAGGTGAGCAGCTAATCTTTAAGGCGCTCACATACAA----TCA-GTGGCTT---CTTGTTGGAAGGAAAACATTT-------------------------------------------------------------------------------------------------------------------------GACTCTATG----------------GGAGTTCTTCCA-----------------AATCGCAAATA-------TGCA--------GTAGTGTC-----------------AAAGAATGGAATTTCAGG----GTCA",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA32_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "AAGTCGCACA------------------------AC--------------ATCT-----------TGAAGGAAAAAACT-----------------------TA-------ACATGC-----T-----TCATTATTGGTGGTGCTCAAATCT",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA20_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "A---------------ATC------------AATATCACGACAGC-----------------------GA------TCAACGAAT---A----GCTGTCATTGGTGGAGAAA--AGCTGT-ACGTGC--------AA---GCCC--TCGCATCTGC-------------CACAA----------------AAGTCCACATGA-------CGGTAATGCA------------CA--------AGCCATA------TAACTGCGATCGGAC-G-----------TTG--CC---------GATGTC---------------ATAC-ATCGACAAAAA------GTTT------------GT----TGCAG-------GTCAA-------------GGGTCTATC-----------ACCATTCAAACT-----GCGGTAGATGG----TGAGACCC-------ATCCCGT---GAAG",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA23_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "AA----TCA-GTGGCTC---CTTGTTGGAAGGAAAACATTT-------------------------------------------------------------------------------------------------------------------------GACTCTATG----------------GGTGTTCTTCC",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA7_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "AA----TCA-GTGGCTT---CTTGTCGGAAGAAAAACATTT-------------------------------------------------------------------------------------------------------------------------GAGTCAATG----------------GGTATTCTTCCT-----------------AATCGAAAGTA-------TGCT--------GTTCTTTC-----------------AAAAAATGGAATTTCACA----CCT--TCCTG------------AAAA----------CG-------TACTAGTT-TTTTCGTCT--------ATAG------------------AAAATGCATTATA-----------------------TG---------------AAC------------TGGCTAAGGTAACA-----------------------GA-------CCATTT----AT----AT-ATTTCTGGCGGTGGTCAAATATATAAT--A---------GTCTTA-----TTGAAAGTGC------------TGATAC-----------------CATCCACTTAT-------CTATCATCCA-",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA29_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "AATGGCGTAAT----CGGTAGTGGTCCTGATATC-CCGTGG--TCAGT----AAAAGGTGAGCAACTACTCTTTAAAGCGCTCACATATAA----TCA-ATGGCTC---CTTGTCGGAAGAAAAACATTT-------------------------------------------------------------------------------------------------------------------------GACTCTATG----------------GGTGTTCTTCCA-----------------AATCGCAAATA-------TGCA--------GTAGTGTC-----------------AAAGAACGGAATTTCAAG-",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA17_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "ACGCAT---T----GCTGTCATTGGTGGGGAGA--AGTTGT-ACATTC--------AA---GCTC--TTTCATCAGC-------------AACGA----------------AACTGCACATGA-------CCATAATTCC------------AAGAG-----AGTTCG---------ACTGTGATCGATTTA-----------TT---CC-----------TGTTG--------------ATCCGATCCAGAACAAT------TTTCACATTG-----AT----TCCAG------TGCCAGC------------GAG",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA18_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrA",
+        "Amplicon": {
+          "sequence": "ACTCTATGCCGAG---------GCTCTGCC---CCGA----GC------------GGATCG-----------------CTTGTATCTAA------CCTAC-ATTGA------------CGCTC-----AGTTGA---------ACGGTGATACCCATT-----------TC---CC--------------------------------GGATTACCTATCGC-------TTGGGTGGCA-----GG----AGTTG---------GAGCGGT--------CAACGCATCCTG-----------CTGACG------------ATAAGAACAG--CTATGCCT------------G----CGAATTTGTTACC------TTGAGTCGTC------------AGCG",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrA3_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrB",
+        "Amplicon": {
+          "sequence": "AATGGGAGATCGCGTGCGCAAGAAATCTGGCGCCGCTTGGCAAGGCCAGATTGTCGGGTGGTACTGC",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrB1-8_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrB",
+        "Amplicon": {
+          "sequence": "GCAGGGTCAAGTTGTCGGCTGGTACAGCACAAAACTAACCCCAGAAGGCTATGCCGTCGAGTCCGA",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrB2-7_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrB",
+        "Amplicon": {
+          "sequence": "AC-----CCGACAACTTGACCCTGCCAAGCGGCGCCAGATTTCTTG-------CGCACGCGATCTCCC-----AGGCCAAAC-GTGGCGTGCGATGGGAGCGCAAACTGGC-CAGCAACTAGAGT-ACTGACTCCATTGTTGTGTT------GGT",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrB3_1_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "dfrB",
+        "Amplicon": {
+          "sequence": "A----ATCTCACCCAGGCTCAGT--CCAG----ATTTATCCCATGACTGCGCTTGAACGG",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "dfrB4_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "sul",
+        "Amplicon": {
+          "sequence": "GCTGGTGGTTATGCACTCAGCGCA--GCGGGATGGCATCGCCACCCGCACCG-GTCACCTTCGACCCGAAGACGCGC-TCGACGAGATTG-----TGCGGTTCTTCGAGGCGCGGGTTTCCGCCTTG----CGACGGAGCGGGGTCGCTGCC--GACCGGCTCATCCTCGA--TCCGGGGATGGGATTTTTCTTGAGCCCCGCACCGGAAACATCG--CTGCACGTGCTGTCGAACCTTCAAAAGCTGAAG------TCGGCGTTGGGGCTTCCGCTATTGGTCTCGGTGTCGCGGAAATCCTTCTTGGGCG",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance  "
+          }
+        }
+      },
+      "name": "sul1_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "sul",
+        "Amplicon": {
+          "sequence": "CATCATTTTCGGCATCGTCAACATAACCTCGGACAGTTT--CTCCGATGGAGGCCGGTATCTGGCGCCAGACGCAGCCA----------TTGCGCAGGCGCGTAAGCTGATGGCCGAGGGGGCAGATGTGATCGACCTCGGTCCGGCATCCAGCAATCCCGACGCCGCGCCTGTTTCGTCCGACACAGAAATCGCGCGTATCGCGCCGGTGCTGGACGCGC--TCAAGGCAGATGGCATTCCCGTCTCGCTCGACAGTTATCAACCCGCGACGCAAGCCTATGCCTTGTCGC",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance"
+          }
+        }
+      },
+      "name": "sul2_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "sul",
+        "Amplicon": {
+          "sequence": "AAAGCCTTAATGACAGGTTTGAGTCTTTTGATTTCTTCCACAACGCCCACTTCAGTTGTATCAGGATTACTGGAAGCGGCTCCCAAATCAATCACATCTGCTCCATCTTC",
+          "Significance": {
+            "message": "TMP-SMX (Trimethoprim/sulfamethoxazole) resistance"
+          }
+        }
+      },
+      "name": "sul3_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "vanA",
+        "Amplicon": {
+          "sequence": "CGGCTCGACTTCCTGATGAATACGAAAGATTCCGTACTGCAGCCTGATTTGGTCCACCTCGCCAACAACTAACGCGGCACTGTTTCCCAATACCGCACA",
+          "Significance": {
+            "message": "Vancomycin resistance"
+          }
+        }
+      },
+      "name": "vanA_UT1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "reverse_comp": true,
+        "Amplicon": {
+          "RegionOfInterest": [
+            {
+              "mutations": "L,N,Y",
+              "Significance": {
+                "message": "Vancomycin intermediate resistance"
+              },
+              "aa_sequence": "H",
+              "position_range": "30-32"
             },
-            "reference": "G"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "SNP",
-      "name": "CC8_UT1",
-      "Target": {
-        "function": "strain ID",
-        "gene_name": "dnaA: chromosomal replication initiator protein",
-        "Amplicon": {
-          "sequence": "TGCCCATAACACATTTGACACTTTTGTAATCGGACCCGGTAACCGCTTTCCACATGCAGCGAGTTTAGCTGTGGCCGAA",
-          "SNP": {
-            "variant": "C",
-            "position": 37,
-            "Significance": {
-              "message": "S. aureus CC8 (excluding ST239)"
-            },
-            "reference": "T"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "SNP",
-      "name": "USA3-500_UT1",
-      "Target": {
-        "function": "strain ID",
-        "Amplicon": {
-          "sequence": "ACCTTATACGGAACATAGCAGACGTTATTTATTAGATGAAGGCCTCAATAAAGCGAATATCTTTGTGACAGGATCACCGATGACAGAAGTGATAGAAGCGCATCGA",
-          "SNP": {
-            "variant": "C",
-            "position": 44,
-            "Significance": {
-              "message": "S. aureus USA300/500"
-            },
-            "reference": "T"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "SNP",
-      "name": "ArchIber_UT_B+",
-      "Target": {
-        "function": "strain ID",
-        "Amplicon": {
-          "sequence": "CGCCAAATGACTCGCATTGTGAAATTACTGTAGCAGGGYTGCATGCTGGTAAACATGTGATGTGTGAAAAACCAATGGCTAAAACGACAGCAGAAGCTCAAAAAATGATAGATACAGCTAAATCAACAGGTAAAAAATTAACAATAGGTTATCAAAATCGTTTCCGAGCAGATAGTCAATTTTTACATCAAGCAGCGCAACGTGGCGACTTAGGAGACATTTACTTCGGAAAGGCACATGC",
-          "SNP": {
-            "variant": "T",
-            "position": 39,
-            "Significance": {
-              "message": "S. aureus Archaic Iberian"
-            },
-            "reference": "C"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "SNP",
-      "name": "TruIber_UT1",
-      "Target": {
-        "function": "strain ID",
-        "Amplicon": {
-          "sequence": "GCGCAACAGGGAAGCAAGGTAATGCAGTTGTAAAACAGTTGTTAGAGGATGGATGGTATGTAAGTGCATTAACTAGAAATAAGAATAATCGTAAACTTTCAGACATAGGACATCCGCA",
-          "SNP": {
-            "variant": "T",
-            "position": 58,
-            "Significance": {
-              "message": "S. aureus True Iberian"
-            },
-            "reference": "C"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "SNP",
-      "name": "ST239_UT1",
-      "Target": {
-        "function": "strain ID",
-        "Amplicon": {
-          "sequence": "CATGACCGCCACTATAACCAGATACGACTGACCTGATGCCTGGATATGATGTAAATGGTTTAACCATGCACCAGAAACATCCTCCTGCTAATGTTGCAT",
-          "SNP": {
-            "variant": "C",
-            "position": 33,
-            "Significance": {
-              "message": "S. aureus ST239"
-            },
-            "reference": "T"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "SNP",
-      "name": "CC5_UT1",
-      "Target": {
-        "function": "strain ID",
-        "gene_name": "putative glucose inhibited division protein B",
-        "Amplicon": {
-          "sequence": "CTGGCGCTCTCCAGCATCTTCTGGCAATTCAAAGGTATGTGTTTCTGTAACATTACCACCTAACACACTAATTGCAA",
-          "SNP": {
-            "variant": "C",
-            "position": 30,
-            "Significance": {
-              "message": "S. aureus CC5"
-            },
-            "reference": "T"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "sea_UT",
-      "Target": {
-        "function": "virulence factor",
-        "gene_name": "MRSA sea",
-        "Amplicon": {
-          "sequence": "TATGGCTAGACGGTAAACAAAATACAGTACCTTTGGAAACGGTTAAAACGAATAAGAAAAATGTAACTGTTCAGGAGTTGGATCTTCAAGCAAGACGTTATTTACAGGAAAAATATAATTTATATAACTCTGATGTTTTTGATGGGAAGGTTCAGAG",
-          "Significance": {
-            "message": "enterotoxin gene for USA typing"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "seb_UT",
-      "Target": {
-        "function": "virulence factor",
-        "gene_name": "MRSA seb",
-        "Amplicon": {
-          "sequence": "TTACTGTTCGGGTATTTGAAGATGGTAAAAATTTATTATCTTTTGACGTACAAACTAATAAGAAAAAGGTGACTGCTCAAGAATTAGATTACCTAACTCGTCACTATTTGGTGAAAAATAAAAAACTCTATGAATTTAACAACTCGCCTTATGAAACGG",
-          "Significance": {
-            "message": "enterotoxin gene for USA typing"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "stx1_UT",
-      "Target": {
-        "function": "virulence factor",
-        "gene_name": "Shiga toxin",
-        "Amplicon": {
-          "sequence": "ATGTCAGAGGGATAGATCCAGAGGAAGGGCGGTTTAATAATCTACGGCTTATTGTTGAACGAAATAATTTATATGTGACAGGATTTGTTAACAGGACAAATAATGTTTTTTATCGCTTTGCTGATTTTTCACATGTTACCTTTCCAGGTACAACAGCGGTTACATTGTCTGGTGACAGTAGCTATA",
-          "Significance": {
-            "message": "encodes Shiga toxin protein (STEC)"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "stx2_UT",
-      "Target": {
-        "function": "virulence factor",
-        "gene_name": "Shiga toxin",
-        "Amplicon": {
-          "sequence": "AGTTCTGCGTTTTGTCACTGTCACAGCAGAAGCCTTACGCTTCAGGCAGATACAGAGAGAATTTCGTCAGGCACTGTCTGAAACTGCTCCTGTGTATACGATGACGCCGGGAGACGTGGACCTCACTCTGAACTGGGGGCGAATCAGCAATGTGCTTCCG",
-          "Significance": {
-            "message": "encodes Shiga toxin protein (STEC)"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "EAEC_aggR_UT",
-      "Target": {
-        "function": "virulence factor",
-        "gene_name": "E. coli aggR",
-        "Amplicon": {
-          "sequence": "GATACATTAAGACGCCTAAAGGATGCCCTGATGATAATATACGGAATATCAAAAGTAGATGCTTGCAGTTGTCCGAATTGGTCAAAAGG",
-          "Significance": {
-            "message": "presence denotes E. coli is EAEC (enteroaggregative)"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "escV_UT",
-      "Target": {
-        "function": "virulence factor",
-        "gene_name": "T3SS in E. coli",
-        "Amplicon": {
-          "sequence": "TGGAATAATCATCATCATTACAGCCATAAAGAAGAAGAGAGCCAGAATAAGATCGTGATATGACTC",
-          "Significance": {
-            "message": "presence denotes AEEC"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "bfpA_UT",
-      "Target": {
-        "function": "virulence factor",
-        "gene_name": "adherence factor, plasmid-encoded, encodes bundle-forming pilus (bfpA-bfpL)",
-        "Amplicon": {
-          "sequence": "TACCAGTCTGCGTCTGATTCCAATAAGGCGCAGAATGCTATTTCAGAAGTAATGAGCGCAACGT",
-          "Significance": {
-            "message": "presence detects EPEC"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "ETEC_eltA_UT",
-      "Target": {
-        "function": "virulence factor",
-        "gene_name": "eltA",
-        "Amplicon": {
-          "sequence": "CTGCGTTAGGTGGAATACCATATTCTCAGATATATGGATGGTATCGTGTTAATTTTGGTGTAATTGATGAACGATTACATCGTAACAGGGAATATAGAGACCGGTATTACAGAAATCTGAATATA",
-          "Significance": {
-            "message": "presence denotes ETEC"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "ETEC_estA_UT",
-      "Target": {
-        "function": "virulence factor",
-        "gene_name": "estA",
-        "Amplicon": {
-          "sequence": "GTTCCAGCCTGCCATCTGCTGCCAGCACCAGGACCTGTTGCTTCTTCCCCTCATTTCTGTGCACTGCCTGAATGGGTACCAGCAGTGTATTTTGGGCTTCATCAGTAATCAGGGTAACCTGAGCA",
-          "Significance": {
-            "message": "presence denotes ETEC"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "UPEC_fyuA_UT",
-      "Target": {
-        "function": "virulence factor",
-        "gene_name": "fyuA",
-        "Amplicon": {
-          "sequence": "AAGCACGCTGGTGGTTACCGCCAGTAAACAATCTTCCCGCTCGGCATCAGCCAACAACGTCTCATCTACTGTTGTCAGCGCGCCGGAATTAAGCGACGCCGGCGTCACCGCCAGCGACAAACTCC",
-          "Significance": {
-            "message": "presence denotes UPEC"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "SNP",
-      "name": "H30-Rx-snp200_UT",
-      "Target": {
-        "function": "strain ID",
-        "gene_name": "CTX-M",
-        "Amplicon": {
-          "sequence": "GACACCATGCGTTTTGCTTCAACGCTGGAGAATATGGGCGTCAGCTTTATCAACGCTATCATGACGTTGATCGCCTTCCTGCCGGTGCTGGTAACGCTCTCCGCACATGTGCCGGAGCTGCCGATTGTCGGGCACATTCCGTATGGTCTGGTGATTGCCGCTATCGTCTGGTCGCTGATGGGGACCGGATTACTGGCAGTGGTAGGGATCAAACTGCCGGGGCTGGAGTTTAAAAACCAGCGTGTAGAGGCTGCCTACCGTAAAGAACTGGTTTATGGTGAAGACGATGCCACGCGCGCGACGCCGCCTACGGTACGCGAGCTTTTTAGCGCCGTACGGAAAAACTATTTCCGCCTCTATTTTCACTATATGTATTTCAATATCGCCCGCATTCTCTATTTGCAGGTCGATAACGTTTTCGGTTTGTTCTTGCTGTTTCCGTCAATTGTTGCCGGTACGA",
-          "SNP": {
-            "variant": "T",
-            "position": 299,
-            "Significance": {
-              "message": "canSNP- 2 assays- Price Mbio 2013- differentiate the CTX-M carrying subclone of ST131."
-            },
-            "reference": "C"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "SNP",
-      "name": "H30-Rx-snp264_UT",
-      "Target": {
-        "function": "strain ID",
-        "gene_name": "CTX-M",
-        "Amplicon": {
-          "sequence": "GTGGCGATTTCACGCTGTTAGGCCTTTCTCTACCGGGATTAATTACTTTCTTACTCTTCTGGCTGGTTAACGTTGGTATTGGTTTTGGCGGCGGAAAAGTTTTAAATAAATTCACTGCCATTCTTAACCCGTGCATCTATATCGTTTTCGGCGGTATGGCGATTTGGGCGATTTCGCTGGTCGGGATCGGTCCAATCTTTGACTACATTCCGGGCGGTATTCAGAAAGCAGAAAACAGTGGCTTCCTGTTTCTGGTGGTGATAAACGCGGTGGTTGCGGTCTGGGCGGCACCGGCGGTGAGCGCATCCGACTTTACGCAAAACGCCCACTCGTTTCGTGAGCAGGCGCTGGGGCAAACGCTGGGTTTAGTTGTGGCCTATATTCTGTTTGCGGTCGCCGGGGTATGTATTATTGCCGGAGCCAGTATTCATTACGGCGCTGACACCTGGAACGTGCTGGATA",
-          "SNP": {
-            "variant": "A",
-            "position": 287,
-            "Significance": {
-              "message": "canSNP- 2 assays- Price Mbio 2013- differentiate the CTX-M carrying subclone of ST131."
-            },
-            "reference": "G"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "trpA_ST131_O16_UT",
-      "Target": {
-        "function": "strain ID",
-        "gene_name": "trpA",
-        "Amplicon": {
-          "sequence": "CCAGAAATCGCGCCCGCAGTTCCTGCATCAATCGCTGCTTTTACCTGATCCGGGGCGGAAATACCAAATCCCTGCAATGGAGGTGCAGCGTTGTACTCTTTCAGCTTCGCAACCAGATGATTGAGAGGTAACGCGGCGCGGTTTT",
-          "Significance": {
-            "message": "multiplex for ST131 serotyping"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "pabB_ST131_O25b",
-      "Target": {
-        "function": "strain ID",
-        "gene_name": "pabB",
-        "Amplicon": {
-          "sequence": "TCCAGCAGGTGCTGGATCGTGCAGACATTCGCCCAGCGCATAACGAAGATTTGCCATTTCAGGGCGGCGCGCTGGGGTTGTTTGGCTACGATCTGGGCCGCCGTTTTGAGTCACTGCCAGAAATTGCGGAACAAGATATCGTTCTGCCGGATATGGCAGTGGGTATCTACGACTGGGCGCTGGTTGTCGACCACCAGCGTCAAACAGTTTCTTTGCTGAGTCATAATGATGTCAATGCCCGTCGGGCCTGGCTGGAAAGCCAGCAATTCTCCCCGCAGGAAGATTTCACACTCACTTCCGACTGGCAATCCAATATGACCCGCGAACAGTACGGCGAAAAATTTCGC",
-          "Significance": {
-            "message": "multiplex for ST131 serotyping"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "uidA_1_UT",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "uidA",
-        "Amplicon": {
-          "sequence": "CCATCAGCACGTTATCGAATCCTTTGCCGCGCAAATCCGCATCTTCATGACGGCCAAAGCCAGTAAAGTAGAACGGTTTGTGGTTGATCAGGAACTGTTCGCCCTTCACTGCCACTGACCGGATGCCGACGCGCAGCGGGTAGATATCACACTCTGTCTGGCTTTTGGCTGTGACGCACAGTTCATAGAGATAACCTTCACCCGATTGCCAGAGGTGCGGATTCACCACTTGCAAAGTCCCGCTGGTGCCTTGTCCAGTTGCAACCACCTGTTGATCCGCATCACGCAGTTCAACGCTGACATCACCATTGGCCACCACCTGCCAGTCAACAGACGCGTGGTTACAGGCTTGCGCGACATGCGTCACCACGGTGATATCGTCCACCCAGGTGTTCGGCGTGGTGTAGAGCATTACGCTGCGATGGATCCCGGCGTAGTTAAAGAAATCATGGAAGTAAGACTGCTTTTTCTTGCCGTTTTCGTCGGTAATCACCATTCCCGGCGGGATAGTCTGCCAGTTCAGTTCGTTGTTCACACAAACGGTGATACGTACACTTTTCCCGGCAATAACATACGGCGTGACATCGGCTTCAAATGGCGTATAGCCGCCCTGATGCTCCATCACTTCCTGATTATTGACCCACACTTTGCCGTAATG",
-          "Significance": {
-            "message": "multiplex for ST131 serotyping"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "presence/absence",
-      "name": "uidA_2_UT",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "uidA",
-        "Amplicon": {
-          "sequence": "GGATTCACCACTTGCAAAGTCCCGCTGGTGCCCCCTTGTCCAGTTGCAACCACCTGTTGATCCGCATCACGCAGTTCAACGCTGACATCACCATTGGCCACCACCTGCCAGTCAACAGACGCGTGGTTACAGTCTTGCGCGACATGCGTCACCACGGTGATATCGTCCACCCAGGTGTTCGGCGTGGTGTAGAGCATTACGCTGCGATGGATCCCGGCGTAGTTAAAGAAATCATGGAAGTAAGACTGCTTTTTCTTGCCGTTTTCGTCGGTAATCACCATTCCCGGCGGGATAGTCTGCCAGTTCAGTTCGTTGTTCACACAAACTGTGATACG",
-          "Significance": {
-            "message": "Cindy's assay"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "SNP",
-      "name": "ST258_UT_FB",
-      "Target": {
-        "function": "strain ID",
-        "gene_name": "MarR transcriptional regulator",
-        "Amplicon": {
-          "sequence": "ATGGTGGTGCGCCAGTGGCGCGCCATTATTGACTYCGCTATCACCGATACCGGACTCACCCAGTCCAGCTGGACGGTGCTGATGCAACTGCATCAGCTGGGAGACAACGTCTCGGTCAGC",
-          "SNP": {
-            "position": 35,
-            "Significance": {
-              "message": "K. pneumoniae ST258 present"
-            },
-            "reference": "X"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "SNP",
-      "name": "CG258_UT_FB",
-      "Target": {
-        "function": "strain ID",
-        "gene_name": "MarR transcriptional regulator",
-        "Amplicon": {
-          "sequence": "ACGGCAGGCGATTTGATTTAACGTGGCGCTGAAGGTAGCGAGATCGGCCTCCGGGATGGTCTGGGTTACGCGCTCCTGATAGGTCTCGATCACGCAGCT",
-          "SNP": {
-            "position": 37,
-            "Significance": {
-              "message": "K. pneumoniae CG258 present"
-            },
-            "reference": "X"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "gene variant",
-      "name": "tuf_UT1",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "tuf",
-        "Amplicon": {
-          "sequence": "ACAGGCCGTGTTGAACGTGGTCAAATCAAAGTTGGTGAAGAAGTTGAAATCATCGGTTTACATGA---CACATCTAAAACAACTGTTACAGGTGTTGAAATGTTCCGTAAATTATTAGACTACGCTGAAGCTGGTG",
-          "Significance": {
-            "message": "Staph genus"
-          }
-        }
-      }
-    },
-    {
-      "assay_type": "gene variant",
-      "name": "tuf_UT2",
-      "Target": {
-        "function": "species ID",
-        "gene_name": "tuf",
-        "Amplicon": {
-          "sequence": "CTCAACTGGCATCATGAATGGTTTGTCAGAATCACGTTCTGGAGTTGGAATGTAAGTATCTACAGCTTCCATTAATTCTAAGATTTTTTCTTCGTATTGAGCATCGCCTTCTAAAGCTTTTAATGCTGAACCAGCGATTACAGGTACATCGTCACCT",
-          "Significance": {
-            "message": "Staph genus"
-          }
-        }
-      }
+            {
+              "mutations": "P",
+              "Significance": {
+                "message": "Rifampin resistance"
+              },
+              "aa_sequence": "S",
+              "position_range": "81-83"
+            }
+          ],
+          "sequence": "CCAGGTCCTAATGCTGATAGACGACGTTTATGCGTTAACTCAGCTAATGGGTTTGCTTGGTCCATGAATTGTGATAATTGAGAGCTACCAAAGAATTCTTTAATAGATGCAATAACAGGTCGAATATTAATTAATTGTTGAGGTGTGATAGACTCAGTATCTTGAATTGACATTCTTTCACGTACAACTCTTTCCATTCTTGATAAACCGATACGGAATTGGTTTTGTAGTAATTCACCTACAGAACGTAAACGACGGT"
+        },
+        "function": null
+      },
+      "assay_type": "ROI",
+      "name": "VISA_rpoB-481_UT1"
     }
   ]
 }
