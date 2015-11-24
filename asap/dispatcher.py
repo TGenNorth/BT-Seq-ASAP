@@ -195,13 +195,18 @@ def _run_novoalign(sample, reads, reference, outdir='', dependency=None, sampath
 def findReads(path):
     import os
     import re
+    import subprocess
     from collections import namedtuple
     read_list = []
     Read = namedtuple('Read', ['sample', 'reads'])
     for file in os.listdir(path):
-        is_read = re.search('(.*)(\.fastq(?:\.gz)?)$', file, re.IGNORECASE)
+        is_read = re.search('(.*)(?:_L\d\d\d_.*)?(\.fastq(\.gz)?)$', file, re.IGNORECASE)
         if is_read:
             sample_name = is_read.group(1)
+            if os.path.getsize(file) == 0 or (is_read.group(3) and subprocess.getoutput("gzip -l %s | awk 'NR > 1{print $2}'" % file) == '0'):
+                logging.warning("Read file %s has no data, skipping..." % file)
+                read_list.append(Read(sample_name, None))
+                next
             is_paired = re.search('^((.*?)(?:_L\d\d\d)?(?:_[R]?))([12])(.*)$', sample_name, re.IGNORECASE)
             if is_paired:
                 if is_paired.group(3) == '1':  # If paired, only process read 1, so we don't double count the pair, see TODO below

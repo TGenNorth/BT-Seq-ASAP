@@ -167,6 +167,9 @@ USAGE
         
             read_list = dispatcher.findReads(read_dir)
             for read in read_list:
+                if (not read.reads):
+                    #TODO: write out appropriate xml for samples with empty read files so they show up in results
+                    next
                 if trim:
                     trimmed_reads = dispatcher.trimAdapters(*read, outdir=out_dir, adapters=adapters, quality=qual, minlen=minlen)
                     (bam_file, job_id) = dispatcher.alignReadsToReference(trimmed_reads.sample, trimmed_reads.reads, ref_fasta, out_dir, jobid=trimmed_reads.jobid, aligner=aligner, args=aligner_args)
