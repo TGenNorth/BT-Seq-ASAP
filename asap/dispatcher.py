@@ -206,7 +206,7 @@ def findReads(path):
             if os.path.getsize(file) == 0 or (is_read.group(3) and subprocess.getoutput("gzip -l %s | awk 'NR > 1{print $2}'" % file) == '0'):
                 logging.warning("Read file %s has no data, skipping..." % file)
                 read_list.append(Read(sample_name, None))
-                next
+                continue
             is_paired = re.search('^((.*?)(?:_L\d\d\d)?(?:_[R]?))([12])(.*)$', sample_name, re.IGNORECASE)
             if is_paired:
                 if is_paired.group(3) == '1':  # If paired, only process read 1, so we don't double count the pair, see TODO below
