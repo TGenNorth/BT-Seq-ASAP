@@ -203,7 +203,8 @@ def findReads(path):
         is_read = re.search('(.*)(?:_L\d\d\d_.*)?(\.fastq(\.gz)?)$', file, re.IGNORECASE)
         if is_read:
             sample_name = is_read.group(1)
-            if os.path.getsize(file) == 0 or (is_read.group(3) and subprocess.getoutput("gzip -l %s | awk 'NR > 1{print $2}'" % file) == '0'):
+            full_file = os.path.join(path, file)
+            if os.path.getsize(full_file) == 0 or (is_read.group(3) and subprocess.getoutput("gzip -l %s | awk 'NR > 1{print $2}'" % full_file) == '0'):
                 logging.warning("Read file %s has no data, skipping..." % file)
                 read_list.append(Read(sample_name, None))
                 continue
