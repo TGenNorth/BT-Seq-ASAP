@@ -5,10 +5,80 @@
         <html>
         <head>
             <title>Run Summary for: <xsl:value-of select="@run_name"/></title>
+            <style>
+				.table-header-rotated {
+				  border-collapse: collapse;
+				}
+				.table-header-rotated td.rotate {
+				  width: 30px;
+				}
+				.table-header-rotated td.norotate {
+				  text-align: left;
+				  white-space: nowrap;
+				}
+				.table-header-rotated th.norotate {
+				  padding: 10px 40px;
+				  vertical-align: bottom;
+				}
+				.table-header-rotated td {
+				  text-align: center;
+				  padding: 10px 5px;
+				  border: 1px solid #ccc;
+				}
+				.table-header-rotated th.rotate {
+				  height: 140px;
+				  white-space: nowrap;
+				}
+				.table-header-rotated th.rotate > div {
+				  -webkit-transform: translate(25px, 51px) rotate(315deg);
+				      -ms-transform: translate(25px, 51px) rotate(315deg);
+				          transform: translate(25px, 51px) rotate(315deg);
+				  width: 30px;
+				}
+				.table-header-rotated th.rotate > div > span {
+				  border-bottom: 1px solid #ccc;
+				  padding: 5px 10px;
+				}
+				.table-header-rotated th.row-header {
+				  padding: 0 10px;
+				  border-bottom: 1px solid #ccc;
+				}            
+            </style>
         </head>
         <body>
         	<center><h1>TB Clinical ASAP Run Summary for: <xsl:value-of select="@run_name"/></h1></center>
 	        <br />
+	        <br />
+            <table class="table-header-rotated">
+	    		<tr>
+	    		<th class="norotate">Sample</th>
+	    		<th class="rotate"><div><span><em>M. Tubercolosis</em> Confirmed</span></div></th>
+	    		<th class="rotate"><div><span>Pyrazinamide Resistance</span></div></th>
+	    		<th class="rotate"><div><span>INH Resistance</span></div></th>
+	    		<th class="rotate"><div><span>Kanamycin Resistance</span></div></th>
+	    		<th class="rotate"><div><span>Quinolone Resistance</span></div></th>
+	    		<th class="rotate"><div><span>Isoniazid Resistance</span></div></th>
+	    		<th class="rotate"><div><span>Rifampin Resistance</span></div></th>
+	    		<th class="rotate"><div><span>Capreomycin Resistance</span></div></th>
+	    		<th class="rotate"><div><span>Amikacin Resistance</span></div></th>
+	    		</tr>
+                <xsl:for-each select="sample">
+                    <tr>
+                        <td class="norotate"><a href="{/analysis/@run_name}/{./@name}.html"><xsl:value-of select="@name"/></a></td>
+                        <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag)]='Mycobacterium tuberculosis confirmed'"><img src="check.png" style="width:30px;height:30px;"/></xsl:when><xsl:otherwise><img src="cross.png" style="width:30px;height:30px;"/></xsl:otherwise></xsl:choose></td>
+                        <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Pyrazinamide')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
+                        <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'INH')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
+                        <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Kanamycin')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
+                        <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Quinolones')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
+                        <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Isoniazid')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
+                        <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Rifampin')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
+                        <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Capreomycin')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
+                        <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Amikacin')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
+                    </tr>
+                </xsl:for-each>
+            </table>
+            <br />
+            <br />
             <table border="1" width="100%">
 	    		<tr>
 	    		<th>Sample</th>
@@ -63,6 +133,45 @@
         <html>
         <head>
             <title>Run Summary for: <xsl:value-of select="@run_name"/></title>
+            <style>
+				.table-header-rotated {
+				  border-collapse: collapse;
+				}
+				.table-header-rotated td.rotate {
+				  width: 30px;
+				}
+				.table-header-rotated td.norotate {
+				  text-align: left;
+				  white-space: nowrap;
+				}
+				.table-header-rotated th.norotate {
+				  padding: 10px 40px;
+				  vertical-align: bottom;
+				}
+				.table-header-rotated td {
+				  text-align: center;
+				  padding: 10px 5px;
+				  border: 1px solid #ccc;
+				}
+				.table-header-rotated th.rotate {
+				  height: 140px;
+				  white-space: nowrap;
+				}
+				.table-header-rotated th.rotate > div {
+				  -webkit-transform: translate(25px, 51px) rotate(315deg);
+				      -ms-transform: translate(25px, 51px) rotate(315deg);
+				          transform: translate(25px, 51px) rotate(315deg);
+				  width: 30px;
+				}
+				.table-header-rotated th.rotate > div > span {
+				  border-bottom: 1px solid #ccc;
+				  padding: 5px 10px;
+				}
+				.table-header-rotated th.row-header {
+				  padding: 0 10px;
+				  border-bottom: 1px solid #ccc;
+				}            
+            </style>
         </head>
         <body>
         	<center><h1>TB Detailed ASAP Run Summary for: <xsl:value-of select="@run_name"/></h1></center>
@@ -103,6 +212,35 @@
 	    <body>
 	        <center><h1>TB Clinical ASAP Results for Sample: <xsl:value-of select="@name"/></h1></center>
 	        <br />
+	        <br />
+            <table class="table-header-rotated">
+	    		<tr>
+	    		<th class="norotate">Sample</th>
+	    		<th class="rotate"><div><span><em>M. Tubercolosis</em> Confirmed</span></div></th>
+	    		<th class="rotate"><div><span>Pyrazinamide Resistance</span></div></th>
+	    		<th class="rotate"><div><span>INH Resistance</span></div></th>
+	    		<th class="rotate"><div><span>Kanamycin Resistance</span></div></th>
+	    		<th class="rotate"><div><span>Quinolone Resistance</span></div></th>
+	    		<th class="rotate"><div><span>Isoniazid Resistance</span></div></th>
+	    		<th class="rotate"><div><span>Rifampin Resistance</span></div></th>
+	    		<th class="rotate"><div><span>Capreomycin Resistance</span></div></th>
+	    		<th class="rotate"><div><span>Amikacin Resistance</span></div></th>
+	    		</tr>
+                <tr>
+                    <td class="norotate"><a href="{/analysis/@run_name}/{./@name}.html"><xsl:value-of select="@name"/></a></td>
+                    <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag)]='Mycobacterium tuberculosis confirmed'"><img src="check.png" style="width:30px;height:30px;"/></xsl:when><xsl:otherwise><img src="cross.png" style="width:30px;height:30px;"/></xsl:otherwise></xsl:choose></td>
+                    <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Pyrazinamide')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
+                    <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'INH')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
+                    <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Kanamycin')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
+                    <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Quinolones')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
+                    <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Isoniazid')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
+                    <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Rifampin')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
+                    <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Capreomycin')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
+                    <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Amikacin')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
+                </tr>
+            </table>
+            <br />
+            <br />
 	    	<table border="2" rules="rows">
 	    	    <tr><th colspan="2">Clinical Summary for Sample: <xsl:value-of select="@name"/></th></tr>
 	    	    <xsl:for-each select=".//significance">
@@ -211,7 +349,7 @@
 	    		<tr>
 	    		<th>Assay Name</th>
 	    		<th># of Reads</th>
-	    		<th>Known Mutations(% reads containing mutation) - Significance</th>
+	    		<th>Known Mutations - # reads containing mutation(% reads) - Significance</th>
 	    		<th>Other SNPs found(% reads containing SNP)</th>
 	    		</tr>
 	    		<xsl:for-each select="assay">
@@ -223,14 +361,14 @@
 		    		        <td>
 		    		        <xsl:for-each select="amplicon/snp">
 		    		            <xsl:if test="./@name != 'unknown'">
-		    		                <xsl:value-of select="./@name"/>(<xsl:value-of select='format-number(./snp_call/@percent, "##.##")'/>%)
+		    		                <xsl:value-of select="./@name"/> - <xsl:value-of select='./snp_call/@count'/>(<xsl:value-of select='format-number(./snp_call/@percent, "##.##")'/>%)
 		    		                <xsl:if test="significance"> - <xsl:value-of select="significance"/><xsl:if test="significance/@flag">(<xsl:value-of select="significance/@flag"/>)</xsl:if></xsl:if>
 		    		                <br/>
 		    		            </xsl:if>
 		    		        </xsl:for-each>
 		    		        <xsl:for-each select="amplicon/region_of_interest">
 		    		            <xsl:for-each select="mutation">
-		    		                <xsl:value-of select="./@name"/>(<xsl:value-of select='format-number(./@percent, "##.##")'/>%)
+		    		                <xsl:value-of select="./@name"/> - <xsl:value-of select='./@count'/>(<xsl:value-of select='format-number(./@percent, "##.##")'/>%)
 	    		                    <xsl:if test="../significance and ./@percent &gt; 10"> - <xsl:value-of select="../significance"/><xsl:if test="../significance/@flag">(<xsl:value-of select="../significance/@flag"/>)</xsl:if></xsl:if>
 		    		                <br/>
 		    		            </xsl:for-each>

@@ -308,11 +308,12 @@ class Significance(object):
     classdocs
     '''
 
-    def __init__(self, message):
+    def __init__(self, message, resistance=None):
         '''
         Constructor
         '''
         self.message = message
+        self.resistance = resistance
         
     def __str__(self):
         return "Significance: %s" % self.message

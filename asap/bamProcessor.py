@@ -49,12 +49,16 @@ def _process_pileup(pileup, amplicon, depth, proportion):
     consensus_seq = ""
     snp_list = []
     breadth_positions = 0
+    avg_depth_total = avg_depth_positions = 0
     amplicon_length = len(amplicon.sequence)
     depth_array = ["0"] * amplicon_length
     for pileupcolumn in pileup:
         depth_array[pileupcolumn.pos] = str(pileupcolumn.n)
         position = pileupcolumn.pos+1
         depth_passed = False
+        if pileupcolumn.n > 0: #This is going to end up being specific to these TB assays, maybe have a clever way to make this line optional
+            avg_depth_positions += 1
+            avg_depth_total += pileupcolumn.n
         if pileupcolumn.n >= depth:
             breadth_positions += 1
             depth_passed = True
@@ -98,6 +102,7 @@ def _process_pileup(pileup, amplicon, depth, proportion):
     pileup_dict['breadth'] = str(breadth_positions/amplicon_length * 100)
     pileup_dict['depths'] = ",".join(depth_array)
     pileup_dict['SNPs'] = snp_list
+    pileup_dict['average_depth'] = str(avg_depth_total/avg_depth_positions)
     return pileup_dict 
 
 def _write_xml(root, xml_file):
@@ -132,6 +137,8 @@ def _add_snp_node(parent, snp):
         significance_node = ElementTree.SubElement(snp_node, 'significance')
         if 'significance' in snp:
             significance_node.text = snp['significance'].message
+            if snp.significance.resistance:
+                significance_node.set("resistance", snp.significance.resistance)
         if 'flag' in snp:
             significance_node.set('flag', snp['flag'])
     ElementTree.SubElement(snp_node, 'base_distribution', {k:str(v) for k,v in base_counter.items()})
@@ -214,10 +221,14 @@ def _add_roi_node(parent, roi, roi_dict, proportion):
             significant = True
     if significant:
         significance_node = ElementTree.SubElement(roi_node, "significance")
-        significance_node.text = roi.significance.message                       
+        significance_node.text = roi.significance.message
+        if roi.significance.resistance:
+            significance_node.set("resistance", roi.significance.resistance)
     elif 'changes' in roi_dict and int(roi_dict['changes']) > 0:
         significance_node = ElementTree.SubElement(roi_node, "significance", {'changes':roi_dict['changes']})
         significance_node.text = roi.significance.message                       
+        if roi.significance.resistance:
+            significance_node.set("resistance", roi.significance.resistance)
     ElementTree.SubElement(roi_node, 'aa_sequence_distribution', {k:str(v) for k,v in aa_seq_counter.items()})
     ElementTree.SubElement(roi_node, 'nt_sequence_distribution', {k:str(v) for k,v in nt_seq_counter.items()})
     return roi_node
@@ -331,6 +342,8 @@ USAGE
                         significance_node = ElementTree.SubElement(amplicon_node, "significance")
                         if amplicon.significance:
                             significance_node.text = amplicon.significance.message
+                            if amplicon.significance.resistance:
+                                significance_node.set("resistance", amplicon.significance.resistance)
                         if samdata.count(ref_name) < depth:
                             significance_node.set("flag", "low coverage")
 

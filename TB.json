@@ -15,21 +15,29 @@
   },
   {
     "name" : "pncA_1",
-    "assay_type" : "presence/absence",
+    "assay_type" : "SNP",
     "Target" : {
       "function" : "resistance type",
       "Amplicon" : {
-        "sequence" : "GTGAACAACCCGACCCAGCCGGCGCGGTCGTGCGCGGCGGCCGCTTGCGGCGAGCGCTCCACCGCCGCCAACAGTTCATCCCGGTTCGGCGGTGCCATCAGGAGCTGCAAACCAACTCGACGCTGGCGGTGCGCATCTCCTCCAGCGCGGCGACGGTGGTATCGGCCGACACACCCGCTGTCAGGTCCACCAGCACCCTGGTGGCCAAGCCATTGCGTACCGCGTCCTCGGCCGTCTGGCGCACACAATGATCGGTGGCAATACCGACCACATCGACCTCATCGACGCCGCGTTGCCGCAGCCAATTCAGCAGTGGCGTGCCGTTCTCGTCGACTCCTTCGAAGCCGCTGTACGCTCCGGTGTAGGCACCCTTGTAGAACACCGCCTCGATTGCCGACGTGT"
+        "sequence" : "GTGAACAACCCGACCCAGCCGGCGCGGTCGTGCGCGGCGGCCGCTTGCGGCGAGCGCTCCACCGCCGCCAACAGTTCATCCCGGTTCGGCGGTGCCATCAGGAGCTGCAAACCAACTCGACGCTGGCGGTGCGCATCTCCTCCAGCGCGGCGACGGTGGTATCGGCCGACACACCCGCTGTCAGGTCCACCAGCACCCTGGTGGCCAAGCCATTGCGTACCGCGTCCTCGGCCGTCTGGCGCACACAATGATCGGTGGCAATACCGACCACATCGACCTCATCGACGCCGCGTTGCCGCAGCCAATTCAGCAGTGGCGTGCCGTTCTCGTCGACTCCTTCGAAGCCGCTGTACGCTCCGGTGTAGGCACCCTTGTAGAACACCGCCTCGATTGCCGACGTGT",
+        "Significance" : {
+          "message" : "pncA mutation present which may be associated with pyrazinamide resistance.",
+          "resistance" : "Pyrazinamide"
+        }
       }
     }
   },
   {
     "name" : "pncA_2",
-    "assay_type" : "presence/absence",
+    "assay_type" : "SNP",
     "Target" : {
       "function" : "resistance type",
       "Amplicon" : {
-        "sequence" : "ACGCTCCGGTGTAGGCACCCTTGTAGAACACCGCCTCGATTGCCGACGTGTCCAGACTGGGATGGAAGTCCGCGCCGGGAGTACCGCTGACGCAATGCGGTGGCCACGACGAGGAATAGTCCGGTGTGCCGGAGAAGTGGTCACCCGGGTCGATGTGGAAGTCCTTGGTTGCCACGACGTGATGGTAGTCCGCCGCTTCGGCCAGGTAGTCGCTGATGGCGCGGGCCAGCGCGGCGCCACCGGTTACCGCCAGCGAGCCACCCTCGCAGAAGTCGTTCTGCACGTCGACGATGATCAACGCCCGCATACGTCCACCATACGTTCGGGCGACTGCCCGGGCAGTTTGCCTACCGACGCGGCAGCCACAGATATAGGGTCCATGACGCC"
+        "sequence" : "ACGCTCCGGTGTAGGCACCCTTGTAGAACACCGCCTCGATTGCCGACGTGTCCAGACTGGGATGGAAGTCCGCGCCGGGAGTACCGCTGACGCAATGCGGTGGCCACGACGAGGAATAGTCCGGTGTGCCGGAGAAGTGGTCACCCGGGTCGATGTGGAAGTCCTTGGTTGCCACGACGTGATGGTAGTCCGCCGCTTCGGCCAGGTAGTCGCTGATGGCGCGGGCCAGCGCGGCGCCACCGGTTACCGCCAGCGAGCCACCCTCGCAGAAGTCGTTCTGCACGTCGACGATGATCAACGCCCGCATACGTCCACCATACGTTCGGGCGACTGCCCGGGCAGTTTGCCTACCGACGCGGCAGCCACAGATATAGGGTCCATGACGCC",
+        "Significance" : {
+          "message" : "pncA mutation present which may be associated with pyrazinamide resistance.",
+          "resistance" : "Pyrazinamide"
+        }
       }
     }
   },
@@ -47,7 +55,8 @@
           "variant" : "T",
           "name" : "-6T",
           "Significance" : {
-            "message" : "ahpC -6 mutation present which is associated with INH resistance"
+            "message" : "ahpC -6 mutation present which is associated with INH resistance",
+            "resistance" : "INH"
           }
         },
         {
@@ -56,7 +65,8 @@
           "variant" : "A",
           "name" : "-10A",
           "Significance" : {
-            "message" : "ahpC -10 mutation present which is associated with INH resistance"
+            "message" : "ahpC -10 mutation present which is associated with INH resistance",
+            "resistance" : "INH"
           }
         }]
       }
@@ -76,7 +86,8 @@
           "variant" : "T",
           "name" : "-10A",
           "Significance" : {
-            "message" : "eis -10 mutation present which is associated with kanamycin resistance"
+            "message" : "eis -10 mutation present which is associated with kanamycin resistance",
+            "resistance" : "Kanamycin"
           }
         },
         {
@@ -85,7 +96,8 @@
           "variant" : "A",
           "name" : "-12T",
           "Significance" : {
-            "message" : "eis -12 mutation present which is associated with kanamycin resistance"
+            "message" : "eis -12 mutation present which is associated with kanamycin resistance",
+            "resistance" : "Kanamycin"
           }
         },
         {
@@ -94,7 +106,8 @@
           "variant" : "A",
           "name" : "-14T",
           "Significance" : {
-            "message" : "eis -14 mutation present which is associated with kanamycin resistance"
+            "message" : "eis -14 mutation present which is associated with kanamycin resistance",
+            "resistance" : "Kanamycin"
           }
         },
         {
@@ -103,7 +116,8 @@
           "variant" : "C",
           "name" : "-15G",
           "Significance" : {
-            "message" : "eis -15 mutation present which is associated with kanamycin resistance"
+            "message" : "eis -15 mutation present which is associated with kanamycin resistance",
+            "resistance" : "Kanamycin"
           }
         },
         {
@@ -112,7 +126,8 @@
           "variant" : "A",
           "name" : "-37T",
           "Significance" : {
-            "message" : "eis -37 mutation present which is associated with kanamycin resistance"
+            "message" : "eis -37 mutation present which is associated with kanamycin resistance",
+            "resistance" : "Kanamycin"
           }
         }]
       }
@@ -130,7 +145,8 @@
             "position_range": "1101-1103",
             "name": "88",
             "Significance": {
-              "message": "gyrA 88 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
+              "message": "gyrA 88 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended.",
+              "resistance" : "Quinolones"
             },
             "nt_sequence": "GGC",
             "mutations": "GCC,GTG,TGC"
@@ -139,7 +155,8 @@
             "position_range": "1107-1109",
             "name": "90",
             "Significance": {
-              "message": "gyrA 90 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
+              "message": "gyrA 90 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended.",
+              "resistance" : "Quinolones"
             },
             "nt_sequence": "GCG",
             "mutations": "GTG"
@@ -148,7 +165,8 @@
             "position_range": "1110-1112",
             "name": "91",
             "Significance": {
-              "message": "gyrA 91 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
+              "message": "gyrA 91 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended.",
+              "resistance" : "Quinolones"
             },
             "nt_sequence": "TCG",
             "mutations": "CCG"
@@ -157,7 +175,8 @@
             "position_range": "1119-1121",
             "name": "94",
             "Significance": {
-              "message": "gyrA 94 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended."
+              "message": "gyrA 94 mutation present which is associated with resistance to quinolones, but Moxifloxacin may still have clinical activity. Testing for MOX MIC is recommended.",
+              "resistance" : "Quinolones"
             },
             "nt_sequence": "GAC",
             "mutations": "GGC,AAC,CAC,GCC,TAC"
@@ -180,7 +199,8 @@
           "variant" : "A",
           "name" : "-8A",
           "Significance" : {
-            "message" : "inhA -8 mutation present which is associated with isoniazid resistance"
+            "message" : "inhA -8 mutation present which is associated with isoniazid resistance",
+            "resistance" : "Isoniazid"
           }
         },
         {
@@ -189,7 +209,8 @@
           "variant" : "C",
           "name" : "-8C",
           "Significance" : {
-            "message" : "inhA -8 mutation present which is associated with isoniazid resistance"
+            "message" : "inhA -8 mutation present which is associated with isoniazid resistance",
+            "resistance" : "Isoniazid"
           }
         },
         {
@@ -198,7 +219,8 @@
           "variant" : "G",
           "name" : "-8G",
           "Significance" : {
-            "message" : "inhA -8 mutation present which is associated with isoniazid resistance"
+            "message" : "inhA -8 mutation present which is associated with isoniazid resistance",
+            "resistance" : "Isoniazid"
           }
         },
         {
@@ -207,7 +229,8 @@
           "variant" : "T",
           "name" : "-15T",
           "Significance" : {
-            "message" : "inhA -15 mutation present which is associated with isoniazid resistance"
+            "message" : "inhA -15 mutation present which is associated with isoniazid resistance",
+            "resistance" : "Isoniazid"
           }
         },
         {
@@ -216,7 +239,8 @@
           "variant" : "T",
           "name" : "-17T",
           "Significance" : {
-            "message" : "inhA -17 mutation present which is associated with isoniazid resistance"
+            "message" : "inhA -17 mutation present which is associated with isoniazid resistance",
+            "resistance" : "Isoniazid"
           }
         }]
       }
@@ -232,9 +256,10 @@
         "sequence" : "CTGGTAGGTCCCGTCATCTGCTGGCGAGGGCTCCCAGGTGATACCCATGTCGAGCAGGTTCACGAAGAAGTCGTTGGTCAGTGACTCGGAGGCCTCGGTGAACACGCCCAGCGGTAAGCGCTTGTAGTTTGCGCCGAGGACGCGCAGGCCACCTACCAGCACCGTCATCTCAGGGGCACTGAGCGTAAGCAGGTTCGCCTTGTCGAGCAGCATGTACTCGGCCGGCAACGGGTTGCCCTTTCCGAGGTAGTTTCGGAAGCCATCTGCCTTGGGCTCCAGCACGGCAAAGGATTCCACGTCGGTTTGTTCCTGCGACGCATCCGTGCGGCCCGGGGTGAAGGGCACCGTGATGTTGTGGCCAGCCGCCTTTGCTGCTTTCTCTATGGCGGCACAGCCACCGAGCACGACGAGGTCGGCGAAGGACACTTTGATGTTCCCCGGCGCCGCGGAGTTGAATGACTCCTGGATCTCTTCCAGGGTGCGAATGACCTTGCGCAGATCCCCGTCGGGGTCGTTGACCTCCCACCCGACTTGTGGCTGCAGGCGGATGCGACCACCGTTGGCGCCGCCGCGCTTGTCGCTACCACGGAACGACGACGCCGCCGCCCATGCGGTCGAAACTAGCTGTGAGACAGTCAATCCCGATGCCCGGATCTGGCTCTTAAGGCTGGCAATCTCGGCTTCGCCGACGAGGTCGTGGCTGACCGCAGGGACCGGATCCTGCCACAGCAGGGTCTGCTTGGGGACCAGCGGCCCAAGGTATCTCGCAACGGGACCCATGTCTCGGTGGATCAGCTTGTACCAGGCCTTGGCGAACTCGTCGGCCAATTCCTCGGGGTGTTCCAGCCAGCGACGCGTGATCCGCTCATAGATCGGATCCACCCGCAGCGAGAGGTCAGTGGCCAGCATCGTCGGGGAGCGCCCTGGCCCGCCGAACGGGTCCGGGATGGTGCCGGCACCGGCGCCGTCCTTGGCGGTGTATTGCCAAGCGCCAGCAGGGCTCTTCGTCAGCTCCCACTCGTAGCCGTACAGGATCTCGAGGAAACTGTTGTCCCATTTCGTCGGGGTGTTCGTCCATACGACCTCGATGCCGCTGGTGATCGCGTCCTTACCGGTTCCGGTGCCATACGAGCTCTTCCAGCCCAAGCCCATCTGCTCCAGCGGAGCAGCCTCGGGTTCGGGGCCGACCAGATCGGCCGGGCCGGCGCCATGGGTCTTACCGAAAGTGTGACCGCCGACGATCAGCGCCGCTGTTTCGACGTCGTTCATGGCCATGCGCCGAAACGTCTCGCGAATGTCGACCGCCGCGGCCATGGGGTCCGGGTTGCCGTTCGGCCCCTCCGGGTTCACGTAGATCAGCCCCATCTGCACCGCGGCCAGCGGGTTCTCCAGATCCCGCTTACCGCTGTAACGCTCATCGCCGAGCCAGGTGGCTTCCTTGCCCCAATAGACCTCATCGGGCTCCCACTGGTCGACCCGGCCGAAGCCGAACCCGAACGTCTTGAAGCCCATCGATTCCAGCGCGCAGTTGCCGGCGAAAACAATCAGGTCCGCCCATGAGAGCTTCTTGCCGTACTTCTTCTTGACCGGCCACAGCAGCCGGCGCGCCTTGTCCAAGCTGGCGTTGTCGGGCCAGCTGTTAAGCGGCGCGAACCGCTGCATGCCGCCCCCGGCGCCGCCGCGGCCGTCGTGGATGCGGTAGGTGCCGGCAGCGTGCCACGCCATCCGGATAAACAGCGGCCCGTAGTGGCCGTAGTCGGCGGGCCACCACGGCTGCGAGGTGGTCATCACTTCCTCGATGTCCCGCGTCAGGGCGTCAACGTCGATGGTCGCGACCTCCGCGGCATAGTCGAACGCCGCACCCATCGGGTCAGCGACGGCCGGGTTTTGGTGCAGTACCTTCAGATTGAGCCGGTTGGGCCACCAGTCCTGGTTTCCGCCGCCCTCGACGGGGTATTTCATATGACCCACGACGGGACAGCCGTTGCTAGCGGCTCCGGTGGTGGTTTCTGTAATGGGTGGGTGTTGCTCGGGCACAGCATTCCTTCCAGGAGTTGGTGTTATCGGGCTGTGATCACGGATGTGATCGCGAAGTGTCGGATATCGAACAATCAGGACATAGACCCCAGTAGATGACCTCCGCCTCGTCCAACAGGAAGCCGTTATGGTCCGAGGCCGTCAGACAGGGTGCCTCGCCAACAGCACAGTCGACATCGGCGATAACCCCGCAAGACCGGCAGACGATGTGATGGTGGTTGTCGCCGACCCTG",
         "RegionOfInterest": {
           "position_range": "1093-1095",
-            "name": "315",
+          "name": "315",
           "Significance": {
-            "message": "katG 315 mutation present which is associated with isoniazid resistance."
+            "message": "katG 315 mutation present which is associated with isoniazid resistance.",
+            "resistance" : "Isoniazid"
           },
           "nt_sequence": "AGC",
           "mutations": "ACC,AAC,ACA,AGA"
@@ -254,7 +279,8 @@
             "position_range": "1089-1091",
             "name": "513",
             "Significance": {
-              "message": "rpoB 513 mutation present which is associated with rifampin resistance."
+              "message": "rpoB 513 mutation present which is associated with rifampin resistance.",
+              "resistance" : "Rifampin"
             },
             "nt_sequence": "CAA",
             "mutations": "AAA,CTA"
@@ -263,7 +289,8 @@
             "position_range": "1098-1100",
             "name": "516",
             "Significance": {
-              "message": "rpoB 516 mutation present which is associated with rifampin resistance."
+              "message": "rpoB 516 mutation present which is associated with rifampin resistance.",
+              "resistance" : "Rifampin"
             },
             "nt_sequence": "GAC",
             "mutations": "TAC,GTC,GGC"
@@ -272,7 +299,8 @@
             "position_range": "1116-1118",
             "name": "522",
             "Significance": {
-              "message": "rpoB 522 mutation present which is associated with rifampin resistance."
+              "message": "rpoB 522 mutation present which is associated with rifampin resistance.",
+              "resistance" : "Rifampin"
             },
             "nt_sequence": "TCG",
             "mutations": "TTG"
@@ -281,7 +309,8 @@
             "position_range": "1128-1130",
             "name": "526",
             "Significance": {
-              "message": "rpoB 526 mutation present which is associated with rifampin resistance."
+              "message": "rpoB 526 mutation present which is associated with rifampin resistance.",
+              "resistance" : "Rifampin"
             },
             "nt_sequence": "CAC",
             "mutations": "GAC,TAC,CGC,CTC,AAC,TGC"
@@ -290,7 +319,8 @@
             "position_range": "1143-1145",
             "name": "531",
             "Significance": {
-              "message": "rpoB 531 mutation present which is associated with rifampin resistance."
+              "message": "rpoB 531 mutation present which is associated with rifampin resistance.",
+              "resistance" : "Rifampin"
             },
             "nt_sequence": "TCG",
             "mutations": "TTG,TGG"
@@ -299,7 +329,8 @@
             "position_range": "1149-1151",
             "name": "533",
             "Significance": {
-              "message": "rpoB 533 mutation present which is associated with rifampin resistance."
+              "message": "rpoB 533 mutation present which is associated with rifampin resistance.",
+              "resistance" : "Rifampin"
             },
             "nt_sequence": "CTG",
             "mutations": "CCG"
@@ -323,7 +354,8 @@
           "variant" : "G",
           "name" : "1401G",
           "Significance" : {
-            "message" : "rrs 1401 mutation present which is associated with kanamycin, capreomycin, and amikacin resistance. Specificity for Capreomycin is about 96%, 3-4% of isolates with this mutation may be sensitive to CAP."
+            "message" : "rrs 1401 mutation present which is associated with kanamycin, capreomycin, and amikacin resistance. Specificity for Capreomycin is about 96%, 3-4% of isolates with this mutation may be sensitive to CAP.",
+            "resistance" : "Rifampin, Capreomycin, Amikacin"
           }
         },
         {
@@ -332,7 +364,8 @@
           "variant" : "T",
           "name" : "1402T",
           "Significance" : {
-            "message" : "rrs 1402 mutation present which is associated with capreomycin and kanamycin resistance"
+            "message" : "rrs 1402 mutation present which is associated with capreomycin and kanamycin resistance",
+            "resistance" : "Capreomycin, Amikacin"
           }
         },
         {
@@ -341,7 +374,8 @@
           "variant" : "T",
           "name" : "1484T",
           "Significance" : {
-            "message" : "rrs 1484 mutation present which is associated with capreomycin and kanamycin resistance"
+            "message" : "rrs 1484 mutation present which is associated with capreomycin and kanamycin resistance",
+            "resistance" : "Capreomycin, Amikacin"
           }
         }]
       }
