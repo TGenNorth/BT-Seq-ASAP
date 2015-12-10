@@ -29,13 +29,13 @@
 				  height: 140px;
 				  white-space: nowrap;
 				}
-				.table-header-rotated th.rotate > div {
+				.table-header-rotated th.rotate <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text> div {
 				  -webkit-transform: translate(25px, 51px) rotate(315deg);
 				      -ms-transform: translate(25px, 51px) rotate(315deg);
 				          transform: translate(25px, 51px) rotate(315deg);
 				  width: 30px;
 				}
-				.table-header-rotated th.rotate > div > span {
+				.table-header-rotated th.rotate <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text> div <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text> span {
 				  border-bottom: 1px solid #ccc;
 				  padding: 5px 10px;
 				}
@@ -157,13 +157,13 @@
 				  height: 140px;
 				  white-space: nowrap;
 				}
-				.table-header-rotated th.rotate > div {
+				.table-header-rotated th.rotate <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text> div {
 				  -webkit-transform: translate(25px, 51px) rotate(315deg);
 				      -ms-transform: translate(25px, 51px) rotate(315deg);
 				          transform: translate(25px, 51px) rotate(315deg);
 				  width: 30px;
 				}
-				.table-header-rotated th.rotate > div > span {
+				.table-header-rotated th.rotate <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text> div <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text> span {
 				  border-bottom: 1px solid #ccc;
 				  padding: 5px 10px;
 				}
@@ -198,6 +198,9 @@
                     <xsl:apply-templates select="."/>
                 </xsl:for-each>
             </table>
+	    	<br />
+	    	<br />
+	    	<a href="{@run_name}.html">Click here for clinical summary</a>
         </body>
         </html>
     </exsl:document>
@@ -228,7 +231,7 @@
 	    		</tr>
                 <tr>
                     <td class="norotate"><a href="{/analysis/@run_name}/{./@name}.html"><xsl:value-of select="@name"/></a></td>
-                    <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag)]='Mycobacterium tuberculosis confirmed'"><img src="check.png" style="width:30px;height:30px;"/></xsl:when><xsl:otherwise><img src="cross.png" style="width:30px;height:30px;"/></xsl:otherwise></xsl:choose></td>
+                    <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag)]='Mycobacterium tuberculosis confirmed'"><img src="../check.png" style="width:30px;height:30px;"/></xsl:when><xsl:otherwise><img src="../cross.png" style="width:30px;height:30px;"/></xsl:otherwise></xsl:choose></td>
                     <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Pyrazinamide')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
                     <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'INH')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
                     <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Kanamycin')]"><font color="red">R</font></xsl:when><xsl:otherwise>S</xsl:otherwise></xsl:choose></td>
@@ -387,6 +390,8 @@
 	    		</xsl:for-each>
 	    	</table>
 	    	<br />
+	    	<br />
+	    	<a href="{@name}.html">Click here for clinical summary</a>
 	    </body>
 	    </html>
 	</exsl:document>
