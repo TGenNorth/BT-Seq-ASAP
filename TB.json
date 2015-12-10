@@ -55,8 +55,8 @@
           "variant" : "T",
           "name" : "-6T",
           "Significance" : {
-            "message" : "ahpC -6 mutation present which is associated with INH resistance",
-            "resistance" : "INH"
+            "message" : "ahpC -6 mutation present which is associated with isoniazid resistance",
+            "resistance" : "Isoniazid"
           }
         },
         {
@@ -65,8 +65,8 @@
           "variant" : "A",
           "name" : "-10A",
           "Significance" : {
-            "message" : "ahpC -10 mutation present which is associated with INH resistance",
-            "resistance" : "INH"
+            "message" : "ahpC -10 mutation present which is associated with isoniazid resistance",
+            "resistance" : "Isoniazid"
           }
         }]
       }
