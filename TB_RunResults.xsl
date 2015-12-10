@@ -133,45 +133,6 @@
         <html>
         <head>
             <title>Run Summary for: <xsl:value-of select="@run_name"/></title>
-            <style>
-				.table-header-rotated {
-				  border-collapse: collapse;
-				}
-				.table-header-rotated td.rotate {
-				  width: 30px;
-				}
-				.table-header-rotated td.norotate {
-				  text-align: left;
-				  white-space: nowrap;
-				}
-				.table-header-rotated th.norotate {
-				  padding: 10px 40px;
-				  vertical-align: bottom;
-				}
-				.table-header-rotated td {
-				  text-align: center;
-				  padding: 10px 5px;
-				  border: 1px solid #ccc;
-				}
-				.table-header-rotated th.rotate {
-				  height: 140px;
-				  white-space: nowrap;
-				}
-				.table-header-rotated th.rotate <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text> div {
-				  -webkit-transform: translate(25px, 51px) rotate(315deg);
-				      -ms-transform: translate(25px, 51px) rotate(315deg);
-				          transform: translate(25px, 51px) rotate(315deg);
-				  width: 30px;
-				}
-				.table-header-rotated th.rotate <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text> div <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text> span {
-				  border-bottom: 1px solid #ccc;
-				  padding: 5px 10px;
-				}
-				.table-header-rotated th.row-header {
-				  padding: 0 10px;
-				  border-bottom: 1px solid #ccc;
-				}            
-            </style>
         </head>
         <body>
         	<center><h1>TB Detailed ASAP Run Summary for: <xsl:value-of select="@run_name"/></h1></center>
@@ -211,6 +172,45 @@
 	    <html>
 	    <head>
 	    	<title>Clinical Results for Sample: <xsl:value-of select="@name"/></title>
+            <style>
+				.table-header-rotated {
+				  border-collapse: collapse;
+				}
+				.table-header-rotated td.rotate {
+				  width: 30px;
+				}
+				.table-header-rotated td.norotate {
+				  text-align: left;
+				  white-space: nowrap;
+				}
+				.table-header-rotated th.norotate {
+				  padding: 10px 40px;
+				  vertical-align: bottom;
+				}
+				.table-header-rotated td {
+				  text-align: center;
+				  padding: 10px 5px;
+				  border: 1px solid #ccc;
+				}
+				.table-header-rotated th.rotate {
+				  height: 140px;
+				  white-space: nowrap;
+				}
+				.table-header-rotated th.rotate <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text> div {
+				  -webkit-transform: translate(25px, 51px) rotate(315deg);
+				      -ms-transform: translate(25px, 51px) rotate(315deg);
+				          transform: translate(25px, 51px) rotate(315deg);
+				  width: 30px;
+				}
+				.table-header-rotated th.rotate <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text> div <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text> span {
+				  border-bottom: 1px solid #ccc;
+				  padding: 5px 10px;
+				}
+				.table-header-rotated th.row-header {
+				  padding: 0 10px;
+				  border-bottom: 1px solid #ccc;
+				}            
+            </style>
 	    </head>
 	    <body>
 	        <center><h1>TB Clinical ASAP Results for Sample: <xsl:value-of select="@name"/></h1></center>
