@@ -20,9 +20,13 @@
       "function" : "resistance type",
       "Amplicon" : {
         "sequence" : "GTGAACAACCCGACCCAGCCGGCGCGGTCGTGCGCGGCGGCCGCTTGCGGCGAGCGCTCCACCGCCGCCAACAGTTCATCCCGGTTCGGCGGTGCCATCAGGAGCTGCAAACCAACTCGACGCTGGCGGTGCGCATCTCCTCCAGCGCGGCGACGGTGGTATCGGCCGACACACCCGCTGTCAGGTCCACCAGCACCCTGGTGGCCAAGCCATTGCGTACCGCGTCCTCGGCCGTCTGGCGCACACAATGATCGGTGGCAATACCGACCACATCGACCTCATCGACGCCGCGTTGCCGCAGCCAATTCAGCAGTGGCGTGCCGTTCTCGTCGACTCCTTCGAAGCCGCTGTACGCTCCGGTGTAGGCACCCTTGTAGAACACCGCCTCGATTGCCGACGTGT",
-        "Significance" : {
-          "message" : "pncA mutation present which may be associated with pyrazinamide resistance.",
-          "resistance" : "Pyrazinamide"
+        "SNP" : {
+          "position" : 0,
+          "reference" : "N",
+          "Significance" : {
+            "message" : "pncA mutation present which may be associated with pyrazinamide resistance.",
+            "resistance" : "Pyrazinamide"
+          }
         }
       }
     }
@@ -34,9 +38,13 @@
       "function" : "resistance type",
       "Amplicon" : {
         "sequence" : "ACGCTCCGGTGTAGGCACCCTTGTAGAACACCGCCTCGATTGCCGACGTGTCCAGACTGGGATGGAAGTCCGCGCCGGGAGTACCGCTGACGCAATGCGGTGGCCACGACGAGGAATAGTCCGGTGTGCCGGAGAAGTGGTCACCCGGGTCGATGTGGAAGTCCTTGGTTGCCACGACGTGATGGTAGTCCGCCGCTTCGGCCAGGTAGTCGCTGATGGCGCGGGCCAGCGCGGCGCCACCGGTTACCGCCAGCGAGCCACCCTCGCAGAAGTCGTTCTGCACGTCGACGATGATCAACGCCCGCATACGTCCACCATACGTTCGGGCGACTGCCCGGGCAGTTTGCCTACCGACGCGGCAGCCACAGATATAGGGTCCATGACGCC",
-        "Significance" : {
-          "message" : "pncA mutation present which may be associated with pyrazinamide resistance.",
-          "resistance" : "Pyrazinamide"
+        "SNP" : {
+          "position" : 0,
+          "reference" : "N",
+          "Significance" : {
+            "message" : "pncA mutation present which may be associated with pyrazinamide resistance.",
+            "resistance" : "Pyrazinamide"
+          }
         }
       }
     }

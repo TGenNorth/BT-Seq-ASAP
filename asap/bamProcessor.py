@@ -56,7 +56,7 @@ def _process_pileup(pileup, amplicon, depth, proportion):
         depth_array[pileupcolumn.pos] = str(pileupcolumn.n)
         position = pileupcolumn.pos+1
         depth_passed = False
-        if pileupcolumn.n > 0: #This is going to end up being specific to these TB assays, maybe have a clever way to make this line optional
+        if pileupcolumn.n > 0: #TODO: This is going to end up being specific to these TB assays, maybe have a clever way to make this line optional
             avg_depth_positions += 1
             avg_depth_total += pileupcolumn.n
         if pileupcolumn.n >= depth:
@@ -68,7 +68,6 @@ def _process_pileup(pileup, amplicon, depth, proportion):
                 base_counter.update("_")
             else:
                 base_counter.update(pileupread.alignment.query_sequence[pileupread.query_position])
-#                    print ('\tbase in read %s = %s' % (pileupread.alignment.query_name, pileupread.alignment.query_sequence[pileupread.query_position]))
         #print(base_counter)
         ordered_list = base_counter.most_common()
         alignment_call = ordered_list[0][0]
@@ -95,6 +94,10 @@ def _process_pileup(pileup, amplicon, depth, proportion):
                 #print("Found position of interest %d, reference: %s, distribution:%s" % (position, snp_dict[position][0], base_counter))
         elif depth_passed and snp_call and snp_call_proportion >= proportion:
             snp = {'name':'unknown', 'position':str(position), 'depth':str(pileupcolumn.n), 'reference':reference_call, 'variant':snp_call, 'basecalls':base_counter}
+            if 0 in snp_dict:
+                (name, _, _, significance) = snp_dict[0]
+                snp['name'] = name
+                snp['significance'] = significance
             snp_list.append(snp)
             #print("SNP found at position %d: %s->%s" % (position, reference_call, alignment_call))
     
@@ -192,10 +195,12 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
     roi_dict['depth'] = str(depth)
     return roi_dict
 
-def _add_roi_node(parent, roi, roi_dict, proportion):
+def _add_roi_node(parent, roi, roi_dict, depth, proportion):
     if "flag" in roi_dict:
         roi_node = ElementTree.SubElement(parent, "region_of_interest", {'region':roi_dict['region']})
         significance_node = ElementTree.SubElement(roi_node, "significance", {'flag':roi_dict['flag']})
+        if roi.significance.resistance:
+            significance_node.set("resistance", roi.significance.resistance)
         return roi_node
     roi_attributes = {k:roi_dict[k] for k in ('region', 'reference', 'depth')}
     roi_node = ElementTree.SubElement(parent, "region_of_interest", roi_attributes)
@@ -224,6 +229,8 @@ def _add_roi_node(parent, roi, roi_dict, proportion):
         significance_node.text = roi.significance.message
         if roi.significance.resistance:
             significance_node.set("resistance", roi.significance.resistance)
+        if roi_dict['depth'] < depth:
+            significance_node.set("flag", "low coverage")
     elif 'changes' in roi_dict and int(roi_dict['changes']) > 0:
         significance_node = ElementTree.SubElement(roi_node, "significance", {'changes':roi_dict['changes']})
         significance_node.text = roi.significance.message                       
@@ -336,7 +343,19 @@ USAGE
                     amplicon_dict['variant'] = amplicon.variant_name
                 amplicon_node = ElementTree.SubElement(assay_node, "amplicon", amplicon_dict)
                 if samdata.count(ref_name) == 0:
-                    ElementTree.SubElement(amplicon_node, "significance", {"flag":"no coverage"})
+                    significance_node = ElementTree.SubElement(amplicon_node, "significance", {"flag":"no coverage"})
+                    #Check for indeterminate resistances
+                    resistances = []
+                    if amplicon.significance.resistance:
+                        resistances.append(amplicon.significance.resistance)
+                    for snp in amplicon.SNPs:
+                        if snp.significance.resistance:
+                            resistances.append(snp.significance.resistance)
+                    for roi in amplicon.ROIs:
+                        if roi.significance.resistance:
+                            resistances.append(snp.significance.resistance)
+                    if resistances:        
+                        significance_node.set("resistance", ",".join(resistances))
                 else:
                     if amplicon.significance or samdata.count(ref_name) < depth:
                         significance_node = ElementTree.SubElement(amplicon_node, "significance")
@@ -364,7 +383,7 @@ USAGE
 
                     for roi in amplicon.ROIs:
                         roi_dict = _process_roi(roi, samdata, ref_name, reverse_comp)
-                        _add_roi_node(amplicon_node, roi, roi_dict, proportion)
+                        _add_roi_node(amplicon_node, roi, roi_dict, depth, proportion)
 
         samdata.close()
         _write_xml(sample_node, out_fp)
