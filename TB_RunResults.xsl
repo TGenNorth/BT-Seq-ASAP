@@ -131,7 +131,13 @@
 			    		            <xsl:when test=".//significance/@flag"><em><xsl:value-of select=".//significance/@flag"/></em></xsl:when>
 			    		            <xsl:when test="snp/significance">
 			    		                <xsl:for-each select="snp">
-			    		                    <xsl:if test="significance"><xsl:value-of select="@name"/> (<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/></xsl:if>
+			    		                    <xsl:if test="significance">
+                                                                <xsl:choose>
+                                                                    <xsl:when test="@name = 'position of interest'"><xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/></xsl:when>
+                                                                    <xsl:otherwise><xsl:value-of select="@name"/></xsl:otherwise>
+                                                                </xsl:choose>
+                                                                (<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
+                                                            </xsl:if>
 			    		                </xsl:for-each>
 			    		            </xsl:when>
 			    		            <xsl:when test="region_of_interest/significance">
@@ -335,7 +341,13 @@
 			    	    <xsl:when test=".//significance/@flag"><em><xsl:value-of select=".//significance/@flag"/></em></xsl:when>
 	    		            <xsl:when test="snp/significance">
 	    		                <xsl:for-each select="snp">
-	    		                    <xsl:if test="significance"><xsl:value-of select="@name"/> (<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/></xsl:if>
+			    		    <xsl:if test="significance">
+                                                <xsl:choose>
+                                                    <xsl:when test="@name = 'position of interest'"><xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/></xsl:when>
+                                                    <xsl:otherwise><xsl:value-of select="@name"/></xsl:otherwise>
+                                                </xsl:choose>
+                                                (<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
+                                            </xsl:if>
 	    		                </xsl:for-each>
 	    		            </xsl:when>
 	    		            <xsl:when test="region_of_interest/significance">
@@ -427,7 +439,11 @@
 		    		        <td>
 		    		        <xsl:for-each select="amplicon/snp">
 		    		            <xsl:if test="./@name != 'unknown'">
-		    		                <xsl:value-of select="./@name"/> - <xsl:value-of select='./snp_call/@count'/>(<xsl:value-of select='format-number(./snp_call/@percent, "##.##")'/>%)
+                                                <xsl:choose>
+                                                  <xsl:when test="./@name = 'position of interest'"><xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/></xsl:when>
+                                                  <xsl:otherwise><xsl:value-of select="./@name"/></xsl:otherwise>
+                                                </xsl:choose>
+                                                - <xsl:value-of select='./snp_call/@count'/>(<xsl:value-of select='format-number(./snp_call/@percent, "##.##")'/>%)
 		    		                <xsl:if test="significance"> - <xsl:value-of select="significance"/><xsl:if test="significance/@flag">(<xsl:value-of select="significance/@flag"/>)</xsl:if></xsl:if>
 		    		                <br/>
 		    		            </xsl:if>

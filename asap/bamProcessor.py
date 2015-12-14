@@ -95,7 +95,7 @@ def _process_pileup(pileup, amplicon, depth, proportion):
         elif depth_passed and snp_call and snp_call_proportion >= proportion:
             snp = {'name':'unknown', 'position':str(position), 'depth':str(pileupcolumn.n), 'reference':reference_call, 'variant':snp_call, 'basecalls':base_counter}
             if 0 in snp_dict:
-                (name, _, _, significance) = snp_dict[0]
+                (name, *rest, significance) = snp_dict[0][0]
                 snp['name'] = name
                 snp['significance'] = significance
             snp_list.append(snp)
@@ -140,8 +140,8 @@ def _add_snp_node(parent, snp):
         significance_node = ElementTree.SubElement(snp_node, 'significance')
         if 'significance' in snp:
             significance_node.text = snp['significance'].message
-            if snp.significance.resistance:
-                significance_node.set("resistance", snp.significance.resistance)
+            if snp['significance'].resistance:
+                significance_node.set("resistance", snp['significance'].resistance)
         if 'flag' in snp:
             significance_node.set('flag', snp['flag'])
     ElementTree.SubElement(snp_node, 'base_distribution', {k:str(v) for k,v in base_counter.items()})
@@ -229,7 +229,7 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion):
         significance_node.text = roi.significance.message
         if roi.significance.resistance:
             significance_node.set("resistance", roi.significance.resistance)
-        if roi_dict['depth'] < depth:
+        if int(roi_dict['depth']) < depth:
             significance_node.set("flag", "low coverage")
     elif 'changes' in roi_dict and int(roi_dict['changes']) > 0:
         significance_node = ElementTree.SubElement(roi_node, "significance", {'changes':roi_dict['changes']})
@@ -345,15 +345,15 @@ USAGE
                 if samdata.count(ref_name) == 0:
                     significance_node = ElementTree.SubElement(amplicon_node, "significance", {"flag":"no coverage"})
                     #Check for indeterminate resistances
-                    resistances = []
-                    if amplicon.significance.resistance:
-                        resistances.append(amplicon.significance.resistance)
+                    resistances = set()
+                    if amplicon.significance and amplicon.significance.resistance:
+                        resistances.add(amplicon.significance.resistance)
                     for snp in amplicon.SNPs:
                         if snp.significance.resistance:
-                            resistances.append(snp.significance.resistance)
+                            resistances.add(snp.significance.resistance)
                     for roi in amplicon.ROIs:
                         if roi.significance.resistance:
-                            resistances.append(snp.significance.resistance)
+                            resistances.add(roi.significance.resistance)
                     if resistances:        
                         significance_node.set("resistance", ",".join(resistances))
                 else:
