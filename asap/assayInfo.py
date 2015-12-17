@@ -447,7 +447,7 @@ def generateReference(assay_list):
                         reference.append(seq)
         else:
             for amplicon in assay.target.amplicons:
-                name = name + "_%s" % amplicon.variant_name if amplicon.variant_name else name
+                name = assay.name + "_%s" % amplicon.variant_name if amplicon.variant_name else name
                 seq = DNA(amplicon.sequence, {'id':name})
                 reference.append(seq)
     return SequenceCollection(reference)

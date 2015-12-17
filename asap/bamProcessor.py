@@ -336,7 +336,7 @@ USAGE
             ref_name = assay.name
             reverse_comp = assay.target.reverse_comp
             for amplicon in assay.target.amplicons:
-                ref_name = ref_name + "_%s" % amplicon.variant_name if amplicon.variant_name else ref_name
+                ref_name = assay.name + "_%s" % amplicon.variant_name if amplicon.variant_name else assay.name
                 amplicon_dict = {}
                 amplicon_dict['reads'] = str(samdata.count(ref_name))
                 if amplicon.variant_name:
