@@ -86,6 +86,7 @@ USAGE
         exclusive_group.add_argument("-f", "--fasta", metavar="FILE", help="fasta file containing amplicon sequences.")
         exclusive_group.add_argument("-x", "--excel", metavar="FILE", help="Excel file of assay data.")
         required_group.add_argument("-o", "--out", metavar="FILE", required=True, help="output JSON file to write. [REQUIRED]")
+        parser.add_argument("-w", "--worksheet", help="Excel worksheet to use, the first one in the file will be used if not specified")
         parser.add_argument('-V', '--version', action='version', version=program_version_message)
 
         # Process arguments
@@ -94,6 +95,7 @@ USAGE
         fasta_file = args.fasta
         excel_file = args.excel
         out_file = args.out
+        worksheet = args.worksheet
 
         assay_list = []
 
@@ -108,6 +110,8 @@ USAGE
         else:
             wb = load_workbook(excel_file, read_only=True)
             ws = wb.active
+            if worksheet:
+                ws = wb[worksheet]
             amplicon = None
             target = None
             assay = None
