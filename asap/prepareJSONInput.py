@@ -26,7 +26,6 @@ from openpyxl import load_workbook
 
 import asap.dispatcher as dispatcher
 import asap.assayInfo as assayInfo
-from asap.assayInfo import SNP
 
 __all__ = []
 __version__ = 0.1
@@ -140,11 +139,14 @@ USAGE
                 if target and row[8].value:
                     target.add_amplicon(amplicon)
                     amplicon = None
+                elif target:
+                    target.amplicon = amplicon
                 else:
                     target = assayInfo.Target(function=row[2].value, gene_name=row[3].value, start_position=row[4].value, end_position=row[5].value, reverse_comp=row[6].value, amplicon=amplicon)
                     assay.target = target
                                                 
-        assay_list.append(assay) #get the last one
+            assay_list.append(assay) #get the last one
+            
         assay_data = {"Assay":assay_list} 
         assayInfo.writeJSON(assay_data, out_file)
 
