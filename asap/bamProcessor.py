@@ -105,7 +105,7 @@ def _process_pileup(pileup, amplicon, depth, proportion):
     pileup_dict['breadth'] = str(breadth_positions/amplicon_length * 100)
     pileup_dict['depths'] = ",".join(depth_array)
     pileup_dict['SNPs'] = snp_list
-    pileup_dict['average_depth'] = str(avg_depth_total/avg_depth_positions)
+    pileup_dict['average_depth'] = str(avg_depth_total/avg_depth_positions) if avg_depth_positions else "0"
     return pileup_dict 
 
 def _write_xml(root, xml_file):
