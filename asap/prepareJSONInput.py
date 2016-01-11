@@ -36,6 +36,25 @@ DEBUG = 1
 TESTRUN = 0
 PROFILE = 0
 
+PRESENCE_ABSENCE = 10
+GENE_VARIANT = 20
+
+def _process_fasta(fasta, fasta_type):
+    return_list = []
+    sc = skbio.io.registry.read(fasta, format='fasta', into=SequenceCollection, constructor=DNA)
+    for seq in sc:
+        significance = assayInfo.Significance(seq.metadata['description']) if seq.metadata['description'] else None
+        amplicon = assayInfo.Amplicon(sequence=str(seq), significance=significance)
+        if fasta_type == GENE_VARIANT:
+            amplicon.variant_name = seq.metadata['id']
+            return_list.append(amplicon)
+        else: #PRESENCE_ABSENCE
+            target = assayInfo.Target(function='species ID', amplicon=amplicon) #'species ID' is a guess here, TODO: make this smarter
+            assay = assayInfo.Assay(name=seq.metadata['id'], assay_type='presence/absence', target=target)
+            return_list.append(assay)
+    return return_list
+    
+
 class CLIError(Exception):
     '''Generic exception to raise and log different fatal errors.'''
     def __init__(self, msg):
@@ -99,13 +118,7 @@ USAGE
         assay_list = []
 
         if fasta_file:
-            sc = skbio.io.registry.read(fasta_file, format='fasta', into=SequenceCollection, constructor=DNA)
-            for seq in sc:
-                significance = assayInfo.Significance(seq.metadata['description']) if seq.metadata['description'] else None
-                amplicon = assayInfo.Amplicon(sequence=str(seq), significance=significance)
-                target = assayInfo.Target(function='species ID', amplicon=amplicon)
-                assay = assayInfo.Assay(name=seq.metadata['id'], assay_type='presence/absence', target=target)
-                assay_list.append(assay)
+            assay_list = _process_fasta(fasta_file, PRESENCE_ABSENCE)
         else:
             wb = load_workbook(excel_file, read_only=True)
             ws = wb.active
@@ -130,7 +143,10 @@ USAGE
                 elif row[9].value: #Significance gets attached to SNP
                     element = assayInfo.SNP(position=row[9].value, reference=row[10].value, variant=row[11].value, significance=significance)
                 if row[8].value: #Process amplicon
-                    amplicon = assayInfo.Amplicon(sequence=row[8].value, variant_name=row[7].value)
+                    if os.path.isfile(row[8].value):
+                        amplicon = _process_fasta(row[8].value, GENE_VARIANT)
+                    else:
+                        amplicon = assayInfo.Amplicon(sequence=row[8].value, variant_name=row[7].value)
                 if element:
                     amplicon.add_SNP(element) if isinstance(element, assayInfo.SNP) else amplicon.add_ROI(element)
                 else:

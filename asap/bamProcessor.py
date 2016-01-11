@@ -65,15 +65,16 @@ def _process_pileup(pileup, amplicon, depth, proportion):
         base_counter = Counter()
         for pileupread in pileupcolumn.pileups:
             if pileupread.is_del:
-                base_counter.update("_")
+                base_counter.update("_") # XSLT doesn't like '-' as an attribute name, have to use '_'
             else:
                 base_counter.update(pileupread.alignment.query_sequence[pileupread.query_position])
         #print(base_counter)
         ordered_list = base_counter.most_common()
         alignment_call = ordered_list[0][0]
         alignment_call_proportion = ordered_list[0][1] / pileupcolumn.n
-        #reference_call = chr(reference[pileupcolumn.pos])
         reference_call = amplicon.sequence[pileupcolumn.pos]
+        if reference_call == '-':
+            reference_call = '_' #Need to use '_' instead of '-' for gaps because of XSLT
         if alignment_call != reference_call:
             snp_call = alignment_call
             snp_call_proportion = alignment_call_proportion

@@ -93,7 +93,7 @@ USAGE
         trim_group.add_argument("-q", "--qual", nargs="?", const="SLIDINGWINDOW:5:20", help="perform quality trimming [default: False], optional parameter can be used to customize quality trimming parameters to trimmomatic. [default: SLIDINGWINDOW:5:20]")
         trim_group.add_argument("-m", "--minlen", metavar="LEN", default=80, type=int, help="minimum read length to keep after trimming. [default: 80]")
         align_group = parser.add_argument_group("read mapping options")
-        align_group.add_argument("-a", "--aligner", default="bwa", help="aligner to use for read mapping, supports bwa, bowtie2, and novoalign. [default: bwa]")
+        align_group.add_argument("-a", "--aligner", default="bowtie2", help="aligner to use for read mapping, supports bowtie2, novoalign, and bwa. [default: bowtie2]")
         align_group.add_argument("--aligner-args", dest="aargs", metavar="ARGS", default='', help="additional arguments to pass to the aligner, enclosed in \"\".")
         align_group.add_argument("-d", "--depth", default=100, type=int, help="minimum read depth required to consider a position covered. [default: 100]")
         align_group.add_argument("--breadth", default=0.8, type=float, help="minimum breadth of coverage required to consider an amplicon as present. [default: 0.8]")
