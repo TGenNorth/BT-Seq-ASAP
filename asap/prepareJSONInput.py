@@ -147,10 +147,10 @@ USAGE
                         amplicon = _process_fasta(row[8].value, GENE_VARIANT)
                     else:
                         amplicon = assayInfo.Amplicon(sequence=row[8].value, variant_name=row[7].value)
-                if element:
-                    amplicon.add_SNP(element) if isinstance(element, assayInfo.SNP) else amplicon.add_ROI(element)
-                else:
-                    amplicon.significance = significance
+                        if element:
+                            amplicon.add_SNP(element) if isinstance(element, assayInfo.SNP) else amplicon.add_ROI(element)
+                        else:
+                            amplicon.significance = significance
                 
                 if target and row[8].value:
                     target.add_amplicon(amplicon)
