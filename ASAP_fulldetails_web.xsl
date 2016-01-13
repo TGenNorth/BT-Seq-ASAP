@@ -21,9 +21,9 @@
 	    		</tr>
                 <xsl:for-each select="sample">
                     <tr>
-                        <td><a href="{/analysis/@run_name}/{./@name}.html"><xsl:value-of select="@name"/></a></td>
+                        <td nowrap="true"><a href="{/analysis/@run_name}/{./@name}.html"><xsl:value-of select="@name"/></a></td>
 			    		<xsl:for-each select="assay">
-			    		    <td align="center"><xsl:for-each select="amplicon">
+			    		    <td align="left"><xsl:for-each select="amplicon">
 			    		        <xsl:choose>
 			    		            <xsl:when test="../@type = 'gene variant'"><xsl:value-of select="./@reads"/>,</xsl:when>
 			    		            <xsl:otherwise><xsl:value-of select="./@reads"/></xsl:otherwise>
@@ -155,25 +155,21 @@
 	    	<table border="2" width="100%">
 	    		<tr>
 	    		<th>Assay Name</th>
-	    		<th>Gene variant - # of Reads - Coverage breadth</th>
-	    		<th>Significance</th>
+	    		<th>Gene variant - # of Reads - Coverage breadth - Significance</th>
 	    		</tr>
 	    		<xsl:for-each select="assay">
 	    		    <xsl:if test="@type = 'gene variant'">
 	    		    <tr>
 	    		        <td><xsl:value-of select="@name"/></td>
 		    		    <td><xsl:for-each select="amplicon">
-	    		            <xsl:value-of select="@variant"/> - <xsl:value-of select="@reads"/>
-	    		            <xsl:if test="amplicon/@reads &gt; 0">
-		    		            - <xsl:value-of select='format-number(amplicon/breadth, "##.##")'/>%
+	    		            <xsl:if test="@reads &gt; 0">
+	    		                <xsl:value-of select="@variant"/> - <xsl:value-of select="@reads"/> - <xsl:value-of select='format-number(breadth, "##.##")'/>%
+	    		                <xsl:if test="significance">
+	    		                    - <xsl:value-of select="significance"/><xsl:if test="significance/@flag"> (<xsl:value-of select="significance/@flag"/>)</xsl:if><br/>
+	    		                </xsl:if>
 		    		        </xsl:if>
 		    		        <br/>
 		    		    </xsl:for-each></td>
-	    		        <td><xsl:for-each select="amplicon">
-	    		            <xsl:if test="@reads &gt; 0 and significance">
-	    		                <xsl:value-of select="significance"/><xsl:if test="significance/@flag"> (<xsl:value-of select="significance/@flag"/>)</xsl:if><br/>
-	    		            </xsl:if>
-	    		        </xsl:for-each></td>
 	    		    </tr>
 	    		    </xsl:if>
 	    		</xsl:for-each>
