@@ -23,12 +23,14 @@
                     <tr>
                         <td nowrap="true"><a href="{/analysis/@run_name}/{./@name}.html"><xsl:value-of select="@name"/></a></td>
 			    		<xsl:for-each select="assay">
-			    		    <td align="left"><xsl:for-each select="amplicon">
+			    		    <td align="center">
 			    		        <xsl:choose>
-			    		            <xsl:when test="../@type = 'gene variant'"><xsl:value-of select="./@reads"/>,</xsl:when>
-			    		            <xsl:otherwise><xsl:value-of select="./@reads"/></xsl:otherwise>
+			    		            <xsl:when test="@type = 'gene variant'">
+			    		                <xsl:for-each select="amplicon"><xsl:sort select="./@reads" data-type="number" order="descending"/><xsl:if test="position()=1"><xsl:value-of select="."/></xsl:if></xsl:for-each>
+			    		            </xsl:when>
+			    		            <xsl:otherwise><xsl:value-of select="amplicon/@reads"/></xsl:otherwise>
 			    		        </xsl:choose>
-			    		    </xsl:for-each></td>
+			    		    </td>
 			    		</xsl:for-each>
                     </tr>
                     <xsl:apply-templates select="."/>
@@ -167,8 +169,8 @@
 	    		                <xsl:if test="significance">
 	    		                    - <xsl:value-of select="significance"/><xsl:if test="significance/@flag"> (<xsl:value-of select="significance/@flag"/>)</xsl:if><br/>
 	    		                </xsl:if>
+		    		            <br/>
 		    		        </xsl:if>
-		    		        <br/>
 		    		    </xsl:for-each></td>
 	    		    </tr>
 	    		    </xsl:if>
