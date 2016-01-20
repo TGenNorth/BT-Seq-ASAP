@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:exsl="http://exslt.org/common" extension-element-prefixes="exsl">
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:exsl="http://exslt.org/common" extension-element-prefixes="exsl">
     <xsl:output method="xhtml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" omit-xml-declaration="yes" encoding="UTF-8" indent="yes"/>
     <xsl:template match="/analysis">
         <html>
@@ -7,39 +7,44 @@
             <title>Run Summary for: <xsl:value-of select="@run_name"/></title>
         </head>
         <body>
-        	<center><h1>ASAP Run Summary for: <xsl:value-of select="@run_name"/></h1></center>
-	        <br/>
-	    	<em>Number of reads aligning to each assay</em>
+            <center><h1>ASAP Run Summary for: <xsl:value-of select="@run_name"/></h1></center>
+	    <br/>
+	    <em>Number of reads aligning to each assay</em>
             <table border="1" width="100%">
-	    		<tr>
-	    		<th>Sample</th>
-	    		<xsl:for-each select="sample[1]">
-	    		<xsl:for-each select="assay">
-	    		    <th><xsl:value-of select='@name'/></th>
-	    		</xsl:for-each>
-	    		</xsl:for-each>
-	    		</tr>
+	        <tr>
+	    	<th>Sample</th>
+	    	<xsl:for-each select="sample[1]">
+	    	    <xsl:for-each select="assay">
+	    	        <th><xsl:value-of select='@name'/></th>
+	    	    </xsl:for-each>
+	    	</xsl:for-each>
+	    	</tr>
                 <xsl:for-each select="sample">
                     <tr>
-                        <td nowrap="true"><a href="{/analysis/@run_name}/{./@name}.html"><xsl:value-of select="@name"/></a></td>
-			    		<xsl:for-each select="assay">
-			    		    <td align="center">
-			    		        <xsl:choose>
-			    		            <xsl:when test="@type = 'gene variant'">
-			    		                <xsl:for-each select="amplicon"><xsl:sort select="./@reads" data-type="number" order="descending"/><xsl:if test="position()=1"><xsl:value-of select="."/></xsl:if></xsl:for-each>
-			    		            </xsl:when>
-			    		            <xsl:otherwise><xsl:value-of select="amplicon/@reads"/></xsl:otherwise>
-			    		        </xsl:choose>
-			    		    </td>
-			    		</xsl:for-each>
+                    <td nowrap="true"><a href="{/analysis/@run_name}/{./@name}.html"><xsl:value-of select="@name"/></a></td>
+		    <xsl:for-each select="assay">
+		        <td align="center">
+			<xsl:choose>
+			<xsl:when test="@type = 'gene variant'">
+                            <xsl:for-each select="amplicon">
+                                <xsl:sort select="@reads" data-type="number" order="descending"/>
+                                <xsl:if test="position()=1">
+                                    <xsl:value-of select="@variant"/> - <xsl:value-of select="@reads"/>
+                                </xsl:if>
+                            </xsl:for-each>
+			</xsl:when>
+			<xsl:otherwise><xsl:value-of select="amplicon/@reads"/></xsl:otherwise>
+			</xsl:choose>
+			</td>
+		    </xsl:for-each>
                     </tr>
                     <xsl:apply-templates select="."/>
                 </xsl:for-each>
             </table>
         </body>
         </html>
-	</xsl:template>
-	<xsl:template match="sample">
+    </xsl:template>
+    <xsl:template match="sample">
 	<exsl:document method="html" href="{/analysis/@run_name}/{@name}.html">
 	    <html>
 	    <head>
@@ -163,13 +168,14 @@
 	    		    <xsl:if test="@type = 'gene variant'">
 	    		    <tr>
 	    		        <td><xsl:value-of select="@name"/></td>
-		    		    <td><xsl:for-each select="amplicon">
-	    		            <xsl:if test="@reads &gt; 0">
+		    		<td><xsl:for-each select="amplicon">
+                                        <xsl:sort select="@reads" data-type="number" order="descending"/>
+	    		                <xsl:if test="@reads &gt; 0">
 	    		                <xsl:value-of select="@variant"/> - <xsl:value-of select="@reads"/> - <xsl:value-of select='format-number(breadth, "##.##")'/>%
 	    		                <xsl:if test="significance">
-	    		                    - <xsl:value-of select="significance"/><xsl:if test="significance/@flag"> (<xsl:value-of select="significance/@flag"/>)</xsl:if><br/>
+	    		                    - <xsl:value-of select="significance"/><xsl:if test="significance/@flag"> (<xsl:value-of select="significance/@flag"/>)</xsl:if>
 	    		                </xsl:if>
-		    		            <br/>
+                                        <br />
 		    		        </xsl:if>
 		    		    </xsl:for-each></td>
 	    		    </tr>
