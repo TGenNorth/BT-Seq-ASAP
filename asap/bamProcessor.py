@@ -366,6 +366,18 @@ USAGE
                                 significance_node.set("resistance", amplicon.significance.resistance)
                         if samdata.count(ref_name) < depth:
                             significance_node.set("flag", "low coverage")
+                            #Check for indeterminate resistances
+                            resistances = set()
+                            if amplicon.significance and amplicon.significance.resistance:
+                                resistances.add(amplicon.significance.resistance)
+                            for snp in amplicon.SNPs:
+                                if snp.significance.resistance:
+                                    resistances.add(snp.significance.resistance)
+                            for roi in amplicon.ROIs:
+                                if roi.significance.resistance:
+                                    resistances.add(roi.significance.resistance)
+                            if resistances:        
+                                significance_node.set("resistance", ",".join(resistances))
 
                     pileup = samdata.pileup(ref_name, max_depth=1000000)
                     amplicon_data = _process_pileup(pileup, amplicon, depth, proportion)
