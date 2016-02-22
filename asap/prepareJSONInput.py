@@ -44,7 +44,7 @@ def _process_fasta(fasta, fasta_type):
     sc = skbio.io.registry.read(fasta, format='fasta', into=SequenceCollection, constructor=DNA)
     for seq in sc:
         significance = assayInfo.Significance(seq.metadata['description']) if seq.metadata['description'] else None
-        amplicon = assayInfo.Amplicon(sequence=str(seq), significance=significance)
+        amplicon = assayInfo.Amplicon(sequence=_clean_seq(str(seq)), significance=significance)
         if fasta_type == GENE_VARIANT:
             amplicon.variant_name = seq.metadata['id']
             return_list.append(amplicon)
@@ -53,7 +53,11 @@ def _process_fasta(fasta, fasta_type):
             assay = assayInfo.Assay(name=seq.metadata['id'], assay_type='presence/absence', target=target)
             return_list.append(assay)
     return return_list
-    
+
+def _clean_seq(sequence):
+    return_seq = sequence.upper()
+    return_seq = re.sub('[-|_]', '', return_seq)
+    return return_seq
 
 class CLIError(Exception):
     '''Generic exception to raise and log different fatal errors.'''
@@ -146,7 +150,7 @@ USAGE
                     if os.path.isfile(row[8].value):
                         amplicon = _process_fasta(row[8].value, GENE_VARIANT)
                     else:
-                        amplicon = assayInfo.Amplicon(sequence=row[8].value, variant_name=row[7].value)
+                        amplicon = assayInfo.Amplicon(sequence=_clean_seq(row[8].value), variant_name=row[7].value)
                         if element:
                             amplicon.add_SNP(element) if isinstance(element, assayInfo.SNP) else amplicon.add_ROI(element)
                         else:
