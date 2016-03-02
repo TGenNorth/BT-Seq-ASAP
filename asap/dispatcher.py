@@ -168,7 +168,7 @@ def _run_bowtie2(sample, reads, reference, outdir='', dependency=None, sampath='
     job_id = _submit_job('PBS', command, job_params, (dependency,))
     return (final_file, job_id)
 
-def _run_novoalign(sample, reads, reference, outdir='', dependency=None, sampath='samtools', novopath='bwa', ncpus=4, args=''):
+def _run_novoalign(sample, reads, reference, outdir='', dependency=None, sampath='samtools', novopath='novoalign', ncpus=4, args=''):
     import os
     read1 = reads[0]
     read2 = reads[1] if len(reads) > 1 else ""
@@ -284,7 +284,7 @@ def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adap
         out_reads1 = [sample+"_R1_trimmed.fastq", sample+"_R1_unpaired.fastq"]
         out_reads2 = [sample+"_R2_trimmed.fastq", sample+"_R2_unpaired.fastq"]
         out_reads = [os.path.join(trim_dir, out_reads1[0]), os.path.join(trim_dir, out_reads2[0])]
-        command = "java -jar /scratch/bin/trimmomatic-0.32.jar PE -threads %d %s %s %s %s %s %s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (job_params['num_cpus'], read1, read2, out_reads1[0], out_reads1[1], out_reads2[0], out_reads2[1], adapters, qual_string, minlen)
+        command = "java -jar /scratch/bin/trimmomatic-0.32.jar PE -threads %d %s %s %s %s %s %s ILLUMINACLIP:%s:4:30:10:1:true %s MINLEN:%d" % (job_params['num_cpus'], read1, read2, out_reads1[0], out_reads1[1], out_reads2[0], out_reads2[1], adapters, qual_string, minlen)
     else:
         out_reads = [os.path.join(trim_dir, sample+"_trimmed.fastq")]
         command = "java -jar /scratch/bin/trimmomatic-0.32.jar SE -threads %d %s %s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (job_params['num_cpus'], read1, out_reads[0], adapters, qual_string, minlen)
