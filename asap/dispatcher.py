@@ -200,7 +200,7 @@ def findReads(path):
     read_list = []
     Read = namedtuple('Read', ['sample', 'reads'])
     for file in os.listdir(path):
-        is_read = re.search('(.*)(?:_L\d\d\d_.*)?(\.fastq(\.gz)?)$', file, re.IGNORECASE)
+        is_read = re.search('(.*)(?:_L\d\d\d_.*)?(\.f(?:ast)?q(\.gz)?)$', file, re.IGNORECASE)
         if is_read:
             sample_name = is_read.group(1)
             full_file = os.path.join(path, file)
@@ -208,7 +208,7 @@ def findReads(path):
                 logging.warning("Read file %s has no data, skipping..." % file)
                 read_list.append(Read(sample_name, None))
                 continue
-            is_paired = re.search('^((.*?)(?:_L\d\d\d)?(?:_[R]?))([12])(.*)$', sample_name, re.IGNORECASE)
+            is_paired = re.search('^((.*?)(?:_L\d\d\d)?(?:_[R|r(?:ead)?]?))([12])(.*)$', sample_name, re.IGNORECASE)
             if is_paired:
                 if is_paired.group(3) == '1':  # If paired, only process read 1, so we don't double count the pair, see TODO below
                     sample_name = is_paired.group(2)
