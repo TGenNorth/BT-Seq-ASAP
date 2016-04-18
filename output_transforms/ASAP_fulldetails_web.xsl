@@ -29,7 +29,7 @@
                             <xsl:for-each select="amplicon">
                                 <xsl:sort select="@reads" data-type="number" order="descending"/>
                                 <xsl:if test="position()=1">
-                                    <xsl:value-of select="@variant"/> - <xsl:value-of select="@reads"/>
+                                    <xsl:value-of select="@variant"/> - <strong><xsl:value-of select="@reads"/></strong>
                                 </xsl:if>
                             </xsl:for-each>
 			</xsl:when>
@@ -171,7 +171,7 @@
 		    		<td><xsl:for-each select="amplicon">
                                         <xsl:sort select="@reads" data-type="number" order="descending"/>
 	    		                <xsl:if test="@reads &gt; 0">
-	    		                <xsl:value-of select="@variant"/> - <xsl:value-of select="@reads"/> - <xsl:value-of select='format-number(breadth, "##.##")'/>%
+	    		                <xsl:value-of select="@variant"/> - <strong><xsl:value-of select="@reads"/></strong> - <xsl:value-of select='format-number(breadth, "##.##")'/>%
 	    		                <xsl:if test="significance">
 	    		                    - <xsl:value-of select="significance"/><xsl:if test="significance/@flag"> (<xsl:value-of select="significance/@flag"/>)</xsl:if>
 	    		                </xsl:if>

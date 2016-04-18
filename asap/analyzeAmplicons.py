@@ -83,7 +83,7 @@ USAGE
         optional_group = parser.add_argument_group("optional arguments")
         reads_bams_group = optional_group.add_mutually_exclusive_group()
         reads_bams_group.add_argument("-r", "--read-dir", dest="rdir", metavar="DIR", help="directory of read files to analyze.")
-        reads_bams_group.add_argument("-b", "--bam-dir", dest="bdir", metavar="DIR", help="directory of bam files to analyze.")
+        reads_bams_group.add_argument("--bam-dir", dest="bdir", metavar="DIR", help="directory of bam files to analyze.")
         optional_group.add_argument("-o", "--out-dir", dest="odir", metavar="DIR", help="directory to write output files to. [default: `pwd`]")
         trim_group = parser.add_argument_group("read trimming options")
         on_off_group = trim_group.add_mutually_exclusive_group()
@@ -96,7 +96,7 @@ USAGE
         align_group.add_argument("-a", "--aligner", default="bowtie2", help="aligner to use for read mapping, supports bowtie2, novoalign, and bwa. [default: bowtie2]")
         align_group.add_argument("--aligner-args", dest="aargs", metavar="ARGS", default='', help="additional arguments to pass to the aligner, enclosed in \"\".")
         align_group.add_argument("-d", "--depth", default=100, type=int, help="minimum read depth required to consider a position covered. [default: 100]")
-        align_group.add_argument("--breadth", default=0.8, type=float, help="minimum breadth of coverage required to consider an amplicon as present. [default: 0.8]")
+        align_group.add_argument("-b", "--breadth", default=0.8, type=float, help="minimum breadth of coverage required to consider an amplicon as present. [default: 0.8]")
         align_group.add_argument("-p", "--proportion", default=0.1, type=float, help="minimum proportion required to call a SNP at a given position. [default: 0.1]")
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
      
@@ -124,7 +124,7 @@ USAGE
             read_dir = os.getcwd()
        
         out_dir = dispatcher.expandPath(out_dir)
-        if read_dir:
+        if read_dir::
             read_dir = dispatcher.expandPath(read_dir)
         if bam_dir:
             bam_dir = dispatcher.expandPath(bam_dir)

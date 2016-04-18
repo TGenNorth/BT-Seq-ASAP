@@ -89,14 +89,14 @@ USAGE
         stylesheet = args.stylesheet
         xml_file = args.xml
         out_file = args.out
+        run_name = ""
 
-#         if not out_dir:
-#             out_dir = os.getcwd()
-#        
-#         out_dir = dispatcher.expandPath(out_dir)
-# 
-#         if not os.path.exists(out_dir):
-#             os.makedirs(out_dir)
+        match = re.search('^(.*)_analysis.xml$', xml_file)
+        if match:
+            run_name = match.group(1)
+            
+        if run_name:
+            os.makedirs(run_name)
 
         dom = ET.parse(xml_file)
         xslt = ET.parse(stylesheet)
