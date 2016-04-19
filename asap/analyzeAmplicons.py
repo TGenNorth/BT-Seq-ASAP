@@ -124,7 +124,7 @@ USAGE
             read_dir = os.getcwd()
        
         out_dir = dispatcher.expandPath(out_dir)
-        if read_dir::
+        if read_dir:
             read_dir = dispatcher.expandPath(read_dir)
         if bam_dir:
             bam_dir = dispatcher.expandPath(bam_dir)
