@@ -155,13 +155,26 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
         return roi_dict
     start = int(range_match.group(1)) - 1
     end = int(range_match.group(2))
+    expected_length = end - start
     aa_sequence_counter = Counter()
     nt_sequence_counter = Counter()
     depth = 0
     for read in samdata.fetch(amplicon_ref, start, end):
         rstart = read.reference_start
+        alignment_length = read.get_overlap(start, end)
+        #throw out reads that either have gaps in the ROI or don't cover the whole ROI
+        if alignment_length != expected_length:
+            continue
         if rstart <= start:
-            nt_sequence = DNA(read.query_alignment_sequence[start-rstart:end-rstart])
+            for (qpos, rpos) in read.get_aligned_pairs():
+                if rpos == start:
+                    qstart = qpos
+                if rpos == end:
+                    qend = qpos
+            #throw out reads with insertions in the ROI
+            if not qend or not qstart or qend-qstart != expected_length:
+                continue
+            nt_sequence = DNA(read.query_alignment_sequence[qstart:qend])
             if reverse_comp:
                 nt_sequence = nt_sequence.reverse_complement()
             #scikit-bio doesn't support translating degenerate bases currently, so we will just throw out reads with degenerates for now

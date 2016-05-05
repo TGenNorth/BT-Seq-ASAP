@@ -95,7 +95,7 @@ USAGE
         if match:
             run_name = match.group(1)
             
-        if run_name:
+        if run_name and not os.path.exists(run_name):
             os.makedirs(run_name)
 
         dom = ET.parse(xml_file)
