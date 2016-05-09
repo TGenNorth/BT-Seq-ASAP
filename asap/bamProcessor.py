@@ -52,6 +52,7 @@ def _process_pileup(pileup, amplicon, depth, proportion):
     avg_depth_total = avg_depth_positions = 0
     amplicon_length = len(amplicon.sequence)
     depth_array = ["0"] * amplicon_length
+    prop_array = ["0"] * amplicon_length
     for pileupcolumn in pileup:
         depth_array[pileupcolumn.pos] = str(pileupcolumn.n)
         position = pileupcolumn.pos+1
@@ -72,6 +73,7 @@ def _process_pileup(pileup, amplicon, depth, proportion):
         ordered_list = base_counter.most_common()
         alignment_call = ordered_list[0][0]
         alignment_call_proportion = ordered_list[0][1] / pileupcolumn.n
+        prop_array[pileupcolumn.pos] = "%.3f" % alignment_call_proportion
         reference_call = amplicon.sequence[pileupcolumn.pos]
         if reference_call == '-':
             reference_call = '_' #Need to use '_' instead of '-' for gaps because of XSLT
@@ -105,6 +107,7 @@ def _process_pileup(pileup, amplicon, depth, proportion):
     pileup_dict['consensus_sequence'] = consensus_seq
     pileup_dict['breadth'] = str(breadth_positions/amplicon_length * 100)
     pileup_dict['depths'] = ",".join(depth_array)
+    pileup_dict['proportions'] = ",".join(prop_array)
     pileup_dict['SNPs'] = snp_list
     pileup_dict['average_depth'] = str(avg_depth_total/avg_depth_positions) if avg_depth_positions else "0"
     return pileup_dict 
