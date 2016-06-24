@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:exsl="http://exslt.org/common" extension-element-prefixes="exsl">
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:exsl="http://exslt.org/common" xmlns:str="http://exslt.org/strings" extension-element-prefixes="exsl str">
+    <xsl:import href="http://exslt.org/str/functions/replace/str.replace.function.xsl"/>
     <xsl:output method="xhtml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" omit-xml-declaration="yes" encoding="UTF-8" indent="yes"/>
     <xsl:template match="/analysis">
         <html>
@@ -50,25 +51,16 @@
             <div>
                 <a href="#close" title="Close" class="close">X</a>
                 <h2>Amplicon Graph</h2>
-				<canvas id="{@name}-chart" height="90vh" class="ampCanvas"></canvas>
-				<script>
-				var <xsl:value-of select="@name"/>_ctx = document.getElementById("<xsl:value-of select="@name"/>-chart");
-				var <xsl:value-of select="@name"/>_chart = new Chart(<xsl:value-of select="@name"/>_ctx, {
+			<canvas id="{@name}-canvas" height="90vh" class="ampCanvas"></canvas>
+			<script>
+				var ctx_<xsl:value-of select="str:replace(str:replace(@name, '+', '_'), '-', '_')"/> = document.getElementById("<xsl:value-of select="@name"/>-canvas").getContext("2d");
+				var chart_<xsl:value-of select="str:replace(str:replace(@name, '+', '_'), '-', '_')"/> = new Chart(ctx_<xsl:value-of select="str:replace(str:replace(@name, '+', '_'), '-', '_')"/>, {
+                                    type: 'bar',
 				    data: {
 				        labels: "<xsl:value-of select="amplicon/consensus_sequence"/>".split(""),
 				        datasets: [{
-						    type: 'bar',
-				            label: 'Read Depth',
-				            yAxisID: 'depth',
-				            data: [<xsl:value-of select="amplicon/depths"/>],
-				            backgroundColor: "#FFDEAD",
-				            borderColor: "#DEB887",
-				            borderWidth: 1,
-				            hoverBorderColor: "#B22222",
-				        },
-				        {
-						    type: 'line',
-                            label: 'Consensus Proportion',
+					    type: 'line',
+                                            label: 'Consensus Proportion',
 				            yAxisID: 'proportion',
 				            data: [<xsl:value-of select="amplicon/proportions"/>],
 				            borderColor: "#5F9EA0",
@@ -76,13 +68,27 @@
 				            fill: false,
 				            pointRadius: 0,
 				            pointHoverRadius: 3,
+				            pointHoverBorderColor: "#B22222",
+				        },
+				        {
+					    type: 'bar',
+				            label: 'Read Depth',
+				            yAxisID: 'depth',
+				            data: [<xsl:value-of select="amplicon/depths"/>],
+				            backgroundColor: "#FFDEAD",
+				            borderColor: "#DEB887",
+				            borderWidth: 1,
+				            hoverBorderColor: "#B22222",
 				        }]
 				    },
 				    options: {
-					    stacked: true,
-					    hover: {
-					    	mode: 'label'
-					    },
+					responsive: true,
+					hover: {
+					    mode: 'label'
+					},
+					tooltips: {
+					    mode: 'label'
+					},
 				        scales: {
 				            yAxes: [{
 				            	id: "depth",
@@ -100,14 +106,14 @@
 				            }],
 				            xAxes: [{
 				            	gridLines: {
-					            	display: false
+					            display: false
 				            	},
-			                    categoryPercentage: 1.0,
-				            }]
+			                        categoryPercentage: 1.0,
+			                    }]
 				        }
 				    }
 				});
-				</script>
+		    </script>
             </div>
         </div>
     </xsl:template>
@@ -134,43 +140,43 @@
 	                pointer-events: none;
 	    	    }
 	    	    .ampGraph:target {
-					opacity:1;
-					pointer-events: auto;
-				}
-				.ampGraph <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text> div {
-					width: 95vw;
-					height: 60vh;
-					position: relative;
-					margin: 10% auto;
-					padding: 5px 20px 13px 20px;
-					border-radius: 10px;
-					background: #fff;
-					background: -moz-linear-gradient(#fff, #999);
-					background: -webkit-linear-gradient(#fff, #999);
-					background: -o-linear-gradient(#fff, #999);
-				}
-				.close {
-					background: #606061;
-					color: #FFFFFF;
-					line-height: 25px;
-					position: absolute;
-					right: -12px;
-					text-align: center;
-					top: -10px;
-					width: 24px;
-					text-decoration: none;
-					font-weight: bold;
-					-webkit-border-radius: 12px;
-					-moz-border-radius: 12px;
-					border-radius: 12px;
-					-moz-box-shadow: 1px 1px 3px #000;
-					-webkit-box-shadow: 1px 1px 3px #000;
-					box-shadow: 1px 1px 3px #000;
-				}
-				.close:hover { background: #00d9ff; }
-				.ampCanvas {
-				    overflow-x: auto;
-				}
+			opacity:1;
+			pointer-events: auto;
+		    }
+		    .ampGraph <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text> div {
+			width: 95vw;
+			height: 60vh;
+			position: relative;
+			margin: 10% auto;
+			padding: 5px 20px 13px 20px;
+			border-radius: 10px;
+			background: #fff;
+			background: -moz-linear-gradient(#fff, #999);
+			background: -webkit-linear-gradient(#fff, #999);
+			background: -o-linear-gradient(#fff, #999);
+	            }
+		    .close {
+			background: #606061;
+			color: #FFFFFF;
+			line-height: 25px;
+			position: absolute;
+			right: -12px;
+			text-align: center;
+			top: -10px;
+			width: 24px;
+		        text-decoration: none;
+			font-weight: bold;
+			-webkit-border-radius: 12px;
+			-moz-border-radius: 12px;
+			border-radius: 12px;
+			-moz-box-shadow: 1px 1px 3px #000;
+			-webkit-box-shadow: 1px 1px 3px #000;
+			box-shadow: 1px 1px 3px #000;
+		    }
+		    .close:hover { background: #00d9ff; }
+		    .ampCanvas {
+		        overflow-x: auto;
+		    }
 	    	</style>
 	    </head>
 	    <body>
@@ -229,8 +235,9 @@
 	    		</tr>
 	    		<xsl:for-each select="assay">
 	    		    <xsl:if test="@type = 'SNP' or @type = 'mixed'">
+	    		    <xsl:call-template name="amplicon-graph"></xsl:call-template>
 	    		    <tr>
-	    		        <td><xsl:value-of select="@name"/></td>
+	    		        <td><a href="#{@name}-graph"><xsl:value-of select="@name"/></a></td>
 	    		        <td><xsl:value-of select="amplicon/@reads"/></td>
 	    		        <xsl:if test="amplicon/@reads &gt; 0">
 		    		        <td><xsl:value-of select='format-number(amplicon/breadth, "##.##")'/>%</td>
@@ -263,8 +270,9 @@
 	    		</tr>
 	    		<xsl:for-each select="assay">
 	    		    <xsl:if test="@type = 'ROI' or @type = 'mixed' and amplicon/region_of_interest">
+	    		    <xsl:call-template name="amplicon-graph"></xsl:call-template>
 	    		    <tr>
-	    		        <td><xsl:value-of select="@name"/></td>
+	    		        <td><a href="#{@name}-graph"><xsl:value-of select="@name"/></a></td>
 	    		        <td><xsl:value-of select="amplicon/@reads"/></td>
 	    		        <xsl:if test="amplicon/@reads &gt; 0">
 		    		        <td><xsl:value-of select='format-number(amplicon/breadth, "##.##")'/>%</td>
@@ -293,7 +301,7 @@
 	    		    <tr>
 	    		        <td><xsl:value-of select="@name"/></td>
 		    		    <td><xsl:for-each select="amplicon">
-                            <xsl:sort select="@reads" data-type="number" order="descending"/>
+                                    <xsl:sort select="@reads" data-type="number" order="descending"/>
 	    		            <xsl:if test="@reads &gt; 0">
 	    		                <xsl:value-of select="@variant"/> - <strong><xsl:value-of select="@reads"/></strong> - <xsl:value-of select='format-number(breadth, "##.##")'/>%
 	    		                <xsl:if test="significance">
