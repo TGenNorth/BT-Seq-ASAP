@@ -7,6 +7,7 @@ Created on Jul 8, 2015
 import logging
 
 job_manager = 'PBS'
+job_manager_args = ''
 
 def _submit_job(job_submitter, command, job_parms, waitfor_id=None, hold=False, notify=False):
     import subprocess
@@ -16,6 +17,7 @@ def _submit_job(job_submitter, command, job_parms, waitfor_id=None, hold=False, 
     # TODO(jtravis): remove unused output variable
     output = jobid = None
     logging.info("command = %s" % command)
+    args = job_parms["args"] or job_manager_args
     if job_submitter == "PBS":
         waitfor = ""
         if waitfor_id:
@@ -24,7 +26,6 @@ def _submit_job(job_submitter, command, job_parms, waitfor_id=None, hold=False, 
         queue = ""
         if job_parms["queue"]:
             queue = "-q %s" % job_parms["queue"]
-        args = job_parms["args"]
         if hold:
             args += " -h"
         if notify:
@@ -49,7 +50,6 @@ def _submit_job(job_submitter, command, job_parms, waitfor_id=None, hold=False, 
         queue = ""
         if job_parms["queue"]:
             queue = "-p %s" % job_parms["queue"]
-        args = job_parms["args"]
         if hold:
             args += " -H"
         if notify:
@@ -73,7 +73,6 @@ def _submit_job(job_submitter, command, job_parms, waitfor_id=None, hold=False, 
         queue = ""
         if job_parms["queue"]:
             queue = "-q %s" % job_parms["queue"]
-        args = job_parms["args"]
         if hold:
             args += " -h"
         if notify:
@@ -136,6 +135,8 @@ def _run_bwa(sample, reads, reference, outdir='', dependency=None, sampath='samt
     bam_nickname = "%s-%s" % (sample, aligner_name)
     samview_command = "%s view -S -b -h -" % sampath
     samsort_command = "%s sort - %s" % (sampath, bam_nickname)
+    #samtools 1.3 version
+    #samsort_command = "%s sort -T %s -o %s.bam -" % (sampath, bam_nickname, bam_nickname)
     samindex_command = "%s index %s.bam" % (sampath, bam_nickname)
     command = "%s | %s | %s \n %s" % (aligner_command, samview_command, samsort_command, samindex_command)
     work_dir = os.path.join(outdir, aligner_name)
@@ -160,6 +161,8 @@ def _run_bowtie2(sample, reads, reference, outdir='', dependency=None, sampath='
     bam_nickname = "%s-%s" % (sample, aligner_name)
     samview_command = "%s view -S -b -h -" % sampath
     samsort_command = "%s sort - %s" % (sampath, bam_nickname)
+    #samtools 1.3 version
+    #samsort_command = "%s sort -T %s -o %s.bam -" % (sampath, bam_nickname, bam_nickname)
     samindex_command = "%s index %s.bam" % (sampath, bam_nickname)
     command = "%s | %s | %s \n %s" % (aligner_command, samview_command, samsort_command, samindex_command)
     work_dir = os.path.join(outdir, aligner_name)
@@ -184,6 +187,8 @@ def _run_novoalign(sample, reads, reference, outdir='', dependency=None, sampath
     bam_nickname = "%s-%s" % (sample, aligner_name)
     samview_command = "%s view -S -b -h -" % sampath
     samsort_command = "%s sort - %s" % (sampath, bam_nickname)
+    #samtools 1.3 version
+    #samsort_command = "%s sort -T %s -o %s.bam -" % (sampath, bam_nickname, bam_nickname)
     samindex_command = "%s index %s.bam" % (sampath, bam_nickname)
     command = "%s | %s | %s \n %s" % (aligner_command, samview_command, samsort_command, samindex_command)
     work_dir = os.path.join(outdir, aligner_name)
