@@ -39,11 +39,11 @@ PROFILE = 0
 PRESENCE_ABSENCE = 10
 GENE_VARIANT = 20
 
-def _process_fasta(fasta, fasta_type):
+def _process_fasta(fasta, fasta_type, message=None):
     return_list = []
     sc = skbio.io.registry.read(fasta, format='fasta', into=SequenceCollection, constructor=DNA)
     for seq in sc:
-        significance = assayInfo.Significance(seq.metadata['description']) if seq.metadata['description'] else None
+        significance = assayInfo.Significance(seq.metadata['description']) if seq.metadata['description'] else message
         amplicon = assayInfo.Amplicon(sequence=_clean_seq(str(seq)), significance=significance)
         if fasta_type == GENE_VARIANT:
             amplicon.variant_name = seq.metadata['id']
@@ -148,7 +148,7 @@ USAGE
                     element = assayInfo.SNP(position=row[9].value, reference=row[10].value, variant=row[11].value, significance=significance)
                 if row[8].value: #Process amplicon
                     if os.path.isfile(row[8].value):
-                        amplicon = _process_fasta(row[8].value, GENE_VARIANT)
+                        amplicon = _process_fasta(row[8].value, GENE_VARIANT, significance)
                     else:
                         amplicon = assayInfo.Amplicon(sequence=_clean_seq(row[8].value), variant_name=row[7].value)
                         if element:
