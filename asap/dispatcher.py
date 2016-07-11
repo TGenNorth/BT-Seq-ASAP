@@ -6,8 +6,8 @@ Created on Jul 8, 2015
 
 import logging
 
-job_manager = 'PBS'
-job_manager_args = ''
+job_manager = "PBS"
+job_manager_args = ""
 
 def _submit_job(job_submitter, command, job_parms, waitfor_id=None, hold=False, notify=False):
     import subprocess
@@ -17,10 +17,10 @@ def _submit_job(job_submitter, command, job_parms, waitfor_id=None, hold=False, 
     # TODO(jtravis): remove unused output variable
     output = jobid = None
     logging.info("command = %s" % command)
-    args = job_parms["args"] or job_manager_args
+    args = job_parms["args"] or job_manager_args or ""
     if job_submitter == "PBS":
         waitfor = ""
-        if waitfor_id:
+        if waitfor_id and waitfor_id[0]:
             dependency_string = waitfor_id[1] if len(waitfor_id) > 1 else 'afterok'
             waitfor = "-W depend=%s:%s" % (dependency_string, waitfor_id[0])
         queue = ""
@@ -269,7 +269,7 @@ def indexFasta(fasta, aligner="bwa"):
     import os
     import re
     job_params = {'queue':'', 'mem_requested':2, 'num_cpus':1, 'walltime':4, 'args':''}
-    job_params['name'] = "asap_index_%s" % fasta
+    job_params['name'] = "asap_index_%s" % os.path.basename(fasta)
     job_params['work_dir'] = os.path.dirname(fasta)
     if re.search('novo', aligner, re.IGNORECASE):
         command = "novoindex %s.idx %s" % (fasta, fasta)
