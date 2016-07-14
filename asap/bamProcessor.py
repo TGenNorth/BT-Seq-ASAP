@@ -257,6 +257,9 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion):
     ElementTree.SubElement(roi_node, 'nt_sequence_distribution', {k:str(v) for k,v in nt_seq_counter.items()})
     return roi_node
 
+def _verify_percent_identity():
+    return
+
 class CLIError(Exception):
     '''Generic exception to raise and log different fatal errors.'''
     def __init__(self, msg):
@@ -344,6 +347,11 @@ USAGE
         sample_dict['mapped_reads'] = str(samdata.mapped)
         sample_dict['unmapped_reads'] = str(samdata.unmapped)
         sample_dict['unassigned_reads'] = str(samdata.nocoordinate)
+        sample_dict['depth_filter'] = str(depth)
+        sample_dict['proportion_filter'] = str(proportion)
+        sample_dict['breadth_filter'] = str(breadth)
+        sample_dict['json_file'] = json_fp
+        sample_dict['bam_file'] = bam_fp
         sample_node = ElementTree.Element("sample", sample_dict)
 
         #out_fp = os.path.join(out_dir, sample_dict['name']+".xml")
@@ -352,6 +360,7 @@ USAGE
             assay_dict = {}
             assay_dict['name'] = assay.name
             assay_dict['type'] = assay.assay_type
+            assay_dict['function'] = assay.target.function
             assay_node = ElementTree.SubElement(sample_node, "assay", assay_dict)
             ref_name = assay.name
             reverse_comp = assay.target.reverse_comp
