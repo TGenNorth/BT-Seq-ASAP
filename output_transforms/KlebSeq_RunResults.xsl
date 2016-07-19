@@ -179,7 +179,6 @@
 		    }
 		    .snpCell{
                 height:15px;
-                width:100px;
                 overflow:hidden;
                 text-overflow:ellipsis
             }
@@ -192,10 +191,22 @@
 	    <body>
 	        <center><h1>KlebSeq ASAP Results for Sample: <xsl:value-of select="@name"/></h1></center>
 	        <br />
-	        Total reads: <xsl:value-of select="@mapped_reads + @unmapped_reads + @unassigned_reads"/><br/>
-	        Mapped reads: <xsl:value-of select="@mapped_reads"/><br/>
-	        Unmapped reads: <xsl:value-of select="@unmapped_reads + @unassigned_reads"/><br/>
+                <table border="0">
+                <tr>
+	        <td style="padding-left: 20">Total reads: <xsl:value-of select="@mapped_reads + @unmapped_reads + @unassigned_reads"/></td>
+                <td style="padding-left: 20">Depth filter: <xsl:value-of select="@depth_filter"/>x</td>
+                </tr>
+                <tr>
+	        <td style="padding-left: 20">Mapped reads: <xsl:value-of select="@mapped_reads"/></td>
+                <td style="padding-left: 20">Breadth filter: <xsl:value-of select="@breadth_filter * 100"/>%</td>
+                </tr>
+                <tr>
+	        <td style="padding-left: 20">Unmapped reads: <xsl:value-of select="@unmapped_reads + @unassigned_reads"/></td>
+                <td style="padding-left: 20">Proportion filter: <xsl:value-of select="@proportion_filter * 100"/>%</td>
+                </tr>
+                </table>
 	        <br/>
+                <br/>
     	    <xsl:variable name="pre_map">
     	    <xsl:for-each select=".//significance">
                 <xsl:if test="not(./@flag)">
@@ -233,15 +244,23 @@
 	    		<th>Significance</th>
 	    		<th>SNPs found</th>
 	    		</tr>
+                        <tbody valign="top">
 	    		<xsl:for-each select="assay">
-	    		    <xsl:if test="@function = 'species ID' or @function = 'strain ID' and amplicon/@reads &gt; 0 and .//significance">
+	    		    <xsl:if test="(@function = 'species ID' or @function = 'strain ID') and .//significance/text()"><!--and (exsl:node-set($best_amp)/@reads &gt; 0)--> 
+                            <xsl:variable name="best_amp">
+                            <xsl:for-each select="amplicon">
+                                <xsl:sort select="breadth" data-type="number" order="descending"/>
+                                <xsl:sort select="@reads" data-type="number" order="descending"/>
+                                <xsl:if test="position()=1"><xsl:copy-of select="./*"/></xsl:if>
+                            </xsl:for-each>
+                            </xsl:variable>
 	    		    <xsl:call-template name="amplicon-graph"></xsl:call-template>
 	    		    <tr>
 	    		        <td><a href="#{@name}-graph"><xsl:value-of select="@name"/></a></td>
-	    		        <td><xsl:value-of select='format-number(amplicon/average_depth, "#.##")'/></td>
-	    		        <td><xsl:value-of select='format-number(amplicon/breadth, "##.##")'/>%</td>
+	    		        <td><xsl:value-of select='format-number(exsl:node-set($best_amp)/average_depth, "#.##")'/></td>
+	    		        <td><xsl:value-of select='format-number(exsl:node-set($best_amp)/breadth, "##.##")'/>%</td>
 	    		        <xsl:choose>
-	    		            <xsl:when test="@type = 'presence/absense'">
+	    		            <xsl:when test="@type = 'presence/absence'">
 	    		                <td><xsl:value-of select="amplicon/significance"/><xsl:if test="amplicon/significance/@flag"> (<xsl:value-of select="amplicon/significance/@flag"/>)</xsl:if></td>
 	    		            </xsl:when>
 	    		            <xsl:when test="@type = 'SNP'">
@@ -262,105 +281,171 @@
 			    		            </xsl:if>
 			    		        </xsl:for-each></td>
 	    		            </xsl:when>
+                                    <xsl:when test="@type = 'gene variant'">
+                                        <td><xsl:for-each select="amplicon">
+                                            <xsl:sort select="breadth" data-type="number" order="descending"/>
+                                            <xsl:sort select="@reads" data-type="number" order="descending"/>
+	    		                    <xsl:if test="@reads &gt; 0">
+	    		                        <xsl:value-of select="@variant"/> - <strong><xsl:value-of select="@reads"/></strong> - <xsl:value-of select='format-number(breadth, "##.##")'/>%
+	    		                    <xsl:if test="significance">
+	    		                        - <xsl:value-of select="significance"/><xsl:if test="significance/@flag"> (<xsl:value-of select="significance/@flag"/>)</xsl:if>
+	    		                    </xsl:if>
+                                            <br />
+		    		            </xsl:if>
+		    		        </xsl:for-each></td>
+                                    </xsl:when>
+                                    <xsl:otherwise><td></td></xsl:otherwise>
 	    		        </xsl:choose>
-	    		        <td><xsl:if test="amplicon/snp">details<div class="snpCell"><xsl:for-each select="amplicon/snp">
+	    		        <td><xsl:if test="exsl:node-set($best_amp)/snp"><div class="snpCell">details...<br/><xsl:for-each select="exsl:node-set($best_amp)/snp">
 	    		            <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
 	    		        </xsl:for-each></div></xsl:if></td>
 	    		    </tr>
 	    		    </xsl:if>
 	    		</xsl:for-each>
+                        </tbody>
 	    	</table>
 	    	<br />
 	    	<h3>Antibiotic resistance assays for sample: <xsl:value-of select="@name"/></h3>
-<!-- 	    	<table border="2" width="100%">
-	    		<tr>
-	    		<th>Assay Name</th>
-	    		<th># of Reads</th>
-	    		<th>Coverage Breadth</th>
-	    		<th>Known SNPs(% reads containing SNP) - Significance</th>
-	    		<th>Other SNPs found(% reads containing SNP)</th>
-	    		</tr>
-	    		<xsl:for-each select="assay">
-	    		    <xsl:if test="@type = 'SNP' or @type = 'mixed'">
-	    		    <xsl:call-template name="amplicon-graph"></xsl:call-template>
-	    		    <tr>
-	    		        <td><a href="#{@name}-graph"><xsl:value-of select="@name"/></a></td>
-	    		        <td><xsl:value-of select="amplicon/@reads"/></td>
-	    		        <xsl:if test="amplicon/@reads &gt; 0">
-		    		        <td><xsl:value-of select='format-number(amplicon/breadth, "##.##")'/>%</td>
-		    		        <td><xsl:for-each select="amplicon/snp">
-		    		            <xsl:if test="./@name != 'unknown'">
-		    		                <xsl:value-of select="./@position"/><xsl:value-of select="./@reference"/>-><xsl:value-of select="./snp_call"/>(<xsl:value-of select='format-number(./snp_call/@percent, "##.##")'/>%)
-		    		                - <xsl:value-of select="significance"/><xsl:if test="significance/@flag">(<xsl:value-of select="significance/@flag"/>)</xsl:if>
-		    		                <br/>
-		    		            </xsl:if>
-		    		        </xsl:for-each></td>
-		    		        <td><xsl:for-each select="amplicon/snp">
-		    		            <xsl:if test="./@name = 'unknown'">
-		    		                <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
-		    		            </xsl:if>
-		    		        </xsl:for-each></td>
-	    		        </xsl:if>
-	    		    </tr>
-	    		    </xsl:if>
-	    		</xsl:for-each>
-	    	</table> -->
-	    	<br />
-	    	<h3>Virulence assays for sample: <xsl:value-of select="@name"/></h3>
-<!-- 	    	<table border="2" width="100%">
-	    		<tr>
-	    		<th>Assay Name</th>
-	    		<th># of Reads</th>
-	    		<th>Coverage Breadth</th>
-	    		<th>Region - Reference - Most common sequence (% reads containing seq) - Significance (# of aa changes)</th>
-	    		<th>SNPs found(% reads containing SNP)</th>
-	    		</tr>
-	    		<xsl:for-each select="assay">
-	    		    <xsl:if test="@type = 'ROI' or @type = 'mixed' and amplicon/region_of_interest">
-	    		    <xsl:call-template name="amplicon-graph"></xsl:call-template>
-	    		    <tr>
-	    		        <td><a href="#{@name}-graph"><xsl:value-of select="@name"/></a></td>
-	    		        <td><xsl:value-of select="amplicon/@reads"/></td>
-	    		        <xsl:if test="amplicon/@reads &gt; 0">
-		    		        <td><xsl:value-of select='format-number(amplicon/breadth, "##.##")'/>%</td>
-		    		        <td><xsl:for-each select="amplicon/region_of_interest">
-		    		            <xsl:value-of select="@region"/> - <xsl:value-of select="@reference"/> - <xsl:value-of select="amino_acid_sequence"/>(<xsl:value-of select='format-number(amino_acid_sequence/@percent, "##.##")'/>%)
-	    		                - <xsl:value-of select="significance"/>(<xsl:value-of select="significance/@changes"/>)
-		    		            <br/>
-		    		        </xsl:for-each></td>
-		    		        <td><xsl:for-each select="amplicon/snp">
-		    		            <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
-		    		        </xsl:for-each></td>
-	    		        </xsl:if>
-	    		    </tr>
-	    		    </xsl:if>
-	    		</xsl:for-each>
-	    	</table>
-	    	<br />
-	    	<h3>Gene Variant assays for sample: <xsl:value-of select="@name"/></h3>
 	    	<table border="2" width="100%">
 	    		<tr>
 	    		<th>Assay Name</th>
-	    		<th>Gene variant - # of Reads - Coverage breadth - Significance</th>
+	    		<th>Average Read Depth</th>
+	    		<th>Coverage Breadth</th>
+	    		<th>Significance</th>
+	    		<th>SNPs found</th>
 	    		</tr>
+                        <tbody valign="top">
 	    		<xsl:for-each select="assay">
-	    		    <xsl:if test="@type = 'gene variant'">
+	    		    <xsl:if test="@function = 'resistance type' and .//significance/text()">
+                            <xsl:variable name="best_amp">
+                            <xsl:for-each select="amplicon">
+                                <xsl:sort select="breadth" data-type="number" order="descending"/>
+                                <xsl:sort select="@reads" data-type="number" order="descending"/>
+                                <xsl:if test="position()=1"><xsl:copy-of select="./*"/></xsl:if>
+                            </xsl:for-each>
+                            </xsl:variable>
+	    		    <xsl:call-template name="amplicon-graph"></xsl:call-template>
 	    		    <tr>
-	    		        <td><xsl:value-of select="@name"/></td>
-		    		    <td><xsl:for-each select="amplicon">
-                                    <xsl:sort select="@reads" data-type="number" order="descending"/>
-	    		            <xsl:if test="@reads &gt; 0">
-	    		                <xsl:value-of select="@variant"/> - <strong><xsl:value-of select="@reads"/></strong> - <xsl:value-of select='format-number(breadth, "##.##")'/>%
-	    		                <xsl:if test="significance">
-	    		                    - <xsl:value-of select="significance"/><xsl:if test="significance/@flag"> (<xsl:value-of select="significance/@flag"/>)</xsl:if>
-	    		                </xsl:if>
-                                <br />
-		    		        </xsl:if>
-		    		    </xsl:for-each></td>
+	    		        <td><a href="#{@name}-graph"><xsl:value-of select="@name"/></a></td>
+	    		        <td><xsl:value-of select='format-number(exsl:node-set($best_amp)/average_depth, "#.##")'/></td>
+	    		        <td><xsl:value-of select='format-number(exsl:node-set($best_amp)/breadth, "##.##")'/>%</td>
+	    		        <xsl:choose>
+	    		            <xsl:when test="@type = 'presence/absence'">
+	    		                <td><xsl:value-of select="amplicon/significance"/><xsl:if test="amplicon/significance/@flag"> (<xsl:value-of select="amplicon/significance/@flag"/>)</xsl:if></td>
+	    		            </xsl:when>
+	    		            <xsl:when test="@type = 'SNP'">
+			    		        <td><xsl:for-each select="amplicon/snp">
+			    		            <xsl:if test="significance and ./@name != 'unknown'">
+			    		                <xsl:value-of select="./@position"/><xsl:value-of select="./@reference"/>-><xsl:value-of select="./snp_call"/>(<xsl:value-of select='format-number(./snp_call/@percent, "##.##")'/>%)
+			    		                - <xsl:value-of select="significance"/><xsl:if test="significance/@flag">(<xsl:value-of select="significance/@flag"/>)</xsl:if>
+			    		                <br/>
+			    		            </xsl:if>
+			    		        </xsl:for-each></td>
+	    		            </xsl:when>
+	    		            <xsl:when test="@type = 'ROI'">
+			    		        <td><xsl:for-each select="amplicon/region_of_interest">
+			    		            <xsl:if test="significance">
+			    		            <xsl:value-of select="@region"/> - <xsl:value-of select="@reference"/> - <xsl:value-of select="amino_acid_sequence"/>(<xsl:value-of select='format-number(amino_acid_sequence/@percent, "##.##")'/>%)
+		    		                - <xsl:value-of select="significance"/>(<xsl:value-of select="significance/@changes"/>)
+			    		            <br/>
+			    		            </xsl:if>
+			    		        </xsl:for-each></td>
+	    		            </xsl:when>
+                                    <xsl:when test="@type = 'gene variant'">
+                                        <td><xsl:for-each select="amplicon">
+                                            <xsl:sort select="breadth" data-type="number" order="descending"/>
+                                            <xsl:sort select="@reads" data-type="number" order="descending"/>
+	    		                    <xsl:if test="@reads &gt; 0">
+	    		                        <xsl:value-of select="@variant"/> - <strong><xsl:value-of select="@reads"/></strong> - <xsl:value-of select='format-number(breadth, "##.##")'/>%
+	    		                    <xsl:if test="significance">
+	    		                        - <xsl:value-of select="significance"/><xsl:if test="significance/@flag"> (<xsl:value-of select="significance/@flag"/>)</xsl:if>
+	    		                    </xsl:if>
+                                            <br />
+		    		            </xsl:if>
+		    		        </xsl:for-each></td>
+                                    </xsl:when>
+                                    <xsl:otherwise><td></td></xsl:otherwise>
+	    		        </xsl:choose>
+	    		        <td><xsl:if test="exsl:node-set($best_amp)/snp"><div class="snpCell">details...<br/><xsl:for-each select="exsl:node-set($best_amp)/snp">
+	    		            <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
+	    		        </xsl:for-each></div></xsl:if></td>
 	    		    </tr>
 	    		    </xsl:if>
 	    		</xsl:for-each>
-	    	</table> -->
+                        </tbody>
+	    	</table>
+	    	<br />
+	    	<h3>Virulence assays for sample: <xsl:value-of select="@name"/></h3>
+	    	<table border="2" width="100%">
+	    		<tr>
+	    		<th>Assay Name</th>
+	    		<th>Average Read Depth</th>
+	    		<th>Coverage Breadth</th>
+	    		<th>Significance</th>
+	    		<th>SNPs found</th>
+	    		</tr>
+                        <tbody valign="top">
+	    		<xsl:for-each select="assay">
+	    		    <xsl:if test="@function = 'virulence factor' and .//significance/text()">
+                            <xsl:variable name="best_amp">
+                            <xsl:for-each select="amplicon">
+                                <xsl:sort select="breadth" data-type="number" order="descending"/>
+                                <xsl:sort select="@reads" data-type="number" order="descending"/>
+                                <xsl:if test="position()=1"><xsl:copy-of select="./*"/></xsl:if>
+                            </xsl:for-each>
+                            </xsl:variable>
+	    		    <xsl:call-template name="amplicon-graph"></xsl:call-template>
+	    		    <tr>
+	    		        <td><a href="#{@name}-graph"><xsl:value-of select="@name"/></a></td>
+	    		        <td><xsl:value-of select='format-number(exsl:node-set($best_amp)/average_depth, "#.##")'/></td>
+	    		        <td><xsl:value-of select='format-number(exsl:node-set($best_amp)/breadth, "##.##")'/>%</td>
+	    		        <xsl:choose>
+	    		            <xsl:when test="@type = 'presence/absence'">
+	    		                <td><xsl:value-of select="amplicon/significance"/><xsl:if test="amplicon/significance/@flag"> (<xsl:value-of select="amplicon/significance/@flag"/>)</xsl:if></td>
+	    		            </xsl:when>
+	    		            <xsl:when test="@type = 'SNP'">
+			    		        <td><xsl:for-each select="amplicon/snp">
+			    		            <xsl:if test="significance and ./@name != 'unknown'">
+			    		                <xsl:value-of select="./@position"/><xsl:value-of select="./@reference"/>-><xsl:value-of select="./snp_call"/>(<xsl:value-of select='format-number(./snp_call/@percent, "##.##")'/>%)
+			    		                - <xsl:value-of select="significance"/><xsl:if test="significance/@flag">(<xsl:value-of select="significance/@flag"/>)</xsl:if>
+			    		                <br/>
+			    		            </xsl:if>
+			    		        </xsl:for-each></td>
+	    		            </xsl:when>
+	    		            <xsl:when test="@type = 'ROI'">
+			    		        <td><xsl:for-each select="amplicon/region_of_interest">
+			    		            <xsl:if test="significance">
+			    		            <xsl:value-of select="@region"/> - <xsl:value-of select="@reference"/> - <xsl:value-of select="amino_acid_sequence"/>(<xsl:value-of select='format-number(amino_acid_sequence/@percent, "##.##")'/>%)
+		    		                - <xsl:value-of select="significance"/>(<xsl:value-of select="significance/@changes"/>)
+			    		            <br/>
+			    		            </xsl:if>
+			    		        </xsl:for-each></td>
+	    		            </xsl:when>
+                                    <xsl:when test="@type = 'gene variant'">
+                                        <td><xsl:for-each select="amplicon">
+                                            <xsl:sort select="breadth" data-type="number" order="descending"/>
+                                            <xsl:sort select="@reads" data-type="number" order="descending"/>
+	    		                    <xsl:if test="@reads &gt; 0">
+	    		                        <xsl:value-of select="@variant"/> - <strong><xsl:value-of select="@reads"/></strong> - <xsl:value-of select='format-number(breadth, "##.##")'/>%
+	    		                    <xsl:if test="significance">
+	    		                        - <xsl:value-of select="significance"/><xsl:if test="significance/@flag"> (<xsl:value-of select="significance/@flag"/>)</xsl:if>
+	    		                    </xsl:if>
+                                            <br />
+		    		            </xsl:if>
+		    		        </xsl:for-each></td>
+                                    </xsl:when>
+                                    <xsl:otherwise><td></td></xsl:otherwise>
+	    		        </xsl:choose>
+	    		        <td><xsl:if test="exsl:node-set($best_amp)/snp"><div class="snpCell">details...<br/><xsl:for-each select="exsl:node-set($best_amp)/snp">
+	    		            <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
+	    		        </xsl:for-each></div></xsl:if></td>
+	    		    </tr>
+	    		    </xsl:if>
+	    		</xsl:for-each>
+                        </tbody>
+	    	</table>
+                <br />
+                <center><img src="../web_resources/TGen-North_small_logo.png"/></center>
 	    </body>
 	    </html>
 	</exsl:document>
