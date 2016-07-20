@@ -216,12 +216,12 @@ def findReads(path):
                 logging.warning("Read file %s has no data, skipping..." % file)
                 read_list.append(Read(sample_name, None))
                 continue
-            is_paired = re.search('^((.*?)(?:_L\d\d\d)?(?:[_\.](?:R(?:ead)?)?))([12])([_\.].*)?$', sample_name, re.IGNORECASE)
+            is_paired = re.search('^((.*?)(?:_L\d\d\d)?(?:(?:[_\.](?:R(?:ead)?)?))([12])([_\.])?)(?!.*[_\.](?:R(?:ead)?)?[12][_\.])(.*)$', sample_name, re.IGNORECASE)
             if is_paired:
                 if is_paired.group(3) == '1':  # If paired, only process read 1, so we don't double count the pair, see TODO below
                     sample_name = is_paired.group(2)
                     read1 = file
-                    read2 = "%s2%s%s" % (is_paired.group(1), is_paired.group(4), is_read.group(2))
+                    read2 = "%s2%s%s%s" % (is_paired.group(1), is_paired.group(4), is_paired.group(5), is_read.group(2))
                     #print("\t%s\t%s\t%s" % (sample_name, read1, read2))
                     if os.path.exists(os.path.join(path, read2)):
                         read = Read(sample_name, [os.path.join(path, read1), os.path.join(path, read2)])
