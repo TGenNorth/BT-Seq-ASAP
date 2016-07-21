@@ -52,17 +52,24 @@
                 <a href="#close" title="Close" class="close">X</a>
                 <h2><xsl:value-of select="@name"/> Coverage Graph</h2>
 			<canvas id="{@name}-canvas" height="90vh" class="ampCanvas"></canvas>
+                            <xsl:variable name="best_amp">
+                            <xsl:for-each select="amplicon">
+                                <xsl:sort select="breadth" data-type="number" order="descending"/>
+                                <xsl:sort select="@reads" data-type="number" order="descending"/>
+                                <xsl:if test="position()=1"><xsl:copy-of select="./*"/></xsl:if>
+                            </xsl:for-each>
+                            </xsl:variable>
 			<script>
 				var ctx_<xsl:value-of select="str:replace(str:replace(@name, '+', '_'), '-', '_')"/> = document.getElementById("<xsl:value-of select="@name"/>-canvas").getContext("2d");
 				var chart_<xsl:value-of select="str:replace(str:replace(@name, '+', '_'), '-', '_')"/> = new Chart(ctx_<xsl:value-of select="str:replace(str:replace(@name, '+', '_'), '-', '_')"/>, {
                                     type: 'bar',
 				    data: {
-				        labels: "<xsl:value-of select="amplicon/consensus_sequence"/>".split(""),
+				        labels: "<xsl:value-of select="exsl:node-set($best_amp)/consensus_sequence"/>".split(""),
 				        datasets: [{
 					    type: 'line',
                                             label: 'Consensus Proportion',
 				            yAxisID: 'proportion',
-				            data: [<xsl:value-of select="amplicon/proportions"/>],
+				            data: [<xsl:value-of select="exsl:node-set($best_amp)/proportions"/>],
 				            borderColor: "#5F9EA0",
 				            borderWidth: 5,
 				            fill: false,
@@ -74,7 +81,7 @@
 					    type: 'bar',
 				            label: 'Read Depth',
 				            yAxisID: 'depth',
-				            data: [<xsl:value-of select="amplicon/depths"/>],
+				            data: [<xsl:value-of select="exsl:node-set($best_amp)/depths"/>],
 				            backgroundColor: "#FFDEAD",
 				            borderColor: "#DEB887",
 				            borderWidth: 1,
@@ -285,7 +292,7 @@
                                         <td><xsl:for-each select="amplicon">
                                             <xsl:sort select="breadth" data-type="number" order="descending"/>
                                             <xsl:sort select="@reads" data-type="number" order="descending"/>
-	    		                    <xsl:if test="@reads &gt; 0">
+	    		                    <xsl:if test="breadth &gt; 0">
 	    		                        <xsl:value-of select="@variant"/> - <strong><xsl:value-of select="@reads"/></strong> - <xsl:value-of select='format-number(breadth, "##.##")'/>%
 	    		                    <xsl:if test="significance">
 	    		                        - <xsl:value-of select="significance"/><xsl:if test="significance/@flag"> (<xsl:value-of select="significance/@flag"/>)</xsl:if>
@@ -355,7 +362,7 @@
                                         <td><xsl:for-each select="amplicon">
                                             <xsl:sort select="breadth" data-type="number" order="descending"/>
                                             <xsl:sort select="@reads" data-type="number" order="descending"/>
-	    		                    <xsl:if test="@reads &gt; 0">
+	    		                    <xsl:if test="breadth &gt; 0">
 	    		                        <xsl:value-of select="@variant"/> - <strong><xsl:value-of select="@reads"/></strong> - <xsl:value-of select='format-number(breadth, "##.##")'/>%
 	    		                    <xsl:if test="significance">
 	    		                        - <xsl:value-of select="significance"/><xsl:if test="significance/@flag"> (<xsl:value-of select="significance/@flag"/>)</xsl:if>
@@ -425,7 +432,7 @@
                                         <td><xsl:for-each select="amplicon">
                                             <xsl:sort select="breadth" data-type="number" order="descending"/>
                                             <xsl:sort select="@reads" data-type="number" order="descending"/>
-	    		                    <xsl:if test="@reads &gt; 0">
+	    		                    <xsl:if test="breadth &gt; 0">
 	    		                        <xsl:value-of select="@variant"/> - <strong><xsl:value-of select="@reads"/></strong> - <xsl:value-of select='format-number(breadth, "##.##")'/>%
 	    		                    <xsl:if test="significance">
 	    		                        - <xsl:value-of select="significance"/><xsl:if test="significance/@flag"> (<xsl:value-of select="significance/@flag"/>)</xsl:if>
