@@ -44,10 +44,14 @@ def _write_parameters(node, data):
     return node
 
 def _perform_SMOR_analysis(pileup, amplicon):
+    pileup_array = []
     for pileupcolumn in pileup:
+        new_column = pileupcolumn
         for pileupread in pileupcolumn.pileups:
-            continue
-    return pileup
+            alignment = pileupread.alignment
+            if alignment.is_proper_pair and alignment.is_read1:
+                continue
+    return iter(pileup_array)
 
 def _process_pileup(pileup, amplicon, depth, proportion):
     pileup_dict = {}
@@ -175,14 +179,14 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
         if alignment_length != expected_length:
             continue
         if rstart <= start:
-            qend = qstart = -1
+            qend = qstart = None
             for (qpos, rpos) in read.get_aligned_pairs():
                 if rpos == start:
                     qstart = qpos
                 if rpos == end:
                     qend = qpos
             #throw out reads with insertions in the ROI
-            if ((qend < 0) or (qstart < 0) or (qend-qstart != expected_length)):
+            if not qend or not qstart or qend-qstart != expected_length:
                 continue
             nt_sequence = DNA(read.query_alignment_sequence[qstart:qend])
             if reverse_comp:
