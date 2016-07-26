@@ -43,6 +43,12 @@ def _write_parameters(node, data):
         subnode.text = str(v)
     return node
 
+def _perform_SMOR_analysis(pileup, amplicon):
+    for pileupcolumn in pileup:
+        for pileupread in pileupcolumn.pileups:
+            continue
+    return pileup
+
 def _process_pileup(pileup, amplicon, depth, proportion):
     pileup_dict = {}
     snp_dict = _create_snp_dict(amplicon)
@@ -169,13 +175,14 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
         if alignment_length != expected_length:
             continue
         if rstart <= start:
+            qend = qstart = -1
             for (qpos, rpos) in read.get_aligned_pairs():
                 if rpos == start:
                     qstart = qpos
                 if rpos == end:
                     qend = qpos
             #throw out reads with insertions in the ROI
-            if not qend or not qstart or qend-qstart != expected_length:
+            if ((qend < 0) or (qstart < 0) or (qend-qstart != expected_length)):
                 continue
             nt_sequence = DNA(read.query_alignment_sequence[qstart:qend])
             if reverse_comp:
@@ -315,6 +322,7 @@ USAGE
         parser.add_argument("-d", "--depth", default=100, type=int, help="minimum read depth required to consider a position covered. [default: 100]")
         parser.add_argument("--breadth", default=0.8, type=float, help="minimum breadth of coverage required to consider an amplicon as present. [default: 0.8]")
         parser.add_argument("-p", "--proportion", default=0.1, type=float, help="minimum proportion required to call a SNP at a given position. [default: 0.1]")
+        parser.add_argument("-s", "--smor", action="store_true", default=False, help="perform SMOR analysis with overlapping reads. [default: False]")
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
      
         # Process arguments
@@ -326,6 +334,7 @@ USAGE
         depth = args.depth
         breadth = args.breadth
         proportion = args.proportion
+        smor = args.smor
         #ref_fp = args.ref
         #out_dir = args.odir
         #if not out_dir:
@@ -408,6 +417,9 @@ USAGE
                                 significance_node.set("resistance", ",".join(resistances))
 
                     pileup = samdata.pileup(ref_name, max_depth=1000000)
+                    if smor:
+                        smor_pileup = _perform_SMOR_analysis(pileup, amplicon)
+                        smor_data = _process_pileup(smor_pileup, amplicon, depth, proportion)
                     amplicon_data = _process_pileup(pileup, amplicon, depth, proportion)
                     if float(amplicon_data['breadth']) < breadth*100:
                         significance_node = amplicon_node.find("significance")
