@@ -87,6 +87,7 @@ USAGE
         optional_group.add_argument("-o", "--out-dir", dest="odir", metavar="DIR", help="directory to write output files to. [default: `pwd`]")
         optional_group.add_argument("-s", "--submitter", dest="job_manager", default="PBS", help="cluster job submitter to use (PBS, SLURM, SGE, none). [default: PBS]")
         optional_group.add_argument("--submitter-args", dest="sargs", metavar="ARGS", help="additional arguments to pass to the job submitter, enclosed in \"\".")
+        optional_group.add_argument("--smor", action="store_true", default=False, help="perform SMOR analysis with overlapping reads. [default: False]")
         trim_group = parser.add_argument_group("read trimming options")
         on_off_group = trim_group.add_mutually_exclusive_group()
         on_off_group.add_argument("--trim", action="store_true", default=True, help="perform adapter trimming on reads. [default: True]")
@@ -121,6 +122,7 @@ USAGE
         adapters = dispatcher.expandPath(args.adapters)
         dispatcher.job_manager = args.job_manager.upper()
         dispatcher.job_manager_args = args.sargs
+        smor = args.smor
         
         if not out_dir:
             out_dir = os.getcwd()
@@ -182,7 +184,7 @@ USAGE
                 bam_list.append((read.sample, bam_file, job_id))    
          
         for sample, bam, job in bam_list:
-            (xml_file, job_id) = dispatcher.processBam(sample, json_fp, bam, xml_dir, job, depth, breadth, proportion)
+            (xml_file, job_id) = dispatcher.processBam(sample, json_fp, bam, xml_dir, job, depth, breadth, proportion, smor)
             output_files.append(xml_file)
             final_jobs.append(job_id)
             

@@ -43,15 +43,82 @@ def _write_parameters(node, data):
         subnode.text = str(v)
     return node
 
-def _perform_SMOR_analysis(pileup, amplicon):
-    pileup_array = []
+def _process_pileup_SMOR(pileup, amplicon, depth, proportion):
+    from operator import attrgetter
+    pileup_dict = {}
+    snp_dict = _create_snp_dict(amplicon)
+    consensus_seq = ""
+    snp_list = []
+    breadth_positions = 0
+    avg_depth_total = avg_depth_positions = 0
+    amplicon_length = len(amplicon.sequence)
+    depth_array = ["0"] * amplicon_length
+    prop_array = ["0"] * amplicon_length
     for pileupcolumn in pileup:
-        new_column = pileupcolumn
-        for pileupread in pileupcolumn.pileups:
-            alignment = pileupread.alignment
-            if alignment.is_proper_pair and alignment.is_read1:
-                continue
-    return iter(pileup_array)
+        base_counter = Counter()
+        sorted(pileupcolumn.pileups, key=attrgetter('alignment.query_name'))
+        reads = iter(pileupcolumn.pileups)
+        for read in reads:
+            alignment = read.alignment
+            if alignment.is_proper_pair: 
+                pair = next(reads, None)
+                if pair and pair.is_del and read.is_del:
+                    base_counter.update("_") # XSLT doesn't like '-' as an attribute name, have to use '_'
+                    base_counter.update("_") # XSLT doesn't like '-' as an attribute name, have to use '_'
+                if pair and pair.alignment.query_sequence[pair.query_position] == alignment.query_sequence[read.query_position]:
+                    depth_array[pileupcolumn.pos] += 2
+                    base_counter.update(alignment.query_sequence[read.query_position])
+                    base_counter.update(pair.alignment.query_sequence[pair.query_position])
+        column_depth = depth_array[pileupcolumn.pos]
+        position = pileupcolumn.pos+1
+        depth_passed = False
+        if column_depth > 0: #TODO: This is going to end up being specific to these TB assays, maybe have a clever way to make this line optional
+            avg_depth_positions += 1
+            avg_depth_total += column_depth
+        if column_depth >= depth:
+            breadth_positions += 1
+            depth_passed = True
+        ordered_list = base_counter.most_common()
+        alignment_call = ordered_list[0][0]
+        alignment_call_proportion = ordered_list[0][1] / column_depth
+        prop_array[pileupcolumn.pos] = "%.3f" % alignment_call_proportion
+        reference_call = amplicon.sequence[pileupcolumn.pos]
+        if reference_call == '-':
+            reference_call = '_' #Need to use '_' instead of '-' for gaps because of XSLT
+        if alignment_call != reference_call:
+            snp_call = alignment_call
+            snp_call_proportion = alignment_call_proportion
+        elif len(ordered_list) > 1:
+            snp_call = ordered_list[1][0]
+            snp_call_proportion = ordered_list[1][1] / column_depth
+        else:
+            snp_call = snp_call_proportion = None
+        consensus_seq += alignment_call if alignment_call_proportion >= proportion else "N"
+        if position in snp_dict:
+            for (name, reference, variant, significance) in snp_dict[position]:
+                snp = {'name':name, 'position':str(position), 'depth':str(column_depth), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
+                if base_counter[variant]/column_depth >= proportion:
+                    snp['significance'] = significance
+                if not depth_passed:
+                    snp['flag'] = "low coverage"
+                snp_list.append(snp)
+                #print("Found position of interest %d, reference: %s, distribution:%s" % (position, snp_dict[position][0], base_counter))
+        elif depth_passed and snp_call and snp_call_proportion >= proportion:
+            snp = {'name':'unknown', 'position':str(position), 'depth':str(column_depth), 'reference':reference_call, 'variant':snp_call, 'basecalls':base_counter}
+            if 0 in snp_dict:
+                (name, *rest, significance) = snp_dict[0][0]
+                snp['name'] = name
+                snp['significance'] = significance
+            snp_list.append(snp)
+            #print("SNP found at position %d: %s->%s" % (position, reference_call, alignment_call))
+    
+    pileup_dict['consensus_sequence'] = consensus_seq
+    pileup_dict['breadth'] = str(breadth_positions/amplicon_length * 100)
+    pileup_dict['depths'] = ",".join(depth_array)
+    pileup_dict['proportions'] = ",".join(prop_array)
+    pileup_dict['SNPs'] = snp_list
+    pileup_dict['average_depth'] = str(avg_depth_total/avg_depth_positions) if avg_depth_positions else "0"
+    return pileup_dict 
 
 def _process_pileup(pileup, amplicon, depth, proportion):
     pileup_dict = {}
@@ -200,6 +267,91 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
                 nt_sequence_counter.update([str(nt_sequence)])
                 aa_sequence_counter.update([aa_string])
                 depth += 1
+    if len(aa_sequence_counter) == 0:
+        roi_dict['flag'] = "region not found"
+        return roi_dict
+    aa_consensus = aa_sequence_counter.most_common(1)[0][0]
+    nt_consensus = nt_sequence_counter.most_common(1)[0][0]
+    num_changes = 0
+    reference = roi.aa_sequence
+    consensus = aa_consensus
+    if roi.nt_sequence:
+        reference = roi.nt_sequence
+        consensus = nt_consensus
+    for i in range(len(reference)):
+        if len(consensus) <= i or reference[i] != consensus[i]:
+            num_changes += 1
+    roi_dict['most_common_aa_sequence'] = aa_consensus
+    roi_dict['most_common_nt_sequence'] = nt_consensus
+    roi_dict['reference'] = reference
+    roi_dict['changes'] = str(num_changes)
+    roi_dict['aa_sequence_distribution'] = aa_sequence_counter
+    roi_dict['nt_sequence_distribution'] = nt_sequence_counter
+    roi_dict['depth'] = str(depth)
+    return roi_dict
+
+def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
+    from operator import attrgetter
+    roi_dict = {'region':roi.position_range}
+    range_match = re.search('(\d*)-(\d*)', roi.position_range)
+    if not range_match:
+        return roi_dict
+    start = int(range_match.group(1)) - 1
+    end = int(range_match.group(2))
+    expected_length = end - start
+    aa_sequence_counter = Counter()
+    nt_sequence_counter = Counter()
+    depth = 0
+    reads = iter(sorted(samdata.fetch(amplicon_ref, start, end), key=attrgetter('query_name')))
+    for read in reads:
+        if not read.is_proper_pair:
+            continue
+        pair = next(reads)
+        rstart1 = read.reference_start
+        rstart2 = pair.reference_start
+        alignment_length1 = read.get_overlap(start, end)
+        alignment_length2 = pair.get_overlap(start, end)
+        #throw out reads that either have gaps in the ROI or don't cover the whole ROI
+        if alignment_length1 != expected_length or alignment_length2 != expected_length:
+            continue
+        if rstart1 <= start:
+            qend = qstart = None
+            for (qpos, rpos) in read.get_aligned_pairs():
+                if rpos == start:
+                    qstart = qpos
+                if rpos == end:
+                    qend = qpos
+            #throw out reads with insertions in the ROI
+            if not qend or not qstart or qend-qstart != expected_length:
+                continue
+            nt_sequence = DNA(read.query_alignment_sequence[qstart:qend])
+        if rstart2 <= start:
+            qend = qstart = None
+            for (qpos, rpos) in pair.get_aligned_pairs():
+                if rpos == start:
+                    qstart = qpos
+                if rpos == end:
+                    qend = qpos
+            #throw out reads with insertions in the ROI
+            if not qend or not qstart or qend-qstart != expected_length:
+                continue
+            nt_sequence2 = DNA(pair.query_alignment_sequence[qstart:qend])
+        if nt_sequence != nt_sequence2:
+            continue
+        else:
+            if reverse_comp:
+                nt_sequence = nt_sequence.reverse_complement()
+            #scikit-bio doesn't support translating degenerate bases currently, so we will just throw out reads with degenerates for now
+            if nt_sequence.has_degenerates(): 
+                continue
+            aa_sequence = nt_sequence.translate()
+            aa_string = str(aa_sequence).replace('*', 'x')
+            if aa_string:
+                nt_sequence_counter.update([str(nt_sequence)])
+                aa_sequence_counter.update([aa_string])
+                nt_sequence_counter.update([str(nt_sequence)])
+                aa_sequence_counter.update([aa_string])
+                depth += 2
     if len(aa_sequence_counter) == 0:
         roi_dict['flag'] = "region not found"
         return roi_dict
@@ -422,9 +574,9 @@ USAGE
 
                     pileup = samdata.pileup(ref_name, max_depth=1000000)
                     if smor:
-                        smor_pileup = _perform_SMOR_analysis(pileup, amplicon)
-                        smor_data = _process_pileup(smor_pileup, amplicon, depth, proportion)
-                    amplicon_data = _process_pileup(pileup, amplicon, depth, proportion)
+                        amplicon_data = _process_pileup_SMOR(pileup, amplicon, depth, proportion)
+                    else:
+                        amplicon_data = _process_pileup(pileup, amplicon, depth, proportion)
                     if float(amplicon_data['breadth']) < breadth*100:
                         significance_node = amplicon_node.find("significance")
                         if significance_node is None:
@@ -439,7 +591,10 @@ USAGE
                     _write_parameters(amplicon_node, amplicon_data)
 
                     for roi in amplicon.ROIs:
-                        roi_dict = _process_roi(roi, samdata, ref_name, reverse_comp)
+                        if smor:
+                            roi_dict = _process_roi_SMOR(roi, samdata, ref_name, reverse_comp)
+                        else:
+                            roi_dict = _process_roi(roi, samdata, ref_name, reverse_comp)
                         _add_roi_node(amplicon_node, roi, roi_dict, depth, proportion)
 
         samdata.close()
