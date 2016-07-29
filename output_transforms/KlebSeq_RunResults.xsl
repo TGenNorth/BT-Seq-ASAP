@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:exsl="http://exslt.org/common" xmlns:str="http://exslt.org/strings" extension-element-prefixes="exsl str">
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:exsl="http://exslt.org/common" xmlns:str="http://exslt.org/strings" xmlns:re="http://exslt.org/regular-expressions" extension-element-prefixes="exsl str re">
     <xsl:import href="http://exslt.org/str/functions/replace/str.replace.function.xsl"/>
     <xsl:output method="xhtml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" omit-xml-declaration="yes" encoding="UTF-8" indent="yes"/>
     <xsl:template match="/analysis">
@@ -197,8 +197,11 @@
 	    </head>
 	    <body>
 	        <center><h1>KlebSeq ASAP Results for Sample: <xsl:value-of select="@name"/></h1></center>
-	        <br />
                 <table border="0">
+                <tr>
+                <th>Alignment statistics</th>
+                <th>Analysis parameters</th>
+                </tr>
                 <tr>
 	        <td style="padding-left: 20">Total reads: <xsl:value-of select="@mapped_reads + @unmapped_reads + @unassigned_reads"/></td>
                 <td style="padding-left: 20">Depth filter: <xsl:value-of select="@depth_filter"/>x</td>
@@ -211,10 +214,12 @@
 	        <td style="padding-left: 20">Unmapped reads: <xsl:value-of select="@unmapped_reads + @unassigned_reads"/></td>
                 <td style="padding-left: 20">Proportion filter: <xsl:value-of select="@proportion_filter * 100"/>%</td>
                 </tr>
+                <tr>
+                <td style="padding-left: 20">Aligner used: bowtie2</td>
+                </tr>
                 </table>
 	        <br/>
-                <br/>
-    	    <xsl:variable name="pre_map">
+    	    <!--<xsl:variable name="pre_map">
     	    <xsl:for-each select=".//significance">
                 <xsl:if test="not(./@flag)">
                     <entry key="{.}"><xsl:value-of select="ancestor::assay/@name"/></entry>
@@ -230,15 +235,60 @@
                 </xsl:for-each>
                 </result>
             </xsl:for-each>
+            </xsl:variable>-->
+    	    <xsl:variable name="species_map">
+    	    <xsl:for-each select=".//significance">
+                <xsl:if test="not(./@flag) and (ancestor::assay/@function = 'species ID' or ancestor::assay/@function = 'strain ID')">
+                    <entry key="{.}"></entry>
+                </xsl:if>
+            </xsl:for-each>
             </xsl:variable>
-	    	<table border="2" rules="rows">
-	    	    <tr><th colspan="2">Clinical Summary for Sample: <xsl:value-of select="@name"/></th></tr>
-                <xsl:for-each select="exsl:node-set($clinical_map)/result">
+    	    <xsl:variable name="amr_map">
+    	    <xsl:for-each select=".//significance">
+                <xsl:if test="not(./@flag) and ancestor::assay/@function = 'resistance type'">
+                    <entry key="{ancestor::assay/@gene}"><xsl:value-of select="./@resistance"/></entry>
+                </xsl:if>
+            </xsl:for-each>
+            </xsl:variable>
+    	    <xsl:variable name="virulence_map">
+    	    <xsl:for-each select=".//significance">
+                <xsl:if test="not(./@flag) and ancestor::assay/@function = 'virulence factor'">
+                    <entry key="{.}"></entry>
+                </xsl:if>
+            </xsl:for-each>
+            </xsl:variable>
+	    	<h3>Summary for Sample: <xsl:value-of select="@name"/></h3>
+	    	<table border="2" rules="cols" cellpadding="5">
+                    <colgroup width="33%"/>
+                    <colgroup width="33%"/>
+                    <colgroup width="33%"/>
+                    <tr>
+                        <th><em>Klebsiella</em> species and strain types detected</th>
+                        <th>Antimicrobial resistance determinants detected</th>
+                        <th>Other phenotype determinants detected</th>
+                    </tr>
+                    <xsl:for-each select="exsl:node-set($species_map)/entry[not(@key=preceding-sibling::entry/@key)]">
+    		    <tr>
+    		        <td><xsl:value-of select='re:replace(@key, " present", "g", "")'/></td>
+    		    </tr>
+    		    </xsl:for-each>
+                    <xsl:for-each select="exsl:node-set($amr_map)/entry[not(@key=preceding-sibling::entry/@key)]">
+    		    <tr>
+    		        <td><xsl:value-of select="@key"/> (<xsl:value-of select="."/>)</td>
+    		    </tr>
+    		    </xsl:for-each>
+                    <xsl:for-each select="exsl:node-set($virulence_map)/entry[not(@key=preceding-sibling::entry/@key)]">
+    		    <tr>
+    		        <td><xsl:value-of select='re:replace(@key, " present", "g", "")'/></td>
+    		    </tr>
+    		    </xsl:for-each>
+
+                <!--<xsl:for-each select="exsl:node-set($clinical_map)/result">
     		    <tr>
     		        <td><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]]></xsl:text></td>
     		        <td><xsl:value-of select="@message"/> (<xsl:for-each select="evidence[not(@value=preceding-sibling::evidence/@value)]"><xsl:value-of select="@value"/><xsl:if test="position() != last()"><xsl:text>, </xsl:text></xsl:if></xsl:for-each>)</td>
     		    </tr>
-    		    </xsl:for-each>
+    		    </xsl:for-each>-->
 	    	</table>
 	    	<br />
 	    	<br />

@@ -140,7 +140,10 @@ USAGE
                         amplicon = None
                     assay = assayInfo.Assay(name=row[0].value, assay_type=row[1].value)
                 
-                significance = assayInfo.Significance(message=row[15].value)
+                if row[16].value:
+                    significance = assayInfo.Significance(message=row[15].value, resistance=row[16].value)
+                else:
+                    significance = assayInfo.Significance(message=row[15].value)
                 element = None
                 if row[12].value: #Significance gets attached to ROI
                     element = assayInfo.RegionOfInterest(position_range=row[12].value, aa_sequence=row[13].value, mutations=row[14].value, significance=significance)
