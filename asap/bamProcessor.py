@@ -37,6 +37,13 @@ DEBUG = 1
 TESTRUN = 0
 PROFILE = 0
 
+def pairwise(iterable):
+    from itertools import tee
+    "s -> (s0,s1), (s1,s2), (s2, s3), ..."
+    a, b = tee(iterable)
+    next(b, None)
+    return zip(a, b)
+
 def _write_parameters(node, data):
     for k, v in data.items():
         subnode = ElementTree.SubElement(node, k)
@@ -52,24 +59,27 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion):
     breadth_positions = 0
     avg_depth_total = avg_depth_positions = 0
     amplicon_length = len(amplicon.sequence)
-    depth_array = ["0"] * amplicon_length
+    depth_array = [0] * amplicon_length
     prop_array = ["0"] * amplicon_length
     for pileupcolumn in pileup:
         base_counter = Counter()
         sorted(pileupcolumn.pileups, key=attrgetter('alignment.query_name'))
         reads = iter(pileupcolumn.pileups)
-        for read in reads:
+        for read, pair in pairwise(reads):
+            if read.alignment.query_name != pair.alignment.query_name:
+                continue
             alignment = read.alignment
-            if alignment.is_proper_pair: 
-                pair = next(reads, None)
-                if pair and pair.is_del and read.is_del:
-                    base_counter.update("_") # XSLT doesn't like '-' as an attribute name, have to use '_'
-                    base_counter.update("_") # XSLT doesn't like '-' as an attribute name, have to use '_'
-                if pair and pair.alignment.query_sequence[pair.query_position] == alignment.query_sequence[read.query_position]:
-                    depth_array[pileupcolumn.pos] += 2
+            if pair.is_del and read.is_del:
+                base_counter.update("_") # XSLT doesn't like '-' as an attribute name, have to use '_'
+            elif read.query_position and pair.query_position:
+                if pair.alignment.query_sequence[pair.query_position] == alignment.query_sequence[read.query_position]:
+                    depth_array[pileupcolumn.pos] += 1
                     base_counter.update(alignment.query_sequence[read.query_position])
-                    base_counter.update(pair.alignment.query_sequence[pair.query_position])
+                else
+                    print("Pair does not match at reference position %d -> (%s != %s)" % (pileupcolumn.reference_pos, alignment.query_sequence[read.query_position], pair.alignment.query_sequence[pair.query_position]))
         column_depth = depth_array[pileupcolumn.pos]
+        if column_depth == 0:
+            continue
         position = pileupcolumn.pos+1
         depth_passed = False
         if column_depth > 0: #TODO: This is going to end up being specific to these TB assays, maybe have a clever way to make this line optional
@@ -114,7 +124,7 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion):
     
     pileup_dict['consensus_sequence'] = consensus_seq
     pileup_dict['breadth'] = str(breadth_positions/amplicon_length * 100)
-    pileup_dict['depths'] = ",".join(depth_array)
+    pileup_dict['depths'] = ",".join(str(n) for n in depth_array)
     pileup_dict['proportions'] = ",".join(prop_array)
     pileup_dict['SNPs'] = snp_list
     pileup_dict['average_depth'] = str(avg_depth_total/avg_depth_positions) if avg_depth_positions else "0"
@@ -303,10 +313,9 @@ def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
     nt_sequence_counter = Counter()
     depth = 0
     reads = iter(sorted(samdata.fetch(amplicon_ref, start, end), key=attrgetter('query_name')))
-    for read in reads:
-        if not read.is_proper_pair:
+    for read, pair in pairwise(reads):
+        if read.query_name != pair.query_name:
             continue
-        pair = next(reads)
         rstart1 = read.reference_start
         rstart2 = pair.reference_start
         alignment_length1 = read.get_overlap(start, end)
@@ -349,9 +358,7 @@ def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
             if aa_string:
                 nt_sequence_counter.update([str(nt_sequence)])
                 aa_sequence_counter.update([aa_string])
-                nt_sequence_counter.update([str(nt_sequence)])
-                aa_sequence_counter.update([aa_string])
-                depth += 2
+                depth += 1
     if len(aa_sequence_counter) == 0:
         roi_dict['flag'] = "region not found"
         return roi_dict
@@ -526,6 +533,7 @@ USAGE
             assay_dict['name'] = assay.name
             assay_dict['type'] = assay.assay_type
             assay_dict['function'] = assay.target.function
+            assay_dict['gene'] = assay.target.gene_name or ""
             assay_node = ElementTree.SubElement(sample_node, "assay", assay_dict)
             ref_name = assay.name
             reverse_comp = assay.target.reverse_comp
