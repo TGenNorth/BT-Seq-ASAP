@@ -63,8 +63,8 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion):
     prop_array = ["0"] * amplicon_length
     for pileupcolumn in pileup:
         base_counter = Counter()
-        sorted(pileupcolumn.pileups, key=attrgetter('alignment.query_name'))
-        reads = iter(pileupcolumn.pileups)
+        reads = iter(sorted(pileupcolumn.pileups, key=attrgetter('alignment.query_name')))
+        #reads = iter(pileupcolumn.pileups)
         for read, pair in pairwise(reads):
             if read.alignment.query_name != pair.alignment.query_name:
                 continue
@@ -75,8 +75,8 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion):
                 if pair.alignment.query_sequence[pair.query_position] == alignment.query_sequence[read.query_position]:
                     depth_array[pileupcolumn.pos] += 1
                     base_counter.update(alignment.query_sequence[read.query_position])
-                else
-                    print("Pair does not match at reference position %d -> (%s != %s)" % (pileupcolumn.reference_pos, alignment.query_sequence[read.query_position], pair.alignment.query_sequence[pair.query_position]))
+                #else:
+                #    print("Pair does not match at reference position %d -> (%s != %s)" % (pileupcolumn.reference_pos, alignment.query_sequence[read.query_position], pair.alignment.query_sequence[pair.query_position]))
         column_depth = depth_array[pileupcolumn.pos]
         if column_depth == 0:
             continue
