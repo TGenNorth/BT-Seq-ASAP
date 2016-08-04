@@ -43,6 +43,9 @@ class CLIError(Exception):
     def __unicode__(self):
         return self.msg
 
+def distinct_values(context, values):
+    return list(set(values))
+
 def main(argv=None): # IGNORE:C0111
     '''Command line options.'''
 
@@ -97,6 +100,9 @@ USAGE
             
         if run_name and not os.path.exists(run_name):
             os.makedirs(run_name)
+
+        ns = ET.FunctionNamespace("http://pathogen.tgen.org/ASAP/functions")
+        ns['distinct-values'] = distinct_values
 
         dom = ET.parse(xml_file)
         xslt = ET.parse(stylesheet)
