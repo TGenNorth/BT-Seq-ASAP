@@ -117,59 +117,62 @@
 	    		</xsl:for-each>
 	    		</tr>
 	    		<xsl:for-each select="sample[1]/assay[not(@type='presence/absence')]">
-                    <tr>
+	    		    <xsl:variable name="current_assay" select="./@name"/>
+                    <xsl:text disable-output-escaping="yes"><![CDATA[<tr>]]></xsl:text>
 	    		    <xsl:choose>
 	    		        <xsl:when test="@type = 'SNP'">
-                    	    <td rowspan="{count(asap:distinct-values(//assay[@name=current()/@name]//amplicon//snp/@name))}"><xsl:value-of select="@name"/></td>
-                            <xsl:for-each select="asap:distinct-values(//assay[@name=current()/@name]//amplicon//snp/@name)">
-                            <tr>
-                            <td><xsl:value-of select="."/></td>
-                            </tr>
+                    	    <td rowspan="{count(asap:distinct-values(//assay[@name=current()/@name]//amplicon//snp/@name[. != 'unknown']))}"><xsl:value-of select="@name"/></td>
+                            <xsl:for-each select="asap:distinct-values(//assay[@name=current()/@name]//amplicon//snp/@name[. != 'unknown'])">
+                            <xsl:sort select="."/>
+	    		                <xsl:variable name="current_snp" select="."/>
+	                            <td><xsl:value-of select="."/></td>
+	                            <xsl:for-each select="//sample">
+	                                <td nowrap="true">
+	                                <xsl:if test="not(.//assay[@name=$current_assay]//amplicon//snp[@name=$current_snp])"><!-- assay not present --><em>no coverage</em></xsl:if>
+	                                <xsl:for-each select=".//assay[@name=$current_assay]//amplicon//snp[@name=$current_snp]">
+		                            <xsl:choose>
+		                            <xsl:when test="./significance/@flag"><em><xsl:value-of select="./significance/@flag"/></em></xsl:when>
+		                            <xsl:when test="./significance[not(@flag)]">
+		                                <xsl:value-of select="snp_call/@count"/>/<xsl:value-of select="@depth"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)
+		                            </xsl:when>
+		                            <xsl:otherwise><!-- SNP not present --><em>-</em></xsl:otherwise>
+		                            </xsl:choose>
+	                                </xsl:for-each>
+	                                </td>
+	                            </xsl:for-each>
+	                            <xsl:text disable-output-escaping="yes"><![CDATA[</tr><tr>]]></xsl:text>
                             </xsl:for-each>
 	    		        </xsl:when>
 	    		        <xsl:when test="@type = 'ROI'">
                     	    <td rowspan="{count(asap:distinct-values(//assay[@name=current()/@name]//amplicon//region_of_interest//mutation/@name))}"><xsl:value-of select="@name"/></td>
+                            <xsl:for-each select="asap:distinct-values(//assay[@name=current()/@name]//amplicon//region_of_interest//mutation/@name)">
+                            <xsl:sort select="."/>
+	    		                <xsl:variable name="current_codon" select="."/>
+	                            <td><xsl:value-of select="."/></td>
+	                            <xsl:for-each select="//sample">
+	                                <td nowrap="true">
+	                                <xsl:if test="not(.//assay[@name=$current_assay]//amplicon//region_of_interest//mutation[@name=$current_codon])"><!-- assay not present --><em>no coverage</em></xsl:if>
+	                                <xsl:for-each select=".//assay[@name=$current_assay]//amplicon//region_of_interest//mutation[@name=$current_codon]">
+		                            <xsl:choose>
+		                            <xsl:when test="../significance/@flag"><em><xsl:value-of select="../significance/@flag"/></em></xsl:when>
+		                            <xsl:when test="../significance[not(@flag)]">
+		                                <xsl:value-of select="@count"/>/<xsl:value-of select="../@depth"/>(<xsl:value-of select='format-number(@percent, "##.##")'/>%)
+		                            </xsl:when>
+		                            <xsl:otherwise><!-- mutant codon not present --><em>-</em></xsl:otherwise>
+		                            </xsl:choose>
+	                                </xsl:for-each>
+	                                </td>
+	                            </xsl:for-each>
+                            <xsl:text disable-output-escaping="yes"><![CDATA[</tr><tr>]]></xsl:text>
+                            </xsl:for-each>
 	    		        </xsl:when>
 	    		        <xsl:otherwise><td><xsl:value-of select="@name"/></td></xsl:otherwise>
 	    		    </xsl:choose>
-	    		    </tr>
-	    		<!--<xsl:for-each select="sample[position()&lt;=1]">
-	    		<xsl:for-each select="assay[not(@type='presence/absence')]">
-                    <tr>
-                        <td nowrap="true"></td>
-			    		<xsl:for-each select="assay[not(@type='presence/absence')]">
-			    		    <td align="center"><xsl:for-each select="amplicon">
-			    		        <xsl:choose>
-			    		            <xsl:when test=".//significance/@flag"><em><xsl:value-of select=".//significance/@flag"/></em></xsl:when>
-			    		            <xsl:when test="snp/significance">
-			    		                <xsl:for-each select="snp">
-			    		                    <xsl:if test="significance">
-                                                <xsl:choose>
-                                                    <xsl:when test="@name = 'position of interest'"><xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/></xsl:when>
-                                                    <xsl:otherwise><xsl:value-of select="@name"/></xsl:otherwise>
-                                                </xsl:choose>
-                                                (<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
-                                            </xsl:if>
-			    		                </xsl:for-each>
-			    		            </xsl:when>
-			    		            <xsl:when test="region_of_interest/significance">
-			    		                <xsl:for-each select="region_of_interest">
-			    		                    <xsl:if test="significance and not(significance/@changes)">
-			    		                        <xsl:for-each select="mutation">
-			    		                            <xsl:if test="@percent &gt; 10"><xsl:value-of select="@name"/> (<xsl:value-of select='format-number(@percent, "##.##")'/>%)<br/></xsl:if>
-			    		                        </xsl:for-each>
-			    		                    </xsl:if>
-			    		                </xsl:for-each>
-			    		            </xsl:when>
-			    		            <xsl:otherwise><em>none</em></xsl:otherwise>
-			    		        </xsl:choose>
-			    		    </xsl:for-each></td>
-			    		</xsl:for-each>
-                    </tr>
-                    <xsl:apply-templates select="."/>  -->
+	    		    <xsl:text disable-output-escaping="yes"><![CDATA[</tr>]]></xsl:text>
+	    		<!--<xsl:apply-templates select="."/>  -->
                 </xsl:for-each>
             </table>
-	    	<em>Percentages indicate the percentage of the sample containing that mutation, a value of 'none' indicates that no resistant mutations were present in that gene.</em>
+	    	<em>Values indicate the number of reads in that sample containing that mutation, out of the total number of reads at that position. A value of '-' indicates that that particular mutation wasn't present in that sample.</em>
 	    	<br />
 	    	<br />
 	    	<a href="{@run_name}_details.html">Click here for more details</a>
