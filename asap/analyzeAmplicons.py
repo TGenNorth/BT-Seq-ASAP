@@ -101,6 +101,7 @@ USAGE
         align_group.add_argument("-d", "--depth", default=100, type=int, help="minimum read depth required to consider a position covered. [default: 100]")
         align_group.add_argument("-b", "--breadth", default=0.8, type=float, help="minimum breadth of coverage required to consider an amplicon as present. [default: 0.8]")
         align_group.add_argument("-p", "--proportion", default=0.1, type=float, help="minimum proportion required to call a SNP at a given position. [default: 0.1]")
+        align_group.add_argument("-i", "--percent-id", dest="percid", default=0, type=float, help="minimum percent identity required to align a read to a reference amplicon sequence. [default: 0]")
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
      
         # Process arguments
@@ -119,6 +120,7 @@ USAGE
         depth = args.depth
         breadth = args.breadth
         proportion = args.proportion
+        percid = args.percid
         adapters = dispatcher.expandPath(args.adapters)
         dispatcher.job_manager = args.job_manager.upper()
         dispatcher.job_manager_args = args.sargs
@@ -184,7 +186,7 @@ USAGE
                 bam_list.append((read.sample, bam_file, job_id))    
          
         for sample, bam, job in bam_list:
-            (xml_file, job_id) = dispatcher.processBam(sample, json_fp, bam, xml_dir, job, depth, breadth, proportion, smor)
+            (xml_file, job_id) = dispatcher.processBam(sample, json_fp, bam, xml_dir, job, depth, breadth, proportion, percid, smor)
             output_files.append(xml_file)
             final_jobs.append(job_id)
             

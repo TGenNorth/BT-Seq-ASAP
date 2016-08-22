@@ -427,8 +427,27 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion):
     ElementTree.SubElement(roi_node, 'nt_sequence_distribution', {k:str(v) for k,v in nt_seq_counter.items()})
     return roi_node
 
-def _verify_percent_identity():
-    return
+def _verify_percent_identity(samdata, ref_name, amplicon, percid):
+    amp_length = len(amplicon.sequence)
+    for read in samdata.fetch(ref_name):
+        if read.query_alignment_length / amp_length < percid:
+            _unalign_read(samdata, read)
+        else:
+            matches = 0
+            for (qpos, rpos, seq) in read.get_aligned_pairs(with_seq=True):
+                if rpos is None:
+                    amp_length += 1
+                else:
+                    if qpos and read.query_sequence[qpos] == seq:
+                        matches += 1
+            if matches / amp_length < percid:
+                _unalign_read(samdata, read)
+    return samdata
+
+def _unalign_read(samdata, read):
+    read.flag = 4
+    read.reference_id = -1
+    
 
 class CLIError(Exception):
     '''Generic exception to raise and log different fatal errors.'''
@@ -485,6 +504,7 @@ USAGE
         parser.add_argument("-d", "--depth", default=100, type=int, help="minimum read depth required to consider a position covered. [default: 100]")
         parser.add_argument("--breadth", default=0.8, type=float, help="minimum breadth of coverage required to consider an amplicon as present. [default: 0.8]")
         parser.add_argument("-p", "--proportion", default=0.1, type=float, help="minimum proportion required to call a SNP at a given position. [default: 0.1]")
+        parser.add_argument("-i", "--percent-id", dest="percid", default=0, type=float, help="minimum percent identity required to align a read to a reference amplicon sequence. [default: 0]")
         parser.add_argument("-s", "--smor", action="store_true", default=False, help="perform SMOR analysis with overlapping reads. [default: False]")
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
      
@@ -497,6 +517,7 @@ USAGE
         depth = args.depth
         breadth = args.breadth
         proportion = args.proportion
+        percid = args.percid
         smor = args.smor
         #ref_fp = args.ref
         #out_dir = args.odir
@@ -539,6 +560,8 @@ USAGE
             reverse_comp = assay.target.reverse_comp
             for amplicon in assay.target.amplicons:
                 ref_name = assay.name + "_%s" % amplicon.variant_name if amplicon.variant_name else assay.name
+                if percid:
+                    samdata = _verify_percent_identity(samdata, ref_name, percid)
                 amplicon_dict = {}
                 amplicon_dict['reads'] = str(samdata.count(ref_name))
                 if amplicon.variant_name:
