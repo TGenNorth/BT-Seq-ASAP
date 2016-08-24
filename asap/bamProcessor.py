@@ -428,11 +428,12 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion):
     return roi_node
 
 def _verify_percent_identity(samdata, ref_name, amplicon, percid):
+    temp_file = "%s_%s_temp.bam" % (os.path.splitext(os.path.basename(samdata.filename.decode("utf-8")))[0], ref_name)
+    outdata = pysam.AlignmentFile(temp_file, "wb", template=samdata)
     amp_length = len(amplicon.sequence)
+    discarded_reads = 0
     for read in samdata.fetch(ref_name):
-        if read.query_alignment_length / amp_length < percid:
-            _unalign_read(samdata, read)
-        else:
+        if read.query_alignment_length / amp_length >= percid:
             matches = 0
             for (qpos, rpos, seq) in read.get_aligned_pairs(with_seq=True):
                 if rpos is None:
@@ -440,14 +441,15 @@ def _verify_percent_identity(samdata, ref_name, amplicon, percid):
                 else:
                     if qpos and read.query_sequence[qpos] == seq:
                         matches += 1
-            if matches / amp_length < percid:
-                _unalign_read(samdata, read)
-    return samdata
-
-def _unalign_read(samdata, read):
-    read.flag = 4
-    read.reference_id = -1
-    
+            if matches / amp_length >= percid:
+                outdata.write(read)
+            else:
+                discarded_reads += 1
+        else:
+            discarded_reads += 1
+    outdata.close()
+    pysam.index(temp_file)
+    return (temp_file, discarded_reads)
 
 class CLIError(Exception):
     '''Generic exception to raise and log different fatal errors.'''
@@ -504,7 +506,7 @@ USAGE
         parser.add_argument("-d", "--depth", default=100, type=int, help="minimum read depth required to consider a position covered. [default: 100]")
         parser.add_argument("--breadth", default=0.8, type=float, help="minimum breadth of coverage required to consider an amplicon as present. [default: 0.8]")
         parser.add_argument("-p", "--proportion", default=0.1, type=float, help="minimum proportion required to call a SNP at a given position. [default: 0.1]")
-        parser.add_argument("-i", "--percent-id", dest="percid", default=0, type=float, help="minimum percent identity required to align a read to a reference amplicon sequence. [default: 0]")
+        parser.add_argument("-i", "--identity", dest="percid", default=0, type=float, help="minimum percent identity required to align a read to a reference amplicon sequence. [default: 0]")
         parser.add_argument("-s", "--smor", action="store_true", default=False, help="perform SMOR analysis with overlapping reads. [default: False]")
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
      
@@ -543,6 +545,8 @@ USAGE
         sample_dict['depth_filter'] = str(depth)
         sample_dict['proportion_filter'] = str(proportion)
         sample_dict['breadth_filter'] = str(breadth)
+        if percid:
+            sample_dict['identity_filter'] = str(percid)
         sample_dict['json_file'] = json_fp
         sample_dict['bam_file'] = bam_fp
         sample_node = ElementTree.Element("sample", sample_dict)
@@ -559,10 +563,15 @@ USAGE
             ref_name = assay.name
             reverse_comp = assay.target.reverse_comp
             for amplicon in assay.target.amplicons:
+                temp_file = None
                 ref_name = assay.name + "_%s" % amplicon.variant_name if amplicon.variant_name else assay.name
-                if percid:
-                    samdata = _verify_percent_identity(samdata, ref_name, percid)
                 amplicon_dict = {}
+                if percid:
+                    (temp_file, discarded_reads) = _verify_percent_identity(samdata, ref_name, amplicon, percid)
+                    samdata = pysam.AlignmentFile(temp_file, "rb")
+                    amplicon_dict['discarded_reads'] = str(discarded_reads)
+                elif samdata.closed:
+                    samdata = pysam.AlignmentFile(bam_fp, "rb")
                 amplicon_dict['reads'] = str(samdata.count(ref_name))
                 if amplicon.variant_name:
                     amplicon_dict['variant'] = amplicon.variant_name
@@ -628,7 +637,13 @@ USAGE
                             roi_dict = _process_roi(roi, samdata, ref_name, reverse_comp)
                         _add_roi_node(amplicon_node, roi, roi_dict, depth, proportion)
 
-        samdata.close()
+                if temp_file:
+                    samdata.close()
+                    os.remove(temp_file)
+                    os.remove(temp_file+".bai")
+
+        if samdata.is_open():
+            samdata.close()
         _write_xml(sample_node, out_fp)
 
         return 0
