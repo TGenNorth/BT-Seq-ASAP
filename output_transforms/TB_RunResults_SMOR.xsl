@@ -68,37 +68,44 @@
                         <td class="norotate"><a href="{/analysis/@run_name}/{./@name}.html"><xsl:value-of select="@name"/></a></td>
                         <td class="rotate" align="center"><xsl:choose><xsl:when test=".//significance[not(@flag)]='Mycobacterium tuberculosis confirmed'"><img src="check.png" style="width:30px;height:30px;"/></xsl:when><xsl:otherwise><img src="cross.png" style="width:30px;height:30px;"/></xsl:otherwise></xsl:choose></td>
                         <td class="rotate" align="center"><xsl:choose>
-                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Rifampin')]"><font color="red">R</font></xsl:when>
+                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Rifampin') and not(@level='low')]"><font color="red">HR</font></xsl:when>
+                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Rifampin')]"><font color="red">LHR</font></xsl:when>
                         	<xsl:when test=".//significance[@flag and contains(@resistance, 'Rifampin')]">Ind.</xsl:when>
                         	<xsl:otherwise>S</xsl:otherwise>
                         </xsl:choose></td>
                         <td class="rotate" align="center"><xsl:choose>
-                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Isoniazid')]"><font color="red">R</font></xsl:when>
+                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Isoniazid') and not(@level='low')]"><font color="red">HR</font></xsl:when>
+                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Isoniazid')]"><font color="red">LHR</font></xsl:when>
                         	<xsl:when test=".//significance[@flag and contains(@resistance, 'Isoniazid')]">Ind.</xsl:when>
                         	<xsl:otherwise>S</xsl:otherwise>
                         </xsl:choose></td>
                         <td class="rotate" align="center"><xsl:choose>
-                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Quinolones')]"><font color="red">R</font></xsl:when>
+                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Quinolones') and not(@level='low')]"><font color="red">HR</font></xsl:when>
+                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Quinolones')]"><font color="red">LHR</font></xsl:when>
                         	<xsl:when test=".//significance[@flag and contains(@resistance, 'Quinolones')]">Ind.</xsl:when>
                         	<xsl:otherwise>S</xsl:otherwise>
                         </xsl:choose></td>
                         <td class="rotate" align="center"><xsl:choose>
-                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Kanamycin')]"><font color="red">R</font></xsl:when>
+                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Kanamycin') and not(@level='low')]"><font color="red">HR</font></xsl:when>
+                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Kanamycin')]"><font color="red">LHR</font></xsl:when>
                         	<xsl:when test=".//significance[@flag and contains(@resistance, 'Kanamycin')]">Ind.</xsl:when>
                         	<xsl:otherwise>S</xsl:otherwise>
                         </xsl:choose></td>
                         <td class="rotate" align="center"><xsl:choose>
-                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Capreomycin')]"><font color="red">R</font></xsl:when>
+                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Capreomycin') and not(@level='low')]"><font color="red">HR</font></xsl:when>
+                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Capreomycin')]"><font color="red">LHR</font></xsl:when>
                         	<xsl:when test=".//significance[@flag and contains(@resistance, 'Capreomycin')]">Ind.</xsl:when>
                         	<xsl:otherwise>S</xsl:otherwise>
                         </xsl:choose></td>
                         <td class="rotate" align="center"><xsl:choose>
-                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Amikacin')]"><font color="red">R</font></xsl:when>
+                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Amikacin') and not(@level='low')]"><font color="red">HR</font></xsl:when>
+                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Amikacin')]"><font color="red">LHR</font></xsl:when>
                         	<xsl:when test=".//significance[@flag and contains(@resistance, 'Amikacin')]">Ind.</xsl:when>
                         	<xsl:otherwise>S</xsl:otherwise>
                         </xsl:choose></td>
                         <td class="rotate" align="center"><xsl:choose>
-                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Pyrazinamide')]"><font color="red">R</font></xsl:when>
+                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Pyrazinamide') and not(@level='low')]"><font color="red">HR</font></xsl:when>
+                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Pyrazinamide')]"><font color="red">LHR</font></xsl:when>
                         	<xsl:when test=".//significance[@flag and contains(@resistance, 'Pyrazinamide')]">Ind.</xsl:when>
                         	<xsl:otherwise>S</xsl:otherwise>
                         </xsl:choose></td>

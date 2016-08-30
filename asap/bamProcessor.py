@@ -37,6 +37,8 @@ DEBUG = 1
 TESTRUN = 0
 PROFILE = 0
 
+low_level_cutoff = 0.01
+
 def pairwise(iterable):
     from itertools import tee
     "s -> (s0,s1), (s1,s2), (s2, s3), ..."
@@ -107,8 +109,11 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion):
         if position in snp_dict:
             for (name, reference, variant, significance) in snp_dict[position]:
                 snp = {'name':name, 'position':str(position), 'depth':str(column_depth), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
-                if base_counter[variant]/column_depth >= proportion:
+                variant_proportion = base_counter[variant]/column_depth
+                if variant_proportion >= proportion:
                     snp['significance'] = significance
+                    if variant_proportion <= low_level_cutoff:
+                        snp['level'] = "low"
                 if not depth_passed:
                     snp['flag'] = "low coverage"
                 snp_list.append(snp)
@@ -233,6 +238,8 @@ def _add_snp_node(parent, snp):
             significance_node.text = snp['significance'].message
             if snp['significance'].resistance:
                 significance_node.set("resistance", snp['significance'].resistance)
+            if snp['level']:
+                significance_node.set("level", snp['level'])
         if 'flag' in snp:
             significance_node.set('flag', snp['flag'])
     ElementTree.SubElement(snp_node, 'base_distribution', {k:str(v) for k,v in base_counter.items()})
@@ -400,6 +407,7 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion):
     nt_seq_node = ElementTree.SubElement(roi_node, "nucleotide_sequence", {'count':str(nt_seq_count), 'percent':str(nt_seq_count/int(roi_dict['depth'])*100)})
     nt_seq_node.text = roi_dict['most_common_nt_sequence']
     significant = False
+    low_level = True
     for mutation in roi.mutations:
         if roi.nt_sequence:
             count = nt_seq_counter[mutation]
@@ -411,6 +419,8 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion):
         mutation_node.text = mutation
         if mutant_proportion >= proportion:
             significant = True
+            if mutant_proportion > low_level_cutoff:
+                low_level = False
     if significant:
         significance_node = ElementTree.SubElement(roi_node, "significance")
         significance_node.text = roi.significance.message
@@ -418,6 +428,8 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion):
             significance_node.set("resistance", roi.significance.resistance)
         if int(roi_dict['depth']) < depth:
             significance_node.set("flag", "low coverage")
+        if low_level:
+            significance_node.set("level", "low")
     elif 'changes' in roi_dict and int(roi_dict['changes']) > 0:
         significance_node = ElementTree.SubElement(roi_node, "significance", {'changes':roi_dict['changes']})
         significance_node.text = roi.significance.message                       
