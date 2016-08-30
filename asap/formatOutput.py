@@ -84,6 +84,7 @@ USAGE
         required_group.add_argument("-s", "--stylesheet", metavar="FILE", required=True, help="XSLT stylesheet to use for transforming the output. [REQUIRED]")
         required_group.add_argument("-x", "--xml", metavar="FILE", required=True, help="XML output file to transform. [REQUIRED]")
         required_group.add_argument("-o", "--out", dest="out", metavar="FILE", help="output file to write. [REQUIRED]")
+        parser.add_argument("-t", "--text", action="store_true", default=False, help="output plain text.")
         parser.add_argument('-V', '--version', action='version', version=program_version_message)
 
         # Process arguments
@@ -93,6 +94,7 @@ USAGE
         xml_file = args.xml
         out_file = args.out
         run_name = ""
+        text = args.text
 
         match = re.search('^(.*)_analysis.xml$', xml_file)
         if match:
@@ -110,7 +112,10 @@ USAGE
         newdom = transform(dom)
         
         output = open(out_file, 'wb')
-        output.write(ET.tostring(newdom, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
+        if text:
+            output.write(ET.tostring(newdom, method="text"))
+        else:
+            output.write(ET.tostring(newdom, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
         output.close()
 
         return 0
