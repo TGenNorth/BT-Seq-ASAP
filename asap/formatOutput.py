@@ -113,7 +113,7 @@ USAGE
         
         output = open(out_file, 'wb')
         if text:
-            output.write(ET.tostring(newdom, method="text"))
+            output.write(newdom)
         else:
             output.write(ET.tostring(newdom, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
         output.close()
