@@ -238,7 +238,7 @@ def _add_snp_node(parent, snp):
             significance_node.text = snp['significance'].message
             if snp['significance'].resistance:
                 significance_node.set("resistance", snp['significance'].resistance)
-            if snp['level']:
+            if 'level' in snp:
                 significance_node.set("level", snp['level'])
         if 'flag' in snp:
             significance_node.set('flag', snp['flag'])
