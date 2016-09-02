@@ -59,6 +59,19 @@ def _clean_seq(sequence):
     return_seq = re.sub('[-|_]', '', return_seq)
     return return_seq
 
+def _isNT(sequence, positions):
+    size = 0
+    for token in positions.split(','):
+        m = re.search(r"(\d*)-(\d*)", token)
+        if m:
+            size += int(m.group(2)) - int(m.group(1)) + 1
+        else:
+            size += 1
+    if size == len(sequence):
+        return True
+    else:
+        return False
+
 class CLIError(Exception):
     '''Generic exception to raise and log different fatal errors.'''
     def __init__(self, msg):
@@ -140,15 +153,20 @@ USAGE
                         amplicon = None
                     assay = assayInfo.Assay(name=row[0].value, assay_type=row[1].value)
                 
-                if row[16].value:
-                    significance = assayInfo.Significance(message=row[15].value, resistance=row[16].value)
+                if row[18].value:
+                    significance = assayInfo.Significance(message=row[17].value, resistance=row[18].value)
                 else:
-                    significance = assayInfo.Significance(message=row[15].value)
+                    significance = assayInfo.Significance(message=row[17].value)
                 element = None
-                if row[12].value: #Significance gets attached to ROI
-                    element = assayInfo.RegionOfInterest(position_range=row[12].value, aa_sequence=row[13].value, mutations=row[14].value, significance=significance)
-                elif row[9].value: #Significance gets attached to SNP
-                    element = assayInfo.SNP(position=row[9].value, reference=row[10].value, variant=row[11].value, significance=significance)
+                if row[14].value: #Significance gets attached to ROI
+                    sequence = row[15].value
+                    positions = row[14].value
+                    if _isNT(sequence, positions):
+                        element = assayInfo.RegionOfInterest(position_range=positions, nt_sequence=sequence, mutations=row[16].value, name=row[13].value, significance=significance)
+                    else:
+                        element = assayInfo.RegionOfInterest(position_range=positions, aa_sequence=sequence, mutations=row[16].value, name=row[13].value, significance=significance)
+                elif row[10].value is not None: #Significance gets attached to SNP
+                    element = assayInfo.SNP(position=row[10].value, reference=row[11].value, variant=row[12].value, name=row[9].value, significance=significance)
                 if row[8].value: #Process amplicon
                     if os.path.isfile(row[8].value):
                         amplicon = _process_fasta(row[8].value, GENE_VARIANT, significance)
@@ -158,6 +176,8 @@ USAGE
                             amplicon.add_SNP(element) if isinstance(element, assayInfo.SNP) else amplicon.add_ROI(element)
                         else:
                             amplicon.significance = significance
+                elif amplicon and element: #We already have an amplicon, but we need to add another SNP or ROI to it
+                   amplicon.add_SNP(element) if isinstance(element, assayInfo.SNP) else amplicon.add_ROI(element)
                 
                 if target and row[8].value:
                     target.add_amplicon(amplicon)
