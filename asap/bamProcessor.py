@@ -452,6 +452,7 @@ def _verify_percent_identity(samdata, ref_name, amplicon, percid):
     outdata = pysam.AlignmentFile(temp_file, "wb", template=samdata)
     amp_length = len(amplicon.sequence)
     discarded_reads = 0
+    seq_counter = Counter()
     for read in samdata.fetch(ref_name):
         if read.query_alignment_length / amp_length >= percid:
             matches = 0
@@ -465,11 +466,13 @@ def _verify_percent_identity(samdata, ref_name, amplicon, percid):
                 outdata.write(read)
             else:
                 discarded_reads += 1
+                seq_counter.update(read.query_sequence)
         else:
             discarded_reads += 1
+            seq_counter.update(read.query_sequence)
     outdata.close()
     pysam.index(temp_file)
-    return (temp_file, discarded_reads)
+    return (temp_file, discarded_reads, seq_counter)
 
 class CLIError(Exception):
     '''Generic exception to raise and log different fatal errors.'''
@@ -586,8 +589,9 @@ USAGE
                 temp_file = None
                 ref_name = assay.name + "_%s" % amplicon.variant_name if amplicon.variant_name else assay.name
                 amplicon_dict = {}
+                seq_counter = None
                 if percid:
-                    (temp_file, discarded_reads) = _verify_percent_identity(samdata, ref_name, amplicon, percid)
+                    (temp_file, discarded_reads, seq_counter) = _verify_percent_identity(samdata, ref_name, amplicon, percid)
                     samdata = pysam.AlignmentFile(temp_file, "rb")
                     amplicon_dict['discarded_reads'] = str(discarded_reads)
                 elif samdata.closed:
@@ -596,6 +600,8 @@ USAGE
                 if amplicon.variant_name:
                     amplicon_dict['variant'] = amplicon.variant_name
                 amplicon_node = ElementTree.SubElement(assay_node, "amplicon", amplicon_dict)
+                if seq_counter:
+                    ElementTree.SubElement(amplicon_node, "sequence_distribution", {k:str(v) for k,v in seq_counter.items()})
                 if samdata.count(ref_name) == 0:
                     significance_node = ElementTree.SubElement(amplicon_node, "significance", {"flag":"no coverage"})
                     #Check for indeterminate resistances
