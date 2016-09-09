@@ -38,6 +38,7 @@ TESTRUN = 0
 PROFILE = 0
 
 low_level_cutoff = 0.01
+high_level_cutoff = 0.50
 
 def pairwise(iterable):
     from itertools import tee
@@ -114,6 +115,8 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion):
                     snp['significance'] = significance
                     if variant_proportion <= low_level_cutoff:
                         snp['level'] = "low"
+                    elif variant_proportion >= high_level_cutoff:
+                        snp['level'] = "high"
                 if not depth_passed:
                     snp['flag'] = "low coverage"
                 snp_list.append(snp)
@@ -408,6 +411,7 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion):
     nt_seq_node.text = roi_dict['most_common_nt_sequence']
     significant = False
     low_level = True
+    high_level = False
     for mutation in roi.mutations:
         if roi.nt_sequence:
             count = nt_seq_counter[mutation]
@@ -421,6 +425,8 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion):
             significant = True
             if mutant_proportion > low_level_cutoff:
                 low_level = False
+            elif mutant_proportion >= high_level_cutoff:
+                high_level = True
     if significant:
         significance_node = ElementTree.SubElement(roi_node, "significance")
         significance_node.text = roi.significance.message
@@ -430,6 +436,8 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion):
             significance_node.set("flag", "low coverage")
         if low_level:
             significance_node.set("level", "low")
+        elif high_level:
+            significance_node.set("level", "high")
     elif 'changes' in roi_dict and int(roi_dict['changes']) > 0:
         significance_node = ElementTree.SubElement(roi_node, "significance", {'changes':roi_dict['changes']})
         significance_node.text = roi.significance.message                       
