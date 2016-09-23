@@ -425,7 +425,7 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion):
             significant = True
             if mutant_proportion > low_level_cutoff:
                 low_level = False
-            elif mutant_proportion >= high_level_cutoff:
+            if mutant_proportion >= high_level_cutoff:
                 high_level = True
     if significant:
         significance_node = ElementTree.SubElement(roi_node, "significance")
@@ -466,10 +466,10 @@ def _verify_percent_identity(samdata, ref_name, amplicon, percid):
                 outdata.write(read)
             else:
                 discarded_reads += 1
-                seq_counter.update(read.query_sequence)
+                seq_counter.update([read.query_sequence])
         else:
             discarded_reads += 1
-            seq_counter.update(read.query_sequence)
+            seq_counter.update([read.query_sequence])
     outdata.close()
     pysam.index(temp_file)
     return (temp_file, discarded_reads, seq_counter)
