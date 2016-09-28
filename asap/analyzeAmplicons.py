@@ -92,7 +92,7 @@ USAGE
         on_off_group = trim_group.add_mutually_exclusive_group()
         on_off_group.add_argument("--trim", action="store_true", default=True, help="perform adapter trimming on reads. [default: True]")
         on_off_group.add_argument("--no-trim", dest="trim", action="store_false", help="do not perform adapter trimming.")
-        trim_group.add_argument("--adapter-sequences", dest="adapters", default="/scratch/dlemmer/ASAP/illumina_adapters_all.fasta", help="location of the adapter sequence file to use for trimming. [default: /scratch/dlemmer/ASAP/illumina_adapters_all.fasta]")
+        trim_group.add_argument("--adapter-sequences", dest="adapters", default="/scratch/dl765/ASAP/illumina_adapters_all.fasta", help="location of the adapter sequence file to use for trimming. [default: /scratch/dl765/ASAP/illumina_adapters_all.fasta]")
         trim_group.add_argument("-q", "--qual", nargs="?", const="SLIDINGWINDOW:5:20", help="perform quality trimming [default: False], optional parameter can be used to customize quality trimming parameters to trimmomatic. [default: SLIDINGWINDOW:5:20]")
         trim_group.add_argument("-m", "--minlen", metavar="LEN", default=80, type=int, help="minimum read length to keep after trimming. [default: 80]")
         align_group = parser.add_argument_group("read mapping options")
@@ -170,7 +170,7 @@ USAGE
         if read_dir:
             reference = assayInfo.generateReference(assay_list)
             ref_fasta = os.path.join(out_dir, "reference.fasta")
-            reference.write(ref_fasta, 'fasta')
+            skbio.io.registry.write(reference, 'fasta', ref_fasta)
             index_job = dispatcher.indexFasta(ref_fasta, aligner)        
         
             read_list = dispatcher.findReads(read_dir)

@@ -439,7 +439,6 @@ def writeJSON(assay_data, filename):
     
 def generateReference(assay_list):
     from skbio import DNA
-    from skbio import SequenceCollection
     reference = []
     for assay in assay_list:
         name = assay.name
@@ -456,7 +455,7 @@ def generateReference(assay_list):
                 name = assay.name + "_%s" % amplicon.variant_name if amplicon.variant_name else name
                 seq = DNA(amplicon.sequence, {'id':name})
                 reference.append(seq)
-    return SequenceCollection(reference)
+    return reference
         
 def main():
     assays = parseJSON('../TB.json')
