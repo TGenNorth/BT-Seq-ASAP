@@ -1,0 +1,9 @@
+include illumina_adapters_all.fasta
+
+include HISTORY.rst
+include LICENSE
+include README.rst
+
+recursive-include assay_data *
+recursive-include output_transforms *
+

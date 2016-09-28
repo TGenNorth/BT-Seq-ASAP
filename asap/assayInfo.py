@@ -439,7 +439,6 @@ def writeJSON(assay_data, filename):
     
 def generateReference(assay_list):
     from skbio import DNA
-    reference = []
     for assay in assay_list:
         name = assay.name
         if assay.AND:
@@ -449,13 +448,12 @@ def generateReference(assay_list):
                     for amplicon in operand.amplicons:
                         name = name + "_%s" % amplicon.variant_name if amplicon.variant_name else name
                         seq = DNA(amplicon.sequence, id=name)
-                        reference.append(seq)
+                        yield seq
         else:
             for amplicon in assay.target.amplicons:
                 name = assay.name + "_%s" % amplicon.variant_name if amplicon.variant_name else name
                 seq = DNA(amplicon.sequence, {'id':name})
-                reference.append(seq)
-    return reference
+                yield seq
         
 def main():
     assays = parseJSON('../TB.json')

@@ -1,3 +1,4 @@
 build
 ASAP.egg-info
-
+.*
+!.gitignnore
