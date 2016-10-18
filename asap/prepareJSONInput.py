@@ -21,7 +21,6 @@ import argparse
 import logging
 import skbio.io
 from skbio import DNA
-from skbio import SequenceCollection
 from openpyxl import load_workbook
 
 import asap.dispatcher as dispatcher
@@ -41,8 +40,7 @@ GENE_VARIANT = 20
 
 def _process_fasta(fasta, fasta_type, message=None):
     return_list = []
-    sc = skbio.io.registry.read(fasta, format='fasta', into=SequenceCollection, constructor=DNA)
-    for seq in sc:
+    for seq in skbio.io.registry.read(fasta, format='fasta', constructor=DNA):
         significance = assayInfo.Significance(seq.metadata['description']) if seq.metadata['description'] else message
         amplicon = assayInfo.Amplicon(sequence=_clean_seq(str(seq)), significance=significance)
         if fasta_type == GENE_VARIANT:
