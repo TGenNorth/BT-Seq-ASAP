@@ -319,7 +319,7 @@ def alignReadsToReference(sample, reads, reference, outdir, jobid=None, aligner=
 
 def processBam(sample_name, json_file, bam_file, xml_dir, dependency, depth, breadth, proportion, percid, smor=False):
     import os
-    job_params = {'queue':'', 'mem_requested':2, 'num_cpus':1, 'walltime':4, 'args':''}
+    job_params = {'queue':'', 'mem_requested':4, 'num_cpus':2, 'walltime':24, 'args':''}
     job_params['name'] = "asap_bamprocesser_%s" % sample_name
     job_params['work_dir'] = xml_dir
     out_file = os.path.join(xml_dir, sample_name+".xml")
