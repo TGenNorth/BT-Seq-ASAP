@@ -228,7 +228,7 @@ def findReads(path):
                     if is_paired.group(3) == '1':  # If paired, only process read 1, so we don't double count the pair, see TODO below
                         sample_name = is_paired.group(2)
                         read1 = file
-                        read2 = "%s2%s%s%s" % (is_paired.group(1), is_paired.group(4), is_paired.group(5), is_read.group(2))
+                        read2 = "%s2%s%s%s" % (is_paired.group(1), is_paired.group(4) or '', is_paired.group(5), is_read.group(2))
                         #print("\t%s\t%s\t%s" % (sample_name, read1, read2))
                         if os.path.exists(os.path.join(path, read2)):
                             read = Read(sample_name, [os.path.join(path, read1), os.path.join(path, read2)])
@@ -241,7 +241,7 @@ def findReads(path):
                             read_list.append(read)
                             logging.info(read)
                 else: #Read is unpaired
-                    sample_name = is_merged.group(1)
+                    sample_name = is_read.group(1)
                     read = Read(sample_name, [os.path.join(path, file)])
                     read_list.append(read)
                     logging.info(read)
