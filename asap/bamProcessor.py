@@ -447,27 +447,37 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion):
     ElementTree.SubElement(roi_node, 'nt_sequence_distribution', {k:str(v) for k,v in nt_seq_counter.items()})
     return roi_node
 
-def _verify_percent_identity(samdata, ref_name, amplicon, percid):
+def _verify_percent_identity(samdata, ref_name, amplicon, percid, merge):
     temp_file = "%s_%s_temp.bam" % (os.path.splitext(os.path.basename(samdata.filename.decode("utf-8")))[0], ref_name)
     outdata = pysam.AlignmentFile(temp_file, "wb", template=samdata)
     amp_length = len(amplicon.sequence)
     discarded_reads = 0
     seq_counter = Counter()
+    logging.debug("Checking %s for amplicon %s, length %i" % (samdata.filename, ref_name, amp_length))
     for read in samdata.fetch(ref_name):
-        if read.query_alignment_length / amp_length >= percid:
+        length = read.infer_query_length(False)
+        amp_length = len(amplicon.sequence) #reset amp_length in case we altered it in the last iteration
+        logging.debug("\tRead %s, aligned length %i, total read length %i" % (read.query_name, read.query_alignment_length, length))
+        if read.query_alignment_length / length >= percid: #Using length instead of amp_length to compare to query instead of reference
             matches = 0
             for (qpos, rpos, seq) in read.get_aligned_pairs(with_seq=True):
+                #if there is a gap in the alignment, extend the length of the query or reference accordingly
                 if rpos is None:
                     amp_length += 1
+                if qpos is None:
+                    length += 1
                 else:
-                    if qpos and read.query_sequence[qpos] == seq:
+                    if read.query_sequence[qpos].upper() == seq.upper():
                         matches += 1
-            if matches / amp_length >= percid:
+            if matches / length >= percid: #Using length instead of amp_length to compare to query instead of reference
+                logging.debug("\t\tFound %i matches, keeping..." % matches)
                 outdata.write(read)
             else:
+                logging.debug("\t\tFound %i matches, discarding..." % matches)
                 discarded_reads += 1
                 seq_counter.update([read.query_sequence])
         else:
+            logging.debug("\t\tToo short, discarding...")
             discarded_reads += 1
             seq_counter.update([read.query_sequence])
     outdata.close()
@@ -529,7 +539,14 @@ USAGE
         parser.add_argument("-d", "--depth", default=100, type=int, help="minimum read depth required to consider a position covered. [default: 100]")
         parser.add_argument("--breadth", default=0.8, type=float, help="minimum breadth of coverage required to consider an amplicon as present. [default: 0.8]")
         parser.add_argument("-p", "--proportion", default=0.1, type=float, help="minimum proportion required to call a SNP at a given position. [default: 0.1]")
-        parser.add_argument("-i", "--identity", dest="percid", default=0, type=float, help="minimum percent identity required to align a read to a reference amplicon sequence. [default: 0]")
+        identity_group = parser.add_argument_group("identity filter options")
+        identity_group.add_argument("-i", "--identity", dest="percid", default=0, type=float, help="minimum percent identity required to align a read to a reference amplicon sequence. [default: 0]")
+        keep_discarded_group = identity_group.add_mutually_exclusive_group()
+        keep_discarded_group.add_argument("-k", "--keep", action="store_true", default=True, help="keep filtered reads. [default: True]")
+        keep_discarded_group.add_argument("--no-keep", action="store_false", dest="keep", help="discard filtered reads.")
+        merge_group = identity_group.add_mutually_exclusive_group()
+        merge_group.add_argument("-m", "--merge", action="store_true", default=False, help="merge paired reads. [default: False]")
+        merge_group.add_argument("--no-merge", action="store_false", dest="merge", help="do not merge paired reads.")
         parser.add_argument("-s", "--smor", action="store_true", default=False, help="perform SMOR analysis with overlapping reads. [default: False]")
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
      
@@ -543,6 +560,8 @@ USAGE
         breadth = args.breadth
         proportion = args.proportion
         percid = args.percid
+        keep = args.keep
+        merge = args.merge
         smor = args.smor
         #ref_fp = args.ref
         #out_dir = args.odir
@@ -574,6 +593,14 @@ USAGE
         sample_dict['bam_file'] = bam_fp
         sample_node = ElementTree.Element("sample", sample_dict)
 
+        logfile = "%s.log" % sample_dict['name']
+
+        #logging.basicConfig(level=logging.DEBUG,
+        #                    format='%(asctime)s %(levelname)-8s %(message)s',
+        #                    datefmt='%m/%d/%Y %H:%M:%S',
+        #                    filename=logfile,
+        #                    filemode='w')
+
         #out_fp = os.path.join(out_dir, sample_dict['name']+".xml")
         
         for assay in assay_list:
@@ -591,9 +618,10 @@ USAGE
                 amplicon_dict = {}
                 seq_counter = None
                 if percid:
-                    (temp_file, discarded_reads, seq_counter) = _verify_percent_identity(samdata, ref_name, amplicon, percid)
+                    (temp_file, discarded_reads, seq_counter) = _verify_percent_identity(samdata, ref_name, amplicon, percid, merge)
                     samdata = pysam.AlignmentFile(temp_file, "rb")
-                    amplicon_dict['discarded_reads'] = str(discarded_reads)
+                    if keep:
+                        amplicon_dict['discarded_reads'] = str(discarded_reads)
                 elif samdata.closed:
                     samdata = pysam.AlignmentFile(bam_fp, "rb")
                 amplicon_dict['reads'] = str(samdata.count(ref_name))
@@ -667,6 +695,7 @@ USAGE
                     samdata.close()
                     os.remove(temp_file)
                     os.remove(temp_file+".bai")
+                    samdata = pysam.AlignmentFile(bam_fp, "rb")
 
         if samdata.is_open():
             samdata.close()
