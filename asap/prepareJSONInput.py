@@ -65,7 +65,10 @@ def _clean_str(string):
 
 def _strip(string):
     if string:
-        return string.strip()
+        if type(string) is str:
+            return string.strip()
+        else:
+            return string
     else:
         return None
 
@@ -175,7 +178,7 @@ USAGE
                         element = assayInfo.RegionOfInterest(position_range=positions, nt_sequence=sequence, mutations=_strip(row[16].value), name=_strip(row[13].value), significance=significance)
                     else:
                         element = assayInfo.RegionOfInterest(position_range=positions, aa_sequence=sequence, mutations=_strip(row[16].value), name=_strip(row[13].value), significance=significance)
-                elif _strip(row[10].value and row[10].value): #Significance gets attached to SNP
+                elif _strip(row[10].value): #Significance gets attached to SNP
                     element = assayInfo.SNP(position=_strip(row[10].value), reference=_strip(row[11].value), variant=_strip(row[12].value), name=_strip(row[9].value), significance=significance)
                 if _strip(row[8].value): #Process amplicon
                     if os.path.isfile(_strip(row[8].value)):
