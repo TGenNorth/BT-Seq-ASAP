@@ -180,7 +180,7 @@ def _run_novoalign(sample, reads, reference, outdir='', dependency=None, sampath
     #paired_string = "-i PE 500,100" if read2 else ""
     paired_string = ""
     bam_string = "\'@RG\\tID:%s\\tSM:%s\'" % (sample, sample)
-    job_params = {'queue':'', 'mem_requested':4, 'num_cpus':ncpus, 'walltime':8, 'args':''}
+    job_params = {'queue':'', 'mem_requested':4, 'num_cpus':ncpus, 'walltime':24, 'args':''}
     job_params['name'] = "asap_novo_%s" % sample
     aligner_name = "novo"
     aligner_command = "%s -f %s %s %s -c %s -o SAM %s -d %s.idx %s" % (novopath, read1, read2, paired_string, ncpus, bam_string, reference, args)
