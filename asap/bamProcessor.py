@@ -461,10 +461,12 @@ def _verify_percent_identity(samdata, ref_name, amplicon, percid, merge):
         if read.query_alignment_length / length >= percid: #Using length instead of amp_length to compare to query instead of reference
             matches = 0
             for (qpos, rpos, seq) in read.get_aligned_pairs(with_seq=True):
+                query = read.query_sequence[qpos] if qpos else "None"
+                logging.debug("qpos: %i\trpos: %i\tseq: %s\tquery[qpos]: %s" % (qpos or -1, rpos or -1, seq, query)) 
                 #if there is a gap in the alignment, extend the length of the query or reference accordingly
                 if rpos is None:
                     amp_length += 1
-                if qpos is None:
+                elif qpos is None:
                     length += 1
                 else:
                     if read.query_sequence[qpos].upper() == seq.upper():
