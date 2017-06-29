@@ -68,7 +68,7 @@ def _strip(string):
         if type(string) is str:
             return string.strip()
         else:
-            return string
+            return str(string)
     else:
         return None
 
