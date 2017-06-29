@@ -275,7 +275,7 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
             #throw out reads with insertions in the ROI
             if not qend or not qstart or qend-qstart != expected_length:
                 continue
-            nt_sequence = DNA(read.query_alignment_sequence[qstart:qend])
+            nt_sequence = DNA(read.query_sequence[qstart:qend])
             if reverse_comp:
                 nt_sequence = nt_sequence.reverse_complement()
             #scikit-bio doesn't support translating degenerate bases currently, so we will just throw out reads with degenerates for now
@@ -343,7 +343,7 @@ def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
             #throw out reads with insertions in the ROI
             if not qend or not qstart or qend-qstart != expected_length:
                 continue
-            nt_sequence = DNA(read.query_alignment_sequence[qstart:qend])
+            nt_sequence = DNA(read.query_sequence[qstart:qend])
         if rstart2 <= start:
             qend = qstart = None
             for (qpos, rpos) in pair.get_aligned_pairs():
@@ -354,7 +354,7 @@ def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
             #throw out reads with insertions in the ROI
             if not qend or not qstart or qend-qstart != expected_length:
                 continue
-            nt_sequence2 = DNA(pair.query_alignment_sequence[qstart:qend])
+            nt_sequence2 = DNA(pair.query_sequence[qstart:qend])
         if nt_sequence != nt_sequence2:
             continue
         else:
@@ -457,12 +457,15 @@ def _verify_percent_identity(samdata, ref_name, amplicon, percid, merge):
     for read in samdata.fetch(ref_name):
         length = read.infer_query_length(False)
         amp_length = len(amplicon.sequence) #reset amp_length in case we altered it in the last iteration
-        logging.debug("\tRead %s, aligned length %i, total read length %i" % (read.query_name, read.query_alignment_length, length))
+        logging.debug("Read %s, aligned length %i, total read length %i" % (read.query_name, read.query_alignment_length, length))
+        if read.is_unmapped:
+            logging.debug("\tRead is unmapped, skipping....");
+            continue
         if read.query_alignment_length / length >= percid: #Using length instead of amp_length to compare to query instead of reference
             matches = 0
             for (qpos, rpos, seq) in read.get_aligned_pairs(with_seq=True):
                 query = read.query_sequence[qpos] if qpos else "None"
-                logging.debug("qpos: %i\trpos: %i\tseq: %s\tquery[qpos]: %s" % (qpos or -1, rpos or -1, seq, query)) 
+                logging.debug("\tqpos: %i\trpos: %i\tseq: %s\tquery[qpos]: %s" % (qpos or -1, rpos or -1, seq, query)) 
                 #if there is a gap in the alignment, extend the length of the query or reference accordingly
                 if rpos is None:
                     amp_length += 1
@@ -595,7 +598,7 @@ USAGE
         sample_dict['bam_file'] = bam_fp
         sample_node = ElementTree.Element("sample", sample_dict)
 
-        logfile = "%s.log" % sample_dict['name']
+        #logfile = "%s.log" % sample_dict['name']
 
         #logging.basicConfig(level=logging.DEBUG,
         #                    format='%(asctime)s %(levelname)-8s %(message)s',
