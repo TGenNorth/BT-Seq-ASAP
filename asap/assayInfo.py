@@ -221,7 +221,7 @@ class SNP(object):
         '''
         Constructor
         '''
-        self.position = position
+        self.position = int(position)
         self.reference = reference
         self.variant = variant
         self.name = name
