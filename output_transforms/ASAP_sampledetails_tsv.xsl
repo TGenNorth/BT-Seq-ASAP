@@ -15,8 +15,8 @@
 <xsl:value-of select="@name"/><xsl:text>&#x9;</xsl:text><xsl:value-of select="amplicon/@reads"/><xsl:text>&#x9;</xsl:text><xsl:value-of select='format-number(amplicon/breadth, "##.##")'/>%<xsl:text>&#x9;</xsl:text><xsl:value-of select='format-number(amplicon/snp[@name != "unknown"]/snp_call/@percent, "##.##")'/>%<xsl:text>&#x9;</xsl:text><xsl:value-of select="amplicon/snp/significance"/><xsl:text>&#xa;</xsl:text>
 </xsl:for-each>
 <xsl:for-each select="assay[@type='gene variant']">
-<xsl:variable name="total_reads" select='sum(//amplicon/@reads)'/>
-<xsl:value-of select="@name"/><xsl:text>&#x9;</xsl:text><xsl:value-of select="amplicon/@reads"/><xsl:text>&#x9;</xsl:text><xsl:value-of select='format-number(amplicon/breadth, "##.##")'/>%<xsl:text>&#x9;</xsl:text><xsl:value-of select='format-number(number(amplicon/@reads) div $total_reads * 100, "##.##")'/>%<xsl:text>&#x9;</xsl:text><xsl:value-of select="amplicon/snp/significance"/><xsl:text>&#xa;</xsl:text>
+<xsl:variable name="total_reads" select='sum(./amplicon/@reads)'/>
+<xsl:value-of select="@name"/><xsl:text>&#x9;</xsl:text><xsl:value-of select="amplicon/@reads"/><xsl:text>&#x9;</xsl:text><xsl:value-of select='format-number(amplicon/breadth, "##.##")'/>%<xsl:text>&#x9;</xsl:text><xsl:value-of select='format-number(number(amplicon/@reads) div $total_reads * 100, "##.##")'/>%<xsl:text>&#x9;</xsl:text><xsl:value-of select="amplicon/significance"/><xsl:text>&#xa;</xsl:text>
 </xsl:for-each>
 <xsl:text/>
 </exsl:document>
