@@ -452,14 +452,37 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion):
     ElementTree.SubElement(roi_node, 'nt_sequence_distribution', {k:str(v) for k,v in nt_seq_counter.items()})
     return roi_node
 
+def _merge_reads(read, pair):
+    from copy import deepcopy
+    rstart = read.query_alignment_start
+    rend = read.query_alignment_end
+    pstart = pair.query_alignment_start
+    pend = pair.query_alignment_end
+    merged_read = deepcopy(read)
+    if pstart <= rend:  #There is overlap that will need to be processed
+        
+        continue
+    if pstart > rend+1: #There is a gap that will need to be filled with Ns
+        continue
+    
+
 def _verify_percent_identity(samdata, ref_name, amplicon, percid, merge):
     temp_file = "%s_%s_temp.bam" % (os.path.splitext(os.path.basename(samdata.filename.decode("utf-8")))[0], ref_name)
     outdata = pysam.AlignmentFile(temp_file, "wb", template=samdata)
     amp_length = len(amplicon.sequence)
     discarded_reads = 0
     seq_counter = Counter()
+    aligned_reads = []
     logging.debug("Checking %s for amplicon %s, length %i" % (samdata.filename, ref_name, amp_length))
-    for read in samdata.fetch(ref_name):
+    if merge:
+        reads = iter(sorted(samdata.fetch(ref_name), key=attrgetter('query_name')))
+        for read, pair in pairwise(reads):
+            if read.alignment.query_name != pair.alignment.query_name:
+                continue
+            aligned_reads.append(_merge_reads(read, pair))
+    else:
+        aligned_reads = samdata.fetch(ref_name)
+    for read in aligned_reads:
         length = read.infer_query_length(False)
         amp_length = len(amplicon.sequence) #reset amp_length in case we altered it in the last iteration
         logging.debug("Read %s, aligned length %i, total read length %i" % (read.query_name, read.query_alignment_length, length))
@@ -617,7 +640,7 @@ USAGE
             assay_dict = {}
             assay_dict['name'] = assay.name
             assay_dict['type'] = assay.assay_type
-            assay_dict['function'] = assay.target.function
+            assay_dict['function'] = assay.target.function or ""
             assay_dict['gene'] = assay.target.gene_name or ""
             assay_node = ElementTree.SubElement(sample_node, "assay", assay_dict)
             ref_name = assay.name
