@@ -443,6 +443,11 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion):
         significance_node.text = roi.significance.message                       
         if roi.significance.resistance:
             significance_node.set("resistance", roi.significance.resistance)
+    elif int(roi_dict['depth']) < depth: # No significance but still need to flag it for low coverage
+        significance_node = ElementTree.SubElement(roi_node, "significance")
+        if roi.significance.resistance:
+            significance_node.set("resistance", roi.significance.resistance)
+        significance_node.set("flag", "low coverage")
     ElementTree.SubElement(roi_node, 'aa_sequence_distribution', {k:str(v) for k,v in aa_seq_counter.items()})
     ElementTree.SubElement(roi_node, 'nt_sequence_distribution', {k:str(v) for k,v in nt_seq_counter.items()})
     return roi_node
@@ -547,7 +552,7 @@ USAGE
         identity_group = parser.add_argument_group("identity filter options")
         identity_group.add_argument("-i", "--identity", dest="percid", default=0, type=float, help="minimum percent identity required to align a read to a reference amplicon sequence. [default: 0]")
         keep_discarded_group = identity_group.add_mutually_exclusive_group()
-        keep_discarded_group.add_argument("-k", "--keep", action="store_true", default=True, help="keep filtered reads. [default: True]")
+        keep_discarded_group.add_argument("-k", "--keep", action="store_true", default=False, help="keep filtered reads. [default: True]")
         keep_discarded_group.add_argument("--no-keep", action="store_false", dest="keep", help="discard filtered reads.")
         merge_group = identity_group.add_mutually_exclusive_group()
         merge_group.add_argument("-m", "--merge", action="store_true", default=False, help="merge paired reads. [default: False]")
@@ -625,15 +630,14 @@ USAGE
                 if percid:
                     (temp_file, discarded_reads, seq_counter) = _verify_percent_identity(samdata, ref_name, amplicon, percid, merge)
                     samdata = pysam.AlignmentFile(temp_file, "rb")
-                    if keep:
-                        amplicon_dict['discarded_reads'] = str(discarded_reads)
+                    amplicon_dict['discarded_reads'] = str(discarded_reads)
                 elif samdata.closed:
                     samdata = pysam.AlignmentFile(bam_fp, "rb")
                 amplicon_dict['reads'] = str(samdata.count(ref_name))
                 if amplicon.variant_name:
                     amplicon_dict['variant'] = amplicon.variant_name
                 amplicon_node = ElementTree.SubElement(assay_node, "amplicon", amplicon_dict)
-                if seq_counter:
+                if keep and seq_counter:
                     ElementTree.SubElement(amplicon_node, "sequence_distribution", {k:str(v) for k,v in seq_counter.items()})
                 if samdata.count(ref_name) == 0:
                     significance_node = ElementTree.SubElement(amplicon_node, "significance", {"flag":"no coverage"})

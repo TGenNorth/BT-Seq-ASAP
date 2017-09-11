@@ -1,0 +1,215 @@
+{
+  "Assay": [
+    {
+      "assay_type": "SNP",
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "penA",
+        "Amplicon": {
+          "sequence": "GCCCGTCAATCCGATGCCGTATCTGGCGAGCCGGCAGCAGGGCTAGCGGTGTGCCCGCCGCGCGCGAACGGCCGGCCGCCGTGCGGCACGCTTGCGCCGGTCGCCACAAATTCGCACGCACTCCTGTGACGAGAGCTGATACGCTAGCGAGCCGCGATGTCGGGTGCGCGCACGCCGCGTGCCCGATTCGCGCCCGTTCAATCTTCCCGCGATCCGCCTGATGAATCATTCTCCGTTGCGCCGCTCGCTGCTCGTCGCAGCCATTTCCACCCCACTGATCGGCGC",
+          "SNP": {
+            "reference": "G",
+            "variant": "A",
+            "name": "-78 promoter",
+            "position": "143",
+            "Significance": {
+              "message": "This SNP confers resistance to Ceftazidime",
+              "resistance": "Ceftazidime"
+            }
+          }
+        }
+      },
+      "name": "penA_78Promoter"
+    },
+    {
+      "assay_type": "SNP",
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "penA",
+        "Amplicon": {
+          "sequence": "CATCGCGGCGACGAGCGTTTCCCGTTCTGCAGCACATCCAAGATGATGCTTTGCGCTGCGGTCCTCGCGCGCAGCGCCGGCGAGCCTGCGCTGCTGCAGCGGCGGATTGCGTACGCGAAGGGCGATCTCATCCGCTATTCGCCGATCACCGAG",
+          "SNP": [
+            {
+              "reference": "G",
+              "variant": "A",
+              "name": "C69Y",
+              "position": "29",
+              "Significance": {
+                "message": "This SNP confers resistance to Ceftazidime",
+                "resistance": "Ceftazidime"
+              }
+            },
+            {
+              "reference": "C",
+              "variant": "T",
+              "name": "S72F",
+              "position": "38",
+              "Significance": {
+                "message": "This SNP confers resistance to Ceftazidime",
+                "resistance": "Ceftazidime"
+              }
+            }
+          ]
+        }
+      },
+      "name": "penA_C69Y_S72F"
+    },
+    {
+      "assay_type": "SNP",
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "penA",
+        "Amplicon": {
+          "sequence": "GCTGTGCGCGGCGACGCTTCAGTACAGCGACAACACCGCGGCGAACCTGCTGATCGCGCTGCTCGGCGGGCCGCAGACCGTCACCGCGTATGCGCGCTCGATCGGCGACGCGACGTTCCGGCTCGATCGCCGCGAGCCTGAGCTGAACACGGCGCTGCCCGGCGACGAGCGCGATACGACGACGCCCGCCGCGATGGCCGCGAGCGTGCACCGGCTGCTCGTGGGCGACGCGCTCGGCGCCGCGCAGCGCGCGCAGCTCAATGCATGGATGCTCGGCAACAAGACGGGCGACGCGCGCATCCGCGCGGGCGTGCCGGCCGACTGGCGCGTCGCCGACAAGACGGGCACGGGCGACTACGGAACGGCGAACGACATCGG",
+          "SNP": {
+            "reference": "C",
+            "variant": "T",
+            "name": "P167F",
+            "position": "138",
+            "Significance": {
+              "message": "This SNP confers resistance to Ceftazidime",
+              "resistance": "Ceftazidime"
+            }
+          }
+        }
+      },
+      "name": "penA_P167F"
+    },
+    {
+      "assay_type": "presence/absence",
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "pbp3",
+        "Amplicon": {
+          "variant_name": "pbp3-1",
+          "sequence": "TCGCCGTTTCACGCCCCGCAACGAGGCGGCCGACACCGCGCGCTTCTTGAACATTCGTCAGATCTTTCAACGATTTGGCAGCCAATCCAGACGAAATCATTACTCATTCATTACAATTCGATCTTCGGGATGCGATCCGCCGTCCCGCCCAGCAATAGCGAGCCCATGCGCCTGAACAAAAAACCGAAGTCATCCGATCCTTACGTCGCCGTCGCGAAAAATCCGATGCTGTCGTCGAGCCTGCCGATGTGGCGCTCGAAATTCGTCGTGATCCTCGTGTTCCTCGCGTTCGGCGC",
+          "Significance": {
+            "message": "No expected variation in resistance",
+            "resistance": "Ceftazidime"
+          }
+        }
+      },
+      "name": "PBP3_deletion1"
+    },
+    {
+      "assay_type": "presence/absence",
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "pbp3",
+        "Amplicon": {
+          "variant_name": "pbp3-2",
+          "sequence": "GCTCGCGAAGCTCGCGCTGAACCTGCCTGCCGAGACGATCTGGAACAAGTACCAGGAATACGGCATCGGCCGCGCGCCGGAGCTGACATTCCCCGGCGTCGCGTCAGGGCGGCTGCGCCCGTACAAGCGCTGGCGGCCGATCGAGCAGGCGACGATGGCGTACGGCTACGGGCTGTCGACATCGCTGCTGCAGATCGCGCAGGTCTACACCGCGTATGCGGGCGACGGCACGATCC",
+          "Significance": {
+            "message": "No expected variation in resistance",
+            "resistance": "Ceftazidime"
+          }
+        }
+      },
+      "name": "PBP3_deletion2"
+    },
+    {
+      "assay_type": "presence/absence",
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "bpeT",
+        "Amplicon": {
+          "sequence": "AAGCCGCTGCCGATGCCGATTTCGGTCGTCTATCCGCACAGCCGGTATCTGTCGCCGAAGGTGCGCGTGTTCGTCGACTGGGTCGCCGAGATCTTCGAGCGCTGCCCGCTGCTGAGCGGCCGCAAGGGGCTCGATGCGACGTGCAGCAAGCGCACGTTCGAGGAAGCGGAACGCGCGCCGTCGCTCGACACGCCGGTGTTGAACGAGTGGGTGGCGTAAGCGGTTAGTCGCGCAGACGGGC",
+          "Significance": {
+            "message": "No expected variation in resistance",
+            "resistance": "Trimethoprim"
+          }
+        }
+      },
+      "name": "bpeT_deletion"
+    },
+    {
+      "assay_type": "SNP",
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "bpeS lysR trans reg",
+        "Amplicon": {
+          "sequence": "GAACGGCGGCGTGACCGTCAACGATTCGGATGCCTATGTGACGTGCGGCGTCGAAGGCTTCGGAATGATCCAGCCGACGCTCTTCATGGTGCTGCCGCACCTGCTCGACGGCACGCTGCAGGAGGTGCTGCCGGGCTTCAATCCGAAGCCGAAGCCGATCTCGATCGTCTATCCGAACAGCCGGCATCTGTCCGCGAAGGTTCGCGTGTTCGCCGACTGGATCGCCGA",
+          "SNP": {
+            "reference": "A",
+            "variant": "C",
+            "name": "K267T",
+            "position": "153",
+            "Significance": {
+              "message": "This SNP along with V15G SNP confers resistance to Cotrimoxazole",
+              "resistance": "Cotrimoxazole"
+            }
+          }
+        }
+      },
+      "name": "lysR_K267T"
+    },
+    {
+      "assay_type": "SNP",
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "pteredine reductase",
+        "Amplicon": {
+          "sequence": "ACAAGCCCGGCGTCGAGATGGTGACGTCGCGGATGCTCGGCACGTTCCGCACCGATCCGGCCACGCGCCGCGAATTCCTGTCGATCGTCGCGAATCCTTCCTCGGTCAACCTGACGAACACCTAAATGCAGTCGAGCGCGAAACCAGCCACCTTACCCGTCGTGCTCGTGACGGGCGCCGCGCGCCGCGCGGGCCGCGCGTTCGCGTTGCGCTTCGCCGCGCGCGGCTACCGCGTCGCGGTGCACTACGACCGTTCGGCCGACGCG",
+          "SNP": {
+            "reference": "T",
+            "variant": "G",
+            "name": "V15G",
+            "position": "169",
+            "Significance": {
+              "message": "This SNP along with K267T SNP confers resistance to Cotrimoxazole",
+              "resistance": "Cotrimoxazole"
+            }
+          }
+        }
+      },
+      "name": "pter_red_V15G"
+    },
+    {
+      "assay_type": "gene variant",
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "pteredine reductase",
+        "Amplicon": [
+          {
+            "variant_name": "R20_1stdel",
+            "sequence": "ACAAGCCCGGCGTCGAGATGGTGACGTCGCGGATGCTCGGCACGTTCCGCACCGATCCGGCCACGCGCCGCGAATTCCTGTCGATCGTCGCGAATCCTTCCTCGGTCAACCTGACGAACACCTAAATGCAGTCGAGCGCGAAACCAGCCACCTTACCCGTCGTGCTCGTGACGGGCGCCGCGCGGGCCGCGCGTTCGCGTTGCGCTTCGCCGCGCGCGGCTACCGCGTCGCGGTGCACTACGACCGTTCGGCCGACGCG",
+            "Significance": {
+              "message": "This frameshift along with H278 SNP confers resistance to Cotrimoxazole",
+              "resistance": "Cotrimoxazole"
+            }
+          },
+          {
+            "variant_name": "R20_2nddel",
+            "sequence": "ACAAGCCCGGCGTCGAGATGGTGACGTCGCGGATGCTCGGCACGTTCCGCACCGATCCGGCCACGCGCCGCGAATTCCTGTCGATCGTCGCGAATCCTTCCTCGGTCAACCTGACGAACACCTAAATGCAGTCGAGCGCGAAACCAGCCACCTTACCCGTCGTGCTCGTGACGGGCGCCGCGCGCCGCGCGGGTTCGCGTTGCGCTTCGCCGCGCGCGGCTACCGCGTCGCGGTGCACTACGACCGTTCGGCCGACGCG",
+            "Significance": {
+              "message": "This frameshift along with H278 SNP confers resistance to Cotrimoxazole",
+              "resistance": "Cotrimoxazole"
+            }
+          }
+        ]
+      },
+      "name": "pter_red_R20_frameshift"
+    },
+    {
+      "assay_type": "SNP",
+      "Target": {
+        "function": "resistance type",
+        "gene_name": "bpeT lysR trans reg",
+        "Amplicon": {
+          "sequence": "AAGCCGCTGCCGATGCCGATTTCGGTCGTCTATCCGCACAGCCGGTATCTGTCGCCGAAGGTGCGCGTGTTCGTCGACTGGGTCGCCGAGATCTTCGAGCGCTGCCCGCTGCTGAGCGGCCGCAAGGGGCTCGATGCGACGTGCAGCAAGCGCACGTTCGAGGAAGCGGAACGCGCGCCGTCGCTCGACACGCCGGTGTTGAACGAGTGGGTGGCGTAAGCGGTTAGTCGCGCAGACGGGC",
+          "SNP": {
+            "reference": "C",
+            "variant": "T",
+            "name": "H278",
+            "position": "46",
+            "Significance": {
+              "message": "This SNP along with R20 frameshift confers resistance to Cotrimoxazole",
+              "resistance": "Cotrimoxazole"
+            }
+          }
+        }
+      },
+      "name": "lysR_H278"
+    }
+  ]
+}
