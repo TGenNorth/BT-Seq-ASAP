@@ -232,8 +232,9 @@ def _add_snp_node(parent, snp):
     base_counter = snp['basecalls']
     snpcall = snp['variant']
     depth = int(snp['depth'])
-    snpcount = base_counter[snpcall]
-    snpcall_node = ElementTree.SubElement(snp_node, 'snp_call', {'count':str(snpcount), 'percent':str(snpcount/depth*100)})
+    snpcount = base_counter[snpcall] if base_counter else 0
+    percent = snpcount/depth*100 if depth else 0
+    snpcall_node = ElementTree.SubElement(snp_node, 'snp_call', {'count':str(snpcount), 'percent':str(percent)})
     snpcall_node.text = snpcall
     if 'significance' in snp or 'flag' in snp:
         significance_node = ElementTree.SubElement(snp_node, 'significance')
@@ -245,7 +246,8 @@ def _add_snp_node(parent, snp):
                 significance_node.set("level", snp['level'])
         if 'flag' in snp:
             significance_node.set('flag', snp['flag'])
-    ElementTree.SubElement(snp_node, 'base_distribution', {k:str(v) for k,v in base_counter.items()})
+    if base_counter:
+        ElementTree.SubElement(snp_node, 'base_distribution', {k:str(v) for k,v in base_counter.items()})
     return snp_node
 
 def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
@@ -668,6 +670,9 @@ USAGE
                     if amplicon.significance and amplicon.significance.resistance:
                         resistances.add(amplicon.significance.resistance)
                     for snp in amplicon.SNPs:
+                        name = snp.name if snp.name else "position of interest"
+                        dummy_snp = {'name':name, 'position':str(snp.position), 'depth':"0", 'reference':snp.reference, 'variant':snp.variant, 'basecalls':None}
+                        _add_snp_node(amplicon_node, dummy_snp)
                         if snp.significance.resistance:
                             resistances.add(snp.significance.resistance)
                     for roi in amplicon.ROIs:
