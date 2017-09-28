@@ -209,10 +209,10 @@ def _process_pileup(pileup, amplicon, depth, proportion):
 
 def _write_xml(root, xml_file):
     from xml.dom import minidom
-    #print(ElementTree.dump(root))
+    logging.debug(ElementTree.dump(root))
     dom = minidom.parseString(ElementTree.tostring(root))
     output = open(xml_file, 'w')
-    output.write(dom.toprettyxml(indent="    "))
+    output.write(dom.toprettyxml(indent="  "))
     output.close()
     return xml_file
 
@@ -460,10 +460,9 @@ def _merge_reads(read, pair):
     pend = pair.query_alignment_end
     merged_read = deepcopy(read)
     if pstart <= rend:  #There is overlap that will need to be processed
-        
-        continue
+        pass
     if pstart > rend+1: #There is a gap that will need to be filled with Ns
-        continue
+        pass
     
 
 def _verify_percent_identity(samdata, ref_name, amplicon, percid, merge):
