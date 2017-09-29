@@ -396,7 +396,7 @@ def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
 
 def _add_roi_node(parent, roi, roi_dict, depth, proportion):
     if "flag" in roi_dict:
-        roi_node = ElementTree.SubElement(parent, "region_of_interest", {'region':roi_dict['region']})
+        roi_node = _add_dummy_roi_node(parent, roi)
         significance_node = ElementTree.SubElement(roi_node, "significance", {'flag':roi_dict['flag']})
         if roi.significance.resistance:
             significance_node.set("resistance", roi.significance.resistance)
