@@ -454,6 +454,17 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion):
     ElementTree.SubElement(roi_node, 'nt_sequence_distribution', {k:str(v) for k,v in nt_seq_counter.items()})
     return roi_node
 
+def _add_dummy_roi_node(parent, roi):
+    reference = roi.aa_sequence
+    if roi.nt_sequence:
+        reference = roi.nt_sequence
+    roi_attributes = {'region':roi.position_range, 'reference':reference, 'depth':"0"}
+    roi_node = ElementTree.SubElement(parent, "region_of_interest", roi_attributes)
+    for mutation in roi.mutations:
+        mutation_node = ElementTree.SubElement(roi_node, 'mutation', {'name':str(roi.name)+mutation, 'count':"0", 'percent':"0"})
+        mutation_node.text = mutation
+    return roi_node
+
 def _merge_reads(read, pair):
     from copy import deepcopy
     rstart = read.query_alignment_start
@@ -676,6 +687,7 @@ USAGE
                         if snp.significance.resistance:
                             resistances.add(snp.significance.resistance)
                     for roi in amplicon.ROIs:
+                        _add_dummy_roi_node(amplicon_node, roi)
                         if roi.significance.resistance:
                             resistances.add(roi.significance.resistance)
                     if resistances:        
