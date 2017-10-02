@@ -26,9 +26,9 @@ import asap.dispatcher as dispatcher
 import asap.assayInfo as assayInfo
 
 __all__ = []
-__version__ = 0.1
+__version__ = 0.5
 __date__ = '2015-06-04'
-__updated__ = '2015-06-04'
+__updated__ = '2017-10-02'
 
 DEBUG = 1
 TESTRUN = 0

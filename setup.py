@@ -19,7 +19,7 @@ test_requirements = [
 
 setup(
     name='ASAP',
-    version='0.1',
+    version='0.5',
     description='Amplicon Sequencing Analysis Pipeline',
     long_description=readme + '\n\n' + history,
     author='Darrin Lemmer',
