@@ -6,7 +6,7 @@ Created on Jul 8, 2015
 
 import logging
 
-job_manager = "PBS"
+job_manager = "SLURM"
 job_manager_args = ""
 
 def _submit_job(job_submitter, command, job_parms, waitfor_id=None, hold=False, notify=False):
