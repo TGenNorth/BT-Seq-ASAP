@@ -29,6 +29,10 @@ from skbio import DNA
 from asap import dispatcher
 from asap import assayInfo
 from asap import __version__
+# https://github.com/martinblech/xmltodict
+import json
+import xmltodict
+
 
 __all__ = []
 __updated__ = '2019-01-15'
@@ -883,7 +887,14 @@ USAGE
 
         if samdata.is_open():
             samdata.close()
-        _write_xml(sample_node, out_fp)
+
+        #_write_xml(sample_node, out_fp)
+
+        # Write output as JSON instead of XML.
+        xml_str = ElementTree.tostring(sample_node)
+        xml_obj = xmltodict.parse(xml_str)
+        with open(out_fp, 'w') as handle:
+            json.dump(xml_obj, handle, separators=(',', ':'))
 
         return 0
     except KeyboardInterrupt:
