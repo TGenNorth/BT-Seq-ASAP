@@ -594,6 +594,7 @@ USAGE
         merge_group.add_argument("--no-merge", action="store_false", dest="merge", help="do not merge paired reads.")
         parser.add_argument("-s", "--smor", action="store_true", default=False, help="perform SMOR analysis with overlapping reads. [default: False]")
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
+        parser.add_argument("-D", "--debug", action="store_true", default=False, help="write <sample_name>.log file with debugging information")
      
         # Process arguments
         args = parser.parse_args()
@@ -608,6 +609,7 @@ USAGE
         keep = args.keep
         merge = args.merge
         smor = args.smor
+        debug =args.debug
         #ref_fp = args.ref
         #out_dir = args.odir
         #if not out_dir:
@@ -638,13 +640,14 @@ USAGE
         sample_dict['bam_file'] = bam_fp
         sample_node = ElementTree.Element("sample", sample_dict)
 
-        #logfile = "%s.log" % sample_dict['name']
+        if debug:
+            logfile = "%s.log" % sample_dict['name']
 
-        #logging.basicConfig(level=logging.DEBUG,
-        #                    format='%(asctime)s %(levelname)-8s %(message)s',
-        #                    datefmt='%m/%d/%Y %H:%M:%S',
-        #                    filename=logfile,
-        #                    filemode='w')
+            logging.basicConfig(level=logging.DEBUG,
+                                format='%(asctime)s %(levelname)-8s %(message)s',
+                                datefmt='%m/%d/%Y %H:%M:%S',
+                                filename=logfile,
+                                filemode='w')
 
         #out_fp = os.path.join(out_dir, sample_dict['name']+".xml")
         
