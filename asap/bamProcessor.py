@@ -220,10 +220,18 @@ def _create_snp_dict(amplicon):
     snp_dict = {}
     for snp in amplicon.SNPs:
         name = snp.name if snp.name else "position of interest"
-        if snp.position in snp_dict:
-            snp_dict[snp.position].append((name, snp.reference, snp.variant, snp.significance))
-        else:
-            snp_dict[snp.position] = [(name, snp.reference, snp.variant, snp.significance)]
+        if not snp.variant or snp.variant == "any":
+            for v in {'A', 'G', 'C', 'T'}:
+                if v != snp.reference:
+                    if snp.position in snp_dict:
+                        snp_dict[snp.position].append((name, snp.reference, v, snp.significance))
+                    else:
+                        snp_dict[snp.position] = [(name, snp.reference, v, snp.significance)]
+        else: 
+            if snp.position in snp_dict:
+                snp_dict[snp.position].append((name, snp.reference, snp.variant, snp.significance))
+            else:
+                snp_dict[snp.position] = [(name, snp.reference, snp.variant, snp.significance)]
     return snp_dict
 
 def _add_snp_node(parent, snp):
