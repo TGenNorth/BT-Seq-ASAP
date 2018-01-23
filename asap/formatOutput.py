@@ -22,10 +22,11 @@ import logging
 from xml.etree import ElementTree
 import lxml.etree as ET
 
-import asap.dispatcher as dispatcher
+from asap import dispatcher
+from asap import __version_
 
 __all__ = []
-__version__ = 0.5
+#__version__ = 0.5
 __date__ = '2015-07-29'
 __updated__ = '2017-10-02'
 

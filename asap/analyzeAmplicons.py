@@ -22,11 +22,12 @@ import logging
 import skbio
 import pkg_resources
 
-import asap.dispatcher as dispatcher
-import asap.assayInfo as assayInfo
+from asap import dispatcher
+from asap import assayInfo
+from asap import __version__
 
 __all__ = []
-__version__ = 0.5
+#__version__ = 0.5
 __date__ = '2015-06-04'
 __updated__ = '2017-10-02'
 

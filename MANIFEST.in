@@ -1,6 +1,5 @@
 include asap/illumina_adapters_all.fasta
 
-include HISTORY.rst
 include README.rst
 include LICENSE
 

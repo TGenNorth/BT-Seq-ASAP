@@ -25,11 +25,12 @@ from collections import Counter
 from xml.etree import ElementTree
 from skbio import DNA
 
-import asap.dispatcher as dispatcher
-import asap.assayInfo as assayInfo
+from asap import dispatcher
+from asap import assayInfo
+from asap import __version__
 
 __all__ = []
-__version__ = 0.5
+#__version__ = 0.5
 __date__ = '2015-07-16'
 __updated__ = '2017-10-02'
 
