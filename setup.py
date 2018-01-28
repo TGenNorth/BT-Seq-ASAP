@@ -53,5 +53,6 @@ setup(
         'pysam',
         'scikit-bio',
         'openpyxl',
+        'lxml',
     ]
 )

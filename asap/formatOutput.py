@@ -23,7 +23,7 @@ from xml.etree import ElementTree
 import lxml.etree as ET
 
 from asap import dispatcher
-from asap import __version_
+from asap import __version__
 
 __all__ = []
 #__version__ = 0.5
