@@ -888,14 +888,14 @@ USAGE
         if samdata.is_open():
             samdata.close()
 
+        # TODO: add a flag/condition here to toggle between XML and JSON output
         #_write_xml(sample_node, out_fp)
-
         # Write output as JSON instead of XML.
         xml_str = ElementTree.tostring(sample_node)
-        xml_obj = xmltodict.parse(xml_str)
+        # The 'sample' root node is discarded as unnecessary layer for the JSON object.
+        xml_obj = xmltodict.parse(xml_str)['sample']
         with open(out_fp, 'w') as handle:
             json.dump(xml_obj, handle, separators=(',', ':'))
-
         return 0
     except KeyboardInterrupt:
         ### handle keyboard interrupt ###
