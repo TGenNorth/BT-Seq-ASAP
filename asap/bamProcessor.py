@@ -890,12 +890,75 @@ USAGE
 
         # TODO: add a flag/condition here to toggle between XML and JSON output
         #_write_xml(sample_node, out_fp)
+
         # Write output as JSON instead of XML.
-        xml_str = ElementTree.tostring(sample_node)
-        # The 'sample' root node is discarded as unnecessary layer for the JSON object.
-        xml_obj = xmltodict.parse(xml_str)['sample']
+        #
+        # xmltodict was introduced as a quick way to transform the XML to JSON.
+        #
+        # An unanticipated side-effect of the conversion is the type of a key
+        # changes depending on the number of elements. The following example
+        # compares how zero, one, or more 'assay' elements would be converted
+        # from XML to JSON.
+        #
+        # 'assay' is undefined:
+        # ---------------------
+        #
+        # <sample>
+        # </sample>
+        #
+        # {
+        #   "sample": {},
+        # }
+        #
+        # 'assay' is an Object:
+        # ---------------------
+        #
+        # <sample>
+        #   <assay>...</assay>
+        # </sample>
+        #
+        # {
+        #   "sample": {
+        #     "assay": {...},
+        #   },
+        # }
+        #
+        # 'assay' is an Array of Objects:
+        # ---------------------
+        #
+        # <sample>
+        #   <assay>...</assay>
+        #   <assay>...</assay>
+        # </sample>
+        #
+        # {
+        #   "sample": {
+        #     "assay": [ {...}, {...} ]
+        #   },
+        # }
+        #
+        # JSON includes implicit String/Object/Boolean/Array/Number types.
+        # XML requires an accompanying schema (XSD) to encode types.
+        # As a result, all the values from the XML to JSON conversion are
+        # encoded as Strings.
+        #
+        # Type checks and coversions are a likely source of errors.
+        # To reduce the number of type checks and conversions when rendering
+        # the result
         with open(out_fp, 'w') as handle:
-            json.dump(xml_obj, handle, separators=(',', ':'))
+            xml_str = ElementTree.tostring(sample_node)
+            # The 'sample' root node is discarded as an unnecessary layer for
+            # the JSON object.
+            xml_obj = xmltodict.parse(xml_str)['sample']
+            # FIXME: The output is en/decoded multiple times because it seemed
+            # easier to use the json object_hook to ensure each key had a
+            # a consistent type then to write a nested loop with type checks
+            # and conversions modifying the object as it was traversed.
+            #
+            # Ideally the output should start as a python object that is
+            # encoded to XML or JSON once.
+            json_encoded_xml = json.loads(json.dumps(xml_obj), object_hook=cast_json_output_types)
+            json.dump(json_encoded_xml, handle, separators=(',', ':'))
         return 0
     except KeyboardInterrupt:
         ### handle keyboard interrupt ###
@@ -907,6 +970,96 @@ USAGE
         sys.stderr.write(program_name + ": " + repr(e) + "\n")
         sys.stderr.write(indent + "  for help use --help")
         return 2
+
+# cast_json_output_types is a json decoder object_hook intended to be used on
+# a ASAP output decoded from XML:
+# - casts numbers from strings to float/int
+# - keys that are expected to contain 0 to n elements are lists (or undefined)
+#   eliminating the 1 element object case.
+# - As a special addition, values that were stored in the XML as strings of
+#   comma separated values are converted to an array of an appropriate type.
+def cast_json_output_types(e):
+    ## Sample
+    if '@breadth_filter' in e:
+        e['@breadth_filter'] = float(e['@breadth_filter'])
+    if '@depth_filter' in e:
+        e['@depth_filter'] = int(e['@depth_filter'])
+    # @json_file
+    if '@mapped_reads' in e:
+        e['@mapped_reads'] = int(e['@mapped_reads'])
+    # @name
+    if '@proportion_filter' in e:
+        e['@proportion_filter'] = float(e['@proportion_filter'])
+    if '@unassigned_reads' in e:
+        e['@unassigned_reads'] = int(e['@unassigned_reads'])
+    if '@unmapped_reads' in e:
+        e['@unmapped_reads'] = int(e['@unmapped_reads'])
+    if 'assay' in e and not isinstance(e['assay'], list):
+        e['assay'] = [(e['assay'])]
+
+    ## Assay
+    # @function
+    # @gene
+    # @name
+    # @type
+    # amplicon
+    if 'amplicon' in e and not isinstance(e['amplicon'], list):
+        e['amplicon'] = [e['amplicon']]
+
+    ## Amplicon
+    if '@reads' in e:
+        e['@reads'] = int(e['@reads'])
+    #if 'significance' in e and not isinstance(e['significance'], dict):
+    # consensus_sequence
+    if 'breadth' in e:
+        e['breadth'] = float(e['breadth'])
+    if 'depths' in e:
+        e['depths'] = [int(v) for v in e['depths'].split(',')]
+    if 'proportions' in e:
+        e['proportions'] = [float(v) for v in e['proportions'].split(',')]
+    if 'average_depth' in e:
+        e['average_depth'] = float(e['average_depth'])
+    if 'snp' in e and not isinstance(e['snp'], list):
+        e['snp'] = [e['snp']]
+    if 'region_of_interest' in e and not isinstance(e['region_of_interest'], list):
+        e['region_of_interest'] = [e['region_of_interest']]
+
+    ## SNP
+    if '@depth' in e:
+        e['@depth'] = int(e['@depth'])
+    # @name
+    if '@position' in e:
+        e['@position'] = int(e['@position'])
+    # @reference
+    # snp_call
+    if 'base_distribution' in e:
+        e['base_distribution'] = {k: int(v) for k, v in e['base_distribution'].items()}
+
+    ## SnpCall
+    if '@count' in e:
+        e['@count'] = int(e['@count'])
+    if '@percent' in e:
+        e['@percent'] = float(e['@percent'])
+    # #text: "T"
+
+    ## RegionOfInterest
+    if 'aa_sequence_distribution' in e:
+        e['nt_sequence_distribution'] = {k: int(v) for k, v in e['nt_sequence_distribution'].items()}
+    if 'nt_sequence_distribution' in e:
+        e['nt_sequence_distribution'] = {k: int(v) for k, v in e['nt_sequence_distribution'].items()}
+    if '@changes' in e:
+        e['@changes'] = int(e['@changes'])
+    if 'mutation' in e and not isinstance(e['mutation'], list):
+        e['mutation'] = [e['mutation']]
+
+
+    ## Significance
+    if 'significance' in e and isinstance(e['significance'], str):
+        e['significance'] = {'#text': e['significance']}
+    if '@resistance' in e:
+        e['@resistance'] = e['@resistance'].split(',')
+
+    return e
 
 if __name__ == "__main__":
     if DEBUG:
