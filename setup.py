@@ -19,7 +19,7 @@ test_requirements = [
 
 setup(
     name='ASAP',
-    version='0.5',
+    version='0.6',
     description='Amplicon Sequencing Analysis Pipeline',
     long_description=readme + '\n\n' + history,
     author='Darrin Lemmer',
@@ -52,7 +52,8 @@ setup(
             'analyzeAmplicons = asap.analyzeAmplicons:main',
             'bamProcessor = asap.bamProcessor:main',
             'outputCombiner = asap.outputCombiner:main',
-            'formatOutput = asap.formatOutput:main'
+            'formatOutput = asap.formatOutput:main',
+            'reformatXML = asap.reformatXML:main'
         ]
     },
     scripts = [
