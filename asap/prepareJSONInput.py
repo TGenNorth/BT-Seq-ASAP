@@ -23,12 +23,11 @@ import skbio.io
 from skbio import DNA
 from openpyxl import load_workbook
 
-import asap.dispatcher as dispatcher
-import asap.assayInfo as assayInfo
+from asap import dispatcher
+from asap import assayInfo
+from asap import __version__
 
 __all__ = []
-__version__ = 0.6
-__date__ = '2015-08-03'
 __updated__ = '2017-04-11'
 
 DEBUG = 1
@@ -135,7 +134,7 @@ USAGE
         exclusive_group.add_argument("-x", "--excel", metavar="FILE", help="Excel file of assay data.")
         required_group.add_argument("-o", "--out", metavar="FILE", required=True, help="output JSON file to write. [REQUIRED]")
         parser.add_argument("-w", "--worksheet", help="Excel worksheet to use, the first one in the file will be used if not specified")
-        parser.add_argument('-V', '--version', action='version', version=program_version_message)
+        parser.add_argument('-v', '--version', action='version', version=program_version_message)
 
         # Process arguments
         args = parser.parse_args()

@@ -311,11 +311,11 @@ def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adap
 def alignReadsToReference(sample, reads, reference, outdir, jobid=None, aligner="bowtie2", args=None):
     import re
     if re.search('novo', aligner, re.IGNORECASE):
-        return _run_novoalign(sample, reads, reference, outdir, jobid, novopath=aligner, args=args)
+        return _run_novoalign(sample, reads, reference, outdir, jobid, args=args)
     elif re.search('bwa', aligner, re.IGNORECASE):
-        return _run_bwa(sample, reads, reference, outdir, jobid, bwapath=aligner, args=args)
+        return _run_bwa(sample, reads, reference, outdir, jobid, args=args)
     else: #re.search('b(ow)?t(ie)?2', aligner, re.IGNORECASE)
-        return _run_bowtie2(sample, reads, reference, outdir, jobid, bt2path=aligner, args=args)
+        return _run_bowtie2(sample, reads, reference, outdir, jobid, args=args)
 
 def processBam(sample_name, json_file, bam_file, xml_dir, dependency, depth, breadth, proportion, percid, smor=False):
     import os
