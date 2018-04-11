@@ -24,9 +24,9 @@ from xml.etree import ElementTree
 import asap.dispatcher as dispatcher
 
 __all__ = []
-__version__ = 0.5
+__version__ = 0.6
 __date__ = '2015-07-29'
-__updated__ = '2017-10-02'
+__updated__ = '2017-04-11'
 
 DEBUG = 1
 TESTRUN = 0

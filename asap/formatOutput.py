@@ -25,9 +25,9 @@ import lxml.etree as ET
 import asap.dispatcher as dispatcher
 
 __all__ = []
-__version__ = 0.5
+__version__ = 0.6
 __date__ = '2015-07-29'
-__updated__ = '2017-10-02'
+__updated__ = '2018-04-11'
 
 DEBUG = 1
 TESTRUN = 0
@@ -108,6 +108,8 @@ USAGE
         ns = ET.FunctionNamespace("http://pathogen.tgen.org/ASAP/functions")
         ns['distinct-values'] = distinct_values
 
+        #parser = ET.XMLParser(huge_tree=True)
+        #dom = ET.parse(xml_file, parser=parser)
         dom = ET.parse(xml_file)
         xslt = ET.parse(stylesheet)
         transform = ET.XSLT(xslt)

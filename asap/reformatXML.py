@@ -21,7 +21,7 @@ import os
 import argparse
 
 __all__ = []
-__version__ = 0.5
+__version__ = 0.6
 __date__ = '2018-04-11'
 __updated__ = '2018-04-11'
 
