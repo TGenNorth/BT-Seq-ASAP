@@ -111,6 +111,7 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion):
             for (name, reference, variant, significance) in snp_dict[position]:
                 snp = {'name':name, 'position':str(position), 'depth':str(column_depth), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
                 variant_proportion = base_counter[variant]/column_depth
+                (proportion, low_level_cutoff, high_level_cutoff) = _compute_thresholds_SMOR(column_depth)
                 if variant_proportion >= proportion:
                     snp['significance'] = significance
                     if variant_proportion <= low_level_cutoff:
@@ -209,7 +210,7 @@ def _process_pileup(pileup, amplicon, depth, proportion):
 
 def _write_xml(root, xml_file):
     from xml.dom import minidom
-    logging.debug(ElementTree.dump(root))
+    #logging.debug(ElementTree.dump(root))
     dom = minidom.parseString(ElementTree.tostring(root))
     output = open(xml_file, 'w')
     output.write(dom.toprettyxml(indent="  "))
@@ -402,7 +403,8 @@ def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
     roi_dict['depth'] = str(depth)
     return roi_dict
 
-def _add_roi_node(parent, roi, roi_dict, depth, proportion):
+def _add_roi_node(parent, roi, roi_dict, depth, proportion, smor):
+    global low_level_cutoff, high_level_cutoff
     if "flag" in roi_dict:
         roi_node = _add_dummy_roi_node(parent, roi)
         significance_node = ElementTree.SubElement(roi_node, "significance", {'flag':roi_dict['flag']})
@@ -422,6 +424,9 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion):
     significant = False
     low_level = True
     high_level = False
+    # Smart SMOR -- thresholds and proportion filter are a function of the number of SMOR reads at position
+    if smor:
+        (proportion, low_level_cutoff, high_level_cutoff) = _compute_thresholds_SMOR(int(roi_dict['depth']))
     for mutation in roi.mutations:
         if roi.nt_sequence:
             count = nt_seq_counter[mutation]
@@ -472,6 +477,28 @@ def _add_dummy_roi_node(parent, roi):
         mutation_node = ElementTree.SubElement(roi_node, 'mutation', {'name':str(roi.name)+mutation, 'count':"0", 'percent':"0"})
         mutation_node.text = mutation
     return roi_node
+
+def _compute_thresholds_SMOR(smor_count):
+    proportion = 0
+    low_level_cutoff = 0
+    high_level_cutoff = 0
+    if smor_count >= 5000:
+        proportion = 0.001
+        low_level_cutoff = 0.01
+        high_level_cutoff = 0.5
+    elif smor_count >= 500:
+        proportion = 0.01
+        low_level_cutoff = 0.01
+        high_level_cutoff = 0.5
+    elif smor_count >= 50:
+        proportion = 0.1
+        low_level_cutoff = 0.1
+        high_level_cutoff = 0.5
+    elif smor_count >= 25:
+        proportion = 0.2
+        low_level_cutoff = 0.2
+        high_level_cutoff = 0.5
+    return (proportion, low_level_cutoff, high_level_cutoff)
 
 def _merge_reads(read, pair):
     from copy import deepcopy
@@ -640,6 +667,11 @@ USAGE
         sample_dict['unmapped_reads'] = str(samdata.unmapped)
         sample_dict['unassigned_reads'] = str(samdata.nocoordinate)
         sample_dict['depth_filter'] = str(depth)
+        #When doing SMOR analysis, proportion filter will be a function of SMOR count at a given postion/ROI,
+        # and will ignore passed-in value. Let's specifically set to zero, to make sure all get reported.
+        if smor:
+            sample_dict['SMOR'] = 'True'
+            proportion = 0
         sample_dict['proportion_filter'] = str(proportion)
         sample_dict['breadth_filter'] = str(breadth)
         if percid:
@@ -748,7 +780,7 @@ USAGE
                             roi_dict = _process_roi_SMOR(roi, samdata, ref_name, reverse_comp)
                         else:
                             roi_dict = _process_roi(roi, samdata, ref_name, reverse_comp)
-                        _add_roi_node(amplicon_node, roi, roi_dict, depth, proportion)
+                        _add_roi_node(amplicon_node, roi, roi_dict, depth, proportion, smor)
 
                 if temp_file:
                     samdata.close()
