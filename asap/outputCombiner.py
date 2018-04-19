@@ -21,7 +21,8 @@ import argparse
 import logging
 from xml.etree import ElementTree
 
-import asap.dispatcher as dispatcher
+from asap import dispatcher
+from asap import __version__ 
 
 __all__ = []
 __date__ = '2015-07-29'
