@@ -51,7 +51,7 @@ setup(
     },
     install_requires=[
         'numpy',
-        'pysam',
+        'pysam<=0.13',
         'scikit-bio',
         'openpyxl',
         'lxml',
