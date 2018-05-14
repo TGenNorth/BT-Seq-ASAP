@@ -128,11 +128,6 @@ required arguments:
   -o FILE, --out FILE   output file to write. [REQUIRED]
 
 
-INSTALLATION:
--------------
-
-See the included "INSTALL" document.
-
 DEPENDENCIES:
 -------------
 
