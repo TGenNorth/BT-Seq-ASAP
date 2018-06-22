@@ -88,7 +88,7 @@ USAGE
         # Process arguments
         args = parser.parse_args()
 
-        tree = ET.parse(sys.argv[1])
+        tree = ET.parse(args.xml)
         root = tree.getroot()
         #print root[0][0].attrib["name"]
 
@@ -141,7 +141,7 @@ USAGE
                     if snp.attrib["name"] == "unknown":
                         snp.set("name","unknown:" + snp.attrib["position"] + snp.find('snp_call').text)
 
-        tree2.write(sys.argv[1].split(".")[0]+"_Reformated.xml")
+        tree2.write(args.xml.split(".")[0]+"_Reformated.xml")
 
         return 0
     except KeyboardInterrupt:
