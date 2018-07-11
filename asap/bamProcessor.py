@@ -63,6 +63,7 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion):
     avg_depth_total = avg_depth_positions = 0
     amplicon_length = len(amplicon.sequence)
     depth_array = [0] * amplicon_length
+    discard_array = [0] * amplicon_length
     prop_array = ["0"] * amplicon_length
     for pileupcolumn in pileup:
         base_counter = Counter()
@@ -78,10 +79,12 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion):
                 if pair.alignment.query_sequence[pair.query_position] == alignment.query_sequence[read.query_position]:
                     depth_array[pileupcolumn.pos] += 1
                     base_counter.update(alignment.query_sequence[read.query_position])
-                #else:
+                else:
+                    discard_array[pileupcolumn.pos] += 1
                 #    print("Pair does not match at reference position %d -> (%s != %s)" % (pileupcolumn.reference_pos, alignment.query_sequence[read.query_position], pair.alignment.query_sequence[pair.query_position]))
         column_depth = depth_array[pileupcolumn.pos]
         if column_depth == 0:
+            consensus_seq += "_" #TODO Temporary, remove this line!
             continue
         position = pileupcolumn.pos+1
         depth_passed = False
@@ -107,11 +110,11 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion):
         else:
             snp_call = snp_call_proportion = None
         consensus_seq += alignment_call if alignment_call_proportion >= proportion else "N"
+        (proportion, low_level_cutoff, high_level_cutoff) = _compute_thresholds_SMOR(column_depth)
         if position in snp_dict:
             for (name, reference, variant, significance) in snp_dict[position]:
                 snp = {'name':name, 'position':str(position), 'depth':str(column_depth), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
                 variant_proportion = base_counter[variant]/column_depth
-                (proportion, low_level_cutoff, high_level_cutoff) = _compute_thresholds_SMOR(column_depth)
                 if variant_proportion >= proportion:
                     snp['significance'] = significance
                     if variant_proportion <= low_level_cutoff:
@@ -134,6 +137,7 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion):
     pileup_dict['consensus_sequence'] = consensus_seq
     pileup_dict['breadth'] = str(breadth_positions/amplicon_length * 100)
     pileup_dict['depths'] = ",".join(str(n) for n in depth_array)
+    pileup_dict['discards'] = ",".join(str(n) for n in discard_array)
     pileup_dict['proportions'] = ",".join(prop_array)
     pileup_dict['SNPs'] = snp_list
     pileup_dict['average_depth'] = str(avg_depth_total/avg_depth_positions) if avg_depth_positions else "0"
@@ -463,8 +467,8 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion, smor):
         if roi.significance.resistance:
             significance_node.set("resistance", roi.significance.resistance)
         significance_node.set("flag", "low coverage")
-    ElementTree.SubElement(roi_node, 'aa_sequence_distribution', {k:str(v) for k,v in aa_seq_counter.items()})
-    ElementTree.SubElement(roi_node, 'nt_sequence_distribution', {k:str(v) for k,v in nt_seq_counter.items()})
+    ElementTree.SubElement(roi_node, 'aa_sequence_distribution', {k:str(v) for k,v in aa_seq_counter.items() if v>1})
+    ElementTree.SubElement(roi_node, 'nt_sequence_distribution', {k:str(v) for k,v in nt_seq_counter.items() if v>1})
     return roi_node
 
 def _add_dummy_roi_node(parent, roi):
