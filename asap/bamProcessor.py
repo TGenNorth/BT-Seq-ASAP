@@ -167,6 +167,11 @@ def _process_pileup(pileup, amplicon, depth, proportion):
         for pileupread in pileupcolumn.pileups:
             if pileupread.is_del:
                 base_counter.update("_") # XSLT doesn't like '-' as an attribute name, have to use '_'
+            elif pileupread.indel > 0: #This means the next position is an insertion
+                #print("Found an insertion at position %d, cigar string: %s" % (position, pileupread.alignment.cigarstring))
+                start = pileupread.query_position
+                end = pileupread.query_position + pileupread.indel + 1
+                base_counter.update({pileupread.alignment.query_sequence[start:end]: 1})
             else:
                 base_counter.update(pileupread.alignment.query_sequence[pileupread.query_position])
         #print(base_counter)
