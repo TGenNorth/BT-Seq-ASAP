@@ -2,16 +2,14 @@
 
 from setuptools import setup
 from codecs import open
-from os import path
+import os
 
-
-
-with open(path.join(path.abspath(path.dirname(__file__)), 'README.rst'), encoding='utf-8') as f:
+with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='ASAP',
-    use_scm_version=True,
+    name='asap',
+    use_scm_version={'write_to': 'asap/version.py'},
     setup_requires=['setuptools_scm'],
     description='Amplicon Sequencing Analysis Pipeline',
     long_description=long_description,
