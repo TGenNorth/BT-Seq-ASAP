@@ -19,6 +19,7 @@ import os
 import re
 import argparse
 import logging
+import math
 
 import pysam
 from collections import Counter
@@ -279,6 +280,9 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
     aa_sequence_counter = Counter()
     nt_sequence_counter = Counter()
     depth = 0
+    significant = False
+    if not roi.aa_sequence:
+        roi.aa_sequence = str(DNA(roi.nt_sequence).translate()).replace('*', 'x')
     for read in samdata.fetch(amplicon_ref, start, end):
         rstart = read.reference_start
         alignment_length = read.get_overlap(start, end)
@@ -304,27 +308,29 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
             aa_sequence = nt_sequence.translate()
             aa_string = str(aa_sequence).replace('*', 'x')
             if aa_string:
+                num_changes = 0
+                for i in range(len(roi.aa_sequence)):
+                    if len(aa_string) <= i or roi.aa_sequence[i] != aa_string[i]:
+                        num_changes += 1 #TODO: This is not the most efficient, we are repeating this for every duplicate, even though value won't change
                 nt_sequence_counter.update([str(nt_sequence)])
-                aa_sequence_counter.update([aa_string])
+                aa_sequence_counter.update([(aa_string, num_changes)])
                 depth += 1
     if len(aa_sequence_counter) == 0:
         roi_dict['flag'] = "region not found"
         return roi_dict
-    aa_consensus = aa_sequence_counter.most_common(1)[0][0]
+    #This next bit is just being saved for backward compatibility. Should deprecate and remove soon
+    (aa_consensus, num_changes) = aa_sequence_counter.most_common(1)[0][0]
     nt_consensus = nt_sequence_counter.most_common(1)[0][0]
-    num_changes = 0
     reference = roi.aa_sequence
     consensus = aa_consensus
     if roi.nt_sequence:
         reference = roi.nt_sequence
         consensus = nt_consensus
-    for i in range(len(reference)):
-        if len(consensus) <= i or reference[i] != consensus[i]:
-            num_changes += 1
     roi_dict['most_common_aa_sequence'] = aa_consensus
     roi_dict['most_common_nt_sequence'] = nt_consensus
     roi_dict['reference'] = reference
     roi_dict['changes'] = str(num_changes)
+    #End backward compatibility code
     roi_dict['aa_sequence_distribution'] = aa_sequence_counter
     roi_dict['nt_sequence_distribution'] = nt_sequence_counter
     roi_dict['depth'] = str(depth)
@@ -342,6 +348,8 @@ def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
     aa_sequence_counter = Counter()
     nt_sequence_counter = Counter()
     depth = 0
+    if not roi.aa_sequence:
+        roi.aa_sequence = str(DNA(roi.nt_sequence).translate()).replace('*', 'x')
     reads = iter(sorted(samdata.fetch(amplicon_ref, start, end), key=attrgetter('query_name')))
     for read, pair in pairwise(reads):
         if read.query_name != pair.query_name:
@@ -386,23 +394,23 @@ def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
             aa_sequence = nt_sequence.translate()
             aa_string = str(aa_sequence).replace('*', 'x')
             if aa_string:
+                num_changes = 0
+                for i in range(len(roi.aa_sequence)):
+                    if len(aa_string) <= i or roi.aa_sequence[i] != aa_string[i]:
+                        num_changes += 1 #TODO: This is not the most efficient, we are repeating this for every duplicate, even though value won't change
                 nt_sequence_counter.update([str(nt_sequence)])
-                aa_sequence_counter.update([aa_string])
+                aa_sequence_counter.update([(aa_string, num_changes)])
                 depth += 1
     if len(aa_sequence_counter) == 0:
         roi_dict['flag'] = "region not found"
         return roi_dict
-    aa_consensus = aa_sequence_counter.most_common(1)[0][0]
+    (aa_consensus, num_changes) = aa_sequence_counter.most_common(1)[0][0]
     nt_consensus = nt_sequence_counter.most_common(1)[0][0]
-    num_changes = 0
     reference = roi.aa_sequence
     consensus = aa_consensus
     if roi.nt_sequence:
         reference = roi.nt_sequence
         consensus = nt_consensus
-    for i in range(len(reference)):
-        if len(consensus) <= i or reference[i] != consensus[i]:
-            num_changes += 1
     roi_dict['most_common_aa_sequence'] = aa_consensus
     roi_dict['most_common_nt_sequence'] = nt_consensus
     roi_dict['reference'] = reference
@@ -414,6 +422,10 @@ def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
 
 def _add_roi_node(parent, roi, roi_dict, depth, proportion, smor):
     global low_level_cutoff, high_level_cutoff
+    nonsynonymous = False
+    # Smart SMOR -- thresholds and proportion filter are a function of the number of SMOR reads at position
+    if smor:
+        (proportion, low_level_cutoff, high_level_cutoff) = _compute_thresholds_SMOR(int(roi_dict['depth']))
     if "flag" in roi_dict:
         roi_node = _add_dummy_roi_node(parent, roi)
         significance_node = ElementTree.SubElement(roi_node, "significance", {'flag':roi_dict['flag']})
@@ -421,21 +433,28 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion, smor):
             significance_node.set("resistance", roi.significance.resistance)
         return roi_node
     roi_attributes = {k:roi_dict[k] for k in ('region', 'reference', 'depth')}
+    roi_attributes['name'] = str(roi.name)
     roi_node = ElementTree.SubElement(parent, "region_of_interest", roi_attributes)
+    reporting_threshold = math.ceil(int(roi_dict['depth']) * proportion)
     aa_seq_counter = roi_dict['aa_sequence_distribution']
-    aa_seq_count = aa_seq_counter[roi_dict['most_common_aa_sequence']]
-    aa_seq_node = ElementTree.SubElement(roi_node, "amino_acid_sequence", {'count':str(aa_seq_count), 'percent':str(aa_seq_count/int(roi_dict['depth'])*100)})
-    aa_seq_node.text = roi_dict['most_common_aa_sequence']
+    for ((seq, aa_changes), count) in aa_seq_counter.most_common():
+        if count >= reporting_threshold:
+            aa_seq_node = ElementTree.SubElement(roi_node, "amino_acid_sequence", {'count':str(count), 'percent':str(count/int(roi_dict['depth'])*100), 'aa_changes':str(aa_changes)})
+            aa_seq_node.text = seq
+            if aa_changes > 0:
+                nonsynonymous = True
+        else:
+            break #Since they are returned in order by count, as soon as one is below the threshold the rest will be as well
     nt_seq_counter = roi_dict['nt_sequence_distribution']
-    nt_seq_count = nt_seq_counter[roi_dict['most_common_nt_sequence']]
-    nt_seq_node = ElementTree.SubElement(roi_node, "nucleotide_sequence", {'count':str(nt_seq_count), 'percent':str(nt_seq_count/int(roi_dict['depth'])*100)})
-    nt_seq_node.text = roi_dict['most_common_nt_sequence']
-    significant = False
+    for (seq, count) in nt_seq_counter.most_common():
+        if count >= reporting_threshold:
+            nt_seq_node = ElementTree.SubElement(roi_node, "nucleotide_sequence", {'count':str(count), 'percent':str(count/int(roi_dict['depth'])*100)})
+            nt_seq_node.text = seq
+        else:
+            break #Since they are returned in order by count, as soon as one is below the threshold the rest will be as well
     low_level = True
     high_level = False
-    # Smart SMOR -- thresholds and proportion filter are a function of the number of SMOR reads at position
-    if smor:
-        (proportion, low_level_cutoff, high_level_cutoff) = _compute_thresholds_SMOR(int(roi_dict['depth']))
+    significant = False
     for mutation in roi.mutations:
         if roi.nt_sequence:
             count = nt_seq_counter[mutation]
@@ -462,17 +481,19 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion, smor):
             significance_node.set("level", "low")
         elif high_level:
             significance_node.set("level", "high")
-    elif 'changes' in roi_dict and int(roi_dict['changes']) > 0:
+    elif ('changes' in roi_dict and int(roi_dict['changes']) > 0) or nonsynonymous:
         significance_node = ElementTree.SubElement(roi_node, "significance", {'changes':roi_dict['changes']})
         significance_node.text = roi.significance.message                       
         if roi.significance.resistance:
             significance_node.set("resistance", roi.significance.resistance)
+        if int(roi_dict['depth']) < depth:
+            significance_node.set("flag", "low coverage")
     elif int(roi_dict['depth']) < depth: # No significance but still need to flag it for low coverage
         significance_node = ElementTree.SubElement(roi_node, "significance")
         if roi.significance.resistance:
             significance_node.set("resistance", roi.significance.resistance)
         significance_node.set("flag", "low coverage")
-    ElementTree.SubElement(roi_node, 'aa_sequence_distribution', {k:str(v) for k,v in aa_seq_counter.items() if v>1})
+    ElementTree.SubElement(roi_node, 'aa_sequence_distribution', {k[0]:str(v) for k,v in aa_seq_counter.items() if v>1}) #key is a tuple of (sequence, changes) and I just want the sequence
     ElementTree.SubElement(roi_node, 'nt_sequence_distribution', {k:str(v) for k,v in nt_seq_counter.items() if v>1})
     return roi_node
 
