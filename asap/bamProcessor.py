@@ -54,7 +54,7 @@ def _write_parameters(node, data):
         subnode.text = str(v)
     return node
 
-def _process_pileup_SMOR(pileup, amplicon, depth, proportion):
+def _process_pileup_SMOR(pileup, amplicon, depth, proportion, offset):
     from operator import attrgetter
     pileup_dict = {}
     snp_dict = _create_snp_dict(amplicon)
@@ -114,7 +114,7 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion):
         (proportion, low_level_cutoff, high_level_cutoff) = _compute_thresholds_SMOR(column_depth)
         if position in snp_dict:
             for (name, reference, variant, significance) in snp_dict[position]:
-                snp = {'name':name, 'position':str(position), 'depth':str(column_depth), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
+                snp = {'name':name, 'position':str(position+offset), 'depth':str(column_depth), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
                 variant_proportion = base_counter[variant]/column_depth
                 if variant_proportion >= proportion:
                     snp['significance'] = significance
@@ -127,7 +127,7 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion):
                 snp_list.append(snp)
                 #print("Found position of interest %d, reference: %s, distribution:%s" % (position, snp_dict[position][0], base_counter))
         elif depth_passed and snp_call and snp_call_proportion >= proportion:
-            snp = {'name':'unknown', 'position':str(position), 'depth':str(column_depth), 'reference':reference_call, 'variant':snp_call, 'basecalls':base_counter}
+            snp = {'name':'unknown', 'position':str(position+offset), 'depth':str(column_depth), 'reference':reference_call, 'variant':snp_call, 'basecalls':base_counter}
             if 0 in snp_dict:
                 (name, *rest, significance) = snp_dict[0][0]
                 snp['name'] = name
@@ -144,7 +144,7 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion):
     pileup_dict['average_depth'] = str(avg_depth_total/avg_depth_positions) if avg_depth_positions else "0"
     return pileup_dict 
 
-def _process_pileup(pileup, amplicon, depth, proportion):
+def _process_pileup(pileup, amplicon, depth, proportion, offset):
     pileup_dict = {}
     snp_dict = _create_snp_dict(amplicon)
     consensus_seq = ""
@@ -194,7 +194,7 @@ def _process_pileup(pileup, amplicon, depth, proportion):
         consensus_seq += alignment_call if alignment_call_proportion >= proportion else "N"
         if position in snp_dict:
             for (name, reference, variant, significance) in snp_dict[position]:
-                snp = {'name':name, 'position':str(position), 'depth':str(pileupcolumn.n), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
+                snp = {'name':name, 'position':str(position+offset), 'depth':str(pileupcolumn.n), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
                 if base_counter[variant]/pileupcolumn.n >= proportion:
                     snp['significance'] = significance
                 if not depth_passed:
@@ -202,7 +202,7 @@ def _process_pileup(pileup, amplicon, depth, proportion):
                 snp_list.append(snp)
                 #print("Found position of interest %d, reference: %s, distribution:%s" % (position, snp_dict[position][0], base_counter))
         elif depth_passed and snp_call and snp_call_proportion >= proportion:
-            snp = {'name':'unknown', 'position':str(position), 'depth':str(pileupcolumn.n), 'reference':reference_call, 'variant':snp_call, 'basecalls':base_counter}
+            snp = {'name':'unknown', 'position':str(position+offset), 'depth':str(pileupcolumn.n), 'reference':reference_call, 'variant':snp_call, 'basecalls':base_counter}
             if 0 in snp_dict:
                 (name, *rest, significance) = snp_dict[0][0]
                 snp['name'] = name
@@ -727,6 +727,7 @@ USAGE
             assay_dict['type'] = assay.assay_type
             assay_dict['function'] = assay.target.function or ""
             assay_dict['gene'] = assay.target.gene_name or ""
+            offset = int(assay.target.start_position) or 0
             assay_node = ElementTree.SubElement(sample_node, "assay", assay_dict)
             ref_name = assay.name
             reverse_comp = assay.target.reverse_comp
@@ -789,9 +790,9 @@ USAGE
 
                     pileup = samdata.pileup(ref_name, max_depth=1000000)
                     if smor:
-                        amplicon_data = _process_pileup_SMOR(pileup, amplicon, depth, proportion)
+                        amplicon_data = _process_pileup_SMOR(pileup, amplicon, depth, proportion, offset)
                     else:
-                        amplicon_data = _process_pileup(pileup, amplicon, depth, proportion)
+                        amplicon_data = _process_pileup(pileup, amplicon, depth, proportion, offset)
                     if float(amplicon_data['breadth']) < breadth*100:
                         significance_node = amplicon_node.find("significance")
                         if significance_node is None:
