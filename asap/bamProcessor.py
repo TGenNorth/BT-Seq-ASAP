@@ -733,9 +733,9 @@ USAGE
             assay_dict['type'] = assay.assay_type
             assay_dict['function'] = assay.target.function or ""
             assay_dict['gene'] = assay.target.gene_name or ""
-            offset = int(assay.target.start_position) or 0
+            offset = int(assay.target.start_position) if assay.target.start_position is not None else 0
             #if start>end, then ref sequence is on reverse strand, so need to subtract pos from offset instead of add
-            negative = offset > int(assay.target.end_position) 
+            negative = (offset > int(assay.target.end_position)) if assay.target.end_position is not None else False 
             assay_node = ElementTree.SubElement(sample_node, "assay", assay_dict)
             ref_name = assay.name
             reverse_comp = assay.target.reverse_comp
