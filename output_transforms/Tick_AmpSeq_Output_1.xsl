@@ -2,6 +2,8 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:exsl="http://exslt.org/common" xmlns:str="http://exslt.org/strings" extension-element-prefixes="exsl str">
     <xsl:import href="http://exslt.org/str/functions/replace/str.replace.function.xsl"/>
     <xsl:output method="xhtml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" omit-xml-declaration="yes" encoding="UTF-8" indent="yes"/>
+
+<!-- SNP Summary Report -->
     <xsl:template match="/analysis">
         <html>
         <head>
@@ -57,8 +59,47 @@
 		</xsl:for-each>
             </table>
 	    <br />
+            <a href="{@run_name}_counts.html">Click here for read counts</a> 
         </body>
         </html>
+
+<!-- Read Count Summary -->
+    <exsl:document method="html" href="{@run_name}_counts.html">
+        <html>
+        <head>
+            <title>Run Summary for: <xsl:value-of select="@run_name"/></title>
+        </head>
+        <body>
+        	<center><h1>ASAP Read Count Summary for: <xsl:value-of select="@run_name"/></h1></center>
+	        <br/>
+	    	<em>Number of reads aligning to each assay</em>
+            <table border="1" cellpadding="3">
+	    		<tr>
+	    		<th>Sample</th>
+	    		<xsl:for-each select="sample[1]">
+	    		<xsl:for-each select="assay">
+	    		    <th nowrap="true"><xsl:value-of select='@name'/></th>
+	    		</xsl:for-each>
+	    		</xsl:for-each>
+	    		</tr>
+                <xsl:for-each select="sample">
+                    <tr>
+                        <td><a href="{/analysis/@run_name}/{./@name}.html"><xsl:value-of select="@name"/></a></td>
+			    		<xsl:for-each select="assay">
+			    		    <td align="center">
+			    		        <xsl:value-of select="sum(.//amplicon/@reads)"/>
+			    		    </td>
+			    		</xsl:for-each>
+                    </tr>
+                    <xsl:apply-templates select="."/>
+                </xsl:for-each>
+            </table>
+	    	<br />
+	    	<br />
+	    	<a href="{@run_name}.html">Click here for SNP report</a>
+        </body>
+        </html>
+    </exsl:document>
     </xsl:template>
 
     <xsl:template name="amplicon-graph">
@@ -214,7 +255,7 @@
 	    	</table>
 	    	<br />
 	    	<br />
-	    	<h3>Presence/absence assays present in sample: <xsl:value-of select="@name"/></h3>
+	    	<h3>Presence/absence assays for sample: <xsl:value-of select="@name"/></h3>
 	    	<table border="2" width="100%">
 	    		<tr>
 	    		<th>Assay Name</th>
@@ -224,7 +265,7 @@
 	    		<th>SNPs found(% reads containing SNP)</th>
 	    		</tr>
 	    		<xsl:for-each select="assay">
-	    		    <xsl:if test="@type = 'presence/absence' and amplicon/@reads &gt; 0">
+	    		    <xsl:if test="@type = 'presence/absence'">
 	    		    <xsl:call-template name="amplicon-graph"></xsl:call-template>
 	    		    <tr>
 	    		        <td><a href="#{@name}-graph"><xsl:value-of select="@name"/></a></td>
@@ -274,7 +315,7 @@
 	    		</xsl:for-each>
 	    	</table>
 	    	<br />
-	    	<h3>Region of Interest assays for sample: <xsl:value-of select="@name"/></h3>
+	    	<!--<h3>Region of Interest assays for sample: <xsl:value-of select="@name"/></h3>
 	    	<table border="2" width="100%">
 	    		<tr>
 	    		<th>Assay Name</th>
@@ -304,7 +345,7 @@
 	    		    </xsl:if>
 	    		</xsl:for-each>
 	    	</table>
-	    	<br />
+	    	<br />-->
 	    	<h3>Gene Variant assays for sample: <xsl:value-of select="@name"/></h3>
 	    	<table border="2" width="100%">
 	    		<tr>
