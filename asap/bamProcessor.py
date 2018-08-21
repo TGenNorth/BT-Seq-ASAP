@@ -54,7 +54,7 @@ def _write_parameters(node, data):
         subnode.text = str(v)
     return node
 
-def _process_pileup_SMOR(pileup, amplicon, depth, proportion, offset, negative):
+def _process_pileup_SMOR(pileup, amplicon, depth, proportion, offset):
     from operator import attrgetter
     pileup_dict = {}
     snp_dict = _create_snp_dict(amplicon)
@@ -113,8 +113,6 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion, offset, negative):
         consensus_seq += alignment_call if alignment_call_proportion >= proportion else "N"
         (proportion, low_level_cutoff, high_level_cutoff) = _compute_thresholds_SMOR(column_depth)
         translated = offset+position
-        if negative:
-            translated = offset-position
         if position in snp_dict:
             for (name, reference, variant, significance) in snp_dict[position]:
                 snp = {'name':name, 'position':str(translated), 'depth':str(column_depth), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
@@ -147,7 +145,7 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion, offset, negative):
     pileup_dict['average_depth'] = str(avg_depth_total/avg_depth_positions) if avg_depth_positions else "0"
     return pileup_dict 
 
-def _process_pileup(pileup, amplicon, depth, proportion, offset, negative):
+def _process_pileup(pileup, amplicon, depth, proportion, offset):
     pileup_dict = {}
     snp_dict = _create_snp_dict(amplicon)
     consensus_seq = ""
@@ -196,8 +194,6 @@ def _process_pileup(pileup, amplicon, depth, proportion, offset, negative):
             snp_call = snp_call_proportion = None
         consensus_seq += alignment_call if alignment_call_proportion >= proportion else "N"
         translated = offset+position
-        if negative:
-            translated = offset-position
         if position in snp_dict:
             for (name, reference, variant, significance) in snp_dict[position]:
                 snp = {'name':name, 'position':str(translated), 'depth':str(pileupcolumn.n), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
@@ -733,9 +729,12 @@ USAGE
             assay_dict['type'] = assay.assay_type
             assay_dict['function'] = assay.target.function or ""
             assay_dict['gene'] = assay.target.gene_name or ""
-            offset = int(assay.target.start_position) if assay.target.start_position is not None else 0
-            #if start>end, then ref sequence is on reverse strand, so need to subtract pos from offset instead of add
-            negative = (offset > int(assay.target.end_position)) if assay.target.end_position is not None else False 
+            #offset is where the amplicon sits relative to a reference, subtract 1 to make 0-based position
+            #report the lesser of start and end in case amplicon is on reverse strand
+            try:
+                offset = min(int(assay.target.start_position), int(assay.target.end_position))-1
+            except:
+                offset = 0
             assay_node = ElementTree.SubElement(sample_node, "assay", assay_dict)
             ref_name = assay.name
             reverse_comp = assay.target.reverse_comp
@@ -798,9 +797,9 @@ USAGE
 
                     pileup = samdata.pileup(ref_name, max_depth=1000000)
                     if smor:
-                        amplicon_data = _process_pileup_SMOR(pileup, amplicon, depth, proportion, offset, negative)
+                        amplicon_data = _process_pileup_SMOR(pileup, amplicon, depth, proportion, offset)
                     else:
-                        amplicon_data = _process_pileup(pileup, amplicon, depth, proportion, offset, negative)
+                        amplicon_data = _process_pileup(pileup, amplicon, depth, proportion, offset)
                     if float(amplicon_data['breadth']) < breadth*100:
                         significance_node = amplicon_node.find("significance")
                         if significance_node is None:
