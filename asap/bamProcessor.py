@@ -425,15 +425,15 @@ def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
 def _add_roi_node(parent, roi, roi_dict, depth, proportion, smor):
     global low_level_cutoff, high_level_cutoff
     nonsynonymous = False
-    # Smart SMOR -- thresholds and proportion filter are a function of the number of SMOR reads at position
-    if smor:
-        (proportion, low_level_cutoff, high_level_cutoff) = _compute_thresholds_SMOR(int(roi_dict['depth']))
     if "flag" in roi_dict:
         roi_node = _add_dummy_roi_node(parent, roi)
         significance_node = ElementTree.SubElement(roi_node, "significance", {'flag':roi_dict['flag']})
         if roi.significance.resistance:
             significance_node.set("resistance", roi.significance.resistance)
         return roi_node
+    # Smart SMOR -- thresholds and proportion filter are a function of the number of SMOR reads at position
+    if smor:
+        (proportion, low_level_cutoff, high_level_cutoff) = _compute_thresholds_SMOR(int(roi_dict['depth']))
     roi_attributes = {k:roi_dict[k] for k in ('region', 'reference', 'depth')}
     roi_attributes['name'] = str(roi.name)
     roi_node = ElementTree.SubElement(parent, "region_of_interest", roi_attributes)
