@@ -135,7 +135,7 @@ USAGE
         #this section edits the names of all unknown snps to be Unknown:{POSITION}{CALL}
         #TODO: Let's make this optional in the future, this is a hack for a specific problem, and we do not want to always do this
         for assay in assays2:
-            if assay.attrib["type"] == 'SNP':
+            if assay.attrib["type"] == 'SNP' or assay.attrib["type"] == 'mixed':
                 snps = assay.findall('.//snp')
                 for  snp in snps:
                     if snp.attrib["name"] == "unknown":

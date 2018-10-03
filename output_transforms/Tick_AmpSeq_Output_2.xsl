@@ -19,7 +19,7 @@
 
 
 <xsl:template match="/">
-  <xsl:for-each select="analysis/assay[@type='SNP']">
+  <xsl:for-each select="analysis/assay[@type='SNP' or @type='mixed']">
     <xsl:variable name="currentAssay" select="."/>
     <exsl:document method="html" href="{../@run_name}/{@name}.html">
     <html>
