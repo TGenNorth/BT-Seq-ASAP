@@ -54,8 +54,11 @@ def _submit_job(job_submitter, command, job_parms, waitfor_id=None, hold=False, 
             args += " -H"
         if notify:
             args += " --mail-type=END"
-        submit_command = "sbatch -D \'%s\' -c%s --mem=%s000 --time=%s:00:00 --mail-type=FAIL -J \'%s\' %s %s %s" % (
-            job_parms["work_dir"], job_parms['num_cpus'], job_parms['mem_requested'], job_parms['walltime'],
+        #submit_command = "sbatch -D \'%s\' -c%s --mem=%s000 --time=%s:00:00 --mail-type=FAIL -J \'%s\' %s %s %s" % (
+        #    job_parms["work_dir"], job_parms['num_cpus'], job_parms['mem_requested'], job_parms['walltime'],
+        #    job_parms['name'], waitfor, queue, args)
+        submit_command = "sbatch -D \'%s\' -c%s --mem=%s000 --mail-type=FAIL -J \'%s\' %s %s %s" % (
+            job_parms["work_dir"], job_parms['num_cpus'], job_parms['mem_requested'],
             job_parms['name'], waitfor, queue, args)
         logging.debug("submit_command = %s" % submit_command)
         output = subprocess.getoutput("%s --wrap=\"%s\"" % (submit_command, command))
@@ -284,7 +287,7 @@ def indexFasta(fasta, aligner="bwa"):
         command = "bwa index %s" % (fasta)
     return _submit_job(job_manager, command, job_params)
 
-def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adapters_all.fasta", minlen=80):
+def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adapters_all.fasta", minlen=80, dependency=None):
     from collections import namedtuple
     import os
     read1 = reads[0]
@@ -305,7 +308,7 @@ def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adap
     else:
         out_reads = [os.path.join(trim_dir, sample + "_trimmed.fastq.gz")]
         command = "java -Xmx%sg org.usadellab.trimmomatic.Trimmomatic SE -threads %d %s %s ILLUMINACLIP:%s:2:30:10 %s MINLEN:%d" % (job_params['mem_requested'], job_params['num_cpus'], read1, out_reads[0], adapters, qual_string, minlen)
-    jobid = _submit_job(job_manager, command, job_params)
+    jobid = _submit_job(job_manager, command, job_params, (dependency,))
     return TrimmedRead(sample, jobid, out_reads)
 
 def alignReadsToReference(sample, reads, reference, outdir, jobid=None, aligner="bowtie2", args=None):
