@@ -280,6 +280,7 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
     end = int(range_match.group(2))
     expected_length = end - start
     aa_sequence_counter = Counter()
+    aa_sequence_counter_temp = Counter()
     nt_sequence_counter = Counter()
     depth = 0
     significant = False
@@ -310,16 +311,20 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
             aa_sequence = nt_sequence.translate()
             aa_string = str(aa_sequence).replace('*', 'x')
             if aa_string:
-                num_changes = 0
-                #for i in range(len(roi.aa_sequence)):
-                #    if len(aa_string) <= i or roi.aa_sequence[i] != aa_string[i]:
-                #        num_changes += 1 #TODO: This is not the most efficient, we are repeating this for every duplicate, even though value won't change
                 nt_sequence_counter.update([str(nt_sequence)])
-                aa_sequence_counter.update([(aa_string, num_changes)])
+                aa_sequence_counter_temp.update([aa_string])
                 depth += 1
-    if len(aa_sequence_counter) == 0:
+    if len(aa_sequence_counter_temp) == 0:
         roi_dict['flag'] = "region not found"
         return roi_dict
+    else:
+        for (aa_string, count) in aa_sequence_counter_temp.most_common():
+            num_changes = 0
+            for i in range(len(roi.aa_sequence)):
+                if len(aa_string) <= i or roi.aa_sequence[i] != aa_string[i]:
+                    num_changes += 1 
+            aa_sequence_counter[(aa_string, num_changes)] = count
+
     #This next bit is just being saved for backward compatibility. Should deprecate and remove soon
     (aa_consensus, num_changes) = aa_sequence_counter.most_common(1)[0][0]
     nt_consensus = nt_sequence_counter.most_common(1)[0][0]
@@ -348,6 +353,7 @@ def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
     end = int(range_match.group(2))
     expected_length = end - start
     aa_sequence_counter = Counter()
+    aa_sequence_counter_temp = Counter()
     nt_sequence_counter = Counter()
     depth = 0
     if not roi.aa_sequence:
@@ -396,16 +402,20 @@ def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
             aa_sequence = nt_sequence.translate()
             aa_string = str(aa_sequence).replace('*', 'x')
             if aa_string:
-                num_changes = 0
-                #for i in range(len(roi.aa_sequence)):
-                #    if len(aa_string) <= i or roi.aa_sequence[i] != aa_string[i]:
-                #        num_changes += 1 #TODO: This is not the most efficient, we are repeating this for every duplicate, even though value won't change
                 nt_sequence_counter.update([str(nt_sequence)])
-                aa_sequence_counter.update([(aa_string, num_changes)])
+                aa_sequence_counter_temp.update([aa_string])
                 depth += 1
-    if len(aa_sequence_counter) == 0:
+    if len(aa_sequence_counter_temp) == 0:
         roi_dict['flag'] = "region not found"
         return roi_dict
+    else:
+        for (aa_string, count) in aa_sequence_counter_temp.most_common():
+            num_changes = 0
+            for i in range(len(roi.aa_sequence)):
+                if len(aa_string) <= i or roi.aa_sequence[i] != aa_string[i]:
+                    num_changes += 1 
+            aa_sequence_counter[(aa_string, num_changes)] = count
+    
     (aa_consensus, num_changes) = aa_sequence_counter.most_common(1)[0][0]
     nt_consensus = nt_sequence_counter.most_common(1)[0][0]
     reference = roi.aa_sequence
