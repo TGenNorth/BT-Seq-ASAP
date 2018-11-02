@@ -472,7 +472,7 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion, smor):
             count = nt_seq_counter[mutation]
             mutant_proportion = count/int(roi_dict['depth'])
         else:
-            count = aa_seq_counter[mutation]
+            count = aa_seq_counter[next((k for k in aa_seq_counter.keys() if k[0] == mutation), None)]
             mutant_proportion = count/int(roi_dict['depth'])
         mutation_node = ElementTree.SubElement(roi_node, 'mutation', {'name':str(roi.name)+mutation, 'count':str(count), 'percent':str(mutant_proportion*100)})
         mutation_node.text = mutation
