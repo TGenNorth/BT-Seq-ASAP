@@ -167,8 +167,7 @@
 	    		<xsl:for-each select="sample[1]/assay[not(@type='presence/absence')]">
 	    		    <xsl:variable name="current_assay" select="./@name"/>
                     <xsl:text disable-output-escaping="yes"><![CDATA[<tr>]]></xsl:text>
-	    		    <xsl:choose>
-	    		        <xsl:when test="@type = 'SNP' or @type = 'mixed'">
+	    		    <xsl:if test="@type = 'SNP' or @type = 'mixed'">
                             <xsl:for-each select="asap:distinct-values(//assay[@name=current()/@name]//amplicon//snp/@name[. != 'unknown' and . != 'position of interest'])">
                             <xsl:sort select="."/>
 	    		            <xsl:variable name="current_snp" select="."/>
@@ -190,8 +189,8 @@
 	                            </xsl:for-each>
 	                            <xsl:text disable-output-escaping="yes"><![CDATA[</tr><tr>]]></xsl:text>
                             </xsl:for-each>
-	    		        </xsl:when>
-	    		        <xsl:when test="@type = 'ROI' or @type = 'mixed'">
+	    		    </xsl:if>
+	    		    <xsl:if test="@type = 'ROI' or @type = 'mixed'">
                             <xsl:for-each select="asap:distinct-values(//assay[@name=current()/@name]//amplicon//region_of_interest//mutation/@name)">
                             <xsl:sort select="."/>
 	    		            <xsl:variable name="current_codon" select="."/>
@@ -213,9 +212,7 @@
 	                            </xsl:for-each>
                             <xsl:text disable-output-escaping="yes"><![CDATA[</tr><tr>]]></xsl:text>
                             </xsl:for-each>
-	    		        </xsl:when>
-	    		        <xsl:otherwise><td><xsl:value-of select="@name"/></td></xsl:otherwise>
-	    		    </xsl:choose>
+	    		    </xsl:if>
 	    		    <xsl:text disable-output-escaping="yes"><![CDATA[</tr>]]></xsl:text>
 	    		<!--<xsl:apply-templates select="."/>  -->
                 </xsl:for-each>

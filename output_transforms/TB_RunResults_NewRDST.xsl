@@ -162,7 +162,7 @@
 			    		            </xsl:when>
 			    		            <xsl:when test="region_of_interest/significance">
 			    		                <xsl:for-each select="region_of_interest">
-			    		                    <xsl:if test="significance and not(significance/@changes)">
+			    		                    <xsl:if test="significance">
 			    		                        <xsl:for-each select="mutation">
 			    		                            <xsl:if test="@percent &gt; $prop_filter"><xsl:value-of select="@name"/> (<xsl:value-of select='format-number(@percent, "##.##")'/>%)<br/></xsl:if>
 			    		                        </xsl:for-each>
@@ -395,7 +395,7 @@
 	    		            </xsl:when>
 	    		            <xsl:when test="region_of_interest/significance">
 	    		                <xsl:for-each select="region_of_interest">
-	    		                    <xsl:if test="significance and not(significance/@changes)">
+	    		                    <xsl:if test="significance">
 	    		                        <xsl:for-each select="mutation">
 	    		                            <xsl:if test="@percent &gt; $prop_filter"><xsl:value-of select="@name"/> (<xsl:value-of select='format-number(@percent, "##.##")'/>%)<br/></xsl:if>
 	    		                        </xsl:for-each>
@@ -538,7 +538,8 @@
 	    		<th>Known Mutations - # reads containing mutation(% reads) - Significance</th>
 	    		<th>Other SNPs found(% reads containing SNP)</th>
 	    		</tr>
-	    		<xsl:for-each select="assay[not(@name = 'pncA')]">
+	    		<!--<xsl:for-each select="assay[not(@name = 'pncA')]">-->
+	    		<xsl:for-each select="assay">
 	    		    <xsl:if test="@type = 'SNP' or @type = 'ROI' or @type = 'mixed'">
 	    		    <xsl:call-template name="amplicon-graph"></xsl:call-template>
 	    		    <tr>

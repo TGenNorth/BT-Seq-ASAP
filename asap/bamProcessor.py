@@ -493,7 +493,7 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion, smor):
             significance_node.set("level", "low")
         elif high_level:
             significance_node.set("level", "high")
-    elif ('changes' in roi_dict and int(roi_dict['changes']) > 0) or nonsynonymous:
+    elif len(roi.mutations) == 0 and (('changes' in roi_dict and int(roi_dict['changes']) > 0) or nonsynonymous):
         significance_node = ElementTree.SubElement(roi_node, "significance", {'changes':roi_dict['changes']})
         significance_node.text = roi.significance.message                       
         if roi.significance.resistance:
