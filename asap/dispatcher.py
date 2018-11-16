@@ -320,14 +320,14 @@ def alignReadsToReference(sample, reads, reference, outdir, jobid=None, aligner=
     else: #re.search('b(ow)?t(ie)?2', aligner, re.IGNORECASE)
         return _run_bowtie2(sample, reads, reference, outdir, jobid, args=args)
 
-def processBam(sample_name, json_file, bam_file, xml_dir, dependency, depth, breadth, proportion, percid, smor=False):
+def processBam(sample_name, json_file, bam_file, xml_dir, dependency, depth, breadth, proportion, percid, mutdepth, smor=False):
     import os
     job_params = {'queue':'', 'mem_requested':4, 'num_cpus':2, 'walltime':24, 'args':''}
     job_params['name'] = "asap_bamprocesser_%s" % sample_name
     job_params['work_dir'] = xml_dir
     out_file = os.path.join(xml_dir, sample_name+".xml")
     smor_option = " -s" if smor else ""
-    command = "bamProcessor -j %s -b %s -o %s -d %d --breadth %f -p %f -i %f%s" % (json_file, bam_file, out_file, depth, breadth, proportion, percid, smor_option)
+    command = "bamProcessor -j %s -b %s -o %s -d %d --breadth %f -p %f -m %d -i %f%s" % (json_file, bam_file, out_file, depth, breadth, proportion, mutdepth, percid, smor_option)
     jobid = _submit_job(job_manager, command, job_params, (dependency,)) if dependency else _submit_job(job_manager, command, job_params)
     return (out_file, jobid)
 

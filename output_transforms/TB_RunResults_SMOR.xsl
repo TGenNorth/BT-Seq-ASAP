@@ -74,6 +74,13 @@
             </style>
         </head>
         <body>
+        <xsl:variable name="prop_filter" select="sample[1]/@proportion_filter * 100"/>
+        <xsl:variable name="mutant_count_filter">
+            <xsl:choose>
+                <xsl:when test="sample[1]/@mutation_depth_filter"><xsl:value-of select="sample[1]/@mutation_depth_filter"/></xsl:when>
+                <xsl:otherwise>0</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         	<center><h1>TB Clinical SMOR ASAP Run Summary for: <xsl:value-of select="@run_name"/></h1></center>
 	        <br />
 	        <br />
@@ -202,7 +209,7 @@
 		                            <xsl:choose>
 		                            <xsl:when test="../../significance/@flag"><em><xsl:value-of select="../../significance/@flag"/></em></xsl:when>
 		                            <xsl:when test="../significance/@flag"><em><xsl:value-of select="../significance/@flag"/></em></xsl:when>
-		                            <xsl:when test="../significance[not(@flag)]">
+		                            <xsl:when test="../significance[not(@flag)] and @count &gt;= $mutant_count_filter and @percent &gt;= $prop_filter">
 		                                <xsl:value-of select="@count"/>/<xsl:value-of select="../@depth"/>(<xsl:value-of select='format-number(@percent, "##.##")'/>%)
 		                            </xsl:when>
 		                            <xsl:otherwise><!-- mutant codon not present --><em>-</em></xsl:otherwise>
@@ -266,6 +273,12 @@
 	<xsl:template match="sample">
         
         <xsl:variable name="prop_filter" select="@proportion_filter * 100"/>
+        <xsl:variable name="mutant_count_filter">
+            <xsl:choose>
+                <xsl:when test="@mutation_depth_filter"><xsl:value-of select="@mutation_depth_filter"/></xsl:when>
+                <xsl:otherwise>0</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
 
 <!-- Per Sample Clinical Results -->
 	<exsl:document method="html" href="{/analysis/@run_name}/{@name}.html">
@@ -413,6 +426,7 @@
 	    		    <xsl:choose>
 	    		        <xsl:when test="@type = 'SNP'"><th><xsl:value-of select="@name"/> SNP (% res)</th></xsl:when>
 	    		        <xsl:when test="@type = 'ROI'"><th><xsl:value-of select="@name"/> codon (% res)</th></xsl:when>
+	    		        <xsl:when test="@type = 'mixed'"><th><xsl:value-of select="@name"/> SNP/codon (% res)</th></xsl:when>
 	    		        <xsl:otherwise></xsl:otherwise>
 	    		    </xsl:choose>
 	    		</xsl:for-each>
@@ -436,9 +450,9 @@
 	    		            </xsl:when>
 	    		            <xsl:when test="region_of_interest/significance">
 	    		                <xsl:for-each select="region_of_interest">
-	    		                    <xsl:if test="significance and not(significance/@changes)">
+	    		                    <xsl:if test="significance">
 	    		                        <xsl:for-each select="mutation">
-	    		                            <xsl:if test="@percent &gt; $prop_filter"><xsl:value-of select="@name"/> (<xsl:value-of select='format-number(@percent, "##.##")'/>%)<br/></xsl:if>
+	    		                            <xsl:if test="@percent &gt; $prop_filter and @count &gt;= $mutant_count_filter"><xsl:value-of select="@name"/> (<xsl:value-of select='format-number(@percent, "##.##")'/>%)<br/></xsl:if>
 	    		                        </xsl:for-each>
 	    		                    </xsl:if>
 	    		                </xsl:for-each>
