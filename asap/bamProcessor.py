@@ -130,6 +130,8 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset):
                     snp['flag'] = "low coverage"
                 snp_list.append(snp)
                 #print("Found position of interest %d, reference: %s, distribution:%s" % (position, snp_dict[position][0], base_counter))
+            # We've covered it, now remove it from the dict so we can see what we might have missed
+            del snp_dict[position]
         elif depth_passed and snp_call and snp_count >= mutdepth and snp_call_proportion >= proportion:
             snp = {'name':'unknown', 'position':str(translated), 'depth':str(column_depth), 'reference':reference_call, 'variant':snp_call, 'basecalls':base_counter}
             if 0 in snp_dict:
@@ -139,6 +141,13 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset):
             snp_list.append(snp)
             #print("SNP found at position %d: %s->%s" % (position, reference_call, alignment_call))
     
+    #Check for any positions_of_interest that weren't covered
+    snp_dict.pop(0, None)
+    for position in snp_dict.keys():
+        for (name, reference, variant, significance) in snp_dict[position]:
+            snp = {'name':name, 'position':str(position), 'depth':str(0), 'reference':reference, 'variant':variant}
+            snp_list.append(snp)
+
     pileup_dict['consensus_sequence'] = consensus_seq
     pileup_dict['breadth'] = str(breadth_positions/amplicon_length * 100)
     pileup_dict['depths'] = ",".join(str(n) for n in depth_array)
@@ -202,12 +211,20 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset):
         if position in snp_dict:
             for (name, reference, variant, significance) in snp_dict[position]:
                 snp = {'name':name, 'position':str(translated), 'depth':str(pileupcolumn.n), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
-                if base_counter[variant]/pileupcolumn.n >= proportion and base_counter[variant] >= mutdepth:
+                variant_proportion = base_counter[variant]/pileupcolumn.n
+                variant_count = base_counter[variant]
+                if variant_proportion >= proportion and variant_count >= mutdepth:
                     snp['significance'] = significance
+                    if variant_proportion <= low_level_cutoff:
+                        snp['level'] = "low"
+                    elif variant_proportion >= high_level_cutoff:
+                        snp['level'] = "high"
                 if not depth_passed:
                     snp['flag'] = "low coverage"
                 snp_list.append(snp)
                 #print("Found position of interest %d, reference: %s, distribution:%s" % (position, snp_dict[position][0], base_counter))
+            # We've covered it, now remove it from the dict so we can see what we might have missed
+            del snp_dict[position]
         elif depth_passed and snp_call and snp_count >= mutdepth and snp_call_proportion >= proportion:
             snp = {'name':'unknown', 'position':str(translated), 'depth':str(pileupcolumn.n), 'reference':reference_call, 'variant':snp_call, 'basecalls':base_counter}
             if 0 in snp_dict:
@@ -216,7 +233,14 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset):
                 snp['significance'] = significance
             snp_list.append(snp)
             #print("SNP found at position %d: %s->%s" % (position, reference_call, alignment_call))
-    
+
+    #Check for any positions_of_interest that weren't covered
+    snp_dict.pop(0, None)
+    for position in snp_dict.keys():
+        for (name, reference, variant, significance) in snp_dict[position]:
+            snp = {'name':name, 'position':str(position), 'depth':str(0), 'reference':reference, 'variant':variant}
+            snp_list.append(snp)
+
     pileup_dict['consensus_sequence'] = consensus_seq
     pileup_dict['breadth'] = str(breadth_positions/amplicon_length * 100)
     pileup_dict['depths'] = ",".join(depth_array)
@@ -255,7 +279,7 @@ def _create_snp_dict(amplicon):
 def _add_snp_node(parent, snp):
     snp_attributes = {k:snp[k] for k in ('name', 'position', 'depth', 'reference')}
     snp_node = ElementTree.SubElement(parent, 'snp', snp_attributes)
-    base_counter = snp['basecalls']
+    base_counter = snp.get('basecalls')
     snpcall = snp['variant']
     depth = int(snp['depth'])
     snpcount = base_counter[snpcall] if base_counter else 0
@@ -283,6 +307,9 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
         return roi_dict
     start = int(range_match.group(1)) - 1
     end = int(range_match.group(2))
+    if end < start:
+        reverse_comp = True
+        start,end = end,start
     expected_length = end - start
     aa_sequence_counter = Counter()
     aa_sequence_counter_temp = Counter()
@@ -356,6 +383,9 @@ def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
         return roi_dict
     start = int(range_match.group(1)) - 1
     end = int(range_match.group(2))
+    if end < start:
+        reverse_comp = True
+        start,end = end,start
     expected_length = end - start
     aa_sequence_counter = Counter()
     aa_sequence_counter_temp = Counter()
@@ -723,7 +753,7 @@ USAGE
         # and will ignore passed-in value. Let's specifically set to zero, to make sure all get reported.
         if smor:
             sample_dict['SMOR'] = 'True'
-            proportion = 0
+            proportion = 0.001
         sample_dict['proportion_filter'] = str(proportion)
         sample_dict['breadth_filter'] = str(breadth)
         sample_dict['mutation_depth_filter'] = str(mutdepth)
