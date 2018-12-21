@@ -54,7 +54,7 @@ def _write_parameters(node, data):
         subnode.text = str(v)
     return node
 
-def _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset):
+def _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset, wholegenome):
     from operator import attrgetter
     pileup_dict = {}
     snp_dict = _create_snp_dict(amplicon)
@@ -148,16 +148,17 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset):
             snp = {'name':name, 'position':str(position), 'depth':str(0), 'reference':reference, 'variant':variant}
             snp_list.append(snp)
 
-    pileup_dict['consensus_sequence'] = consensus_seq
+    if not wholegenome: #If reference is whole genome, none of these are going to make sense, and they will make the output too large
+        pileup_dict['consensus_sequence'] = consensus_seq
+        pileup_dict['depths'] = ",".join(str(n) for n in depth_array)
+        pileup_dict['proportions'] = ",".join(prop_array)
     pileup_dict['breadth'] = str(breadth_positions/amplicon_length * 100)
-    pileup_dict['depths'] = ",".join(str(n) for n in depth_array)
     pileup_dict['discards'] = ",".join(str(n) for n in discard_array)
-    pileup_dict['proportions'] = ",".join(prop_array)
     pileup_dict['SNPs'] = snp_list
     pileup_dict['average_depth'] = str(avg_depth_total/avg_depth_positions) if avg_depth_positions else "0"
     return pileup_dict 
 
-def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset):
+def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, wholegenome):
     pileup_dict = {}
     snp_dict = _create_snp_dict(amplicon)
     consensus_seq = ""
@@ -241,10 +242,11 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset):
             snp = {'name':name, 'position':str(position), 'depth':str(0), 'reference':reference, 'variant':variant}
             snp_list.append(snp)
 
-    pileup_dict['consensus_sequence'] = consensus_seq
+    if not wholegenome: #If reference is whole genome, none of these are going to make sense, and they will make the output too large
+        pileup_dict['consensus_sequence'] = consensus_seq
+        pileup_dict['depths'] = ",".join(depth_array)
+        pileup_dict['proportions'] = ",".join(prop_array)
     pileup_dict['breadth'] = str(breadth_positions/amplicon_length * 100)
-    pileup_dict['depths'] = ",".join(depth_array)
-    pileup_dict['proportions'] = ",".join(prop_array)
     pileup_dict['SNPs'] = snp_list
     pileup_dict['average_depth'] = str(avg_depth_total/avg_depth_positions) if avg_depth_positions else "0"
     return pileup_dict 
@@ -711,6 +713,7 @@ USAGE
         parser.add_argument("-s", "--smor", action="store_true", default=False, help="perform SMOR analysis with overlapping reads. [default: False]")
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
         parser.add_argument("-D", "--debug", action="store_true", default=False, help="write <sample_name>.log file with debugging information")
+        parser.add_argument("-w", "--whole-genome", action="store_true", dest="wholegenome", default=False, help="JSON file uses a whole genome reference, so don't write out the consensus, depth, and proportion arrays for each sample")
      
         # Process arguments
         args = parser.parse_args()
@@ -727,6 +730,7 @@ USAGE
         merge = args.merge
         smor = args.smor
         debug = args.debug
+        wholegenome = args.wholegenome
         #ref_fp = args.ref
         #out_dir = args.odir
         #if not out_dir:
@@ -848,9 +852,9 @@ USAGE
 
                     pileup = samdata.pileup(ref_name, max_depth=1000000)
                     if smor:
-                        amplicon_data = _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset)
+                        amplicon_data = _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset, wholegenome)
                     else:
-                        amplicon_data = _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset)
+                        amplicon_data = _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, wholegenome)
                     if float(amplicon_data['breadth']) < breadth*100:
                         significance_node = amplicon_node.find("significance")
                         if significance_node is None:
