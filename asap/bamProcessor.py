@@ -7,7 +7,7 @@ asap.bamProcessor
 
 @author:     Darrin Lemmer
 
-@copyright:  2015 TGen North. All rights reserved.
+@copyright:  2015,2019 TGen North. All rights reserved.
 
 @license:    ACADEMIC AND RESEARCH LICENSE -- see ../LICENSE
 
@@ -31,7 +31,7 @@ from asap import assayInfo
 from asap import __version__
 
 __all__ = []
-__updated__ = '2018-04-11'
+__updated__ = '2019-01-15'
 __date__ = '2015-07-16'
 
 DEBUG = 1

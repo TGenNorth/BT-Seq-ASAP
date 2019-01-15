@@ -7,7 +7,7 @@ asap.analyzeAmplicons
 
 @author:     Darrin Lemmer
 
-@copyright:  2015 TGen North. All rights reserved.
+@copyright:  2015,2019 TGen North. All rights reserved.
 
 @license:    ACADEMIC AND RESEARCH LICENSE -- see ../LICENSE
 
@@ -28,7 +28,7 @@ from asap import __version__
 
 __all__ = []
 __date__ = '2015-06-04'
-__updated__ = '2018-04-11'
+__updated__ = '2019-01-15'
 
 DEBUG = 1
 TESTRUN = 0
