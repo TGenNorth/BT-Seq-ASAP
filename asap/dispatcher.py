@@ -137,9 +137,9 @@ def _run_bwa(sample, reads, reference, outdir='', dependency=None, sampath='samt
     aligner_command = "%s mem -R %s %s -t %s %s %s %s" % (bwapath, bam_string, args, ncpus, reference, read1, read2)
     bam_nickname = "%s-%s" % (sample, aligner_name)
     samview_command = "%s view -S -b -h -" % sampath
-    samsort_command = "%s sort - %s" % (sampath, bam_nickname)
+    #samsort_command = "%s sort - %s" % (sampath, bam_nickname)
     #samtools 1.3 version
-    #samsort_command = "%s sort -T %s -o %s.bam -" % (sampath, bam_nickname, bam_nickname)
+    samsort_command = "%s sort -T %s -o %s.bam -" % (sampath, bam_nickname, bam_nickname)
     samindex_command = "%s index %s.bam" % (sampath, bam_nickname)
     command = "%s | %s | %s \n %s" % (aligner_command, samview_command, samsort_command, samindex_command)
     work_dir = os.path.join(outdir, aligner_name)
@@ -163,9 +163,9 @@ def _run_bowtie2(sample, reads, reference, outdir='', dependency=None, sampath='
     aligner_command = "%s %s -p %s %s -x %s %s" % (bt2path, args, ncpus, bam_string, ref_string, read_string)
     bam_nickname = "%s-%s" % (sample, aligner_name)
     samview_command = "%s view -S -b -h -" % sampath
-    samsort_command = "%s sort - %s" % (sampath, bam_nickname)
+    #samsort_command = "%s sort - %s" % (sampath, bam_nickname)
     #samtools 1.3 version
-    #samsort_command = "%s sort -T %s -o %s.bam -" % (sampath, bam_nickname, bam_nickname)
+    samsort_command = "%s sort -T %s -o %s.bam -" % (sampath, bam_nickname, bam_nickname)
     samindex_command = "%s index %s.bam" % (sampath, bam_nickname)
     command = "%s | %s | %s \n %s" % (aligner_command, samview_command, samsort_command, samindex_command)
     work_dir = os.path.join(outdir, aligner_name)
@@ -189,9 +189,9 @@ def _run_novoalign(sample, reads, reference, outdir='', dependency=None, sampath
     aligner_command = "%s -f %s %s %s -c %s -o SAM %s -d %s.idx %s" % (novopath, read1, read2, paired_string, ncpus, bam_string, reference, args)
     bam_nickname = "%s-%s" % (sample, aligner_name)
     samview_command = "%s view -S -b -h -" % sampath
-    samsort_command = "%s sort - %s" % (sampath, bam_nickname)
+    #samsort_command = "%s sort - %s" % (sampath, bam_nickname)
     #samtools 1.3 version
-    #samsort_command = "%s sort -T %s -o %s.bam -" % (sampath, bam_nickname, bam_nickname)
+    samsort_command = "%s sort -T %s -o %s.bam -" % (sampath, bam_nickname, bam_nickname)
     samindex_command = "%s index %s.bam" % (sampath, bam_nickname)
     command = "%s | %s | %s \n %s" % (aligner_command, samview_command, samsort_command, samindex_command)
     work_dir = os.path.join(outdir, aligner_name)

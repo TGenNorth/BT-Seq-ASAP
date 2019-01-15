@@ -745,8 +745,8 @@ USAGE
         #reference = pysam.FastaFile(ref_fp)
         
         sample_dict = {}
-        if 'RG' in samdata.header :
-            sample_dict['name'] = samdata.header['RG'][0]['ID']
+        if 'RG' in samdata.header.to_dict() :
+            sample_dict['name'] = samdata.header.to_dict()['RG'][0]['ID']
         else:
             sample_dict['name'] = os.path.splitext(os.path.basename(bam_fp))[0]
         sample_dict['mapped_reads'] = str(samdata.mapped)
