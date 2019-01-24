@@ -1044,7 +1044,7 @@ def cast_json_output_types(e):
 
     ## RegionOfInterest
     if 'aa_sequence_distribution' in e:
-        e['nt_sequence_distribution'] = {k: int(v) for k, v in e['nt_sequence_distribution'].items()}
+        e['aa_sequence_distribution'] = {k: int(v) for k, v in e['aa_sequence_distribution'].items()}
     if 'nt_sequence_distribution' in e:
         e['nt_sequence_distribution'] = {k: int(v) for k, v in e['nt_sequence_distribution'].items()}
     if '@changes' in e:
