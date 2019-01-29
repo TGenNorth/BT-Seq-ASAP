@@ -255,15 +255,6 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, whole
     pileup_dict['average_depth'] = str(avg_depth_total/avg_depth_positions) if avg_depth_positions else "0"
     return pileup_dict 
 
-def _write_xml(root, xml_file):
-    from xml.dom import minidom
-    #logging.debug(ElementTree.dump(root))
-    dom = minidom.parseString(ElementTree.tostring(root))
-    output = open(xml_file, 'w')
-    output.write(dom.toprettyxml(indent="  "))
-    output.close()
-    return xml_file
-
 def _create_snp_dict(amplicon):
     snp_dict = {}
     for snp in amplicon.SNPs:
@@ -694,13 +685,13 @@ USAGE
 
     try:
         # Setup argument parser
-        parser = argparse.ArgumentParser(description=program_license, formatter_class=argparse.RawDescriptionHelpFormatter)
+        parser = argparse.ArgumentParser( description=program_license, formatter_class=argparse.RawTextHelpFormatter )
         required_group = parser.add_argument_group("required arguments")
-        required_group.add_argument("-j", "--json", metavar="FILE", required=True, help="JSON file of assay descriptions. [REQUIRED]")
-        required_group.add_argument("-b", "--bam", metavar="FILE", required=True, help="BAM file to analyze. [REQUIRED]")
+        required_group.add_argument("-j", "--json", metavar="FILE", required=True, type=argparse.FileType('r'), help="JSON file of assay descriptions. [REQUIRED]")
+        required_group.add_argument("-b", "--bam", metavar="FILE", required=True, type=argparse.FileType('r'), default=sys.stdin, help="BAM file to analyze. [REQUIRED]")
         #required_group.add_argument("-r", "--ref", metavar="FILE", required=True, help="reference fasta file, should already be indexed. [REQUIRED]")
         #parser.add_argument("-o", "--out-dir", dest="odir", metavar="DIR", help="directory to write output files to. [default: `pwd`]")
-        required_group.add_argument("-o", "--out", metavar="FILE", required=True, help="XML file to write output to. [REQUIRED]")
+        # TODO: (argparse file type and optional. default to stdout)
         #parser.add_argument("-n", "--name", help="sample name, if not provided it will be derived from BAM file")
         parser.add_argument("-d", "--depth", default=100, type=int, help="minimum read depth required to consider a position covered. [default: 100]")
         parser.add_argument("--breadth", default=0.8, type=float, help="minimum breadth of coverage required to consider an amplicon as present. [default: 0.8]")
@@ -718,13 +709,15 @@ USAGE
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
         parser.add_argument("-D", "--debug", action="store_true", default=False, help="write <sample_name>.log file with debugging information")
         parser.add_argument("-w", "--whole-genome", action="store_true", dest="wholegenome", default=False, help="JSON file uses a whole genome reference, so don't write out the consensus, depth, and proportion arrays for each sample")
+
+        parser.add_argument('-o', '--out', metavar="FILE", type=argparse.FileType('w'), default=sys.stdout, help="output filename [default: stdout]")
+        parser.add_argument("--output-format", type=str.lower, choices=('xml', 'json'), default='xml', help="output format [default: xml]")
      
         # Process arguments
         args = parser.parse_args()
 
         json_fp = args.json
         bam_fp = args.bam
-        out_fp = args.out
         depth = args.depth
         breadth = args.breadth
         proportion = args.proportion
@@ -780,8 +773,6 @@ USAGE
                                 filename=logfile,
                                 filemode='w')
 
-        #out_fp = os.path.join(out_dir, sample_dict['name']+".xml")
-        
         for assay in assay_list:
             assay_dict = {}
             assay_dict['name'] = assay.name
@@ -888,81 +879,10 @@ USAGE
         if samdata.is_open():
             samdata.close()
 
-        # TODO: add a flag/condition here to toggle between XML and JSON output
-        #_write_xml(sample_node, out_fp)
+        _write_output(args.out, sample_node, args.output_format)
 
-        # Write output as JSON instead of XML.
-        #
-        # xmltodict was introduced as a quick way to transform the XML to JSON.
-        #
-        # An unanticipated side-effect of the conversion is the type of a key
-        # changes depending on the number of elements. The following example
-        # compares how zero, one, or more 'assay' elements would be converted
-        # from XML to JSON.
-        #
-        # 'assay' is undefined:
-        # ---------------------
-        #
-        # <sample>
-        # </sample>
-        #
-        # {
-        #   "sample": {},
-        # }
-        #
-        # 'assay' is an Object:
-        # ---------------------
-        #
-        # <sample>
-        #   <assay>...</assay>
-        # </sample>
-        #
-        # {
-        #   "sample": {
-        #     "assay": {...},
-        #   },
-        # }
-        #
-        # 'assay' is an Array of Objects:
-        # ---------------------
-        #
-        # <sample>
-        #   <assay>...</assay>
-        #   <assay>...</assay>
-        # </sample>
-        #
-        # {
-        #   "sample": {
-        #     "assay": [ {...}, {...} ]
-        #   },
-        # }
-        #
-        # JSON includes implicit String/Object/Boolean/Array/Number types.
-        # XML requires an accompanying schema (XSD) to encode types.
-        # As a result, all the values from the XML to JSON conversion are
-        # encoded as Strings.
-        #
-        # Type checks and coversions are a likely source of errors.
-        # To reduce the number of type checks and conversions when rendering
-        # the result
-        with open(out_fp, 'w') as handle:
-            xml_str = ElementTree.tostring(sample_node)
-            # The 'sample' root node is discarded as an unnecessary layer for
-            # the JSON object.
-            xml_obj = xmltodict.parse(xml_str)['sample']
-            # FIXME: The output is en/decoded multiple times because it seemed
-            # easier to use the json object_hook to ensure each key had a
-            # a consistent type then to write a nested loop with type checks
-            # and conversions modifying the object as it was traversed.
-            #
-            # Ideally the output should start as a python object that is
-            # encoded to XML or JSON once.
-            json_encoded_xml = json.loads(json.dumps(xml_obj), object_hook=cast_json_output_types)
-            json.dump(json_encoded_xml, handle, separators=(',', ':'))
-        return 0
     except KeyboardInterrupt:
-        ### handle keyboard interrupt ###
-        return 0
+        pass
     except Exception as e:
         if DEBUG or TESTRUN:
             raise(e)
@@ -970,6 +890,30 @@ USAGE
         sys.stderr.write(program_name + ": " + repr(e) + "\n")
         sys.stderr.write(indent + "  for help use --help")
         return 2
+
+    return 0
+
+def _write_output(file_obj, xml_element, output_format='xml'):
+    if output_format == 'xml':
+        from xml.dom import minidom
+        dom = minidom.parseString(ElementTree.tostring(root))
+        file_obj.write(dom.toprettyxml(indent="  "))
+    elif output_format == 'json':
+        xml_str = ElementTree.tostring(sample_node)
+        # The 'sample' root node is discarded as an unnecessary layer for the JSON object.
+        xml_obj = xmltodict.parse(xml_str)['sample']
+        # FIXME: The output is en/decoded multiple times because it seemed
+        # easier to use the json object_hook to ensure each key had a
+        # a consistent type then to write a nested loop with type checks
+        # and conversions modifying the object as it was traversed.
+        #
+        # Ideally the output should start as a python object that is
+        # encoded to XML or JSON once.
+        json_encoded_xml = json.loads(json.dumps(xml_obj), object_hook=cast_json_output_types)
+        json.dump(json_encoded_xml, file_obj, separators=(',', ':'))
+    else:
+        raise Exception('unsupported output format: %s' % args.format)
+
 
 # cast_json_output_types is a json decoder object_hook intended to be used on
 # a ASAP output decoded from XML:
@@ -1043,9 +987,10 @@ def cast_json_output_types(e):
     # #text: "T"
 
     ## RegionOfInterest
-    if 'aa_sequence_distribution' in e:
+    # TODO: what if {aa,nt}_sequence_distribution is set and None; should it default to an empty array? undefined? none?
+    if e.get('aa_sequence_distribution'):
         e['aa_sequence_distribution'] = {k: int(v) for k, v in e['aa_sequence_distribution'].items()}
-    if 'nt_sequence_distribution' in e:
+    if e.get('nt_sequence_distribution'):
         e['nt_sequence_distribution'] = {k: int(v) for k, v in e['nt_sequence_distribution'].items()}
     if '@changes' in e:
         e['@changes'] = int(e['@changes'])
