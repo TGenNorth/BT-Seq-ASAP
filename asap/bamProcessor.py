@@ -688,7 +688,7 @@ USAGE
         parser = argparse.ArgumentParser( description=program_license, formatter_class=argparse.RawTextHelpFormatter )
         required_group = parser.add_argument_group("required arguments")
         required_group.add_argument("-j", "--json", metavar="FILE", required=True, type=argparse.FileType('r'), help="JSON file of assay descriptions. [REQUIRED]")
-        required_group.add_argument("-b", "--bam", metavar="FILE", required=True, type=argparse.FileType('r'), default=sys.stdin, help="BAM file to analyze. [REQUIRED]")
+        required_group.add_argument("-b", "--bam", metavar="FILE", required=True, type=argparse.FileType('rb'), default=sys.stdin, help="BAM file to analyze. [REQUIRED]")
         #required_group.add_argument("-r", "--ref", metavar="FILE", required=True, help="reference fasta file, should already be indexed. [REQUIRED]")
         #parser.add_argument("-o", "--out-dir", dest="odir", metavar="DIR", help="directory to write output files to. [default: `pwd`]")
         # TODO: (argparse file type and optional. default to stdout)
@@ -737,7 +737,7 @@ USAGE
         #if not os.path.exists(out_dir):
         #    os.makedirs(out_dir)
 
-        assay_list = assayInfo.parseJSON(json_fp)
+        assay_list = assayInfo.parseJSON(args.json)
         samdata = pysam.AlignmentFile(bam_fp, "rb")
         #reference = pysam.FastaFile(ref_fp)
         
@@ -745,7 +745,7 @@ USAGE
         if 'RG' in samdata.header.to_dict() :
             sample_dict['name'] = samdata.header.to_dict()['RG'][0]['ID']
         else:
-            sample_dict['name'] = os.path.splitext(os.path.basename(bam_fp))[0]
+            sample_dict['name'] = os.path.splitext(os.path.basename(bam_fp.name))[0]
         sample_dict['mapped_reads'] = str(samdata.mapped)
         sample_dict['unmapped_reads'] = str(samdata.unmapped)
         sample_dict['unassigned_reads'] = str(samdata.nocoordinate)
