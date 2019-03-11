@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import json
 
 '''
@@ -453,9 +454,16 @@ def generateReference(assay_list):
                 yield seq
         
 def main():
-    assays = parseJSON('../TB.json')
-    for assay in assays:
-        print(assay)
+    import argparse
+    import json
+    import skbio
+    import sys
+    parser = argparse.ArgumentParser(description='backdoor command to generate a reference fasta from an ASAP JSON file', epilog='', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('json', type=argparse.FileType('r'), help='JSON file to print as a fasta')
+    args = parser.parse_args()
+
+    data = json.load(args.json, object_hook=_json_decode)
+    skbio.io.registry.write(generateReference(data['assay']), "fasta", sys.stdout)
 
 if __name__ == "__main__":
     main()
