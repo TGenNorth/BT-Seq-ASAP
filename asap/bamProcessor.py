@@ -738,7 +738,7 @@ USAGE
         #    os.makedirs(out_dir)
 
         assay_list = assayInfo.parseJSON(args.json)
-        samdata = pysam.AlignmentFile(bam_fp, "rb")
+        samdata = pysam.AlignmentFile(bam_fp.name, "rb")
         #reference = pysam.FastaFile(ref_fp)
         
         sample_dict = {}
@@ -760,8 +760,11 @@ USAGE
         sample_dict['mutation_depth_filter'] = str(mutdepth)
         if percid:
             sample_dict['identity_filter'] = str(percid)
-        sample_dict['json_file'] = json_fp
-        sample_dict['bam_file'] = bam_fp
+        # minidom.parseString will raise xml.parsers.expat.ExpatError: not well-formed (invalid token)
+        # if json_file or bam_file contain the python string representation of a file-like object.
+        # e.g. bam_file="<_io.BufferedReader name=\'/shared/Targeted_sequence_fastqs/ASAP/COD-10-24_S302.bam\'>"
+        sample_dict['json_file'] = json_fp.name
+        sample_dict['bam_file'] = bam_fp.name
         sample_node = ElementTree.Element("sample", sample_dict)
 
         if debug:
@@ -896,10 +899,10 @@ USAGE
 def _write_output(file_obj, xml_element, output_format='xml'):
     if output_format == 'xml':
         from xml.dom import minidom
-        dom = minidom.parseString(ElementTree.tostring(root))
+        dom = minidom.parseString(ElementTree.tostring(xml_element))
         file_obj.write(dom.toprettyxml(indent="  "))
     elif output_format == 'json':
-        xml_str = ElementTree.tostring(sample_node)
+        xml_str = ElementTree.tostring(xml_element)
         # The 'sample' root node is discarded as an unnecessary layer for the JSON object.
         xml_obj = xmltodict.parse(xml_str)['sample']
         # FIXME: The output is en/decoded multiple times because it seemed
