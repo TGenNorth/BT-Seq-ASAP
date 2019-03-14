@@ -81,7 +81,7 @@ USAGE
         parser = argparse.ArgumentParser(description=program_license, formatter_class=argparse.RawDescriptionHelpFormatter)
         required_group = parser.add_argument_group("required arguments")
         required_group.add_argument("-n", "--name", required=True, help="name for this run. [REQUIRED]")
-        required_group.add_argument("-j", "--json", required=True, help="JSON file of assay descriptions. [REQUIRED]")
+        required_group.add_argument("-j", "--json", metavar="FILE", required=True, type=argparse.FileType('r'), help="JSON file of assay descriptions. [REQUIRED]")
         optional_group = parser.add_argument_group("optional arguments")
         reads_bams_group = optional_group.add_mutually_exclusive_group()
         reads_bams_group.add_argument("-r", "--read-dir", dest="rdir", metavar="DIR", help="directory of read files to analyze.")
@@ -111,7 +111,7 @@ USAGE
         args = parser.parse_args()
 
         run_name = args.name
-        json_fp = dispatcher.expandPath(args.json)
+        json_filename = dispatcher.expandPath(args.json.name)
         read_dir = args.rdir
         bam_dir = args.bdir
         out_dir = args.odir
@@ -157,9 +157,9 @@ USAGE
                             filename=logfile,
                             filemode='w')
         
-        logging.info("Combining reads in %s and JSON file: %s for run: %s. Trim=%s Qual=%s" % (read_dir, json_fp, run_name, trim, qual))
+        logging.info("Combining reads in %s and JSON file: %s for run: %s. Trim=%s Qual=%s" % (read_dir, json_filename, run_name, trim, qual))
         
-        assay_list = assayInfo.parseJSON(json_fp)
+        assay_list = assayInfo.parseJSON(args.json)
         
         bam_list = []
         output_files = []
@@ -190,7 +190,7 @@ USAGE
                 bam_list.append((read.sample, bam_file, job_id))    
          
         for sample, bam, job in bam_list:
-            (xml_file, job_id) = dispatcher.processBam(sample, json_fp, bam, xml_dir, job, depth, breadth, proportion, percid, mutdepth, smor)
+            (xml_file, job_id) = dispatcher.processBam(sample, json_filename, bam, xml_dir, job, depth, breadth, proportion, percid, mutdepth, smor)
             output_files.append(xml_file)
             final_jobs.append(job_id)
             

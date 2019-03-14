@@ -29,6 +29,10 @@ from skbio import DNA
 from asap import dispatcher
 from asap import assayInfo
 from asap import __version__
+# https://github.com/martinblech/xmltodict
+import json
+import xmltodict
+
 
 __all__ = []
 __updated__ = '2019-01-15'
@@ -250,15 +254,6 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, whole
     pileup_dict['SNPs'] = snp_list
     pileup_dict['average_depth'] = str(avg_depth_total/avg_depth_positions) if avg_depth_positions else "0"
     return pileup_dict 
-
-def _write_xml(root, xml_file):
-    from xml.dom import minidom
-    #logging.debug(ElementTree.dump(root))
-    dom = minidom.parseString(ElementTree.tostring(root))
-    output = open(xml_file, 'w')
-    output.write(dom.toprettyxml(indent="  "))
-    output.close()
-    return xml_file
 
 def _create_snp_dict(amplicon):
     snp_dict = {}
@@ -690,13 +685,13 @@ USAGE
 
     try:
         # Setup argument parser
-        parser = argparse.ArgumentParser(description=program_license, formatter_class=argparse.RawDescriptionHelpFormatter)
+        parser = argparse.ArgumentParser( description=program_license, formatter_class=argparse.RawTextHelpFormatter )
         required_group = parser.add_argument_group("required arguments")
-        required_group.add_argument("-j", "--json", metavar="FILE", required=True, help="JSON file of assay descriptions. [REQUIRED]")
-        required_group.add_argument("-b", "--bam", metavar="FILE", required=True, help="BAM file to analyze. [REQUIRED]")
+        required_group.add_argument("-j", "--json", metavar="FILE", required=True, type=argparse.FileType('r'), help="JSON file of assay descriptions. [REQUIRED]")
+        required_group.add_argument("-b", "--bam", metavar="FILE", required=True, type=argparse.FileType('rb'), default=sys.stdin, help="BAM file to analyze. [REQUIRED]")
         #required_group.add_argument("-r", "--ref", metavar="FILE", required=True, help="reference fasta file, should already be indexed. [REQUIRED]")
         #parser.add_argument("-o", "--out-dir", dest="odir", metavar="DIR", help="directory to write output files to. [default: `pwd`]")
-        required_group.add_argument("-o", "--out", metavar="FILE", required=True, help="XML file to write output to. [REQUIRED]")
+        # TODO: (argparse file type and optional. default to stdout)
         #parser.add_argument("-n", "--name", help="sample name, if not provided it will be derived from BAM file")
         parser.add_argument("-d", "--depth", default=100, type=int, help="minimum read depth required to consider a position covered. [default: 100]")
         parser.add_argument("--breadth", default=0.8, type=float, help="minimum breadth of coverage required to consider an amplicon as present. [default: 0.8]")
@@ -714,13 +709,15 @@ USAGE
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
         parser.add_argument("-D", "--debug", action="store_true", default=False, help="write <sample_name>.log file with debugging information")
         parser.add_argument("-w", "--whole-genome", action="store_true", dest="wholegenome", default=False, help="JSON file uses a whole genome reference, so don't write out the consensus, depth, and proportion arrays for each sample")
+
+        parser.add_argument('-o', '--out', metavar="FILE", type=argparse.FileType('w'), default=sys.stdout, help="output filename [default: stdout]")
+        parser.add_argument("--output-format", type=str.lower, choices=('xml', 'json'), default='xml', help="output format [default: xml]")
      
         # Process arguments
         args = parser.parse_args()
 
         json_fp = args.json
         bam_fp = args.bam
-        out_fp = args.out
         depth = args.depth
         breadth = args.breadth
         proportion = args.proportion
@@ -740,7 +737,7 @@ USAGE
         #if not os.path.exists(out_dir):
         #    os.makedirs(out_dir)
 
-        assay_list = assayInfo.parseJSON(json_fp)
+        assay_list = assayInfo.parseJSON(args.json)
         samdata = pysam.AlignmentFile(bam_fp, "rb")
         #reference = pysam.FastaFile(ref_fp)
         
@@ -748,7 +745,7 @@ USAGE
         if 'RG' in samdata.header.to_dict() :
             sample_dict['name'] = samdata.header.to_dict()['RG'][0]['ID']
         else:
-            sample_dict['name'] = os.path.splitext(os.path.basename(bam_fp))[0]
+            sample_dict['name'] = os.path.splitext(os.path.basename(bam_fp.name))[0]
         sample_dict['mapped_reads'] = str(samdata.mapped)
         sample_dict['unmapped_reads'] = str(samdata.unmapped)
         sample_dict['unassigned_reads'] = str(samdata.nocoordinate)
@@ -776,8 +773,6 @@ USAGE
                                 filename=logfile,
                                 filemode='w')
 
-        #out_fp = os.path.join(out_dir, sample_dict['name']+".xml")
-        
         for assay in assay_list:
             assay_dict = {}
             assay_dict['name'] = assay.name
@@ -883,12 +878,11 @@ USAGE
 
         if samdata.is_open():
             samdata.close()
-        _write_xml(sample_node, out_fp)
 
-        return 0
+        _write_output(args.out, sample_node, args.output_format)
+
     except KeyboardInterrupt:
-        ### handle keyboard interrupt ###
-        return 0
+        pass
     except Exception as e:
         if DEBUG or TESTRUN:
             raise(e)
@@ -896,6 +890,121 @@ USAGE
         sys.stderr.write(program_name + ": " + repr(e) + "\n")
         sys.stderr.write(indent + "  for help use --help")
         return 2
+
+    return 0
+
+def _write_output(file_obj, xml_element, output_format='xml'):
+    if output_format == 'xml':
+        from xml.dom import minidom
+        dom = minidom.parseString(ElementTree.tostring(root))
+        file_obj.write(dom.toprettyxml(indent="  "))
+    elif output_format == 'json':
+        xml_str = ElementTree.tostring(sample_node)
+        # The 'sample' root node is discarded as an unnecessary layer for the JSON object.
+        xml_obj = xmltodict.parse(xml_str)['sample']
+        # FIXME: The output is en/decoded multiple times because it seemed
+        # easier to use the json object_hook to ensure each key had a
+        # a consistent type then to write a nested loop with type checks
+        # and conversions modifying the object as it was traversed.
+        #
+        # Ideally the output should start as a python object that is
+        # encoded to XML or JSON once.
+        json_encoded_xml = json.loads(json.dumps(xml_obj), object_hook=cast_json_output_types)
+        json.dump(json_encoded_xml, file_obj, separators=(',', ':'))
+    else:
+        raise Exception('unsupported output format: %s' % args.format)
+
+
+# cast_json_output_types is a json decoder object_hook intended to be used on
+# a ASAP output decoded from XML:
+# - casts numbers from strings to float/int
+# - keys that are expected to contain 0 to n elements are lists (or undefined)
+#   eliminating the 1 element object case.
+# - As a special addition, values that were stored in the XML as strings of
+#   comma separated values are converted to an array of an appropriate type.
+def cast_json_output_types(e):
+    ## Sample
+    if '@breadth_filter' in e:
+        e['@breadth_filter'] = float(e['@breadth_filter'])
+    if '@depth_filter' in e:
+        e['@depth_filter'] = int(e['@depth_filter'])
+    # @json_file
+    if '@mapped_reads' in e:
+        e['@mapped_reads'] = int(e['@mapped_reads'])
+    # @name
+    if '@proportion_filter' in e:
+        e['@proportion_filter'] = float(e['@proportion_filter'])
+    if '@unassigned_reads' in e:
+        e['@unassigned_reads'] = int(e['@unassigned_reads'])
+    if '@unmapped_reads' in e:
+        e['@unmapped_reads'] = int(e['@unmapped_reads'])
+    if 'assay' in e and not isinstance(e['assay'], list):
+        e['assay'] = [(e['assay'])]
+
+    ## Assay
+    # @function
+    # @gene
+    # @name
+    # @type
+    # amplicon
+    if 'amplicon' in e and not isinstance(e['amplicon'], list):
+        e['amplicon'] = [e['amplicon']]
+
+    ## Amplicon
+    if '@reads' in e:
+        e['@reads'] = int(e['@reads'])
+    #if 'significance' in e and not isinstance(e['significance'], dict):
+    # consensus_sequence
+    if 'breadth' in e:
+        e['breadth'] = float(e['breadth'])
+    if 'depths' in e:
+        e['depths'] = [int(v) for v in e['depths'].split(',')]
+    if 'proportions' in e:
+        e['proportions'] = [float(v) for v in e['proportions'].split(',')]
+    if 'average_depth' in e:
+        e['average_depth'] = float(e['average_depth'])
+    if 'snp' in e and not isinstance(e['snp'], list):
+        e['snp'] = [e['snp']]
+    if 'region_of_interest' in e and not isinstance(e['region_of_interest'], list):
+        e['region_of_interest'] = [e['region_of_interest']]
+
+    ## SNP
+    if '@depth' in e:
+        e['@depth'] = int(e['@depth'])
+    # @name
+    if '@position' in e:
+        e['@position'] = int(e['@position'])
+    # @reference
+    # snp_call
+    if 'base_distribution' in e:
+        e['base_distribution'] = {k: int(v) for k, v in e['base_distribution'].items()}
+
+    ## SnpCall
+    if '@count' in e:
+        e['@count'] = int(e['@count'])
+    if '@percent' in e:
+        e['@percent'] = float(e['@percent'])
+    # #text: "T"
+
+    ## RegionOfInterest
+    # TODO: what if {aa,nt}_sequence_distribution is set and None; should it default to an empty array? undefined? none?
+    if e.get('aa_sequence_distribution'):
+        e['aa_sequence_distribution'] = {k: int(v) for k, v in e['aa_sequence_distribution'].items()}
+    if e.get('nt_sequence_distribution'):
+        e['nt_sequence_distribution'] = {k: int(v) for k, v in e['nt_sequence_distribution'].items()}
+    if '@changes' in e:
+        e['@changes'] = int(e['@changes'])
+    if 'mutation' in e and not isinstance(e['mutation'], list):
+        e['mutation'] = [e['mutation']]
+
+
+    ## Significance
+    if 'significance' in e and isinstance(e['significance'], str):
+        e['significance'] = {'#text': e['significance']}
+    if '@resistance' in e:
+        e['@resistance'] = e['@resistance'].split(',')
+
+    return e
 
 if __name__ == "__main__":
     if DEBUG:
