@@ -72,11 +72,13 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset, 
     prop_array = ["0"] * amplicon_length
     for pileupcolumn in pileup:
         base_counter = Counter()
+        start_count = pileupcolumn.n
+        end_count = 0
         reads = iter(sorted(pileupcolumn.pileups, key=attrgetter('alignment.query_name')))
-        #reads = iter(pileupcolumn.pileups)
         for read, pair in pairwise(reads):
             if read.alignment.query_name != pair.alignment.query_name:
                 continue
+            end_count = end_count+1
             alignment = read.alignment
             if pair.is_del and read.is_del:
                 base_counter.update("_") # XSLT doesn't like '-' as an attribute name, have to use '_'
@@ -86,7 +88,6 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset, 
                     base_counter.update(alignment.query_sequence[read.query_position])
                 else:
                     discard_array[pileupcolumn.pos] += 1
-                #    print("Pair does not match at reference position %d -> (%s != %s)" % (pileupcolumn.reference_pos, alignment.query_sequence[read.query_position], pair.alignment.query_sequence[pair.query_position]))
         column_depth = depth_array[pileupcolumn.pos]
         if column_depth == 0:
             consensus_seq += "_" #TODO Temporary, remove this line!
@@ -195,6 +196,8 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, whole
                 base_counter.update(pileupread.alignment.query_sequence[pileupread.query_position])
         #print(base_counter)
         ordered_list = base_counter.most_common()
+        if not ordered_list:
+            continue
         alignment_call = ordered_list[0][0]
         alignment_call_proportion = ordered_list[0][1] / pileupcolumn.n
         prop_array[pileupcolumn.pos] = "%.3f" % alignment_call_proportion
@@ -696,7 +699,7 @@ USAGE
         parser.add_argument("-d", "--depth", default=100, type=int, help="minimum read depth required to consider a position covered. [default: 100]")
         parser.add_argument("--breadth", default=0.8, type=float, help="minimum breadth of coverage required to consider an amplicon as present. [default: 0.8]")
         parser.add_argument("-p", "--proportion", default=0.1, type=float, help="minimum proportion required to call a mutation at a given locus. [default: 0.1]")
-        parser.add_argument("-m", "--mutation-depth", dest="mutdepth", default=10, type=int, help="minimum number of reads required to call a mutation at a given locus. [default: 10]")
+        parser.add_argument("-m", "--mutation-depth", dest="mutdepth", default=5, type=int, help="minimum number of reads required to call a mutation at a given locus. [default: 5]")
         identity_group = parser.add_argument_group("identity filter options")
         identity_group.add_argument("-i", "--identity", dest="percid", default=0, type=float, help="minimum percent identity required to align a read to a reference amplicon sequence. [default: 0]")
         keep_discarded_group = identity_group.add_mutually_exclusive_group()
@@ -848,7 +851,7 @@ USAGE
                             if resistances:        
                                 significance_node.set("resistance", ",".join(resistances))
 
-                    pileup = samdata.pileup(ref_name, max_depth=1000000)
+                    pileup = samdata.pileup(ref_name, max_depth=1000000, ignore_orphans=False, ignore_overlaps=False)
                     if smor:
                         amplicon_data = _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset, wholegenome)
                     else:
@@ -861,7 +864,7 @@ USAGE
                             significance_node.set("flag", "insufficient breadth of coverage")
                     for snp in amplicon_data['SNPs']:
                         _add_snp_node(amplicon_node, snp)
-                        # This would be helpful, but count_coverage is broken in python3
+                        # This would be helpful, but count_coverage is broken in python3 -- TODO: Revisit this
                         #print(samdata.count_coverage(ref_name, snp.position-1, snp.position))
                     del amplicon_data['SNPs']
                     _write_parameters(amplicon_node, amplicon_data)

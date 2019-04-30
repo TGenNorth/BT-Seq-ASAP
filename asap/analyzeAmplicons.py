@@ -90,6 +90,7 @@ USAGE
         optional_group.add_argument("-s", "--submitter", dest="job_manager", default="SLURM", help="cluster job submitter to use (PBS, SLURM, SGE, none). [default: SLURM]")
         optional_group.add_argument("--submitter-args", dest="sargs", metavar="ARGS", help="additional arguments to pass to the job submitter, enclosed in \"\".")
         optional_group.add_argument("--smor", action="store_true", default=False, help="perform SMOR analysis with overlapping reads. [default: False]")
+        optional_group.add_argument("-w", "--whole-genome", action="store_true", dest="wholegenome", default=False, help="JSON file uses a whole genome reference, so don't write out the consensus, depth, and proportion arrays for each sample")
         trim_group = parser.add_argument_group("read trimming options")
         on_off_group = trim_group.add_mutually_exclusive_group()
         on_off_group.add_argument("--trim", action="store_true", default=True, help="perform adapter trimming on reads. [default: True]")
@@ -103,9 +104,10 @@ USAGE
         align_group.add_argument("-d", "--depth", default=100, type=int, help="minimum read depth required to consider a position covered. [default: 100]")
         align_group.add_argument("-b", "--breadth", default=0.8, type=float, help="minimum breadth of coverage required to consider an amplicon as present. [default: 0.8]")
         align_group.add_argument("-p", "--proportion", default=0.1, type=float, help="minimum proportion required to call a mutation at a given locus. [default: 0.1]")
-        align_group.add_argument("-m", "--mutation-depth", dest="mutdepth", default=10, type=int, help="minimum number of reads required to call a mutation at a given locus. [default: 10]")
+        align_group.add_argument("-m", "--mutation-depth", dest="mutdepth", default=5, type=int, help="minimum number of reads required to call a mutation at a given locus. [default: 5]")
         align_group.add_argument("-i", "--identity", dest="percid", default=0, type=float, help="minimum percent identity required to align a read to a reference amplicon sequence. [default: 0]")
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
+        parser.add_argument("-D", "--debug", action="store_true", default=False, help="turn on debugging mode")
      
         # Process arguments
         args = parser.parse_args()
@@ -129,6 +131,8 @@ USAGE
         dispatcher.job_manager = args.job_manager.upper()
         dispatcher.job_manager_args = args.sargs
         smor = args.smor
+        debug = args.debug
+        wholegenome = args.wholegenome
         
         if not out_dir:
             out_dir = os.getcwd()
@@ -190,7 +194,7 @@ USAGE
                 bam_list.append((read.sample, bam_file, job_id))    
          
         for sample, bam, job in bam_list:
-            (xml_file, job_id) = dispatcher.processBam(sample, json_filename, bam, xml_dir, job, depth, breadth, proportion, percid, mutdepth, smor)
+            (xml_file, job_id) = dispatcher.processBam(sample, json_filename, bam, xml_dir, job, depth, breadth, proportion, percid, mutdepth, smor, wholegenome, debug)
             output_files.append(xml_file)
             final_jobs.append(job_id)
             
