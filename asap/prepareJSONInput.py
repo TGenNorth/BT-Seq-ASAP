@@ -69,7 +69,7 @@ def _clean_str(string):
         return None
 
 def _strip(string):
-    if string:
+    if string or string is 0:
         if type(string) is str:
             return string.strip()
         else:
