@@ -50,7 +50,7 @@ setup(
     install_requires=[
         'lxml',
         'numpy',
-        'openpyxl',
+        'openpyxl<=2.2.5',
         'pysam>0.13',
         'scikit-bio',
         'xmltodict',
