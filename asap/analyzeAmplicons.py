@@ -25,7 +25,6 @@ import pkg_resources
 from asap import dispatcher
 from asap import assayInfo
 from asap import __version__
-__version__=2
 __all__ = []
 __date__ = '2015-06-04'
 __updated__ = '2019-01-15'
