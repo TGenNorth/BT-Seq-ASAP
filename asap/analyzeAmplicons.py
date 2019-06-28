@@ -3,7 +3,7 @@
 '''
 asap.analyzeAmplicons -- Align and interpret amplicon sequencing reads
 
-asap.analyzeAmplicons 
+asap.analyzeAmplicons
 
 @author:     Darrin Lemmer
 
@@ -25,10 +25,11 @@ import pkg_resources
 from asap import dispatcher
 from asap import assayInfo
 from asap import __version__
-
+__version__=2
 __all__ = []
 __date__ = '2015-06-04'
 __updated__ = '2019-01-15'
+
 
 DEBUG = 1
 TESTRUN = 0
@@ -59,7 +60,7 @@ def main(argv=None): # IGNORE:C0111
     if __name__ == '__main__':
         program_shortdesc = __import__('__main__').__doc__.split("\n")[1]
     else:
-        program_shortdesc = __doc__.split("\n")[1]    
+        program_shortdesc = __doc__.split("\n")[1]
     #program_shortdesc = __import__('__main__').__doc__.split("\n")[1]
     program_license = '''%s
 
@@ -93,9 +94,10 @@ USAGE
         optional_group.add_argument("-w", "--whole-genome", action="store_true", dest="wholegenome", default=False, help="JSON file uses a whole genome reference, so don't write out the consensus, depth, and proportion arrays for each sample")
         trim_group = parser.add_argument_group("read trimming options")
         on_off_group = trim_group.add_mutually_exclusive_group()
-        on_off_group.add_argument("--trim", action="store_true", default=True, help="perform adapter trimming on reads. [default: True]")
+        on_off_group.add_argument("--trim", default="bbduk", help="perform adapter trimming on reads. [default: bbduk]. NOTE: cannot trim-primers if not using bbduk")
         on_off_group.add_argument("--no-trim", dest="trim", action="store_false", help="do not perform adapter trimming.")
-        trim_group.add_argument("--adapter-sequences", dest="adapters", default=pkg_resources.resource_filename(__name__, 'illumina_adapters_all.fasta'), help="location of the adapter sequence file to use for trimming. [default: <ASAP install dir>/asap/illumina_adapters_all.fasta]")
+        trim_group.add_argument("--adapter-sequences", dest="adapters",default=pkg_resources.resource_filename(__name__,'illumina_adapters_all.fasta'),help="location of the adapter sequence file to use for trimming. [default: <ASAP install dir>/asap/illumina_adapters_all.fasta]")
+        trim_group.add_argument("--trim-primers", dest="primers", default=False, help="location of primer file to use for primer trimming. NOTE: Not possible if not using bbduk")
         trim_group.add_argument("-q", "--qual", nargs="?", const="SLIDINGWINDOW:5:20", help="perform quality trimming [default: False], optional parameter can be used to customize quality trimming parameters to trimmomatic. [default: SLIDINGWINDOW:5:20]")
         trim_group.add_argument("-l", "--minlen", metavar="LEN", default=80, type=int, help="minimum read length to keep after trimming. [default: 80]")
         align_group = parser.add_argument_group("read mapping options")
@@ -108,7 +110,6 @@ USAGE
         align_group.add_argument("-i", "--identity", dest="percid", default=0, type=float, help="minimum percent identity required to align a read to a reference amplicon sequence. [default: 0]")
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
         parser.add_argument("-D", "--debug", action="store_true", default=False, help="turn on debugging mode")
-     
         # Process arguments
         args = parser.parse_args()
 
@@ -118,6 +119,7 @@ USAGE
         bam_dir = args.bdir
         out_dir = args.odir
         trim = args.trim
+        primer_seqs = args.primers
         qual = args.qual
         minlen = args.minlen
         aligner = args.aligner
@@ -134,11 +136,18 @@ USAGE
         debug = args.debug
         wholegenome = args.wholegenome
         
+        if primer_seqs != False and trim != "bbduk":
+            response = input(
+                "\nPrimer trimming requested using a trimmer other than bbduk, this is not supported functionality.\nContinue using %s as a trimmer without primer trimming [N]? " % trim)
+            if not re.match('^[Yy]',response):
+                print("Operation cancelled!")
+                quit()
+        
         if not out_dir:
             out_dir = os.getcwd()
         if not (read_dir or bam_dir):
             read_dir = os.getcwd()
-       
+
         out_dir = dispatcher.expandPath(out_dir)
         if read_dir:
             read_dir = dispatcher.expandPath(read_dir)
@@ -162,42 +171,44 @@ USAGE
                             filemode='w')
         
         logging.info("Combining reads in %s and JSON file: %s for run: %s. Trim=%s Qual=%s" % (read_dir, json_filename, run_name, trim, qual))
-        
         assay_list = assayInfo.parseJSON(args.json)
-        
+
         bam_list = []
         output_files = []
         final_jobs = []
         xml_dir = os.path.join(out_dir, "xml")
         if not os.path.exists(xml_dir):
             os.makedirs(xml_dir)
-        
+
         if bam_dir:
             bam_list = dispatcher.findBams(bam_dir)
-                   
+
         if read_dir:
             #reference = assayInfo.generateReference(assay_list)
             ref_fasta = os.path.join(out_dir, "reference.fasta")
             skbio.io.registry.write(assayInfo.generateReference(assay_list), 'fasta', ref_fasta)
-            index_job = dispatcher.indexFasta(ref_fasta, aligner)        
-        
+            
+            index_job = dispatcher.indexFasta(ref_fasta, aligner)
             read_list = dispatcher.findReads(read_dir)
             for read in read_list:
                 if (not read.reads):
                     #TODO: write out appropriate xml for samples with empty read files so they show up in results
                     continue
-                if trim:
-                    trimmed_reads = dispatcher.trimAdapters(*read, outdir=out_dir, adapters=adapters, quality=qual, minlen=minlen, dependency=index_job)
+                if trim != False: #if trimming has not been turned off by --no-trim
+                    trimmed_reads = dispatcher.trimAdapters(*read, outdir=out_dir, adapters=adapters, quality=qual, minlen=minlen, dependency=index_job, trimmer=trim, primers=primer_seqs)
                     (bam_file, job_id) = dispatcher.alignReadsToReference(trimmed_reads.sample, trimmed_reads.reads, ref_fasta, out_dir, jobid=trimmed_reads.jobid, aligner=aligner, args=aligner_args)
-                else:            
+                else: #if trimming has been turned off go straight to aligning
                     (bam_file, job_id) = dispatcher.alignReadsToReference(read.sample, read.reads, ref_fasta, out_dir, jobid=index_job, aligner=aligner, args=aligner_args)
-                bam_list.append((read.sample, bam_file, job_id))    
-         
+                bam_list.append((read.sample, bam_file, job_id))
+            if trim == "bbduk":
+                f = open(out_dir+"/trimmed/STATS/info.txt", "w+")
+                f.write("If run with paired reads the stats information for each pair is in [read_pair_name]*R1*STATS, if run with single reads the stats information for the single read is in [read_name]*R1*STATS. _primers if is the stats for trimming primers, no _primers if stats for trimming adapters")
+                f.close()
         for sample, bam, job in bam_list:
             (xml_file, job_id) = dispatcher.processBam(sample, json_filename, bam, xml_dir, job, depth, breadth, proportion, percid, mutdepth, smor, wholegenome, debug)
             output_files.append(xml_file)
             final_jobs.append(job_id)
-            
+
         (final_output, job) = dispatcher.combineOutputFiles(run_name, xml_dir, out_dir, final_jobs)
         print("All jobs are submitted, the final job id is: %s. Output will be in %s when ready." % (job, final_output))
 
