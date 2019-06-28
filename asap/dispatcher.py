@@ -333,7 +333,7 @@ def _run_bbduk(sample, reads, outdir, quality, adapters, minlen, dependency, pri
     job_params = {'queue':'', 'mem_requested':6, 'num_cpus':4, 'walltime':8, 'args':''}
     job_params['name'] = "asap_trim_%s" % sample
     job_params['work_dir'] = trim_dir
-    qual_string = 'rl' if quality else 'f'
+    qual_string = 'w' if quality else 'f'
     #get the length of shortest adapter so can appropriately set bbduk kmer length
     minAdapterLen = _shortest_primer_or_adapter(adapters)
     jobid2 = -1
@@ -353,7 +353,7 @@ def _run_bbduk(sample, reads, outdir, quality, adapters, minlen, dependency, pri
             minPrimerLen = _shortest_primer_or_adapter(primers)
             out_reads = [os.path.join(trim_dir, out_reads1_primers), os.path.join(trim_dir, out_reads2_primers)]
             #trims adapters
-            command = "/packages/bbmap/bbduk.sh -Xmx%sg threads=%d in=%s in2=%s out=%s out2=%s outm=%s outm2=%s ref=%s ktrim=%s k=%d mink=%d hdist=%d minlen=%d stats=%s statscolumns=%d ottm=%s ordered=%s qtrim=%s trimq=%d tpe tbo copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], read1, read2, out_reads1, out_reads2, out_reads_match1, out_reads_match2, adapters, 'r', minAdapterLen, 11, 1, minlen, out_reads_stats, 5, 't', 't', qual_string, 20)
+            command = "/packages/bbmap/bbduk.sh -Xmx%sg threads=%d in=%s in2=%s out=%s out2=%s outm=%s outm2=%s ref=%s ktrim=%s k=%d mink=%d hdist=%d minlen=%d stats=%s statscolumns=%d ottm=%s ordered=%s qtrim=%s,5 trimq=%d tpe tbo copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], read1, read2, out_reads1, out_reads2, out_reads_match1, out_reads_match2, adapters, 'r', minAdapterLen, 11, 1, minlen, out_reads_stats, 5, 't', 't', qual_string, 20)
             jobid = _submit_job(job_manager, command, job_params, (dependency,)) if dependency else _submit_job(job_manager, command, job_params)
             #trims primers
             command2 = "/packages/bbmap/bbduk.sh -Xmx%sg threads=%d in=%s in2=%s out=%s out2=%s outm=%s outm2=%s ref=%s stats=%s statscolumns=%d ottm=%s restrictleft=%d ordered=%s k=%d minlen=%d ktrim=%s copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], out_reads1, out_reads2, out_reads1_primers, out_reads2_primers, out_reads_match1_primers, out_reads_match2_primers, primers, out_reads_stats_primers, 5, 't', 50, 't', minPrimerLen, minlen, 'l')
