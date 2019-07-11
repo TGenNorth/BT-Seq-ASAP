@@ -206,7 +206,7 @@ def _shortest_primer_or_adapter(filePath):
     for line in f:
         if line[0] != '>':
             lengths.append(len(line))
-    return min(lengths)
+    return min(lengths), max(lengths)
 
 def findReads(path):
     import os
@@ -334,62 +334,81 @@ def _run_bbduk(sample, reads, outdir, quality, adapters, minlen, dependency, pri
     job_params['name'] = "asap_trim_%s" % sample
     job_params['work_dir'] = trim_dir
     qual_string = 'w' if quality else 'f'
-    #get the length of shortest adapter so can appropriately set bbduk kmer length
-    minAdapterLen = _shortest_primer_or_adapter(adapters)
+    #get the length of shortest and longest adapter so can appropriately set bbduk kmer length
+    minAdapterLen, maxAdapterLen = _shortest_primer_or_adapter(adapters)
     jobid2 = -1
     if read2:
         out_reads1 = sample + "_R1_trimmed.fastq.gz"
         out_reads2 = sample + "_R2_trimmed.fastq.gz"
         out_reads1_primers = sample + '_primers' + "_R1_trimmed.fastq.gz"
         out_reads2_primers  = sample + '_primers' +  "_R2_trimmed.fastq.gz"
+        out_reads1_primers2 = sample + '_primers' + "_R1_trimmed2.fastq.gz"
+        out_reads2_primers2  = sample + '_primers' +  "_R2_trimmed2.fastq.gz"
         out_reads_match1 = sample + "_R1_matched.fastq.gz"
         out_reads_match2 = sample + "_R2_matched.fastq.gz"
         out_reads_match1_primers = sample + '_primers' +  "_R1_matched.fastq.gz"
         out_reads_match2_primers  = sample + '_primers' + "_R2_matched.fastq.gz"
+        out_reads_match1_primers2 = sample + '_primers' +  "_R1_matched2.fastq.gz"
+        out_reads_match2_primers2  = sample + '_primers' + "_R2_matched2.fastq.gz"
         out_reads_stats = stats_dir + '/' + out_reads1 + '_STATS'
         out_reads_stats_primers = stats_dir + '/' + out_reads1 + '_primers' + '_STATS'
+        out_reads_stats_primers2 = stats_dir + '/' + out_reads1 + '_primers' + '_STATS2'
         if primers != False: #user has requested that primers be trimmed
-            #get length of shortest primer so can appropriately set bbduk kmer length
-            minPrimerLen = _shortest_primer_or_adapter(primers)
-            out_reads = [os.path.join(trim_dir, out_reads1_primers), os.path.join(trim_dir, out_reads2_primers)]
+            #get length of shortest and longest primer so can appropriately set bbduk kmer length
+            minPrimerLen, maxPrimerLen = _shortest_primer_or_adapter(primers)
+            out_reads = [os.path.join(trim_dir, out_reads1_primers2), os.path.join(trim_dir, out_reads2_primers2)]
             #trims adapters
             command = "/packages/bbmap/bbduk.sh -Xmx%sg threads=%d in=%s in2=%s out=%s out2=%s outm=%s outm2=%s ref=%s ktrim=%s k=%d mink=%d hdist=%d minlen=%d stats=%s statscolumns=%d ottm=%s ordered=%s qtrim=%s,5 trimq=%d tpe tbo copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], read1, read2, out_reads1, out_reads2, out_reads_match1, out_reads_match2, adapters, 'r', minAdapterLen, 11, 1, minlen, out_reads_stats, 5, 't', 't', qual_string, 20)
             jobid = _submit_job(job_manager, command, job_params, (dependency,)) if dependency else _submit_job(job_manager, command, job_params)
-            #trims primers
-            command2 = "/packages/bbmap/bbduk.sh -Xmx%sg threads=%d in=%s in2=%s out=%s out2=%s outm=%s outm2=%s ref=%s stats=%s statscolumns=%d ottm=%s restrictleft=%d ordered=%s k=%d minlen=%d ktrim=%s copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], out_reads1, out_reads2, out_reads1_primers, out_reads2_primers, out_reads_match1_primers, out_reads_match2_primers, primers, out_reads_stats_primers, 5, 't', 50, 't', minPrimerLen, minlen, 'l')
+            #not sure why it seems impossible to get both primers in one call to bbduk, could possibly be fixed...
+            #trims primers off left side
+            command2 = "/packages/bbmap/bbduk.sh -Xmx%sg threads=%d in=%s in2=%s out=%s out2=%s outm=%s outm2=%s ref=%s stats=%s statscolumns=%d ottm=%s restrictleft=%d ordered=%s k=%d minlen=%d ktrim=%s hdist=%d copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], out_reads1, out_reads2, out_reads1_primers, out_reads2_primers, out_reads_match1_primers, out_reads_match2_primers, primers, out_reads_stats_primers, 5, 't', maxPrimerLen+3, 't', int(minPrimerLen/3), minlen, 'l', 1)
             wait = []
             wait.append(jobid)
             jobid2 = _submit_job(job_manager, command2, job_params, waitfor_id=wait)
+            #trims primers off right side
+            command3 = "/packages/bbmap/bbduk.sh -Xmx%sg threads=%d in=%s in2=%s out=%s out2=%s outm=%s outm2=%s ref=%s stats=%s statscolumns=%d ottm=%s restrictright=%d ordered=%s k=%d minlen=%d ktrim=%s hdist=%d copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], out_reads1_primers, out_reads2_primers, out_reads1_primers2, out_reads2_primers2, out_reads_match1_primers2, out_reads_match2_primers2, primers, out_reads_stats_primers2, 5, 't', maxPrimerLen+3, 't', int(minPrimerLen/3), minlen, 'r', 1)
+            wait2 = []
+            wait2.append(jobid2)
+            jobid3 = _submit_job(job_manager, command3, job_params, waitfor_id=wait2)
         else: #only trim adapters
             out_reads = [os.path.join(trim_dir, out_reads1), os.path.join(trim_dir, out_reads2)]
             command = "/packages/bbmap/bbduk.sh -Xmx%sg threads=%d in=%s in2=%s out=%s out2=%s outm=%s outm2=%s ref=%s ktrim=%s k=%d mink=%d hdist=%d minlen=%d stats=%s statscolumns=%d ottm=%s ordered=%s qtrim=%s,5 trimq=%d tpe tbo copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], read1, read2, out_reads1, out_reads2, out_reads_match1, out_reads_match2, adapters, 'r', minAdapterLen, 11, 1, minlen, out_reads_stats, 5, 't', 't', qual_string, 20)
             jobid = _submit_job(job_manager, command, job_params, (dependency,)) if dependency else _submit_job(job_manager, command, job_params)
-    else:
+    else: #not paired reads
         out_reads1 = sample + "_R1_trimmed.fastq.gz"
         out_reads1_primers = sample + '_primers' + "_R1_trimmed.fastq.gz"
+        out_reads1_primers2 = sample + '_primers' + "_R1_trimmed2.fastq.gz"
         out_reads_match1 = sample + "_R1_matched.fastq.gz"
         out_reads_match1_primers = sample + '_primers' +  "_R1_matched.fastq.gz"
+        out_reads_match1_primers2 = sample + '_primers' +  "_R1_matched2.fastq.gz"
         out_reads_stats = stats_dir + '/' + out_reads1 + '_STATS'
         out_reads_stats_primers = stats_dir + '/' + out_reads1 + '_primers' + '_STATS'
+        out_reads_stats_primers2 = stats_dir + '/' + out_reads1 + '_primers' + '_STATS2'
         if primers != False: #user has requested that primers be trimmed
             #get length of shortest primer so can appropriately set bbduk kmer length
-            minPrimerLen = _shortest_primer_or_adapter(primers)
+            minPrimerLen,maxPrimerLen = _shortest_primer_or_adapter(primers)
             out_reads = [os.path.join(trim_dir, out_reads1_primers)]
             #trims adapters
             command = "/packages/bbmap/bbduk.sh -Xmx%sg threads=%d in=%s out=%s outm=%s ref=%s ktrim=%s k=%d mink=%d hdist=%d minlen=%d stats=%s statscolumns=%d ottm=%s ordered=%s qtrim=%s,5 trimq=%d tpe tbo copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], read1, out_reads1, out_reads_match1, adapters, 'r', minAdapterLen, 11, 1, minlen, out_reads_stats, 5, 't', 't', qual_string, 20)
             jobid = _submit_job(job_manager, command, job_params, (dependency,)) if dependency else _submit_job(job_manager, command, job_params)
-            #trims primers
-            command2 = "/packages/bbmap/bbduk.sh -Xmx%sg threads=%d in=%s out=%s  outm=%s ref=%s stats=%s statscolumns=%d ottm=%s restrictleft=%d ordered=%s k=%d minlen=%d ktrim=%s copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], out_reads1, out_reads1_primers, out_reads_match1_primers, primers, out_reads_stats_primers, 5, 't', 50, 't', minPrimerLen, minlen, 'l')
+            #trims left primers
+            command2 = "/packages/bbmap/bbduk.sh -Xmx%sg threads=%d in=%s out=%s  outm=%s ref=%s stats=%s statscolumns=%d ottm=%s restrictleft=%d ordered=%s k=%d minlen=%d ktrim=%s hdist=%d copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], out_reads1, out_reads1_primers, out_reads_match1_primers, primers, out_reads_stats_primers, 5, 't', maxPrimerLen+3, 't', int(minPrimerLen/3), minlen, 'l', 1)
             wait = []
             wait.append(jobid)
             jobid2 = _submit_job(job_manager, command2, job_params, waitfor_id=wait)
+            #trims right primers
+            command3 = "/packages/bbmap/bbduk.sh -Xmx%sg threads=%d in=%s out=%s  outm=%s ref=%s stats=%s statscolumns=%d ottm=%s restrictright=%d ordered=%s k=%d minlen=%d ktrim=%s hdist=%d copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], out_reads1_primers, out_reads1_primers2, out_reads_match1_primers2, primers, out_reads_stats_primers2, 5, 't', maxPrimerLen+3, 't', int(minPrimerLen/3), minlen, 'r', 1)
+            wait2 = []
+            wait2.append(jobid2)
+            jobid3 = _submit_job(job_manager, command3, job_params, waitfor_id=wait2)
         else: #only trim adapters
             out_reads = [os.path.join(trim_dir, out_reads1)]
             command = "/packages/bbmap/bbduk.sh -Xmx%sg threads=%d in=%s out=%s outm=%s ref=%s ktrim=%s k=%d mink=%d hdist=%d minlen=%d stats=%s statscolumns=%d ottm=%s ordered=%s qtrim=%s,5 trimq=%d tpe tbo copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], read1, out_reads1, out_reads_match1, adapters, 'r', minAdapterLen, 11, 1, minlen, out_reads_stats, 5, 't', 't', qual_string, 20)
             jobid = _submit_job(job_manager, command, job_params, (dependency,)) if dependency else _submit_job(job_manager, command, job_params)
     #if trimming primers make sure the aligner waits on the primer trimming not the adapter trimming
     if jobid2 != -1:
-        jobid = jobid2
+        jobid = jobid3
     return TrimmedRead(sample, jobid, out_reads)
 
 def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adapters_all.fasta", minlen=80, dependency=None, trimmer="bbduk", primers=False):
