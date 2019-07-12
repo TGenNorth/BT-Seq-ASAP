@@ -204,7 +204,7 @@ def _shortest_primer_or_adapter(filePath):
     f = open(filePath)
     lengths = []
     for line in f:
-        if line[0] != '>':
+        if line[0] != '>' and len(line.strip()) != 0:
             lengths.append(len(line))
     return min(lengths), max(lengths)
 
