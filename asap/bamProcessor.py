@@ -3,7 +3,7 @@
 '''
 asap.bamProcessor -- Process BAM alignment files with an AssayInfo JSON file and generate XML for the results
 
-asap.bamProcessor 
+asap.bamProcessor
 
 @author:     Darrin Lemmer
 
@@ -145,7 +145,7 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset, 
                 snp['significance'] = significance
             snp_list.append(snp)
             #print("SNP found at position %d: %s->%s" % (position, reference_call, alignment_call))
-    
+
     #Check for any positions_of_interest that weren't covered
     snp_dict.pop(0, None)
     for position in snp_dict.keys():
@@ -161,7 +161,7 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset, 
     pileup_dict['discards'] = ",".join(str(n) for n in discard_array)
     pileup_dict['SNPs'] = snp_list
     pileup_dict['average_depth'] = str(avg_depth_total/avg_depth_positions) if avg_depth_positions else "0"
-    return pileup_dict 
+    return pileup_dict
 
 def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, wholegenome):
     pileup_dict = {}
@@ -256,7 +256,7 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, whole
     pileup_dict['breadth'] = str(breadth_positions/amplicon_length * 100)
     pileup_dict['SNPs'] = snp_list
     pileup_dict['average_depth'] = str(avg_depth_total/avg_depth_positions) if avg_depth_positions else "0"
-    return pileup_dict 
+    return pileup_dict
 
 def _create_snp_dict(amplicon):
     snp_dict = {}
@@ -269,7 +269,7 @@ def _create_snp_dict(amplicon):
                         snp_dict[snp.position].append((name, snp.reference, v, snp.significance))
                     else:
                         snp_dict[snp.position] = [(name, snp.reference, v, snp.significance)]
-        else: 
+        else:
             if snp.position in snp_dict:
                 snp_dict[snp.position].append((name, snp.reference, snp.variant, snp.significance))
             else:
@@ -301,6 +301,7 @@ def _add_snp_node(parent, snp):
     return snp_node
 
 def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
+    from operator import attrgetter
     roi_dict = {'region':roi.position_range}
     range_match = re.search('(\d*)-(\d*)', roi.position_range)
     if not range_match:
@@ -311,6 +312,25 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
         reverse_comp = True
         start,end = end,start
     expected_length = end - start
+    aligned_reads = samdata.fetch(amplicon_ref, start, end)
+    big_reads = []
+    #check if roi is bigger than reads
+    n = 0
+    failed = 0
+    for read in aligned_reads:
+        if read.get_overlap(start, end) != expected_length:
+            failed += 1
+        n += 1
+        if n >= 100:
+            break
+    proportion_failed = failed/n
+    #if most reads are not as big as the roi change stratetgy
+    if proportion_failed >= .95:
+        logging.debug("reads are not as big as roi, merging...")
+        reads = sorted(samdata.fetch(amplicon_ref, start, end), key=attrgetter('query_name'))
+        print("reads are not as big as roi, merging...")
+        big_reads = _process_merge(reads, start ,end)
+
     aa_sequence_counter = Counter()
     aa_sequence_counter_temp = Counter()
     nt_sequence_counter = Counter()
@@ -318,34 +338,48 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
     significant = False
     if not roi.aa_sequence:
         roi.aa_sequence = str(DNA(roi.nt_sequence).translate()).replace('*', 'x')
-    for read in samdata.fetch(amplicon_ref, start, end):
-        rstart = read.reference_start
-        alignment_length = read.get_overlap(start, end)
-        #throw out reads that either have gaps in the ROI or don't cover the whole ROI
-        if alignment_length != expected_length:
-            continue
-        if rstart <= start:
-            qend = qstart = None
-            for (qpos, rpos) in read.get_aligned_pairs():
-                if rpos == start:
-                    qstart = qpos
-                if rpos == end:
-                    qend = qpos
-            #throw out reads with insertions in the ROI
-            if not qend or not qstart or qend-qstart != expected_length:
-                continue
-            nt_sequence = DNA(read.query_sequence[qstart:qend])
+    if big_reads != []:
+        if not roi.aa_sequence:
+            roi.aa_sequence = str(DNA(roi.nt_sequence).translate()).replace('*', 'x')
+        for read in big_reads:
+            nt_sequence = DNA(read)
             if reverse_comp:
                 nt_sequence = nt_sequence.reverse_complement()
-            #scikit-bio doesn't support translating degenerate bases currently, so we will just throw out reads with degenerates for now
-            if nt_sequence.has_degenerates(): 
-                continue
             aa_sequence = nt_sequence.translate()
             aa_string = str(aa_sequence).replace('*', 'x')
             if aa_string:
                 nt_sequence_counter.update([str(nt_sequence)])
                 aa_sequence_counter_temp.update([aa_string])
                 depth += 1
+    else:
+        for read in aligned_reads:
+            rstart = read.reference_start
+            alignment_length = read.get_overlap(start, end)
+            #throw out reads that either have gaps in the ROI or don't cover the whole ROI
+            if alignment_length != expected_length:
+                continue
+            if rstart <= start:
+                qend = qstart = None
+                for (qpos, rpos) in read.get_aligned_pairs():
+                    if rpos == start:
+                        qstart = qpos
+                    if rpos == end:
+                        qend = qpos
+                #throw out reads with insertions in the ROI
+                #if not qend or not qstart or qend-qstart != expected_length:
+                    #continue
+                nt_sequence = DNA(read.query_sequence[qstart:qend])
+                if reverse_comp:
+                    nt_sequence = nt_sequence.reverse_complement()
+                #scikit-bio doesn't support translating degenerate bases currently, so we will just throw out reads with degenerates for now
+                if nt_sequence.has_degenerates():
+                    continue
+                aa_sequence = nt_sequence.translate()
+                aa_string = str(aa_sequence).replace('*', 'x')
+                if aa_string:
+                    nt_sequence_counter.update([str(nt_sequence)])
+                    aa_sequence_counter_temp.update([aa_string])
+                    depth += 1
     if len(aa_sequence_counter_temp) == 0:
         roi_dict['flag'] = "region not found"
         return roi_dict
@@ -354,7 +388,7 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
             num_changes = 0
             for i in range(len(roi.aa_sequence)):
                 if len(aa_string) <= i or roi.aa_sequence[i] != aa_string[i]:
-                    num_changes += 1 
+                    num_changes += 1
             aa_sequence_counter[(aa_string, num_changes)] = count
 
     #This next bit is just being saved for backward compatibility. Should deprecate and remove soon
@@ -374,6 +408,58 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
     roi_dict['nt_sequence_distribution'] = nt_sequence_counter
     roi_dict['depth'] = str(depth)
     return roi_dict
+
+#use pysam pileup() on the reference and start, end to get a pileup of the reads
+#might want to use truncate parameter to make sure don't get too much on either end, or can just only look at specific region in what is returned
+#ignore overlaps autmoatically takes the higher quality base if reads overlap so could use that to break ties instead of inserting an 'N'
+#need to read through the bam file, comparing pairs of reads, constructing a combined read for them, and then generating matching combined metadata. How to do the metadata?
+#maybe need to create a new _process_ROI where it just takes in a list of DNA sequences that, on faith, only span exactly the ROI in question. would this work? hmm
+#use alignment.mapping_quality to break ties
+def _process_merge(reads, start, end):
+    big_aligned_reads = []
+    for read, pair in pairwise(reads):
+        combined_read = ""
+        if read.query_name != pair.query_name:
+            continue
+        if len(read.get_reference_positions()) == 0 or len(pair.get_reference_positions()) == 0:
+            continue
+        #check if pair of reads spans whole roi
+        if read.reference_start != 0 or pair.reference_end < end:
+            continue
+        read_seq = read.query_sequence
+        pair_seq = pair.query_sequence
+        read_qual = read.query_qualities
+        pair_qual = pair.query_qualities
+        if (read.reference_end - read.reference_start) > len(read_seq) or (pair.reference_end - pair.reference_start) > len(pair_seq):
+            continue
+        for i in range(read.reference_end):
+            if i < pair.reference_start:
+                if read_seq[i] == None:
+                    combined_read += "N"
+                else:
+                    combined_read += read_seq[i]
+            else: #i is in range of both reads
+                if read_seq[i] == None and pair_seq[i - pair.reference_start] == None:
+                    combined_read += "N"
+                elif read_seq[i] == None and pair_seq[i - pair.reference_start] != None:
+                    combined_read += pair_seq[i - pair.reference_start]
+                elif read_seq[i] != None and pair_seq[i - pair.reference_start] == None:
+                    combined_read += read_seq[i]
+                else:
+                    if read_qual[i] >= pair_qual[i - pair.reference_start]:
+                        combined_read += read_seq[i]
+                    else:
+                        combined_read += pair_seq[i - pair.reference_start]
+        #iterate over remaining length of second read ("pair")
+        for j in range(i+1, pair.reference_end):
+            if pair_seq[j - pair.reference_start] == None:
+                combined_read += "N"
+            else:
+                combined_read += pair_seq[j - pair.reference_start]
+        big_aligned_reads.append(combined_read)
+    return big_aligned_reads
+
+
 
 def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
     from operator import attrgetter
@@ -432,7 +518,7 @@ def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
             if reverse_comp:
                 nt_sequence = nt_sequence.reverse_complement()
             #scikit-bio doesn't support translating degenerate bases currently, so we will just throw out reads with degenerates for now
-            if nt_sequence.has_degenerates(): 
+            if nt_sequence.has_degenerates():
                 continue
             aa_sequence = nt_sequence.translate()
             aa_string = str(aa_sequence).replace('*', 'x')
@@ -448,9 +534,9 @@ def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
             num_changes = 0
             for i in range(len(roi.aa_sequence)):
                 if len(aa_string) <= i or roi.aa_sequence[i] != aa_string[i]:
-                    num_changes += 1 
+                    num_changes += 1
             aa_sequence_counter[(aa_string, num_changes)] = count
-    
+
     (aa_consensus, num_changes) = aa_sequence_counter.most_common(1)[0][0]
     nt_consensus = nt_sequence_counter.most_common(1)[0][0]
     reference = roi.aa_sequence
@@ -502,6 +588,21 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion, mutdepth, smor):
             nt_seq_node.text = seq
         else:
             break #Since they are returned in order by count, as soon as one is below the threshold the rest will be as well
+    cutOff = int(roi_dict['depth']) * .02
+    allele_count = 0
+    for (seq, count) in nt_seq_counter.most_common():
+        #get most frequent alleles that have a freq of > 2% (this is an arbitrary cut-off)
+        if count >= cutOff:
+            allele_node = ElementTree.SubElement(roi_node, "allele_sequence", {'count':str(count), 'percent':str(count/int(roi_dict['depth'])*100),'hash':str(hash(seq))})
+            allele_node.text = seq
+            allele_count += 1
+        else:
+            if allele_count < 2:
+                allele_count += 1
+                allele_node = ElementTree.SubElement(roi_node, "allele_sequence", {'count':str(count), 'percent':str(count/int(roi_dict['depth'])*100),'hash':str(hash(seq))})
+                allele_node.text = seq
+            else:
+                break
     low_level = True
     high_level = False
     significant = False
@@ -533,7 +634,7 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion, mutdepth, smor):
             significance_node.set("level", "high")
     elif len(roi.mutations) == 0 and dominant_count >= mutdepth and (('changes' in roi_dict and int(roi_dict['changes']) > 0) or nonsynonymous):
         significance_node = ElementTree.SubElement(roi_node, "significance", {'changes':roi_dict['changes']})
-        significance_node.text = roi.significance.message                       
+        significance_node.text = roi.significance.message
         if roi.significance.resistance:
             significance_node.set("resistance", roi.significance.resistance)
         if int(roi_dict['depth']) < depth:
@@ -580,6 +681,10 @@ def _compute_thresholds_SMOR(smor_count):
         high_level_cutoff = 0.5
     return (proportion, low_level_cutoff, high_level_cutoff)
 
+
+
+
+
 def _merge_reads(read, pair):
     from copy import deepcopy
     rstart = read.query_alignment_start
@@ -591,7 +696,7 @@ def _merge_reads(read, pair):
         pass
     if pstart > rend+1: #There is a gap that will need to be filled with Ns
         pass
-    
+
 
 def _verify_percent_identity(samdata, ref_name, amplicon, percid, merge):
     temp_file = "%s_%s_temp.bam" % (os.path.splitext(os.path.basename(samdata.filename.decode("utf-8")))[0], ref_name)
@@ -620,7 +725,7 @@ def _verify_percent_identity(samdata, ref_name, amplicon, percid, merge):
             matches = 0
             for (qpos, rpos, seq) in read.get_aligned_pairs(with_seq=True):
                 query = read.query_sequence[qpos] if qpos else "None"
-                logging.debug("\tqpos: %i\trpos: %i\tseq: %s\tquery[qpos]: %s" % (qpos or -1, rpos or -1, seq, query)) 
+                logging.debug("\tqpos: %i\trpos: %i\tseq: %s\tquery[qpos]: %s" % (qpos or -1, rpos or -1, seq, query))
                 #if there is a gap in the alignment, extend the length of the query or reference accordingly
                 if rpos is None:
                     amp_length += 1
@@ -669,7 +774,7 @@ def main(argv=None): # IGNORE:C0111
     if __name__ == '__main__':
         program_shortdesc = __import__('__main__').__doc__.split("\n")[1]
     else:
-        program_shortdesc = __doc__.split("\n")[1]    
+        program_shortdesc = __doc__.split("\n")[1]
     #program_shortdesc = __import__('__main__').__doc__.split("\n")[1]
     program_license = '''%s
 
@@ -715,7 +820,7 @@ USAGE
 
         parser.add_argument('-o', '--out', metavar="FILE", type=argparse.FileType('w'), default=sys.stdout, help="output filename [default: stdout]")
         parser.add_argument("--output-format", type=str.lower, choices=('xml', 'json'), default='xml', help="output format [default: xml]")
-     
+
         # Process arguments
         args = parser.parse_args()
 
@@ -735,7 +840,7 @@ USAGE
         #out_dir = args.odir
         #if not out_dir:
         #    out_dir = os.getcwd()
-       
+
         #out_dir = dispatcher.expandPath(out_dir)
         #if not os.path.exists(out_dir):
         #    os.makedirs(out_dir)
@@ -743,7 +848,7 @@ USAGE
         assay_list = assayInfo.parseJSON(args.json)
         samdata = pysam.AlignmentFile(bam_fp.name, "rb")
         #reference = pysam.FastaFile(ref_fp)
-        
+
         sample_dict = {}
         if 'RG' in samdata.header.to_dict() :
             sample_dict['name'] = samdata.header.to_dict()['RG'][0]['ID']
@@ -827,7 +932,7 @@ USAGE
                         _add_dummy_roi_node(amplicon_node, roi)
                         if roi.significance.resistance:
                             resistances.add(roi.significance.resistance)
-                    if resistances:        
+                    if resistances:
                         significance_node.set("resistance", ",".join(resistances))
                 else:
                     if amplicon.significance or samdata.count(ref_name) < depth:
@@ -848,7 +953,7 @@ USAGE
                             for roi in amplicon.ROIs:
                                 if roi.significance.resistance:
                                     resistances.add(roi.significance.resistance)
-                            if resistances:        
+                            if resistances:
                                 significance_node.set("resistance", ",".join(resistances))
 
                     pileup = samdata.pileup(ref_name, max_depth=1000000, ignore_orphans=False, ignore_overlaps=False)
