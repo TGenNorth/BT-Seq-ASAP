@@ -328,7 +328,7 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
     if proportion_failed >= .95:
         logging.debug("reads are not as big as roi, merging...")
         reads = sorted(samdata.fetch(amplicon_ref, start, end), key=attrgetter('query_name'))
-        print("reads are not as big as roi, merging...")
+        #print("reads are not as big as roi, merging...")
         big_reads = _process_merge(reads, start ,end)
 
     aa_sequence_counter = Counter()
