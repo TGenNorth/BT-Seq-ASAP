@@ -24,9 +24,6 @@ pipeline {
         // numpy is installed first because it is a chicken-or-the-egg dependency.
         // ASAP is installed to silence 'cannot import <dependency>' warnings.
         //
-        // prospector raises exception when mypy is enabled:
-        // https://github.com/PyCQA/prospector/issues/314
-        //
         // autoformat with black to silence warnings that can be auto-fixed.
         // black excludes .git/ and .venv/ by default.
         //
@@ -37,7 +34,7 @@ pipeline {
           pip install --upgrade pip
           pip install numpy
           pip install .
-          pip install prospector[with_everything] black
+          pip install 'prospector[with_everything] >=1.1.7' black
           black --quiet .
           prospector \
             --max-line-length 120 \
@@ -51,7 +48,7 @@ pipeline {
             --with-tool pyroma \
             --with-tool vulture \
             --with-tool frosted \
-            # --with-tool mypy
+            --with-tool mypy
           '''.stripIndent()
         recordIssues(tools: [pyLint(pattern: 'prospector.log')])
       }
