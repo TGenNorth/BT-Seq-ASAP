@@ -118,7 +118,10 @@ USAGE
         bam_dir = args.bdir
         out_dir = args.odir
         trim = args.trim
-        primer_seqs = args.primers
+        if args.primers == False:
+            primer_seqs = args.primers
+        else: 
+            primer_seqs = dispatcher.expandPath(args.primers)
         qual = args.qual
         minlen = args.minlen
         aligner = args.aligner

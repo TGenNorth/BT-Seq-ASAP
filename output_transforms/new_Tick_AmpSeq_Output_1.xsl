@@ -22,6 +22,9 @@
 	    		<xsl:if test="@type = 'SNP' or @type = 'mixed'">
 			    <th colspan = "{count(./amplicon/snp[@name!='unknown'])}" nowrap="true"><a href="{/analysis/@run_name}/{@name}.html"><xsl:value-of select="@name"/>:Known SNPs Present</a></th>
 			</xsl:if>
+			<xsl:if test="@type = 'ROI'">
+			  <th colspan = "{count(./amplicon/snp[@name!='unknown'])}" nowrap="true"><a href="{/analysis/@run_name}/{@name}.html"><xsl:value-of select="@name"/></a></th>
+			</xsl:if>
 	    	    </xsl:for-each>
 	    	</xsl:for-each>
 		</tr>
@@ -37,7 +40,10 @@
 		    		    </th>
 				</xsl:if>
 		    	    </xsl:for-each>
-			</xsl:if>	
+			</xsl:if>
+			<xsl:if test="@type = 'ROI'">
+			  <th nowrap="true">N/A</th>
+			</xsl:if>
 	            </xsl:for-each>	
 		    </tr>
 		</xsl:for-each>
@@ -53,6 +59,9 @@
 		    		    </td>
 				</xsl:if>
 		    	    </xsl:for-each>
+			</xsl:if>
+			<xsl:if test="@type = 'ROI'">
+			  <td align="center">N/A</td>
 			</xsl:if>	
 		    </xsl:for-each>	
 		    </tr>
@@ -372,7 +381,7 @@
 	    	</table>
 		<!--allele tables-->
 		<xsl:for-each select="assay">
-		  <xsl:if test="@type='mixed' and amplicon/region_of_interest">
+		  <xsl:if test="@type='mixed' or @type='ROI'">
 		    <h3>Alleles for Region of Interest: <xsl:value-of select="@name"/></h3>
 	    	    <table border="2" width="100%">
 	    	      <tr>

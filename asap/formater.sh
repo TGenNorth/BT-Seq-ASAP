@@ -26,5 +26,9 @@ echo "re-reformatting done"
 
 formatOutput -s $3 -x $reReformatedName
 
+mkdir ./fasta
+
+formatOutput -s $4 -x $reReformatedName
+
 echo "done"
 

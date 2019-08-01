@@ -19,7 +19,7 @@
 
 
 <xsl:template match="/">
-  <xsl:for-each select="analysis/assay[@type='SNP' or @type='mixed']">
+  <xsl:for-each select="analysis/assay[@type='SNP' or @type='mixed' or @type='ROI']">
     <xsl:variable name="currentAssay" select="."/>
     <exsl:document method="html" href="{../@run_name}/{@name}.html">
     <html>
@@ -34,6 +34,7 @@
       }
    </style>
    <body>
+     <xsl:if test="@type='mixed' or @type='SNP'">
       <table style = "width:100%, border: 1px solid black">
 
 
@@ -89,6 +90,7 @@
         </xsl:for-each>
 
       </table>
+     </xsl:if>
       <h3>Alleles present in this Assay</h3>
       <!--get a sorted list by freq of all the alleles from the current assay-->
       <table style = "width:100%, border: 1px solid black">
@@ -98,7 +100,7 @@
 	  <th>Allele Sequences</th>
         </tr>
 	<xsl:for-each select="/analysis/assay_counts/assay/allele">
-	  <xsl:sort select="@sample_count" order="descending" data-type="number"/>
+	  <xsl:sort select="@read_count" order="descending" data-type="number"/>
 	  <xsl:if test="../@name = $currentAssay/@name">
 	    <tr>
 	      <td><xsl:value-of select="@sample_count"/></td>
@@ -123,7 +125,7 @@
       }                                                                                                                                
     </style>
    <body>
-     <h1>Samples containing allele:</h1>   
+     <h1>From assay <xsl:value-of select="@assay"/>, Samples containing allele:</h1>   
        <p><xsl:value-of select="@sequence"/></p>
        <table style = "width:100%, border: 1px solid black">
 	 <tr>

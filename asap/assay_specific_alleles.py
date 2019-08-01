@@ -23,7 +23,7 @@ def main(argv=None):
     #get the sequences, counts, and sample counts for each assay for assay-specific output
     all_dicts = defaultdict(defaultdict)
     for assay in root:
-        if assay.get('type') == 'mixed':
+        if assay.get('type') == 'mixed' or assay.get('type') == 'ROI':
             currentAssayDict = defaultdict(list)
             for sample in assay:
                 for allele in sample.iter('allele_sequence'):
@@ -52,7 +52,12 @@ def main(argv=None):
             allele_node.set('read_count', str(dict[1][allele][0]))
             allele_node.set('sample_count', str(dict[1][allele][1]))
             allele_node.set('hash', str(hash(allele)))
-    
+            for li in range(2, len(dict[1][allele])):
+                sample_node = ET.SubElement(allele_node, "sample")
+                sample_node.set('name', dict[1][allele][li][0])
+                sample_node.set('count', dict[1][allele][li][1])
+                sample_node.set('percent', dict[1][allele][li][2])
+
 
     #create a portion of xml for each allele's info
     for dict in all_dicts.items():
@@ -60,6 +65,7 @@ def main(argv=None):
             allele_node = ET.SubElement(root, "allele_occurences")
             allele_node.set('sequence', allele)
             allele_node.set('hash', str(hash(allele)))
+            allele_node.set('assay', str(dict[0]))
             for li in range(2, len(dict[1][allele])):
                 sample_node = ET.SubElement(allele_node, "sample")
                 sample_node.set('name', dict[1][allele][li][0])
