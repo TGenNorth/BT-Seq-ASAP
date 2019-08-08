@@ -301,6 +301,7 @@ def _add_snp_node(parent, snp):
     return snp_node
 
 def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
+    #TODO come up with a way to filter out reads that did not align to the region well, but distinguish this from reads that need to be merged because the region is too big
     from operator import attrgetter
     roi_dict = {'region':roi.position_range}
     range_match = re.search('(\d*)-(\d*)', roi.position_range)
@@ -314,13 +315,14 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
     expected_length = end - start
     aligned_reads = samdata.fetch(amplicon_ref, start, end)
     big_reads = []
-    #check if roi is bigger than reads
-    n = 0
-    failed = 0
-    for read in aligned_reads:
-        if read.get_overlap(start, end) != expected_length:
-            failed += 1
+    #check if reads are long enough, if not then merge
+    n = failed = 0
+    for read, pair in pairwise(aligned_reads):
+        if read.reference_end == None or read.reference_start == None:
+            continue
         n += 1
+        if read.reference_end - read.reference_start < expected_length:
+            failed +=1
         if n >= 100:
             break
     if n == 0:
@@ -328,11 +330,10 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
         return roi_dict
     else:
         proportion_failed = failed/n
-        #if most reads are not as big as the roi change stratetgy
         if proportion_failed >= .95:
             logging.debug("reads are not as big as roi, merging...")
             reads = sorted(samdata.fetch(amplicon_ref, start, end), key=attrgetter('query_name'))
-            #print("reads are not as big as roi, merging...")
+            #print("reads are not as big as roi, merging...", roi, amplicon_ref, samdata)
             big_reads = _process_merge(reads, start ,end)
     aa_sequence_counter = Counter()
     aa_sequence_counter_temp = Counter()
@@ -342,12 +343,12 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
     if not roi.aa_sequence:
         roi.aa_sequence = str(DNA(roi.nt_sequence).translate()).replace('*', 'x')
     if big_reads != []:
-        if not roi.aa_sequence:
-            roi.aa_sequence = str(DNA(roi.nt_sequence).translate()).replace('*', 'x')
         for read in big_reads:
             nt_sequence = DNA(read)
             if reverse_comp:
                 nt_sequence = nt_sequence.reverse_complement()
+            if nt_sequence.has_degenerates():
+                continue
             aa_sequence = nt_sequence.translate()
             aa_string = str(aa_sequence).replace('*', 'x')
             if aa_string:
@@ -412,18 +413,73 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
     roi_dict['depth'] = str(depth)
     return roi_dict
 
+
 def _process_merge(reads, start, end):
     big_aligned_reads = []
     for read, pair in pairwise(reads):
         if read.query_name != pair.query_name:
             continue
         refstart1 = read.reference_start
+        refend1 = read.reference_end
         refstart2 = pair.reference_start
+        refend2 = pair.reference_end
+        if refstart1 == None or refend1 == None or refstart2 == None or refend2 == None:
+            continue
+        #get the farthest left and right positions that either read align to reference
+        refstart = refstart1 if refstart1 < refstart2 else refstart2
+        refend = refend2 if refend2 > refend1 else refend1
+        combined_read = ""
+        print("read", read.query_sequence)
+        print("pair", pair.query_sequence)
+        for ref_pos in range(refstart, refend):
+            read_base = pair_base = None
+            for (read_qpos, read_rpos) in read.get_aligned_pairs():
+                if read_rpos == ref_pos and read_qpos != None:
+                    read_base = str(DNA(read.query_sequence[int(read_qpos)]))
+                    read_qual = read.query_qualities[int(read_qpos)]
+                    break
+            for (pair_qpos, pair_rpos) in pair.get_aligned_pairs():
+                if pair_rpos == ref_pos and pair_qpos != None:
+                    pair_base = str(DNA(pair.query_sequence[int(pair_qpos)]))
+                    pair_qual = pair.query_qualities[int(pair_qpos)]
+                    break
+            if read_base == None and pair_base == None:
+                combined_read += 'N'
+            elif read_base != None and pair_base == None:
+                combined_read += read_base
+            elif read_base == None and pair_base != None:
+                combined_read += pair_base
+            else:
+                if read_qual >= pair_qual:
+                    combined_read += read_base
+                else:
+                    combined_read += pair_base
+        print("combined", combined_read)
+        if len(combined_read) == end-start:
+            big_aligned_reads.append(combined_read)
+    return big_aligned_reads
+'''
+def _process_merge(reads, start, end):
+    big_aligned_reads = []
+    for read, pair in pairwise(reads):
+        if read.query_name != pair.query_name:
+            continue
+        refstart1 = read.reference_start
+        refend1 = read.reference_end
+        refstart2 = pair.reference_start
+        refend2 = pair.reference_end
         #if both start at same place then they can't cover whole roi, so skip
         if refstart1 == refstart2:
             continue
         #figure out which starts first
-        normal_orienation = True if refstart1 < refstart2 else False
+        normal_orienation1 = True if refstart1 < refstart2 else False
+        normal_orienation2 = True if refend1 < refend2 else False
+        if normal_orienation1 and normal_orienation2:
+            normal_orienation = True
+        elif normal_orienation1 == False and normal_orientation2 == False:
+            normal_orienation = False
+        else:
+            continue
         if normal_orienation:
             #find coordinates of the ends of read 1
             qend = qstart = rstart = rend = None
@@ -436,6 +492,8 @@ def _process_merge(reads, start, end):
                 rend = rpos
             #throw out reads that do not have ends
             if qend == None or qstart == None or rstart == None or rend == None:
+                continue
+            if qend - qstart != rend - rstart:
                 continue
             nt_sequence = str(DNA(read.query_sequence[qstart:qend]))
             qual_seq = read.query_qualities[qstart:qend]
@@ -454,10 +512,12 @@ def _process_merge(reads, start, end):
             #throw out reads that do not have ends
             if qend2 == None or qstart2 == None or rstart2 == None or rend2 == None:
                 continue
+            if qend2 - qstart2 != rend2 - rstart2:
+                continue
             nt_sequence2 = str(DNA(pair.query_sequence[qstart2:qend2]))
             qual_seq2 = pair.query_qualities[qstart2:qend2]
         else:
-            #fidn coordinates of read which will contain end, not start cause flipped orientation
+            #find coordinates of read which will contain end, not start cause flipped orientation
             qend = qstart = rstart = rend = None
             bool = True
             for (qpos, rpos) in read.get_aligned_pairs():
@@ -471,6 +531,9 @@ def _process_merge(reads, start, end):
                     rend = rpos
             #throw out reads that do not have ends
             if qend == None or qstart == None or rstart == None or rend == None:
+                continue
+            #ignore funny busniness with query and ref getting off, for now
+            if qend - qstart != rend - rstart:
                 continue
             nt_sequence = str(DNA(read.query_sequence[qstart:qend]))
             qual_seq = read.query_qualities[qstart:qend]
@@ -487,6 +550,8 @@ def _process_merge(reads, start, end):
             #throw out reads that do not have ends
             if qend2 == None or qstart2 == None or rstart2 == None or rend2 == None:
                 continue
+            if qend2 - qstart2 != rend2 - rstart2:
+                continue
             nt_sequence2 = str(DNA(pair.query_sequence[qstart2:qend2]))
             qual_seq2 = pair.query_qualities[qstart2:qend2]
         combined_read = ""
@@ -494,6 +559,7 @@ def _process_merge(reads, start, end):
             #find if reads overlap
             is_overlap = True if rend > rstart2 else False
             if is_overlap:
+                skip = False
                 overlap_len = (rend - rstart2)
                 overlap_start_read = (qend - overlap_len)
                 overlap_end_read = qend
@@ -503,6 +569,11 @@ def _process_merge(reads, start, end):
                 combined_read += nt_sequence[qstart: overlap_start_read]
                 #take higher base when overlapping
                 for i in range(overlap_len):
+                    #make sure don't go over end of second read
+                    if (i + rstart2) == end - 1:
+                        skip = True
+                        break
+                    print(rstart, rend, qstart, qend, rstart2, rend2, qstart2, qend2 ,"seq len 1", len(nt_sequence), "seq len 2", len(nt_sequence2),"i", i, "overlap_start_read",overlap_start_read, "overlap_end_read",overlap_end_read, "overlap_start_pair",overlap_start_pair, "overlap_end_pair",overlap_end_pair, "overlap_len",overlap_len,"start", start, "end", end)
                     if not nt_sequence[i + overlap_start_read] and nt_sequence2[i + overlap_start_pair]:
                         combined_read += nt_sequence2[i + overlap_start_pair]
                     elif nt_sequence[i + overlap_start_read] and not nt_sequence2[i + overlap_start_pair]:
@@ -515,7 +586,8 @@ def _process_merge(reads, start, end):
                         else:
                             combined_read += nt_sequence2[i + overlap_start_pair]
                 #add the rest of second read
-                combined_read += nt_sequence2[overlap_end_pair: qend2]
+                    if skip == False:
+                        combined_read += nt_sequence2[overlap_end_pair: qend2]
             else: #no overlap
                 combined_read += nt_sequence
                 #add Ns where neither read is
@@ -544,7 +616,7 @@ def _process_merge(reads, start, end):
                             combined_read += nt_sequence[i + overlap_start_read]
                         else:
                             combined_read += nt_sequence2[i + overlap_start_pair]
-                #add rest
+                #add the rest
                 combined_read += nt_sequence[overlap_end_read:qend]
             else:
                 combined_read += nt_sequence2
@@ -555,7 +627,7 @@ def _process_merge(reads, start, end):
     return big_aligned_reads
 
 
-'''
+
         combined_read = ""
         #keep read pairs together incase we get off
         if read.query_name != pair.query_name:

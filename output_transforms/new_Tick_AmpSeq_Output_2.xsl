@@ -21,6 +21,7 @@
 <xsl:template match="/">
   <xsl:for-each select="analysis/assay[@type='SNP' or @type='mixed' or @type='ROI']">
     <xsl:variable name="currentAssay" select="."/>
+    <xsl:variable name="currentAssayName" select="@name"/>
     <exsl:document method="html" href="{../@run_name}/{@name}.html">
     <html>
 
@@ -99,16 +100,21 @@
 	  <th># of Reads</th>
 	  <th>Allele Sequences</th>
         </tr>
-	<xsl:for-each select="/analysis/assay_counts/assay/allele">
-	  <xsl:sort select="@read_count" order="descending" data-type="number"/>
-	  <xsl:if test="../@name = $currentAssay/@name">
-	    <tr>
-	      <td><xsl:value-of select="@sample_count"/></td>
-	      <td><xsl:value-of select="@read_count"/></td>
-	      <td><a href="{@hash}.html"><xsl:value-of select="@sequence"/></a></td>
-	    </tr>
-	  </xsl:if>
-	</xsl:for-each>
+  <xsl:choose>
+    <xsl:when test="/analysis/assay_counts/assay[@name = $currentAssayName]/allele">
+    	<xsl:for-each select="/analysis/assay_counts/assay/allele">
+        <xsl:sort select="@read_count" order="descending" data-type="number"/>
+        	  <xsl:if test="../@name = $currentAssay/@name">
+        	    <tr>
+        	      <td><xsl:value-of select="@sample_count"/></td>
+        	      <td><xsl:value-of select="@read_count"/></td>
+        	      <td><a href="{@hash}.html"><xsl:value-of select="@sequence"/></a></td>
+        	    </tr>
+        	  </xsl:if>
+    	</xsl:for-each>
+    </xsl:when>
+    <xsl:otherwise><tr><td>Not Found</td><td></td><td></td></tr></xsl:otherwise>
+  </xsl:choose>
       </table>
     </body>
   </html>
@@ -118,14 +124,14 @@
 <xsl:for-each select="analysis/allele_occurences">
   <exsl:document method="html" href="{../@run_name}/{@hash}.html">
   <html>
-    <style>                                                                                                                            
-    table, th, td {                                                                                                                    
-     border: 1px solid black;                                                                                                          
-     border-collapse: collapse;                                                                                                        
-      }                                                                                                                                
+    <style>
+    table, th, td {
+     border: 1px solid black;
+     border-collapse: collapse;
+      }
     </style>
    <body>
-     <h1>From assay <xsl:value-of select="@assay"/>, Samples containing allele:</h1>   
+     <h1>From assay <xsl:value-of select="@assay"/>, Samples containing allele:</h1>
        <p><xsl:value-of select="@sequence"/></p>
        <table style = "width:100%, border: 1px solid black">
 	 <tr>

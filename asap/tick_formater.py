@@ -1,25 +1,67 @@
+
 #!/usr/bin/env python3
 # encoding: utf-8
-
-
-
 from lxml import etree as ET
 import copy
 import sys
 import os
 import argparse
 from collections import defaultdict
+from collections import Counter
+
+
+def parse(read_dir, assay_name, sample_names):
+    assay_file = "../fasta/" + assay_name + ".fasta"
+    a = open(assay_file, 'a+')
+    toSort = []
+    for sample_name in sample_names:
+        reads_file = read_dir + '/' + sample_name + '_' + assay_name + '.fasta'
+        f = open(reads_file, 'r')
+        c = Counter()
+        total = 0
+        for line in f:
+            line = line.strip()
+            if line[0] == '>':
+                continue
+            else:
+                c[line] += 1
+                total += 1
+        passed = 0
+        for allele in c.most_common():
+            if passed >= 2 and (allele[1]/total) < .02:
+                break
+            p = []
+            p.append(">"+sample_name+"_"+str(allele[1])+"\n")
+            p.append(allele[0] + "\n")
+            p.append(allele[1])
+            toSort.append(p)
+            passed += 1
+    toSort.sort(key=lambda x: int(x[2]), reverse=True)
+    for allele in toSort:
+        a.write(allele[0])
+        a.write(allele[1])
+    return
 
 def main(argv=None):
     parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("-x", "--xml", required=True, help="Already reformatted ASAP output XML file. [REQUIRED]")
-    parser.add_argument("-o","--output", required=True, help="file to write new XML to. [REQUIRED]")
+    parser.add_argument("-x", "--xml", help="Already reformatted ASAP output XML file. ")
+    parser.add_argument("-o","--output", help="file to write new XML to. ")
+    parser.add_argument("--switch", action='store_true', help="make parse fasta instead of create xml")
+    parser.add_argument("-q", "--dir")
+    parser.add_argument("-a", "--assay")
+    parser.add_argument("-s", "--sample", nargs='*')
     args = parser.parse_args()
-    out_file = args.output
+    if args.switch:
+        read_dir = args.dir
+        assay_name = args.assay
+        sample_names = args.sample
+        parse(read_dir, assay_name, sample_names)
+        return
+    else:
+        out_file = args.output
+        tree = ET.parse(args.xml)
+        root = tree.getroot()
 
-    tree = ET.parse(args.xml)
-    root = tree.getroot()
-    
     #get the sequences, counts, and sample counts for each assay for assay-specific output
     all_dicts = defaultdict(defaultdict)
     for assay in root:
@@ -31,7 +73,7 @@ def main(argv=None):
                         li = [0, 0]
                         li[0] += int(allele.get('count'))
                         li[1] += 1
-                        li.append([sample.get('name'), allele.get('count'), allele.get('percent')]) 
+                        li.append([sample.get('name'), allele.get('count'), allele.get('percent')])
                         currentAssayDict[allele.text] = li
                     else:
                         lis = currentAssayDict[allele.text]
@@ -71,7 +113,9 @@ def main(argv=None):
                 sample_node.set('name', dict[1][allele][li][0])
                 sample_node.set('count', dict[1][allele][li][1])
                 sample_node.set('percent', dict[1][allele][li][2])
-               
+
     tree.write(out_file, pretty_print=True)
+
+
 if __name__ == "__main__":
     main()

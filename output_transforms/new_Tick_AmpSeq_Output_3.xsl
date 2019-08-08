@@ -6,11 +6,13 @@
     <xsl:variable name="currentAssay" select="."/>
     <exsl:document method="text" href="./fasta/{$currentAssay/@name}.fasta" >
       <xsl:for-each select="allele/sample">
-	<xsl:text/>><xsl:value-of select="@name"/>_<xsl:value-of select="@count"/>
-	<xsl:text>&#xa;</xsl:text>
-	<xsl:value-of select="../@sequence"/>
-	<xsl:text>&#xa;</xsl:text>
+        <xsl:sort select="@count" order="descending" data-type="number"/>
+	       <xsl:text/>><xsl:value-of select="@name"/>_<xsl:value-of select="@count"/>
+	        <xsl:text>&#xa;</xsl:text>
+	         <xsl:value-of select="../@sequence"/>
+	          <xsl:text>&#xa;</xsl:text>
       </xsl:for-each>
+       <xsl:text>&#xa;</xsl:text>
     </exsl:document>
   </xsl:for-each>
 </xsl:template>

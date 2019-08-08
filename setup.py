@@ -44,8 +44,7 @@ setup(
             'bamProcessor = asap.bamProcessor:main',
             'outputCombiner = asap.outputCombiner:main',
             'formatOutput = asap.formatOutput:main',
-            'reformatXML = asap.reformatXML:main',
-            'assay_specific_alleles = asap.assay_specific_alleles:main'
+            'reformatXML = asap.reformatXML:main'
         ]
     },
     install_requires=[

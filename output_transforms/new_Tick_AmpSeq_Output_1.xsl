@@ -44,7 +44,7 @@
 			<xsl:if test="@type = 'ROI'">
 			  <th nowrap="true">N/A</th>
 			</xsl:if>
-	            </xsl:for-each>	
+	            </xsl:for-each>
 		    </tr>
 		</xsl:for-each>
 		<xsl:for-each select ="sample">
@@ -62,13 +62,13 @@
 			</xsl:if>
 			<xsl:if test="@type = 'ROI'">
 			  <td align="center">N/A</td>
-			</xsl:if>	
-		    </xsl:for-each>	
+			</xsl:if>
+		    </xsl:for-each>
 		    </tr>
 		</xsl:for-each>
             </table>
 	    <br />
-            <a href="{@run_name}_counts.html">Click here for read counts</a> 
+            <a href="{@run_name}_counts.html">Click here for read counts</a>
         </body>
         </html>
 
@@ -389,13 +389,18 @@
 	    		<th>% Frequency</th>
 			<th>Allele Sequences</th>
 	    	      </tr>
+          <xsl:choose>
+            <xsl:when test="amplicon/region_of_interest/allele_sequence">
 		      <xsl:for-each select="amplicon/region_of_interest/allele_sequence">
-			<tr>
-			  <td><xsl:value-of select="@count"/></td>
-			  <td><xsl:value-of select='format-number(@percent, "##.##")'/>%</td>
-			  <td><a href="{@hash}.html"><xsl:value-of select="."/></a></td>
-			</tr>
+          			<tr>
+          			  <td><xsl:value-of select="@count"/></td>
+          			  <td><xsl:value-of select='format-number(@percent, "##.##")'/>%</td>
+          			  <td><a href="{@hash}.html"><xsl:value-of select="."/></a></td>
+          			</tr>
 		      </xsl:for-each>
+        </xsl:when>
+        <xsl:otherwise><tr><td>Not Found</td><td></td><td></td></tr></xsl:otherwise>
+      </xsl:choose>
 		    </table>
 		  </xsl:if>
 		</xsl:for-each>
@@ -403,5 +408,5 @@
 	    </html>
 	</exsl:document>
     </xsl:template>
-    
+
 </xsl:stylesheet>
