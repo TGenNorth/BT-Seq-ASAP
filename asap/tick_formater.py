@@ -31,7 +31,8 @@ def parse(read_dir, assay_name, sample_names):
             if passed >= 2 and (allele[1]/total) < .02:
                 break
             p = []
-            p.append(">"+sample_name+"_"+str(allele[1])+"\n")
+            sample_name_trim = sample_name.split('-bowtie')[0]
+            p.append(">"+sample_name_trim+"_"+str(allele[1])+"\n")
             p.append(allele[0] + "\n")
             p.append(allele[1])
             toSort.append(p)
