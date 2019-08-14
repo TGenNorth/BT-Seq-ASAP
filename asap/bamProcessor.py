@@ -119,7 +119,10 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset, 
             snp_call = snp_count = snp_call_proportion = None
         consensus_seq += alignment_call if alignment_call_proportion >= proportion else "N"
         (proportion, low_level_cutoff, high_level_cutoff) = _compute_thresholds_SMOR(column_depth)
-        translated = offset+position
+        if position >= abs(offset) and offset < 0: #if the offset is negative, ie. amplicon starts before beginning of the gene, then when converting to gene-based coordinates need to make offset 1 unit more positive to account for there being no 0-base in gene-coordinates
+            translated = position + (offset + 1)
+        else:
+            translated = position + offset #normal case where gene encompasses the amplicon
         if position in snp_dict:
             for (name, reference, variant, significance) in snp_dict[position]:
                 snp = {'name':name, 'position':str(translated), 'depth':str(column_depth), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
@@ -215,7 +218,10 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, whole
         else:
             snp_call = snp_count = snp_call_proportion = None
         consensus_seq += alignment_call if alignment_call_proportion >= proportion else "N"
-        translated = offset+position
+        if position >= abs(offset) and offset < 0: #if the offset is negative, ie. amplicon starts before beginning of the gene, then when converting to gene-based coordinates need to make offset 1 unit more positive to account for there being no 0-base in gene-coordinates
+            translated = position + (offset + 1)
+        else:
+            translated = position + offset #normal case where gene encompasses the amplicon
         if position in snp_dict:
             for (name, reference, variant, significance) in snp_dict[position]:
                 snp = {'name':name, 'position':str(translated), 'depth':str(pileupcolumn.n), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
