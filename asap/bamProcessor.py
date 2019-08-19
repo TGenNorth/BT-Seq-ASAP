@@ -464,328 +464,6 @@ def _process_merge(reads, start, end):
         if len(combined_read) == end-start:
             big_aligned_reads.append(combined_read)
     return big_aligned_reads
-'''
-def _process_merge(reads, start, end):
-    big_aligned_reads = []
-    for read, pair in pairwise(reads):
-        if read.query_name != pair.query_name:
-            continue
-        refstart1 = read.reference_start
-        refend1 = read.reference_end
-        refstart2 = pair.reference_start
-        refend2 = pair.reference_end
-        #if both start at same place then they can't cover whole roi, so skip
-        if refstart1 == refstart2:
-            continue
-        #figure out which starts first
-        normal_orienation1 = True if refstart1 < refstart2 else False
-        normal_orienation2 = True if refend1 < refend2 else False
-        if normal_orienation1 and normal_orienation2:
-            normal_orienation = True
-        elif normal_orienation1 == False and normal_orientation2 == False:
-            normal_orienation = False
-        else:
-            continue
-        if normal_orienation:
-            #find coordinates of the ends of read 1
-            qend = qstart = rstart = rend = None
-            for (qpos, rpos) in read.get_aligned_pairs():
-                if rpos == start:
-                    qstart = qpos
-                    rstart = rpos
-                #keep setting qend so it ends up being the last position the read aligns to the
-                qend = qpos
-                rend = rpos
-            #throw out reads that do not have ends
-            if qend == None or qstart == None or rstart == None or rend == None:
-                continue
-            if qend - qstart != rend - rstart:
-                continue
-            nt_sequence = str(DNA(read.query_sequence[qstart:qend]))
-            qual_seq = read.query_qualities[qstart:qend]
-            #find coordinates of the ends of read 2
-            qend2 = qstart2 = rstart2 = rend2 = None
-            bool = True
-            for (qpos, rpos) in pair.get_aligned_pairs():
-                #set qstart to first query position
-                if bool:
-                    qstart2 = qpos
-                    rstart2 = rpos
-                    bool = False
-                if rpos == end - 1:
-                    qend2 = qpos
-                    rend2 = rpos
-            #throw out reads that do not have ends
-            if qend2 == None or qstart2 == None or rstart2 == None or rend2 == None:
-                continue
-            if qend2 - qstart2 != rend2 - rstart2:
-                continue
-            nt_sequence2 = str(DNA(pair.query_sequence[qstart2:qend2]))
-            qual_seq2 = pair.query_qualities[qstart2:qend2]
-        else:
-            #find coordinates of read which will contain end, not start cause flipped orientation
-            qend = qstart = rstart = rend = None
-            bool = True
-            for (qpos, rpos) in read.get_aligned_pairs():
-                if bool:
-                    qstart = qpos
-                    rstart = rpos
-                    bool = False
-                #keep setting qend so it ends up being the last position the read aligns to the
-                if rpos == end - 1:
-                    qend = qpos
-                    rend = rpos
-            #throw out reads that do not have ends
-            if qend == None or qstart == None or rstart == None or rend == None:
-                continue
-            #ignore funny busniness with query and ref getting off, for now
-            if qend - qstart != rend - rstart:
-                continue
-            nt_sequence = str(DNA(read.query_sequence[qstart:qend]))
-            qual_seq = read.query_qualities[qstart:qend]
-            #get pair's ends and sequence
-            qend2 = qstart2 = rstart2 = rend2 = None
-            bool = True
-            for (qpos, rpos) in pair.get_aligned_pairs():
-                #set qstart to first query position
-                if rpos == start:
-                    qstart2 = qpos
-                    rstart2 = rpos
-                qend2 = qpos
-                rend2 = rpos
-            #throw out reads that do not have ends
-            if qend2 == None or qstart2 == None or rstart2 == None or rend2 == None:
-                continue
-            if qend2 - qstart2 != rend2 - rstart2:
-                continue
-            nt_sequence2 = str(DNA(pair.query_sequence[qstart2:qend2]))
-            qual_seq2 = pair.query_qualities[qstart2:qend2]
-        combined_read = ""
-        if normal_orienation:
-            #find if reads overlap
-            is_overlap = True if rend > rstart2 else False
-            if is_overlap:
-                skip = False
-                overlap_len = (rend - rstart2)
-                overlap_start_read = (qend - overlap_len)
-                overlap_end_read = qend
-                overlap_start_pair = qstart2
-                overlap_end_pair = (qstart2 + overlap_len)
-                #get non-overlapping part of read
-                combined_read += nt_sequence[qstart: overlap_start_read]
-                #take higher base when overlapping
-                for i in range(overlap_len):
-                    #make sure don't go over end of second read
-                    if (i + rstart2) == end - 1:
-                        skip = True
-                        break
-                    print(rstart, rend, qstart, qend, rstart2, rend2, qstart2, qend2 ,"seq len 1", len(nt_sequence), "seq len 2", len(nt_sequence2),"i", i, "overlap_start_read",overlap_start_read, "overlap_end_read",overlap_end_read, "overlap_start_pair",overlap_start_pair, "overlap_end_pair",overlap_end_pair, "overlap_len",overlap_len,"start", start, "end", end)
-                    if not nt_sequence[i + overlap_start_read] and nt_sequence2[i + overlap_start_pair]:
-                        combined_read += nt_sequence2[i + overlap_start_pair]
-                    elif nt_sequence[i + overlap_start_read] and not nt_sequence2[i + overlap_start_pair]:
-                        combined_read += nt_sequence[i + overlap_start_read]
-                    elif not nt_sequence[i + overlap_start_read] and not nt_sequence2[i + overlap_start_pair]:
-                        combined_read += 'N'
-                    else:
-                        if qual_seq[i + overlap_start_read] >= qual_seq2[i + overlap_start_pair]:
-                            combined_read += nt_sequence[i + overlap_start_read]
-                        else:
-                            combined_read += nt_sequence2[i + overlap_start_pair]
-                #add the rest of second read
-                    if skip == False:
-                        combined_read += nt_sequence2[overlap_end_pair: qend2]
-            else: #no overlap
-                combined_read += nt_sequence
-                #add Ns where neither read is
-                for i in range(rend, rstart2):
-                    combined_read += 'N'
-                combined_read += nt_sequence2
-        else: #reads are flipped in orientation
-            is_overlap = True if rend2 > rstart else False
-            if is_overlap:
-                overlap_len = (rend2 - rstart)
-                overlap_start_read = qstart
-                overlap_end_read = qstart + overlap_len
-                overlap_start_pair = qend2 - overlap_len
-                overlap_end_pair = qend2
-                combined_read += nt_sequence2[qstart2:overlap_start_pair]
-                #take higher base when overlapping
-                for i in range(overlap_len):
-                    if not nt_sequence[i + overlap_start_read] and nt_sequence2[i + overlap_start_pair]:
-                        combined_read += nt_sequence2[i]
-                    elif nt_sequence[i + overlap_start_read] and not nt_sequence2[i + overlap_start_pair]:
-                        combined_read += nt_sequence[i + overlap_start_read]
-                    elif not nt_sequence[i + overlap_start_read] and not nt_sequence2[i + overlap_start_pair]:
-                        combined_read += 'N'
-                    else:
-                        if qual_seq[i + overlap_start_read] > qual_seq2[i + overlap_start_pair]:
-                            combined_read += nt_sequence[i + overlap_start_read]
-                        else:
-                            combined_read += nt_sequence2[i + overlap_start_pair]
-                #add the rest
-                combined_read += nt_sequence[overlap_end_read:qend]
-            else:
-                combined_read += nt_sequence2
-                for i in range(rend2, rstart):
-                    combined_read += 'N'
-                combined_read += nt_sequence
-        big_aligned_reads.append(combined_read)
-    return big_aligned_reads
-
-
-
-        combined_read = ""
-        #keep read pairs together incase we get off
-        if read.query_name != pair.query_name:
-            continue
-        #make sure reads have a nonzero length
-        if len(read.get_reference_positions()) == 0 or len(pair.get_reference_positions()) == 0:
-            continue
-        read_seq = read.query_sequence
-        pair_seq = pair.query_sequence
-        read_qual = read.query_qualities
-        pair_qual = pair.query_qualities
-        #check if either read is reversed
-        read_reversed = False
-        pair_reversed = False
-        read_end = read.reference_end
-        read_start = read.reference_start
-        pair_end = pair.reference_end
-        pair_start = pair.reference_start
-        if read.reference_end < read.reference_start:
-            read_reversed = True
-            read_end = read.reference_start
-            read_start = read.reference_end
-        if pair.reference_end < pair.reference_start:
-            pair_reversed = True
-            pair_end = pair.reference_start
-            pair_start = pair.reference_end
-        #make sure sequence length matches meta-data length because it seems to not always
-        if (read_end - read_start) != len(read_seq) or (pair_end - pair_start) != len(pair_seq):
-            continue
-        #check that reads have ends
-        if pair_end != None and pair_start != None and read_end != None and read_start != None:#no nones so we can keep going
-            pass
-        elif read_end == None or read_start == None and pair_end != None and pair_start != None:
-            for i in range(start, pair_start):
-                combined_read += "N"
-            for i in range(pair_start, pair_end):
-                if pair_seq[i] == None:
-                    combined_read += "N"
-                else:
-                    cmbined_read += pair_seq[i]
-            for i in range(pair_end, end):
-                combined_read += "N"
-            big_aligned_reads.append(combined_read)
-            continue
-        elif pair_end == None or pair_start == None and read_end != None and read_start != None:
-            for i in range(start, read_start):
-                combined_read += "N"
-            for i in range(read_start, read_end):
-                if read_seq[i] == None:
-                    combined_read += "N"
-                else:
-                    cmbined_read += read_seq[i]
-            for i in range(read_end, end):
-                combined_read += "N"
-            big_aligned_reads.append(combined_read)
-            continue
-        else: #cannot use these reads
-            continue
-        #check if read or pair comes first
-        if read_start <= pair_start:
-            normal_orientation = True
-        else:
-            normal_orienation = False
-        #check if read is before pair
-        if normal_orientation:
-            #check if reads cover whole roi
-            if read_start != start:
-                for i in range(start, read_start):
-                    combined_read += "N"
-            for i in range(start, read_end):
-                if i < pair_start:
-                    if read_seq[i] == None:
-                        combined_read += "N"
-                    else:
-                        combined_read += read_seq[i]
-                elif i >= pair_start and i < pair_end: #i is in range of both reads
-                    print(i,read_end, pair_start, pair_end)
-                    booli = read_seq[i]
-                    boolii = pair_seq[i - pair_start]
-                    if read_seq[i] == None and pair_seq[i - pair_start] == None:
-                        combined_read += "N"
-                    elif read_seq[i] == None and pair_seq[i - pair_start] != None:
-                        combined_read += pair_seq[i - pair_start]
-                    elif read_seq[i] != None and pair_seq[i - pair_start] == None:
-                        combined_read += read_seq[i]
-                    else:
-                        if read_qual[i] >= pair_qual[i - pair_start]:
-                            combined_read += read_seq[i]
-                        else:
-                            combined_read += pair_seq[i - pair_start]
-                else: #if we get here then read fully encompasses pair
-                    if read_seq[i] == None:
-                        combined_read += "N"
-                    else:
-                        combined_read += read_seq[i]
-            #check if there is a gap between reads and if there is fill with N's
-            if read_end < pair_start:
-                for i in range(read_end, pair_start):
-                    combined_read += "N"
-            #iterate over remaining length of second read ("pair")
-            for j in range(i+1, pair_end):
-                if pair_seq[j - pair_start] == None:
-                    combined_read += "N"
-                else:
-                    combined_read += pair_seq[j - pair_start]
-            if pair_end < end:
-                for i in range(pair_end, end):
-                    combined_read += "N"
-        else: #pair comes before read
-            if pair_start != start:
-                for i in range(start, pair_start):
-                    combined_read += "N"
-            for i in range(start, pair_end):
-                if i < read_start:
-                    if pair_seq[i] == None:
-                        combined_read += "N"
-                    else:
-                        combined_read += pair_seq[i]
-                elif i >= read_start and i < read_end: #i is in range of both reads now
-                    if pair_seq[i] == None and read_seq[i - read_start] == None:
-                        combined_read += "N"
-                    elif pair_seq[i] == None and read_seq[i - read_start] != None:
-                        combined_read += read_seq[i - read_start]
-                    elif pair_seq[i] != None and read_seq[i - read_start] == None:
-                        combined_read += pair_seq[i]
-                    else:
-                        if pair_qual[i] >= read_qual[i - read_start]:
-                            combined_read += pair_seq[i]
-                        else:
-                            combined_read += read_seq[i - read_start]
-                else: #pair fuly encompasses read
-                    if pair_seq[i] == None:
-                        combined_read += "N"
-                    else:
-                        combined_read += pair_seq[i]
-            #check for gap between reads
-            if pair_end < read_start:
-                for i in range(pair_end, read_start):
-                    combined_read += "N"
-            #iterate over remaining length of second read ("read")
-            for j in range(i+1, read_end):
-                if read_seq[j - read_start] == None:
-                    combined_read += "N"
-                else:
-                    combined_read += read_seq[j - read_start]
-            if read_end < end:
-                for i in range(read_end, end):
-                    combined_read += "N"
-        big_aligned_reads.append(combined_read)
-    return big_aligned_reads
-'''
-
 
 def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
     from operator import attrgetter
@@ -895,6 +573,7 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion, mutdepth, smor):
     roi_attributes['name'] = str(roi.name)
     roi_node = ElementTree.SubElement(parent, "region_of_interest", roi_attributes)
     reporting_threshold = max(mutdepth, math.ceil(int(roi_dict['depth']) * proportion))
+    cutOff = int(roi_dict['depth']) * .02
     dominant_count = 0; #Number of reads containing the most common amino acid sequence
     aa_seq_counter = roi_dict['aa_sequence_distribution']
     for ((seq, aa_changes), count) in aa_seq_counter.most_common():
@@ -907,6 +586,20 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion, mutdepth, smor):
                 nonsynonymous = True
         else:
             break #Since they are returned in order by count, as soon as one is below the threshold the rest will be as well
+    #get the aa alleles that pass the cutoff
+    '''for ((seq, aa_changes), count) in aa_seq_counter.most_common():
+        #get most frequent alleles that have a freq of > 2% (this is an arbitrary cut-off)
+        if count >= cutOff:
+            aa_allele_node = ElementTree.SubElement(roi_node, "aa_allele_sequence", {'count':str(count), 'percent':str(count/int(roi_dict['depth'])*100),'hash':str(hash(seq))})
+            aa_allele_node.text = seq
+            aa_allele_count += 1
+        else:
+            if aa_allele_count < 2:
+                aa_allele_count += 1
+                aa_allele_node = ElementTree.SubElement(roi_node, "aa_allele_sequence", {'count':str(count), 'percent':str(count/int(roi_dict['depth'])*100),'hash':str(hash(seq))})
+                aa_allele_node.text = seq
+            else:
+                break'''
     nt_seq_counter = roi_dict['nt_sequence_distribution']
     for (seq, count) in nt_seq_counter.most_common():
         if count >= reporting_threshold:
@@ -914,7 +607,6 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion, mutdepth, smor):
             nt_seq_node.text = seq
         else:
             break #Since they are returned in order by count, as soon as one is below the threshold the rest will be as well
-    cutOff = int(roi_dict['depth']) * .02
     allele_count = 0
     for (seq, count) in nt_seq_counter.most_common():
         #get most frequent alleles that have a freq of > 2% (this is an arbitrary cut-off)
