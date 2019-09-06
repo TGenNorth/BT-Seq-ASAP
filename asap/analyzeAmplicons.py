@@ -91,6 +91,7 @@ USAGE
         optional_group.add_argument("--submitter-args", dest="sargs", metavar="ARGS", help="additional arguments to pass to the job submitter, enclosed in \"\".")
         optional_group.add_argument("--smor", action="store_true", default=False, help="perform SMOR analysis with overlapping reads. [default: False]")
         optional_group.add_argument("-w", "--whole-genome", action="store_true", dest="wholegenome", default=False, help="JSON file uses a whole genome reference, so don't write out the consensus, depth, and proportion arrays for each sample")
+        optional_group.add_argument("--allele-output-threshold", dest="allele_min_reads", default=8, type=int, help="cutoff of # of reads below which allels for amino acids and nucleotide alleles will not be output [default: 8]")
         trim_group = parser.add_argument_group("read trimming options")
         on_off_group = trim_group.add_mutually_exclusive_group()
         on_off_group.add_argument("--trim", default="bbduk", help="perform adapter trimming on reads. [default: bbduk]. NOTE: cannot trim-primers if not using bbduk")
@@ -120,7 +121,7 @@ USAGE
         trim = args.trim
         if args.primers == False:
             primer_seqs = args.primers
-        else: 
+        else:
             primer_seqs = dispatcher.expandPath(args.primers)
         qual = args.qual
         minlen = args.minlen
@@ -135,16 +136,17 @@ USAGE
         dispatcher.job_manager = args.job_manager.upper()
         dispatcher.job_manager_args = args.sargs
         smor = args.smor
+        allele_min_reads = args.allele_min_reads
         debug = args.debug
         wholegenome = args.wholegenome
-        
+
         if primer_seqs != False and trim != "bbduk":
             response = input(
                 "\nPrimer trimming requested using a trimmer other than bbduk, this is not supported functionality.\nContinue using %s as a trimmer without primer trimming [N]? " % trim)
             if not re.match('^[Yy]',response):
                 print("Operation cancelled!")
                 quit()
-        
+
         if not out_dir:
             out_dir = os.getcwd()
         if not (read_dir or bam_dir):
@@ -171,7 +173,7 @@ USAGE
                             datefmt='%m/%d/%Y %H:%M:%S',
                             filename=logfile,
                             filemode='w')
-        
+
         logging.info("Combining reads in %s and JSON file: %s for run: %s. Trim=%s Qual=%s" % (read_dir, json_filename, run_name, trim, qual))
         assay_list = assayInfo.parseJSON(args.json)
 
@@ -189,7 +191,7 @@ USAGE
             #reference = assayInfo.generateReference(assay_list)
             ref_fasta = os.path.join(out_dir, "reference.fasta")
             skbio.io.registry.write(assayInfo.generateReference(assay_list), 'fasta', ref_fasta)
-            
+
             index_job = dispatcher.indexFasta(ref_fasta, aligner)
             read_list = dispatcher.findReads(read_dir)
             for read in read_list:
@@ -207,7 +209,7 @@ USAGE
                 f.write("If run with paired reads the stats information for each pair is in [read_pair_name]*R1*STATS, if run with single reads the stats information for the single read is in [read_name]*R1*STATS. _primers if is the stats for trimming primers, no _primers if stats for trimming adapters")
                 f.close()
         for sample, bam, job in bam_list:
-            (xml_file, job_id) = dispatcher.processBam(sample, json_filename, bam, xml_dir, job, depth, breadth, proportion, percid, mutdepth, smor, wholegenome, debug)
+            (xml_file, job_id) = dispatcher.processBam(sample, json_filename, bam, xml_dir, job, depth, breadth, proportion, percid, mutdepth, smor, wholegenome, debug, allele_min_reads)
             output_files.append(xml_file)
             final_jobs.append(job_id)
 

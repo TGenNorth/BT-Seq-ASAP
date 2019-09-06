@@ -443,7 +443,7 @@ def alignReadsToReference(sample, reads, reference, outdir, jobid=None, aligner=
     else: #re.search('b(ow)?t(ie)?2', aligner, re.IGNORECASE)
         return _run_bowtie2(sample, reads, reference, outdir, jobid, args=args)
 
-def processBam(sample_name, json_file, bam_file, xml_dir, dependency, depth, breadth, proportion, percid, mutdepth, smor=False, wholegenome=False, debug=False):
+def processBam(sample_name, json_file, bam_file, xml_dir, dependency, depth, breadth, proportion, percid, mutdepth, smor=False, wholegenome=False, debug=False, allele_min_reads=8):
     import os
     job_params = {'queue':'', 'mem_requested':4, 'num_cpus':2, 'walltime':24, 'args':''}
     job_params['name'] = "asap_bamprocesser_%s" % sample_name
@@ -452,7 +452,7 @@ def processBam(sample_name, json_file, bam_file, xml_dir, dependency, depth, bre
     smor_option = " -s" if smor else ""
     wholegenome_option = " -w" if wholegenome else ""
     debug_option = " -D" if debug else ""
-    command = "bamProcessor -j %s -b %s -o %s -d %d --breadth %f -p %f -m %d -i %f%s%s%s" % (json_file, bam_file, out_file, depth, breadth, proportion, mutdepth, percid, smor_option, wholegenome_option, debug_option)
+    command = "bamProcessor -j %s -b %s -o %s -d %d --breadth %f -p %f -m %d -i %f%s%s%s --allele-output-threshold %d" % (json_file, bam_file, out_file, depth, breadth, proportion, mutdepth, percid, smor_option, wholegenome_option, debug_option, allele_min_reads)
     jobid = _submit_job(job_manager, command, job_params, (dependency,)) if dependency else _submit_job(job_manager, command, job_params)
     return (out_file, jobid)
 
