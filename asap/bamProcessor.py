@@ -72,7 +72,7 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, whole
     # for each position in alignment/pileup
     for pileupcolumn in pileup:
         base_counter = Counter()
-        depth_array[pileupcolumn.pos] = 0 #gets incemented if smor, gets set to depth if not smor
+        depth_array[pileupcolumn.pos] = 0 #gets incremented if smor, gets set to depth if not smor
         position = pileupcolumn.pos+1
         column_depth = None
         if smor:
@@ -81,9 +81,9 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, whole
             end_count = 0
             reads = iter(sorted(pileupcolumn.pileups, key=attrgetter('alignment.query_name')))
             for read, pair in pairwise(reads):
-                if read.alignment.query_name != pair.alignment.query_name:
+                if read.alignment.query_name != pair.alignment.query_name:#keep pairs together
                     continue
-                end_count = end_count+1
+                end_count = end_count + 1
                 alignment = read.alignment
                 if pair.is_del and read.is_del:
                     base_counter.update("_") # XSLT doesn't like '-' as an attribute name, have to use '_'
@@ -144,9 +144,9 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, whole
             snp_call_proportion = ordered_list[1][1] / column_depth
         else:
             snp_call = snp_count = snp_call_proportion = None
-        consensus_seq += alignment_call if alignment_call_proportion >= proportion else "N"
         if smor:
             (proportion, low_level_cutoff, high_level_cutoff) = _compute_thresholds_SMOR(column_depth)
+        consensus_seq += alignment_call if alignment_call_proportion >= proportion else "N"
         if position >= abs(offset) and offset < 0: #if the offset is negative, ie. amplicon starts before beginning of the gene, then when converting to gene-based coordinates need to make offset 1 unit more positive to account for there being no 0-base in gene-coordinates
             translated = position + (offset + 1)
         else:
@@ -246,7 +246,7 @@ def _process_roi(roi, samdata, amplicon_ref, smor, amplicon_ref_len, reverse_com
         start,end = end,start
     expected_length = end - start
     #check if the roi spans the whole reference, if so can use .query_alignment_sequence to get the whole sequence without running into the problem of the loop not getting to last base
-    #still will have a problem when start !=0 but end == amplicon_ref_len
+    #still will have a problem when start != 0 but end == amplicon_ref_len
     use_query_alignment_seq = False
     if end == amplicon_ref_len and start == 0:
         use_query_alignment_seq = True
@@ -276,6 +276,7 @@ def _process_roi(roi, samdata, amplicon_ref, smor, amplicon_ref_len, reverse_com
         if proportion_failed >= .95:
             roi_dict['flag'] = "reads are smaller than ROI and cannot merge because --smor"
             return roi_dict
+
     aa_sequence_counter = Counter()
     aa_sequence_counter_temp = Counter()
     nt_sequence_counter = Counter()
@@ -312,6 +313,7 @@ def _process_roi(roi, samdata, amplicon_ref, smor, amplicon_ref_len, reverse_com
                             qend = qpos
                     nt_sequence = DNA(read.query_sequence[qstart:qend])
                 else:
+                    #the ROI is the whole ref so can use .query_alignment_sequence
                     nt_sequence = DNA(read.query_alignment_sequence)
                 if reverse_comp:
                     nt_sequence = nt_sequence.reverse_complement()
@@ -325,6 +327,7 @@ def _process_roi(roi, samdata, amplicon_ref, smor, amplicon_ref_len, reverse_com
                     aa_sequence_counter_temp.update([aa_string])
                     depth += 1
     else: #smor
+        reads = iter(sorted(samdata.fetch(amplicon_ref, start, end), key=attrgetter('query_name')))
         for read, pair in pairwise(reads):
             if read.query_name != pair.query_name:
                 continue
@@ -332,8 +335,8 @@ def _process_roi(roi, samdata, amplicon_ref, smor, amplicon_ref_len, reverse_com
             rstart2 = pair.reference_start
             alignment_length1 = read.get_overlap(start, end)
             alignment_length2 = pair.get_overlap(start, end)
-            #throw out reads that either have gaps in the ROI or don't cover the whole ROI
-            if alignment_length1 != expected_length or alignment_length2 != expected_length:
+            #throw out reads that are not the same length as their pair
+            if alignment_length1 != alignment_length2:
                 continue
             if rstart1 <= start:
                 if not use_query_alignment_seq:
@@ -342,10 +345,9 @@ def _process_roi(roi, samdata, amplicon_ref, smor, amplicon_ref_len, reverse_com
                             qstart = qpos
                         if rpos == end:
                             qend = qpos
-                    if not qend or not qstart or qend-qstart != expected_length:
-                        continue
                     nt_sequence = DNA(read.query_sequence[qstart:qend])
                 else:
+                    #the ROI is the whole ref so can use .query_alignment_sequence
                     nt_sequence = DNA(read.query_alignment_sequence)
             if rstart2 <= start:
                 if not use_query_alignment_seq:
@@ -354,11 +356,10 @@ def _process_roi(roi, samdata, amplicon_ref, smor, amplicon_ref_len, reverse_com
                             qstart = qpos
                         if rpos == end:
                             qend = qpos
-                    if not qend or not qstart or qend-qstart != expected_length:
-                        continue
-                    nt_sequence = DNA(pair.query_sequence[qstart:qend])
+                    nt_sequence2 = DNA(pair.query_sequence[qstart:qend])
                 else:
-                    nt_sequence = DNA(pair.query_alignment_sequence)
+                    #the ROI is the whole ref so can use .query_alignment_sequence
+                    nt_sequence2 = DNA(pair.query_alignment_sequence)
             if nt_sequence != nt_sequence2:
                 continue
             else:
@@ -420,6 +421,7 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion, mutdepth, smor, offs
         roi.aa_sequence = str(DNA(roi.nt_sequence).translate()).replace('*', 'x')
     roi_node.set('aa_reference', roi.aa_sequence)
     reporting_threshold = max(mutdepth, math.ceil(int(roi_dict['depth']) * proportion))
+    print(proportion, low_level_cutoff, high_level_cutoff, int(roi_dict['depth']), reporting_threshold)
     cutOff = int(roi_dict['depth']) * .02
     dominant_count = 0; #Number of reads containing the most common amino acid sequence
     aa_seq_counter = roi_dict['aa_sequence_distribution']
@@ -456,9 +458,14 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion, mutdepth, smor, offs
             start_of_run = _sequential(changes, 0)
             changes = changes[0:start_of_run]
             shift = 0
+            #create change string with '1' and '2' that will be replaced by <b><u> and </u></b> in post-processing
             for change in all_changes:
                 loc = change[0] + shift
-                temp = seq[0:loc] + '1' + seq[loc] + '2' + seq[loc + 1:]
+                #check if change is past last base in seq => an indel at the end of seq
+                if loc >= len(seq):
+                    temp = seq + '1' + '_' + '2'
+                else:
+                    temp = seq[0:loc] + '1' + seq[loc] + '2' + seq[loc + 1:]
                 shift += 2
                 seq = temp
             aa_seq_node.text = seq
@@ -482,7 +489,7 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion, mutdepth, smor, offs
                 aa_seq_node.set('aa_changes_specific', change_string)
         else:
             break #Since they are returned in order by count, as soon as one is below the threshold the rest will be as well
-            #temp = seq[0:loc] + '&lt;b&gt;' + seq[loc] + '&lt;/b&gt;' + seq[loc + 1:]
+
     nt_seq_counter = roi_dict['nt_sequence_distribution']
     for (seq, count) in nt_seq_counter.most_common():
         if count >= reporting_threshold:
