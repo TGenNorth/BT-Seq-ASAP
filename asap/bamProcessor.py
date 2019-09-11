@@ -58,8 +58,7 @@ def _write_parameters(node, data):
         subnode.text = str(v)
     return node
 
-def _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset, wholegenome):
-    from operator import attrgetter
+def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, wholegenome, smor):
     pileup_dict = {}
     snp_dict = _create_snp_dict(amplicon)
     consensus_seq = ""
@@ -70,37 +69,65 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset, 
     depth_array = [0] * amplicon_length
     discard_array = [0] * amplicon_length
     prop_array = ["0"] * amplicon_length
+    # for each position in alignment/pileup
     for pileupcolumn in pileup:
         base_counter = Counter()
-        start_count = pileupcolumn.n
-        end_count = 0
-        reads = iter(sorted(pileupcolumn.pileups, key=attrgetter('alignment.query_name')))
-        for read, pair in pairwise(reads):
-            if read.alignment.query_name != pair.alignment.query_name:
-                continue
-            end_count = end_count+1
-            alignment = read.alignment
-            if pair.is_del and read.is_del:
-                base_counter.update("_") # XSLT doesn't like '-' as an attribute name, have to use '_'
-            elif read.query_position and pair.query_position:
-                if pair.alignment.query_sequence[pair.query_position] == alignment.query_sequence[read.query_position]:
-                    depth_array[pileupcolumn.pos] += 1
-                    base_counter.update(alignment.query_sequence[read.query_position])
-                else:
-                    discard_array[pileupcolumn.pos] += 1
-        column_depth = depth_array[pileupcolumn.pos]
-        if column_depth == 0:
-            consensus_seq += "_" #TODO Temporary, remove this line!
-            continue
+        depth_array[pileupcolumn.pos] = 0 #gets incremented if smor, gets set to depth if not smor
         position = pileupcolumn.pos+1
-        depth_passed = False
-        if column_depth > 0: #TODO: This is going to end up being specific to these TB assays, maybe have a clever way to make this line optional
-            avg_depth_positions += 1
-            avg_depth_total += column_depth
-        if column_depth >= depth:
-            breadth_positions += 1
-            depth_passed = True
+        column_depth = None
+        if smor:
+            from operator import attrgetter
+            start_count = pileupcolumn.n
+            end_count = 0
+            reads = iter(sorted(pileupcolumn.pileups, key=attrgetter('alignment.query_name')))
+            for read, pair in pairwise(reads):
+                if read.alignment.query_name != pair.alignment.query_name:#keep pairs together
+                    continue
+                end_count = end_count + 1
+                alignment = read.alignment
+                if pair.is_del and read.is_del:
+                    base_counter.update("_") # XSLT doesn't like '-' as an attribute name, have to use '_'
+                elif read.query_position and pair.query_position:
+                    if pair.alignment.query_sequence[pair.query_position] == alignment.query_sequence[read.query_position]:
+                        depth_array[pileupcolumn.pos] += 1
+                        base_counter.update(alignment.query_sequence[read.query_position])
+                    else:
+                        discard_array[pileupcolumn.pos] += 1
+            column_depth = depth_array[pileupcolumn.pos]
+            if column_depth == 0:
+                consensus_seq += "_" #TODO Temporary, remove this line!
+                continue
+            depth_passed = False
+            if column_depth > 0: #TODO: This is going to end up being specific to these TB assays, maybe have a clever way to make this line optional
+                avg_depth_positions += 1
+                avg_depth_total += column_depth
+            if column_depth >= depth:
+                breadth_positions += 1
+                depth_passed = True
+        else: # not smor
+            depth_array[pileupcolumn.pos] = pileupcolumn.n
+            depth_passed = False
+            if pileupcolumn.n > 0: #TODO: This is going to end up being specific to these TB assays, maybe have a clever way to make this line optional
+                avg_depth_positions += 1
+                avg_depth_total += pileupcolumn.n
+            if pileupcolumn.n >= depth:
+                breadth_positions += 1
+                depth_passed = True
+            for pileupread in pileupcolumn.pileups:
+                if pileupread.is_del:
+                    base_counter.update("_") # XSLT doesn't like '-' as an attribute name, have to use '_'
+                elif pileupread.indel > 0: #This means the next position is an insertion
+                    #print("Found an insertion at position %d, cigar string: %s" % (position, pileupread.alignment.cigarstring))
+                    start = pileupread.query_position
+                    end = pileupread.query_position + pileupread.indel + 1
+                    base_counter.update({pileupread.alignment.query_sequence[start:end]: 1})
+                else:
+                    base_counter.update(pileupread.alignment.query_sequence[pileupread.query_position])
+        if column_depth == None: # this means did not do smor, so set column_depth to whole depth
+            column_depth = pileupcolumn.n
         ordered_list = base_counter.most_common()
+        if not ordered_list:
+            continue
         alignment_call = ordered_list[0][0]
         alignment_call_proportion = ordered_list[0][1] / column_depth
         prop_array[pileupcolumn.pos] = "%.3f" % alignment_call_proportion
@@ -117,8 +144,9 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset, 
             snp_call_proportion = ordered_list[1][1] / column_depth
         else:
             snp_call = snp_count = snp_call_proportion = None
+        if smor:
+            (proportion, low_level_cutoff, high_level_cutoff) = _compute_thresholds_SMOR(column_depth)
         consensus_seq += alignment_call if alignment_call_proportion >= proportion else "N"
-        (proportion, low_level_cutoff, high_level_cutoff) = _compute_thresholds_SMOR(column_depth)
         if position >= abs(offset) and offset < 0: #if the offset is negative, ie. amplicon starts before beginning of the gene, then when converting to gene-based coordinates need to make offset 1 unit more positive to account for there being no 0-base in gene-coordinates
             translated = position + (offset + 1)
         else:
@@ -137,7 +165,6 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset, 
                 if not depth_passed:
                     snp['flag'] = "low coverage"
                 snp_list.append(snp)
-                #print("Found position of interest %d, reference: %s, distribution:%s" % (position, snp_dict[position][0], base_counter))
             # We've covered it, now remove it from the dict so we can see what we might have missed
             del snp_dict[position]
         elif depth_passed and snp_call and snp_count >= mutdepth and snp_call_proportion >= proportion:
@@ -147,119 +174,19 @@ def _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset, 
                 snp['name'] = name
                 snp['significance'] = significance
             snp_list.append(snp)
-            #print("SNP found at position %d: %s->%s" % (position, reference_call, alignment_call))
-
     #Check for any positions_of_interest that weren't covered
     snp_dict.pop(0, None)
     for position in snp_dict.keys():
         for (name, reference, variant, significance) in snp_dict[position]:
             snp = {'name':name, 'position':str(position), 'depth':str(0), 'reference':reference, 'variant':variant}
             snp_list.append(snp)
-
     if not wholegenome: #If reference is whole genome, none of these are going to make sense, and they will make the output too large
         pileup_dict['consensus_sequence'] = consensus_seq
         pileup_dict['depths'] = ",".join(str(n) for n in depth_array)
         pileup_dict['proportions'] = ",".join(prop_array)
     pileup_dict['breadth'] = str(breadth_positions/amplicon_length * 100)
-    pileup_dict['discards'] = ",".join(str(n) for n in discard_array)
-    pileup_dict['SNPs'] = snp_list
-    pileup_dict['average_depth'] = str(avg_depth_total/avg_depth_positions) if avg_depth_positions else "0"
-    return pileup_dict
-
-def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, wholegenome):
-    pileup_dict = {}
-    snp_dict = _create_snp_dict(amplicon)
-    consensus_seq = ""
-    snp_list = []
-    breadth_positions = 0
-    avg_depth_total = avg_depth_positions = 0
-    amplicon_length = len(amplicon.sequence)
-    depth_array = ["0"] * amplicon_length
-    prop_array = ["0"] * amplicon_length
-    for pileupcolumn in pileup:
-        depth_array[pileupcolumn.pos] = str(pileupcolumn.n)
-        position = pileupcolumn.pos+1
-        depth_passed = False
-        if pileupcolumn.n > 0: #TODO: This is going to end up being specific to these TB assays, maybe have a clever way to make this line optional
-            avg_depth_positions += 1
-            avg_depth_total += pileupcolumn.n
-        if pileupcolumn.n >= depth:
-            breadth_positions += 1
-            depth_passed = True
-        base_counter = Counter()
-        for pileupread in pileupcolumn.pileups:
-            if pileupread.is_del:
-                base_counter.update("_") # XSLT doesn't like '-' as an attribute name, have to use '_'
-            elif pileupread.indel > 0: #This means the next position is an insertion
-                #print("Found an insertion at position %d, cigar string: %s" % (position, pileupread.alignment.cigarstring))
-                start = pileupread.query_position
-                end = pileupread.query_position + pileupread.indel + 1
-                base_counter.update({pileupread.alignment.query_sequence[start:end]: 1})
-            else:
-                base_counter.update(pileupread.alignment.query_sequence[pileupread.query_position])
-        #print(base_counter)
-        ordered_list = base_counter.most_common()
-        if not ordered_list:
-            continue
-        alignment_call = ordered_list[0][0]
-        alignment_call_proportion = ordered_list[0][1] / pileupcolumn.n
-        prop_array[pileupcolumn.pos] = "%.3f" % alignment_call_proportion
-        reference_call = amplicon.sequence[pileupcolumn.pos]
-        if reference_call == '-':
-            reference_call = '_' #Need to use '_' instead of '-' for gaps because of XSLT
-        if alignment_call != reference_call:
-            snp_call = alignment_call
-            snp_count = ordered_list[0][1]
-            snp_call_proportion = alignment_call_proportion
-        elif len(ordered_list) > 1:
-            snp_call = ordered_list[1][0]
-            snp_count = ordered_list[1][1]
-            snp_call_proportion = ordered_list[1][1] / pileupcolumn.n
-        else:
-            snp_call = snp_count = snp_call_proportion = None
-        consensus_seq += alignment_call if alignment_call_proportion >= proportion else "N"
-        if position >= abs(offset) and offset < 0: #if the offset is negative, ie. amplicon starts before beginning of the gene, then when converting to gene-based coordinates need to make offset 1 unit more positive to account for there being no 0-base in gene-coordinates
-            translated = position + (offset + 1)
-        else:
-            translated = position + offset #normal case where gene encompasses the amplicon
-        if position in snp_dict:
-            for (name, reference, variant, significance) in snp_dict[position]:
-                snp = {'name':name, 'position':str(translated), 'depth':str(pileupcolumn.n), 'reference':reference, 'variant':variant, 'basecalls':base_counter}
-                variant_proportion = base_counter[variant]/pileupcolumn.n
-                variant_count = base_counter[variant]
-                if variant_proportion >= proportion and variant_count >= mutdepth:
-                    snp['significance'] = significance
-                    if variant_proportion <= low_level_cutoff:
-                        snp['level'] = "low"
-                    elif variant_proportion >= high_level_cutoff:
-                        snp['level'] = "high"
-                if not depth_passed:
-                    snp['flag'] = "low coverage"
-                snp_list.append(snp)
-                #print("Found position of interest %d, reference: %s, distribution:%s" % (position, snp_dict[position][0], base_counter))
-            # We've covered it, now remove it from the dict so we can see what we might have missed
-            del snp_dict[position]
-        elif depth_passed and snp_call and snp_count >= mutdepth and snp_call_proportion >= proportion:
-            snp = {'name':'unknown', 'position':str(translated), 'depth':str(pileupcolumn.n), 'reference':reference_call, 'variant':snp_call, 'basecalls':base_counter}
-            if 0 in snp_dict:
-                (name, *rest, significance) = snp_dict[0][0]
-                snp['name'] = name
-                snp['significance'] = significance
-            snp_list.append(snp)
-            #print("SNP found at position %d: %s->%s" % (position, reference_call, alignment_call))
-
-    #Check for any positions_of_interest that weren't covered
-    snp_dict.pop(0, None)
-    for position in snp_dict.keys():
-        for (name, reference, variant, significance) in snp_dict[position]:
-            snp = {'name':name, 'position':str(position), 'depth':str(0), 'reference':reference, 'variant':variant}
-            snp_list.append(snp)
-
-    if not wholegenome: #If reference is whole genome, none of these are going to make sense, and they will make the output too large
-        pileup_dict['consensus_sequence'] = consensus_seq
-        pileup_dict['depths'] = ",".join(depth_array)
-        pileup_dict['proportions'] = ",".join(prop_array)
-    pileup_dict['breadth'] = str(breadth_positions/amplicon_length * 100)
+    if smor:
+        pileup_dict['discards'] = ",".join(str(n) for n in discard_array)
     pileup_dict['SNPs'] = snp_list
     pileup_dict['average_depth'] = str(avg_depth_total/avg_depth_positions) if avg_depth_positions else "0"
     return pileup_dict
@@ -306,8 +233,7 @@ def _add_snp_node(parent, snp):
         ElementTree.SubElement(snp_node, 'base_distribution', {k:str(v) for k,v in base_counter.items()})
     return snp_node
 
-def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
-    #TODO come up with a way to filter out reads that did not align to the region well, but distinguish this from reads that need to be merged because the region is too big
+def _process_roi(roi, samdata, amplicon_ref, smor, amplicon_ref_len, reverse_comp=False):
     from operator import attrgetter
     roi_dict = {'region':roi.position_range}
     range_match = re.search('(\d*)-(\d*)', roi.position_range)
@@ -319,6 +245,11 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
         reverse_comp = True
         start,end = end,start
     expected_length = end - start
+    #check if the roi spans the whole reference, if so can use .query_alignment_sequence to get the whole sequence without running into the problem of the loop not getting to last base
+    #still will have a problem when start != 0 but end == amplicon_ref_len
+    use_query_alignment_seq = False
+    if end == amplicon_ref_len and start == 0:
+        use_query_alignment_seq = True
     aligned_reads = samdata.fetch(amplicon_ref, start, end)
     big_reads = []
     #check if reads are long enough, if not then merge
@@ -334,13 +265,18 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
     if n == 0:
         roi_dict['flag'] = "region not found"
         return roi_dict
-    else:
+    elif not smor:#no --smor flag
         proportion_failed = failed/n
         if proportion_failed >= .95:
             logging.debug("reads are not as big as roi, merging...")
             reads = sorted(samdata.fetch(amplicon_ref, start, end), key=attrgetter('query_name'))
-            #print("reads are not as big as roi, merging...", roi, amplicon_ref, samdata)
             big_reads = _process_merge(reads, start ,end)
+    else: #smor
+        proportion_failed = failed/n
+        if proportion_failed >= .95:
+            roi_dict['flag'] = "reads are smaller than ROI and cannot merge because --smor"
+            return roi_dict
+
     aa_sequence_counter = Counter()
     aa_sequence_counter_temp = Counter()
     nt_sequence_counter = Counter()
@@ -348,7 +284,7 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
     significant = False
     if not roi.aa_sequence:
         roi.aa_sequence = str(DNA(roi.nt_sequence).translate()).replace('*', 'x')
-    if big_reads != []:
+    if big_reads != []: #merged => not smor
         for read in big_reads:
             nt_sequence = DNA(read)
             if reverse_comp:
@@ -361,7 +297,7 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
                 nt_sequence_counter.update([str(nt_sequence)])
                 aa_sequence_counter_temp.update([aa_string])
                 depth += 1
-    else:
+    elif not smor:#no --smor flag
         for read in aligned_reads:
             rstart = read.reference_start
             alignment_length = read.get_overlap(start, end)
@@ -369,16 +305,64 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
             if alignment_length != expected_length:
                 continue
             if rstart <= start:
-                qend = qstart = None
-                for (qpos, rpos) in read.get_aligned_pairs():
-                    if rpos == start:
-                        qstart = qpos
-                    if rpos == end:
-                        qend = qpos
-                #throw out reads with insertions in the ROI
-                #if not qend or not qstart or qend-qstart != expected_length:
-                    #continue
-                nt_sequence = DNA(read.query_sequence[qstart:qend])
+                if not use_query_alignment_seq:
+                    for (qpos, rpos) in read.get_aligned_pairs():
+                        if rpos == start:
+                            qstart = qpos
+                        if rpos == end:
+                            qend = qpos
+                    nt_sequence = DNA(read.query_sequence[qstart:qend])
+                else:
+                    #the ROI is the whole ref so can use .query_alignment_sequence
+                    nt_sequence = DNA(read.query_alignment_sequence)
+                if reverse_comp:
+                    nt_sequence = nt_sequence.reverse_complement()
+                #scikit-bio doesn't support translating degenerate bases currently, so we will just throw out reads with degenerates for now
+                if nt_sequence.has_degenerates():
+                    continue
+                aa_sequence = nt_sequence.translate()
+                aa_string = str(aa_sequence).replace('*', 'x')
+                if aa_string:
+                    nt_sequence_counter.update([str(nt_sequence)])
+                    aa_sequence_counter_temp.update([aa_string])
+                    depth += 1
+    else: #smor
+        reads = iter(sorted(samdata.fetch(amplicon_ref, start, end), key=attrgetter('query_name')))
+        for read, pair in pairwise(reads):
+            if read.query_name != pair.query_name:
+                continue
+            rstart1 = read.reference_start
+            rstart2 = pair.reference_start
+            alignment_length1 = read.get_overlap(start, end)
+            alignment_length2 = pair.get_overlap(start, end)
+            #throw out reads that are not the same length as their pair
+            if alignment_length1 != alignment_length2:
+                continue
+            if rstart1 <= start:
+                if not use_query_alignment_seq:
+                    for (qpos, rpos) in read.get_aligned_pairs():
+                        if rpos == start:
+                            qstart = qpos
+                        if rpos == end:
+                            qend = qpos
+                    nt_sequence = DNA(read.query_sequence[qstart:qend])
+                else:
+                    #the ROI is the whole ref so can use .query_alignment_sequence
+                    nt_sequence = DNA(read.query_alignment_sequence)
+            if rstart2 <= start:
+                if not use_query_alignment_seq:
+                    for (qpos, rpos) in pair.get_aligned_pairs():
+                        if rpos == start:
+                            qstart = qpos
+                        if rpos == end:
+                            qend = qpos
+                    nt_sequence2 = DNA(pair.query_sequence[qstart:qend])
+                else:
+                    #the ROI is the whole ref so can use .query_alignment_sequence
+                    nt_sequence2 = DNA(pair.query_alignment_sequence)
+            if nt_sequence != nt_sequence2:
+                continue
+            else:
                 if reverse_comp:
                     nt_sequence = nt_sequence.reverse_complement()
                 #scikit-bio doesn't support translating degenerate bases currently, so we will just throw out reads with degenerates for now
@@ -400,7 +384,6 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
                 if len(aa_string) <= i or roi.aa_sequence[i] != aa_string[i]:
                     num_changes += 1
             aa_sequence_counter[(aa_string, num_changes)] = count
-
     #This next bit is just being saved for backward compatibility. Should deprecate and remove soon
     (aa_consensus, num_changes) = aa_sequence_counter.most_common(1)[0][0]
     nt_consensus = nt_sequence_counter.most_common(1)[0][0]
@@ -419,467 +402,7 @@ def _process_roi(roi, samdata, amplicon_ref, reverse_comp=False):
     roi_dict['depth'] = str(depth)
     return roi_dict
 
-
-def _process_merge(reads, start, end):
-    big_aligned_reads = []
-    for read, pair in pairwise(reads):
-        if read.query_name != pair.query_name:
-            continue
-        refstart1 = read.reference_start
-        refend1 = read.reference_end
-        refstart2 = pair.reference_start
-        refend2 = pair.reference_end
-        if refstart1 == None or refend1 == None or refstart2 == None or refend2 == None:
-            continue
-        #get the farthest left and right positions that either read align to reference
-        refstart = refstart1 if refstart1 < refstart2 else refstart2
-        refend = refend2 if refend2 > refend1 else refend1
-        combined_read = ""
-        print("read", read.query_sequence)
-        print("pair", pair.query_sequence)
-        for ref_pos in range(refstart, refend):
-            read_base = pair_base = None
-            for (read_qpos, read_rpos) in read.get_aligned_pairs():
-                if read_rpos == ref_pos and read_qpos != None:
-                    read_base = str(DNA(read.query_sequence[int(read_qpos)]))
-                    read_qual = read.query_qualities[int(read_qpos)]
-                    break
-            for (pair_qpos, pair_rpos) in pair.get_aligned_pairs():
-                if pair_rpos == ref_pos and pair_qpos != None:
-                    pair_base = str(DNA(pair.query_sequence[int(pair_qpos)]))
-                    pair_qual = pair.query_qualities[int(pair_qpos)]
-                    break
-            if read_base == None and pair_base == None:
-                combined_read += 'N'
-            elif read_base != None and pair_base == None:
-                combined_read += read_base
-            elif read_base == None and pair_base != None:
-                combined_read += pair_base
-            else:
-                if read_qual >= pair_qual:
-                    combined_read += read_base
-                else:
-                    combined_read += pair_base
-        print("combined", combined_read)
-        if len(combined_read) == end-start:
-            big_aligned_reads.append(combined_read)
-    return big_aligned_reads
-'''
-def _process_merge(reads, start, end):
-    big_aligned_reads = []
-    for read, pair in pairwise(reads):
-        if read.query_name != pair.query_name:
-            continue
-        refstart1 = read.reference_start
-        refend1 = read.reference_end
-        refstart2 = pair.reference_start
-        refend2 = pair.reference_end
-        #if both start at same place then they can't cover whole roi, so skip
-        if refstart1 == refstart2:
-            continue
-        #figure out which starts first
-        normal_orienation1 = True if refstart1 < refstart2 else False
-        normal_orienation2 = True if refend1 < refend2 else False
-        if normal_orienation1 and normal_orienation2:
-            normal_orienation = True
-        elif normal_orienation1 == False and normal_orientation2 == False:
-            normal_orienation = False
-        else:
-            continue
-        if normal_orienation:
-            #find coordinates of the ends of read 1
-            qend = qstart = rstart = rend = None
-            for (qpos, rpos) in read.get_aligned_pairs():
-                if rpos == start:
-                    qstart = qpos
-                    rstart = rpos
-                #keep setting qend so it ends up being the last position the read aligns to the
-                qend = qpos
-                rend = rpos
-            #throw out reads that do not have ends
-            if qend == None or qstart == None or rstart == None or rend == None:
-                continue
-            if qend - qstart != rend - rstart:
-                continue
-            nt_sequence = str(DNA(read.query_sequence[qstart:qend]))
-            qual_seq = read.query_qualities[qstart:qend]
-            #find coordinates of the ends of read 2
-            qend2 = qstart2 = rstart2 = rend2 = None
-            bool = True
-            for (qpos, rpos) in pair.get_aligned_pairs():
-                #set qstart to first query position
-                if bool:
-                    qstart2 = qpos
-                    rstart2 = rpos
-                    bool = False
-                if rpos == end - 1:
-                    qend2 = qpos
-                    rend2 = rpos
-            #throw out reads that do not have ends
-            if qend2 == None or qstart2 == None or rstart2 == None or rend2 == None:
-                continue
-            if qend2 - qstart2 != rend2 - rstart2:
-                continue
-            nt_sequence2 = str(DNA(pair.query_sequence[qstart2:qend2]))
-            qual_seq2 = pair.query_qualities[qstart2:qend2]
-        else:
-            #find coordinates of read which will contain end, not start cause flipped orientation
-            qend = qstart = rstart = rend = None
-            bool = True
-            for (qpos, rpos) in read.get_aligned_pairs():
-                if bool:
-                    qstart = qpos
-                    rstart = rpos
-                    bool = False
-                #keep setting qend so it ends up being the last position the read aligns to the
-                if rpos == end - 1:
-                    qend = qpos
-                    rend = rpos
-            #throw out reads that do not have ends
-            if qend == None or qstart == None or rstart == None or rend == None:
-                continue
-            #ignore funny busniness with query and ref getting off, for now
-            if qend - qstart != rend - rstart:
-                continue
-            nt_sequence = str(DNA(read.query_sequence[qstart:qend]))
-            qual_seq = read.query_qualities[qstart:qend]
-            #get pair's ends and sequence
-            qend2 = qstart2 = rstart2 = rend2 = None
-            bool = True
-            for (qpos, rpos) in pair.get_aligned_pairs():
-                #set qstart to first query position
-                if rpos == start:
-                    qstart2 = qpos
-                    rstart2 = rpos
-                qend2 = qpos
-                rend2 = rpos
-            #throw out reads that do not have ends
-            if qend2 == None or qstart2 == None or rstart2 == None or rend2 == None:
-                continue
-            if qend2 - qstart2 != rend2 - rstart2:
-                continue
-            nt_sequence2 = str(DNA(pair.query_sequence[qstart2:qend2]))
-            qual_seq2 = pair.query_qualities[qstart2:qend2]
-        combined_read = ""
-        if normal_orienation:
-            #find if reads overlap
-            is_overlap = True if rend > rstart2 else False
-            if is_overlap:
-                skip = False
-                overlap_len = (rend - rstart2)
-                overlap_start_read = (qend - overlap_len)
-                overlap_end_read = qend
-                overlap_start_pair = qstart2
-                overlap_end_pair = (qstart2 + overlap_len)
-                #get non-overlapping part of read
-                combined_read += nt_sequence[qstart: overlap_start_read]
-                #take higher base when overlapping
-                for i in range(overlap_len):
-                    #make sure don't go over end of second read
-                    if (i + rstart2) == end - 1:
-                        skip = True
-                        break
-                    print(rstart, rend, qstart, qend, rstart2, rend2, qstart2, qend2 ,"seq len 1", len(nt_sequence), "seq len 2", len(nt_sequence2),"i", i, "overlap_start_read",overlap_start_read, "overlap_end_read",overlap_end_read, "overlap_start_pair",overlap_start_pair, "overlap_end_pair",overlap_end_pair, "overlap_len",overlap_len,"start", start, "end", end)
-                    if not nt_sequence[i + overlap_start_read] and nt_sequence2[i + overlap_start_pair]:
-                        combined_read += nt_sequence2[i + overlap_start_pair]
-                    elif nt_sequence[i + overlap_start_read] and not nt_sequence2[i + overlap_start_pair]:
-                        combined_read += nt_sequence[i + overlap_start_read]
-                    elif not nt_sequence[i + overlap_start_read] and not nt_sequence2[i + overlap_start_pair]:
-                        combined_read += 'N'
-                    else:
-                        if qual_seq[i + overlap_start_read] >= qual_seq2[i + overlap_start_pair]:
-                            combined_read += nt_sequence[i + overlap_start_read]
-                        else:
-                            combined_read += nt_sequence2[i + overlap_start_pair]
-                #add the rest of second read
-                    if skip == False:
-                        combined_read += nt_sequence2[overlap_end_pair: qend2]
-            else: #no overlap
-                combined_read += nt_sequence
-                #add Ns where neither read is
-                for i in range(rend, rstart2):
-                    combined_read += 'N'
-                combined_read += nt_sequence2
-        else: #reads are flipped in orientation
-            is_overlap = True if rend2 > rstart else False
-            if is_overlap:
-                overlap_len = (rend2 - rstart)
-                overlap_start_read = qstart
-                overlap_end_read = qstart + overlap_len
-                overlap_start_pair = qend2 - overlap_len
-                overlap_end_pair = qend2
-                combined_read += nt_sequence2[qstart2:overlap_start_pair]
-                #take higher base when overlapping
-                for i in range(overlap_len):
-                    if not nt_sequence[i + overlap_start_read] and nt_sequence2[i + overlap_start_pair]:
-                        combined_read += nt_sequence2[i]
-                    elif nt_sequence[i + overlap_start_read] and not nt_sequence2[i + overlap_start_pair]:
-                        combined_read += nt_sequence[i + overlap_start_read]
-                    elif not nt_sequence[i + overlap_start_read] and not nt_sequence2[i + overlap_start_pair]:
-                        combined_read += 'N'
-                    else:
-                        if qual_seq[i + overlap_start_read] > qual_seq2[i + overlap_start_pair]:
-                            combined_read += nt_sequence[i + overlap_start_read]
-                        else:
-                            combined_read += nt_sequence2[i + overlap_start_pair]
-                #add the rest
-                combined_read += nt_sequence[overlap_end_read:qend]
-            else:
-                combined_read += nt_sequence2
-                for i in range(rend2, rstart):
-                    combined_read += 'N'
-                combined_read += nt_sequence
-        big_aligned_reads.append(combined_read)
-    return big_aligned_reads
-
-
-
-        combined_read = ""
-        #keep read pairs together incase we get off
-        if read.query_name != pair.query_name:
-            continue
-        #make sure reads have a nonzero length
-        if len(read.get_reference_positions()) == 0 or len(pair.get_reference_positions()) == 0:
-            continue
-        read_seq = read.query_sequence
-        pair_seq = pair.query_sequence
-        read_qual = read.query_qualities
-        pair_qual = pair.query_qualities
-        #check if either read is reversed
-        read_reversed = False
-        pair_reversed = False
-        read_end = read.reference_end
-        read_start = read.reference_start
-        pair_end = pair.reference_end
-        pair_start = pair.reference_start
-        if read.reference_end < read.reference_start:
-            read_reversed = True
-            read_end = read.reference_start
-            read_start = read.reference_end
-        if pair.reference_end < pair.reference_start:
-            pair_reversed = True
-            pair_end = pair.reference_start
-            pair_start = pair.reference_end
-        #make sure sequence length matches meta-data length because it seems to not always
-        if (read_end - read_start) != len(read_seq) or (pair_end - pair_start) != len(pair_seq):
-            continue
-        #check that reads have ends
-        if pair_end != None and pair_start != None and read_end != None and read_start != None:#no nones so we can keep going
-            pass
-        elif read_end == None or read_start == None and pair_end != None and pair_start != None:
-            for i in range(start, pair_start):
-                combined_read += "N"
-            for i in range(pair_start, pair_end):
-                if pair_seq[i] == None:
-                    combined_read += "N"
-                else:
-                    cmbined_read += pair_seq[i]
-            for i in range(pair_end, end):
-                combined_read += "N"
-            big_aligned_reads.append(combined_read)
-            continue
-        elif pair_end == None or pair_start == None and read_end != None and read_start != None:
-            for i in range(start, read_start):
-                combined_read += "N"
-            for i in range(read_start, read_end):
-                if read_seq[i] == None:
-                    combined_read += "N"
-                else:
-                    cmbined_read += read_seq[i]
-            for i in range(read_end, end):
-                combined_read += "N"
-            big_aligned_reads.append(combined_read)
-            continue
-        else: #cannot use these reads
-            continue
-        #check if read or pair comes first
-        if read_start <= pair_start:
-            normal_orientation = True
-        else:
-            normal_orienation = False
-        #check if read is before pair
-        if normal_orientation:
-            #check if reads cover whole roi
-            if read_start != start:
-                for i in range(start, read_start):
-                    combined_read += "N"
-            for i in range(start, read_end):
-                if i < pair_start:
-                    if read_seq[i] == None:
-                        combined_read += "N"
-                    else:
-                        combined_read += read_seq[i]
-                elif i >= pair_start and i < pair_end: #i is in range of both reads
-                    print(i,read_end, pair_start, pair_end)
-                    booli = read_seq[i]
-                    boolii = pair_seq[i - pair_start]
-                    if read_seq[i] == None and pair_seq[i - pair_start] == None:
-                        combined_read += "N"
-                    elif read_seq[i] == None and pair_seq[i - pair_start] != None:
-                        combined_read += pair_seq[i - pair_start]
-                    elif read_seq[i] != None and pair_seq[i - pair_start] == None:
-                        combined_read += read_seq[i]
-                    else:
-                        if read_qual[i] >= pair_qual[i - pair_start]:
-                            combined_read += read_seq[i]
-                        else:
-                            combined_read += pair_seq[i - pair_start]
-                else: #if we get here then read fully encompasses pair
-                    if read_seq[i] == None:
-                        combined_read += "N"
-                    else:
-                        combined_read += read_seq[i]
-            #check if there is a gap between reads and if there is fill with N's
-            if read_end < pair_start:
-                for i in range(read_end, pair_start):
-                    combined_read += "N"
-            #iterate over remaining length of second read ("pair")
-            for j in range(i+1, pair_end):
-                if pair_seq[j - pair_start] == None:
-                    combined_read += "N"
-                else:
-                    combined_read += pair_seq[j - pair_start]
-            if pair_end < end:
-                for i in range(pair_end, end):
-                    combined_read += "N"
-        else: #pair comes before read
-            if pair_start != start:
-                for i in range(start, pair_start):
-                    combined_read += "N"
-            for i in range(start, pair_end):
-                if i < read_start:
-                    if pair_seq[i] == None:
-                        combined_read += "N"
-                    else:
-                        combined_read += pair_seq[i]
-                elif i >= read_start and i < read_end: #i is in range of both reads now
-                    if pair_seq[i] == None and read_seq[i - read_start] == None:
-                        combined_read += "N"
-                    elif pair_seq[i] == None and read_seq[i - read_start] != None:
-                        combined_read += read_seq[i - read_start]
-                    elif pair_seq[i] != None and read_seq[i - read_start] == None:
-                        combined_read += pair_seq[i]
-                    else:
-                        if pair_qual[i] >= read_qual[i - read_start]:
-                            combined_read += pair_seq[i]
-                        else:
-                            combined_read += read_seq[i - read_start]
-                else: #pair fuly encompasses read
-                    if pair_seq[i] == None:
-                        combined_read += "N"
-                    else:
-                        combined_read += pair_seq[i]
-            #check for gap between reads
-            if pair_end < read_start:
-                for i in range(pair_end, read_start):
-                    combined_read += "N"
-            #iterate over remaining length of second read ("read")
-            for j in range(i+1, read_end):
-                if read_seq[j - read_start] == None:
-                    combined_read += "N"
-                else:
-                    combined_read += read_seq[j - read_start]
-            if read_end < end:
-                for i in range(read_end, end):
-                    combined_read += "N"
-        big_aligned_reads.append(combined_read)
-    return big_aligned_reads
-'''
-
-
-def _process_roi_SMOR(roi, samdata, amplicon_ref, reverse_comp=False):
-    from operator import attrgetter
-    roi_dict = {'region':roi.position_range}
-    range_match = re.search('(\d*)-(\d*)', roi.position_range)
-    if not range_match:
-        return roi_dict
-    start = int(range_match.group(1)) - 1
-    end = int(range_match.group(2))
-    if end < start:
-        reverse_comp = True
-        start,end = end,start
-    expected_length = end - start
-    aa_sequence_counter = Counter()
-    aa_sequence_counter_temp = Counter()
-    nt_sequence_counter = Counter()
-    depth = 0
-    if not roi.aa_sequence:
-        roi.aa_sequence = str(DNA(roi.nt_sequence).translate()).replace('*', 'x')
-    reads = iter(sorted(samdata.fetch(amplicon_ref, start, end), key=attrgetter('query_name')))
-    for read, pair in pairwise(reads):
-        if read.query_name != pair.query_name:
-            continue
-        rstart1 = read.reference_start
-        rstart2 = pair.reference_start
-        alignment_length1 = read.get_overlap(start, end)
-        alignment_length2 = pair.get_overlap(start, end)
-        #throw out reads that either have gaps in the ROI or don't cover the whole ROI
-        if alignment_length1 != expected_length or alignment_length2 != expected_length:
-            continue
-        if rstart1 <= start:
-            qend = qstart = None
-            for (qpos, rpos) in read.get_aligned_pairs():
-                if rpos == start:
-                    qstart = qpos
-                if rpos == end:
-                    qend = qpos
-            #throw out reads with insertions in the ROI
-            if not qend or not qstart or qend-qstart != expected_length:
-                continue
-            nt_sequence = DNA(read.query_sequence[qstart:qend])
-        if rstart2 <= start:
-            qend = qstart = None
-            for (qpos, rpos) in pair.get_aligned_pairs():
-                if rpos == start:
-                    qstart = qpos
-                if rpos == end:
-                    qend = qpos
-            #throw out reads with insertions in the ROI
-            if not qend or not qstart or qend-qstart != expected_length:
-                continue
-            nt_sequence2 = DNA(pair.query_sequence[qstart:qend])
-        if nt_sequence != nt_sequence2:
-            continue
-        else:
-            if reverse_comp:
-                nt_sequence = nt_sequence.reverse_complement()
-            #scikit-bio doesn't support translating degenerate bases currently, so we will just throw out reads with degenerates for now
-            if nt_sequence.has_degenerates():
-                continue
-            aa_sequence = nt_sequence.translate()
-            aa_string = str(aa_sequence).replace('*', 'x')
-            if aa_string:
-                nt_sequence_counter.update([str(nt_sequence)])
-                aa_sequence_counter_temp.update([aa_string])
-                depth += 1
-    if len(aa_sequence_counter_temp) == 0:
-        roi_dict['flag'] = "region not found"
-        return roi_dict
-    else:
-        for (aa_string, count) in aa_sequence_counter_temp.most_common():
-            num_changes = 0
-            for i in range(len(roi.aa_sequence)):
-                if len(aa_string) <= i or roi.aa_sequence[i] != aa_string[i]:
-                    num_changes += 1
-            aa_sequence_counter[(aa_string, num_changes)] = count
-
-    (aa_consensus, num_changes) = aa_sequence_counter.most_common(1)[0][0]
-    nt_consensus = nt_sequence_counter.most_common(1)[0][0]
-    reference = roi.aa_sequence
-    consensus = aa_consensus
-    if roi.nt_sequence:
-        reference = roi.nt_sequence
-        consensus = nt_consensus
-    roi_dict['most_common_aa_sequence'] = aa_consensus
-    roi_dict['most_common_nt_sequence'] = nt_consensus
-    roi_dict['reference'] = reference
-    roi_dict['changes'] = str(num_changes)
-    roi_dict['aa_sequence_distribution'] = aa_sequence_counter
-    roi_dict['nt_sequence_distribution'] = nt_sequence_counter
-    roi_dict['depth'] = str(depth)
-    return roi_dict
-
-def _add_roi_node(parent, roi, roi_dict, depth, proportion, mutdepth, smor):
+def _add_roi_node(parent, roi, roi_dict, depth, proportion, mutdepth, smor, offset, allele_min_reads):
     global low_level_cutoff, high_level_cutoff
     nonsynonymous = False
     if "flag" in roi_dict:
@@ -894,19 +417,79 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion, mutdepth, smor):
     roi_attributes = {k:roi_dict[k] for k in ('region', 'reference', 'depth')}
     roi_attributes['name'] = str(roi.name)
     roi_node = ElementTree.SubElement(parent, "region_of_interest", roi_attributes)
+    if not roi.aa_sequence:
+        roi.aa_sequence = str(DNA(roi.nt_sequence).translate()).replace('*', 'x')
+    roi_node.set('aa_reference', roi.aa_sequence)
     reporting_threshold = max(mutdepth, math.ceil(int(roi_dict['depth']) * proportion))
+    print(proportion, low_level_cutoff, high_level_cutoff, int(roi_dict['depth']), reporting_threshold)
+    cutOff = int(roi_dict['depth']) * .02
     dominant_count = 0; #Number of reads containing the most common amino acid sequence
     aa_seq_counter = roi_dict['aa_sequence_distribution']
+    aa_allele_count = 0
+    #calculate offsets depending on if in positive region of gene or negative
+    #adding one when in negative to keep consistent with _process_pileup
+    aa_offset_pos = math.floor(offset/3)
+    aa_offset_neg = math.floor((offset+1)/3)
     for ((seq, aa_changes), count) in aa_seq_counter.most_common():
         if dominant_count == 0:
             dominant_count = count
         if count >= reporting_threshold:
             aa_seq_node = ElementTree.SubElement(roi_node, "amino_acid_sequence", {'count':str(count), 'percent':str(count/int(roi_dict['depth'])*100), 'aa_changes':str(aa_changes)})
-            aa_seq_node.text = seq
             if aa_changes > 0:
                 nonsynonymous = True
+            #get string of the aa changes
+            changes = []
+            all_changes = []
+            for i in range(len(roi.aa_sequence)):
+                if i > len(seq) - 1:
+                    change = [i, roi.aa_sequence[i], "_"]
+                    all_changes.append(change)
+                    changes.append(change)
+                elif roi.aa_sequence[i] != seq[i]:
+                    change = [i, roi.aa_sequence[i], seq[i]]
+                    all_changes.append(change)
+                    changes.append(change)
+            if len(seq) > len(roi.aa_sequence):
+                for i in range(len(roi.aa_sequence), len(seq)):
+                    change = [i, "_", seq[i]]
+                    all_changes.append(change)
+                    changes.append(change)
+            #check to see if aa changes are a result of an indel, and if so remove them
+            start_of_run = _sequential(changes, 0)
+            changes = changes[0:start_of_run]
+            shift = 0
+            #create change string with '1' and '2' that will be replaced by <b><u> and </u></b> in post-processing
+            for change in all_changes:
+                loc = change[0] + shift
+                #check if change is past last base in seq => an indel at the end of seq
+                if loc >= len(seq):
+                    temp = seq + '1' + '_' + '2'
+                else:
+                    temp = seq[0:loc] + '1' + seq[loc] + '2' + seq[loc + 1:]
+                shift += 2
+                seq = temp
+            aa_seq_node.text = seq
+            #create changes strings, adjusting the aa coordinates to be gene-relative
+            if all_changes != []:
+                change_string = ""
+                for all_change in all_changes:
+                    if all_change[0] >= abs(aa_offset_pos) and aa_offset_pos < 0: #if the offset is negative, ie. amplicon starts before beginning of the gene, then when converting to gene-based coordinates need to make offset 1 unit more positive to account for there being no 0-base in gene-coordinates
+                        all_change[0] = all_change[0] + aa_offset_neg
+                    else:
+                        all_change[0] = all_change[0] + aa_offset_pos #normal case where gene encompasses the amplicon
+                    change_string += ', ' + all_change[1] + str(all_change[0]) + all_change[2]
+                aa_seq_node.set('aa_changes_specific_all', change_string)
+                change_string = ""
+                for change in changes:
+                    #don't need to shift the aa coordinates here again because all_changes and changes are filled with same, shallow copied, lists
+                    if change[0] < 0:
+                        continue
+                    else:
+                        change_string += change[1] + str(change[0]) + change[2] + ', '
+                aa_seq_node.set('aa_changes_specific', change_string)
         else:
             break #Since they are returned in order by count, as soon as one is below the threshold the rest will be as well
+
     nt_seq_counter = roi_dict['nt_sequence_distribution']
     for (seq, count) in nt_seq_counter.most_common():
         if count >= reporting_threshold:
@@ -914,7 +497,6 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion, mutdepth, smor):
             nt_seq_node.text = seq
         else:
             break #Since they are returned in order by count, as soon as one is below the threshold the rest will be as well
-    cutOff = int(roi_dict['depth']) * .02
     allele_count = 0
     for (seq, count) in nt_seq_counter.most_common():
         #get most frequent alleles that have a freq of > 2% (this is an arbitrary cut-off)
@@ -963,16 +545,29 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion, mutdepth, smor):
         significance_node.text = roi.significance.message
         if roi.significance.resistance:
             significance_node.set("resistance", roi.significance.resistance)
-        if int(roi_dict['depth']) < depth:
+        if int(roi_dict['depth']) < depth:# that is so incredibly strange that i am typing that habitualy
             significance_node.set("flag", "low coverage")
     elif int(roi_dict['depth']) < depth: # No significance but still need to flag it for low coverage
         significance_node = ElementTree.SubElement(roi_node, "significance")
         if roi.significance.resistance:
             significance_node.set("resistance", roi.significance.resistance)
         significance_node.set("flag", "low coverage")
-    ElementTree.SubElement(roi_node, 'aa_sequence_distribution', {k[0]:str(v) for k,v in aa_seq_counter.items() if v>1}) #key is a tuple of (sequence, changes) and I just want the sequence
-    ElementTree.SubElement(roi_node, 'nt_sequence_distribution', {k:str(v) for k,v in nt_seq_counter.items() if v>1})
+    #keep all alleles until this point so proportional calculations are correct
+    #do not output alleles that have less than allele_min_reads # of reads
+    ElementTree.SubElement(roi_node, 'aa_sequence_distribution', {k[0]:str(v) for k,v in aa_seq_counter.items() if v >= allele_min_reads}) #key is a tuple of (sequence, changes) and I just want the sequence
+    ElementTree.SubElement(roi_node, 'nt_sequence_distribution', {k:str(v) for k,v in nt_seq_counter.items() if v >= allele_min_reads})
     return roi_node
+
+#returns the index of the start of a run of sequential numbers from some point in array to the end of array
+#if such a run does not exist it returns the index of last element + 1
+#allows for one element gaps, ie. [1,3,4,5,6] would return 0 but [1,4,5,6] would return 1
+def _sequential(arr, n):
+    if n == len(arr) - 1:
+        return n + 1
+    for i in range(n, len(arr) - 1):
+        if arr[i][0] + 1 != arr[i+1][0] and arr[i][0] + 2 != arr[i+1][0]:
+            return _sequential(arr, i + 1)
+    return n
 
 def _add_dummy_roi_node(parent, roi):
     reference = roi.aa_sequence
@@ -1008,7 +603,47 @@ def _compute_thresholds_SMOR(smor_count):
     return (proportion, low_level_cutoff, high_level_cutoff)
 
 
-
+def _process_merge(reads, start, end):
+    big_aligned_reads = []
+    for read, pair in pairwise(reads):
+        if read.query_name != pair.query_name:
+            continue
+        refstart1 = read.reference_start
+        refend1 = read.reference_end
+        refstart2 = pair.reference_start
+        refend2 = pair.reference_end
+        if refstart1 == None or refend1 == None or refstart2 == None or refend2 == None:
+            continue
+        #get the farthest left and right positions that either read align to reference
+        refstart = refstart1 if refstart1 < refstart2 else refstart2
+        refend = refend2 if refend2 > refend1 else refend1
+        combined_read = ""
+        for ref_pos in range(refstart, refend):
+            read_base = pair_base = None
+            for (read_qpos, read_rpos) in read.get_aligned_pairs():
+                if read_rpos == ref_pos and read_qpos != None:
+                    read_base = str(DNA(read.query_sequence[int(read_qpos)]))
+                    read_qual = read.query_qualities[int(read_qpos)]
+                    break
+            for (pair_qpos, pair_rpos) in pair.get_aligned_pairs():
+                if pair_rpos == ref_pos and pair_qpos != None:
+                    pair_base = str(DNA(pair.query_sequence[int(pair_qpos)]))
+                    pair_qual = pair.query_qualities[int(pair_qpos)]
+                    break
+            if read_base == None and pair_base == None:
+                combined_read += 'N'
+            elif read_base != None and pair_base == None:
+                combined_read += read_base
+            elif read_base == None and pair_base != None:
+                combined_read += pair_base
+            else:
+                if read_qual >= pair_qual:
+                    combined_read += read_base
+                else:
+                    combined_read += pair_base
+        if len(combined_read) == end-start:
+            big_aligned_reads.append(combined_read)
+    return big_aligned_reads
 
 
 def _merge_reads(read, pair):
@@ -1143,7 +778,7 @@ USAGE
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
         parser.add_argument("-D", "--debug", action="store_true", default=False, help="write <sample_name>.log file with debugging information")
         parser.add_argument("-w", "--whole-genome", action="store_true", dest="wholegenome", default=False, help="JSON file uses a whole genome reference, so don't write out the consensus, depth, and proportion arrays for each sample")
-
+        parser.add_argument("--allele-output-threshold", dest="allele_min_reads", default=8, type=int, help="cutoff of # of reads below which allels for amino acids and nucleotide alleles will not be output [default: 8]")
         parser.add_argument('-o', '--out', metavar="FILE", type=argparse.FileType('w'), default=sys.stdout, help="output filename [default: stdout]")
         parser.add_argument("--output-format", type=str.lower, choices=('xml', 'json'), default='xml', help="output format [default: xml]")
 
@@ -1161,6 +796,7 @@ USAGE
         merge = args.merge
         smor = args.smor
         debug = args.debug
+        allele_min_reads = args.allele_min_reads
         wholegenome = args.wholegenome
         #ref_fp = args.ref
         #out_dir = args.odir
@@ -1283,10 +919,7 @@ USAGE
                                 significance_node.set("resistance", ",".join(resistances))
 
                     pileup = samdata.pileup(ref_name, max_depth=1000000, ignore_orphans=False, ignore_overlaps=False)
-                    if smor:
-                        amplicon_data = _process_pileup_SMOR(pileup, amplicon, depth, proportion, mutdepth, offset, wholegenome)
-                    else:
-                        amplicon_data = _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, wholegenome)
+                    amplicon_data = _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, wholegenome, smor)
                     if float(amplicon_data['breadth']) < breadth*100:
                         significance_node = amplicon_node.find("significance")
                         if significance_node is None:
@@ -1301,12 +934,8 @@ USAGE
                     _write_parameters(amplicon_node, amplicon_data)
 
                     for roi in amplicon.ROIs:
-                        if smor:
-                            roi_dict = _process_roi_SMOR(roi, samdata, ref_name, reverse_comp)
-                        else:
-                            roi_dict = _process_roi(roi, samdata, ref_name, reverse_comp)
-                        _add_roi_node(amplicon_node, roi, roi_dict, depth, proportion, mutdepth, smor)
-
+                        roi_dict = _process_roi(roi, samdata, ref_name, smor, len(amplicon.sequence), reverse_comp)
+                        _add_roi_node(amplicon_node, roi, roi_dict, depth, proportion, mutdepth, smor, offset, allele_min_reads)
                 if temp_file:
                     samdata.close()
                     os.remove(temp_file)
