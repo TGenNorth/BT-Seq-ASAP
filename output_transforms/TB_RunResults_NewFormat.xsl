@@ -140,17 +140,51 @@
 	    		</xsl:for-each>
                         <th>gyrA SNPs</th>
                         <th>Pyrazinamide</th>
-	    		<xsl:for-each select="sample[1]/assay[@name='pncA']/amplicon//snp/@name[. != 'unknown' and . != 'position of interest']">
+	    		<xsl:for-each select="sample[1]/assay[starts-with(@name, 'pncA')]/amplicon//snp/@name[. != 'unknown' and . != 'position of interest']">
 	    		    <th nowrap="true">
                                 pncA <xsl:value-of select="."/>
 	    		    </th>
 	    		</xsl:for-each>
-	    		<xsl:for-each select="sample[1]/assay[@name='pncA']/amplicon//region_of_interest//mutation/@name">
+	    		<xsl:for-each select="sample[1]/assay[starts-with(@name, 'pncA')]/amplicon//region_of_interest//mutation/@name">
 	    		    <th nowrap="true">
                                 pncA <xsl:value-of select="."/>
 	    		    </th>
 	    		</xsl:for-each>
                         <th>pncA SNPs</th>
+                        <th>Bedaquiline</th>
+	    		<xsl:for-each select="sample[1]/assay[starts-with(@name, 'Rv0678')]/amplicon//snp/@name[. != 'unknown' and . != 'position of interest']">
+	    		    <th nowrap="true">
+                                Rv0678 <xsl:value-of select="."/>
+	    		    </th>
+	    		</xsl:for-each>
+	    		<xsl:for-each select="sample[1]/assay[starts-with(@name, 'Rv0678')]/amplicon//region_of_interest//mutation/@name">
+	    		    <th nowrap="true">
+                                Rv0678 <xsl:value-of select="."/>
+	    		    </th>
+	    		</xsl:for-each>
+                        <th>Rv0678 SNPs</th>
+	    		<xsl:for-each select="sample[1]/assay[starts-with(@name, 'pepQ')]/amplicon//snp/@name[. != 'unknown' and . != 'position of interest']">
+	    		    <th nowrap="true">
+                                pepQ <xsl:value-of select="."/>
+	    		    </th>
+	    		</xsl:for-each>
+	    		<xsl:for-each select="sample[1]/assay[starts-with(@name, 'pepQ')]/amplicon//region_of_interest//mutation/@name">
+	    		    <th nowrap="true">
+                                pepQ <xsl:value-of select="."/>
+	    		    </th>
+	    		</xsl:for-each>
+                        <th>pepQ SNPs</th>
+	    		<xsl:for-each select="sample[1]/assay[starts-with(@name, 'atpE')]/amplicon//snp/@name[. != 'unknown' and . != 'position of interest']">
+	    		    <th nowrap="true">
+                                atpE <xsl:value-of select="."/>
+	    		    </th>
+	    		</xsl:for-each>
+	    		<xsl:for-each select="sample[1]/assay[starts-with(@name, 'atpE')]/amplicon//region_of_interest//mutation/@name">
+	    		    <th nowrap="true">
+                                atpE <xsl:value-of select="."/>
+	    		    </th>
+	    		</xsl:for-each>
+                        <th>atpE SNPs</th>
 	    		</tr>
                         <xsl:for-each select="sample">
                         <tr><th class="headcol"><a href="{/analysis/@run_name}/{./@name}.html"><xsl:value-of select="@name"/></a></th>
@@ -293,7 +327,7 @@
                         	<xsl:when test=".//significance[@flag and contains(@resistance, 'Pyrazinamide')]">Ind.</xsl:when>
                         	<xsl:otherwise>S</xsl:otherwise>
                         </xsl:choose></td>
-                        <xsl:for-each select="assay[@name='pncA']/amplicon//snp[@name != 'unknown' and @name != 'position of interest']">
+                        <xsl:for-each select="assay[starts-with(@name, 'pncA')]/amplicon//snp[@name != 'unknown' and @name != 'position of interest']">
 		            <td><xsl:choose>
 		            <xsl:when test="../significance/@flag"><font color="lightgray"><em><xsl:value-of select="../significance/@flag"/></em></font></xsl:when>
 		            <xsl:when test="./significance/@flag"><font color="lightgray"><em><xsl:value-of select="./significance/@flag"/></em></font></xsl:when>
@@ -303,7 +337,7 @@
 		            <xsl:otherwise><!-- SNP not present --><em>-</em></xsl:otherwise>
 		            </xsl:choose></td>
                         </xsl:for-each>
-	                <xsl:for-each select="assay[@name='pncA']/amplicon//region_of_interest//mutation">
+	                <xsl:for-each select="assay[starts-with(@name, 'pncA')]/amplicon//region_of_interest//mutation">
 		            <td><xsl:choose>
 		            <xsl:when test="../../significance/@flag"><font color="lightgray"><em><xsl:value-of select="../../significance/@flag"/></em></font></xsl:when>
 		            <xsl:when test="../significance/@flag"><font color="lightgray"><em><xsl:value-of select="../significance/@flag"/></em></font></xsl:when>
@@ -313,7 +347,89 @@
 		            <xsl:otherwise><!-- mutant codon not present --><em>-</em></xsl:otherwise>
 		            </xsl:choose></td>
 	                </xsl:for-each>
-	    		<td><xsl:for-each select="assay[@name='pncA']/amplicon/snp">
+	    		<td><xsl:for-each select="assay[starts-with(@name, 'pncA')]/amplicon/snp">
+                            <xsl:if test="snp_call/@count &gt;= $mutant_count_filter and snp_call/@percent &gt;= $prop_filter">
+	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
+                            </xsl:if>
+	    		</xsl:for-each></td>
+                        <td align="center"><xsl:choose>
+                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Bedaquiline') and contains(@level, 'high')]"><font color="red">R</font></xsl:when>
+                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Bedaquiline') and not(@level='low')]"><font color="red">HR</font></xsl:when>
+                        	<xsl:when test=".//significance[not(@flag) and contains(@resistance, 'Bedaquiline')]"><font color="red">LHR</font></xsl:when>
+                        	<xsl:when test=".//significance[@flag and contains(@resistance, 'Bedaquiline')]">Ind.</xsl:when>
+                        	<xsl:otherwise>S</xsl:otherwise>
+                        </xsl:choose></td>
+                        <xsl:for-each select="assay[starts-with(@name, 'Rv0678')]/amplicon//snp[@name != 'unknown' and @name != 'position of interest']">
+		            <td><xsl:choose>
+		            <xsl:when test="../significance/@flag"><font color="lightgray"><em><xsl:value-of select="../significance/@flag"/></em></font></xsl:when>
+		            <xsl:when test="./significance/@flag"><font color="lightgray"><em><xsl:value-of select="./significance/@flag"/></em></font></xsl:when>
+		            <xsl:when test="./significance[not(@flag)]">
+		                <xsl:value-of select="snp_call/@count"/>/<xsl:value-of select="@depth"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)
+		            </xsl:when>
+		            <xsl:otherwise><!-- SNP not present --><em>-</em></xsl:otherwise>
+		            </xsl:choose></td>
+                        </xsl:for-each>
+	                <xsl:for-each select="assay[starts-with(@name, 'Rv0678')]/amplicon//region_of_interest//mutation">
+		            <td><xsl:choose>
+		            <xsl:when test="../../significance/@flag"><font color="lightgray"><em><xsl:value-of select="../../significance/@flag"/></em></font></xsl:when>
+		            <xsl:when test="../significance/@flag"><font color="lightgray"><em><xsl:value-of select="../significance/@flag"/></em></font></xsl:when>
+		            <xsl:when test="../significance[not(@flag)] and @count &gt;= $mutant_count_filter and @percent &gt;= $prop_filter">
+		                <xsl:value-of select="@count"/>/<xsl:value-of select="../@depth"/>(<xsl:value-of select='format-number(@percent, "##.##")'/>%)
+		            </xsl:when>
+		            <xsl:otherwise><!-- mutant codon not present --><em>-</em></xsl:otherwise>
+		            </xsl:choose></td>
+	                </xsl:for-each>
+	    		<td><xsl:for-each select="assay[starts-with(@name, 'Rv0678')]/amplicon/snp">
+                            <xsl:if test="snp_call/@count &gt;= $mutant_count_filter and snp_call/@percent &gt;= $prop_filter">
+	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
+                            </xsl:if>
+	    		</xsl:for-each></td>
+                        <xsl:for-each select="assay[starts-with(@name, 'pepQ')]/amplicon//snp[@name != 'unknown' and @name != 'position of interest']">
+		            <td><xsl:choose>
+		            <xsl:when test="../significance/@flag"><font color="lightgray"><em><xsl:value-of select="../significance/@flag"/></em></font></xsl:when>
+		            <xsl:when test="./significance/@flag"><font color="lightgray"><em><xsl:value-of select="./significance/@flag"/></em></font></xsl:when>
+		            <xsl:when test="./significance[not(@flag)]">
+		                <xsl:value-of select="snp_call/@count"/>/<xsl:value-of select="@depth"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)
+		            </xsl:when>
+		            <xsl:otherwise><!-- SNP not present --><em>-</em></xsl:otherwise>
+		            </xsl:choose></td>
+                        </xsl:for-each>
+	                <xsl:for-each select="assay[starts-with(@name, 'pepQ')]/amplicon//region_of_interest//mutation">
+		            <td><xsl:choose>
+		            <xsl:when test="../../significance/@flag"><font color="lightgray"><em><xsl:value-of select="../../significance/@flag"/></em></font></xsl:when>
+		            <xsl:when test="../significance/@flag"><font color="lightgray"><em><xsl:value-of select="../significance/@flag"/></em></font></xsl:when>
+		            <xsl:when test="../significance[not(@flag)] and @count &gt;= $mutant_count_filter and @percent &gt;= $prop_filter">
+		                <xsl:value-of select="@count"/>/<xsl:value-of select="../@depth"/>(<xsl:value-of select='format-number(@percent, "##.##")'/>%)
+		            </xsl:when>
+		            <xsl:otherwise><!-- mutant codon not present --><em>-</em></xsl:otherwise>
+		            </xsl:choose></td>
+	                </xsl:for-each>
+	    		<td><xsl:for-each select="assay[starts-with(@name, 'pepQ')]/amplicon/snp">
+                            <xsl:if test="snp_call/@count &gt;= $mutant_count_filter and snp_call/@percent &gt;= $prop_filter">
+	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
+                            </xsl:if>
+	    		</xsl:for-each></td>
+                        <xsl:for-each select="assay[starts-with(@name, 'atpE')]/amplicon//snp[@name != 'unknown' and @name != 'position of interest']">
+		            <td><xsl:choose>
+		            <xsl:when test="../significance/@flag"><font color="lightgray"><em><xsl:value-of select="../significance/@flag"/></em></font></xsl:when>
+		            <xsl:when test="./significance/@flag"><font color="lightgray"><em><xsl:value-of select="./significance/@flag"/></em></font></xsl:when>
+		            <xsl:when test="./significance[not(@flag)]">
+		                <xsl:value-of select="snp_call/@count"/>/<xsl:value-of select="@depth"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)
+		            </xsl:when>
+		            <xsl:otherwise><!-- SNP not present --><em>-</em></xsl:otherwise>
+		            </xsl:choose></td>
+                        </xsl:for-each>
+	                <xsl:for-each select="assay[starts-with(@name, 'atpE')]/amplicon//region_of_interest//mutation">
+		            <td><xsl:choose>
+		            <xsl:when test="../../significance/@flag"><font color="lightgray"><em><xsl:value-of select="../../significance/@flag"/></em></font></xsl:when>
+		            <xsl:when test="../significance/@flag"><font color="lightgray"><em><xsl:value-of select="../significance/@flag"/></em></font></xsl:when>
+		            <xsl:when test="../significance[not(@flag)] and @count &gt;= $mutant_count_filter and @percent &gt;= $prop_filter">
+		                <xsl:value-of select="@count"/>/<xsl:value-of select="../@depth"/>(<xsl:value-of select='format-number(@percent, "##.##")'/>%)
+		            </xsl:when>
+		            <xsl:otherwise><!-- mutant codon not present --><em>-</em></xsl:otherwise>
+		            </xsl:choose></td>
+	                </xsl:for-each>
+	    		<td><xsl:for-each select="assay[starts-with(@name, 'atpE')]/amplicon/snp">
                             <xsl:if test="snp_call/@count &gt;= $mutant_count_filter and snp_call/@percent &gt;= $prop_filter">
 	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
                             </xsl:if>
