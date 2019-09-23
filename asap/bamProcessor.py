@@ -158,10 +158,11 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, whole
                 variant_count = base_counter[variant]
                 if variant_proportion >= proportion and variant_count >= mutdepth:
                     snp['significance'] = significance
-                    if variant_proportion <= low_level_cutoff:
-                        snp['level'] = "low"
-                    elif variant_proportion >= high_level_cutoff:
-                        snp['level'] = "high"
+                    if smor:
+                        if variant_proportion <= low_level_cutoff:
+                            snp['level'] = "low"
+                        elif variant_proportion >= high_level_cutoff:
+                            snp['level'] = "high"
                 if not depth_passed:
                     snp['flag'] = "low coverage"
                 snp_list.append(snp)
@@ -306,6 +307,7 @@ def _process_roi(roi, samdata, amplicon_ref, smor, amplicon_ref_len, reverse_com
                 continue
             if rstart <= start:
                 if not use_query_alignment_seq:
+                    qend = qstart = None
                     for (qpos, rpos) in read.get_aligned_pairs():
                         if rpos == start:
                             qstart = qpos
@@ -340,6 +342,7 @@ def _process_roi(roi, samdata, amplicon_ref, smor, amplicon_ref_len, reverse_com
                 continue
             if rstart1 <= start:
                 if not use_query_alignment_seq:
+                    qend = qstart = None
                     for (qpos, rpos) in read.get_aligned_pairs():
                         if rpos == start:
                             qstart = qpos

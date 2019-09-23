@@ -129,7 +129,7 @@ def _run_bwa(sample, reads, reference, outdir='', dependency=None, sampath='samt
     read1 = reads[0]
     read2 = reads[1] if len(reads) > 1 else ""
     bam_string = "\'@RG\\tID:%s\\tSM:%s\'" % (sample, sample)
-    job_params = {'queue':'', 'mem_requested':4, 'num_cpus':ncpus, 'walltime':8, 'args':''}
+    job_params = {'queue':'', 'mem_requested':8, 'num_cpus':ncpus, 'walltime':8, 'args':''}
     job_params['name'] = "asap_bwa_%s" % sample
     aligner_name = "bwamem"
     aligner_command = "%s mem -R %s %s -t %s %s %s %s" % (bwapath, bam_string, args, ncpus, reference, read1, read2)
@@ -155,7 +155,7 @@ def _run_bowtie2(sample, reads, reference, outdir='', dependency=None, sampath='
     read_string = "-1 %s -2 %s" % (read1, read2) if read2 else "-U %s" % read1
     ref_string = os.path.splitext(reference)[0]
     bam_string = "--rg-id \'%s\' --rg \'SM:%s\'" % (sample, sample)
-    job_params = {'queue':'', 'mem_requested':4, 'num_cpus':ncpus, 'walltime':8, 'args':''}
+    job_params = {'queue':'', 'mem_requested':8, 'num_cpus':ncpus, 'walltime':8, 'args':''}
     job_params['name'] = "asap_bt2_%s" % sample
     aligner_name = "bowtie2"
     aligner_command = "%s %s -p %s %s -x %s %s" % (bt2path, args, ncpus, bam_string, ref_string, read_string)
@@ -181,7 +181,7 @@ def _run_novoalign(sample, reads, reference, outdir='', dependency=None, sampath
     #paired_string = "-i PE 500,100" if read2 else ""
     paired_string = ""
     bam_string = "\'@RG\\tID:%s\\tSM:%s\'" % (sample, sample)
-    job_params = {'queue':'', 'mem_requested':4, 'num_cpus':ncpus, 'walltime':24, 'args':''}
+    job_params = {'queue':'', 'mem_requested':8, 'num_cpus':ncpus, 'walltime':24, 'args':''}
     job_params['name'] = "asap_novo_%s" % sample
     aligner_name = "novo"
     aligner_command = "%s -f %s %s %s -c %s -o SAM %s -d %s.idx %s" % (novopath, read1, read2, paired_string, ncpus, bam_string, reference, args)
@@ -302,7 +302,7 @@ def _run_trimmomatic(sample, reads, outdir, quality, adapters, minlen, dependenc
     trim_dir = os.path.join(outdir, 'trimmed')
     if not os.path.exists(trim_dir):
         os.makedirs(trim_dir)
-    job_params = {'queue':'', 'mem_requested':6, 'num_cpus':4, 'walltime':8, 'args':''}
+    job_params = {'queue':'', 'mem_requested':8, 'num_cpus':4, 'walltime':8, 'args':''}
     job_params['name'] = "asap_trim_%s" % sample
     job_params['work_dir'] = trim_dir
     qual_string = quality if quality else ''
@@ -330,7 +330,7 @@ def _run_bbduk(sample, reads, outdir, quality, adapters, minlen, dependency, pri
     stats_dir = os.path.join(trim_dir, 'STATS')
     if not os.path.exists(stats_dir):
         os.makedirs(stats_dir)
-    job_params = {'queue':'', 'mem_requested':6, 'num_cpus':4, 'walltime':8, 'args':''}
+    job_params = {'queue':'', 'mem_requested':8, 'num_cpus':4, 'walltime':8, 'args':''}
     job_params['name'] = "asap_trim_%s" % sample
     job_params['work_dir'] = trim_dir
     qual_string = 'w' if quality else 'f'
@@ -445,7 +445,7 @@ def alignReadsToReference(sample, reads, reference, outdir, jobid=None, aligner=
 
 def processBam(sample_name, json_file, bam_file, xml_dir, dependency, depth, breadth, proportion, percid, mutdepth, smor=False, wholegenome=False, debug=False, allele_min_reads=8):
     import os
-    job_params = {'queue':'', 'mem_requested':4, 'num_cpus':2, 'walltime':24, 'args':''}
+    job_params = {'queue':'', 'mem_requested':8, 'num_cpus':2, 'walltime':24, 'args':''}
     job_params['name'] = "asap_bamprocesser_%s" % sample_name
     job_params['work_dir'] = xml_dir
     out_file = os.path.join(xml_dir, sample_name+".xml")
@@ -458,7 +458,7 @@ def processBam(sample_name, json_file, bam_file, xml_dir, dependency, depth, bre
 
 def combineOutputFiles(run_name, xml_dir, out_dir, dependencies):
     import os
-    job_params = {'queue':'', 'mem_requested':4, 'num_cpus':2, 'walltime':4, 'args':''}
+    job_params = {'queue':'', 'mem_requested':8, 'num_cpus':2, 'walltime':4, 'args':''}
     job_params['name'] = "asap_final_%s" % run_name
     job_params['work_dir'] = out_dir
     out_file = os.path.join(out_dir, run_name+"_analysis.xml")
