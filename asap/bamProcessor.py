@@ -59,6 +59,7 @@ def _write_parameters(node, data):
     return node
 
 def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, wholegenome, smor):
+    global low_level_cutoff, high_level_cutoff
     pileup_dict = {}
     snp_dict = _create_snp_dict(amplicon)
     consensus_seq = ""
@@ -277,7 +278,6 @@ def _process_roi(roi, samdata, amplicon_ref, smor, amplicon_ref_len, reverse_com
         if proportion_failed >= .95:
             roi_dict['flag'] = "reads are smaller than ROI and cannot merge because --smor"
             return roi_dict
-
     aa_sequence_counter = Counter()
     aa_sequence_counter_temp = Counter()
     nt_sequence_counter = Counter()
@@ -299,7 +299,8 @@ def _process_roi(roi, samdata, amplicon_ref, smor, amplicon_ref_len, reverse_com
                 aa_sequence_counter_temp.update([aa_string])
                 depth += 1
     elif not smor:#no --smor flag
-        for read in aligned_reads:
+        aligned_reads = samdata.fetch(amplicon_ref, start, end)
+        for read, pair in pairwise(aligned_reads):
             rstart = read.reference_start
             alignment_length = read.get_overlap(start, end)
             #throw out reads that either have gaps in the ROI or don't cover the whole ROI
