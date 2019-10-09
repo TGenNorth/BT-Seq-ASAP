@@ -679,12 +679,12 @@ def _verify_percent_identity(samdata, ref_name, amplicon, percid, merge):
     else:
         aligned_reads = samdata.fetch(ref_name)
     for read in aligned_reads:
-        length = read.infer_query_length(False)
-        amp_length = len(amplicon.sequence) #reset amp_length in case we altered it in the last iteration
-        logging.debug("Read %s, aligned length %i, total read length %i" % (read.query_name, read.query_alignment_length, length))
         if read.is_unmapped:
             logging.debug("\tRead is unmapped, skipping....");
             continue
+        length = read.infer_query_length(False)
+        amp_length = len(amplicon.sequence) #reset amp_length in case we altered it in the last iteration
+        logging.debug("Read %s, aligned length %i, total read length %i" % (read.query_name, read.query_alignment_length or -1, length or -1))
         if read.query_alignment_length / length >= percid: #Using length instead of amp_length to compare to query instead of reference
             matches = 0
             for (qpos, rpos, seq) in read.get_aligned_pairs(with_seq=True):
@@ -943,7 +943,7 @@ USAGE
                     samdata.close()
                     os.remove(temp_file)
                     os.remove(temp_file+".bai")
-                    samdata = pysam.AlignmentFile(bam_fp, "rb")
+                    samdata = pysam.AlignmentFile(bam_fp.name, "rb")
 
         if samdata.is_open():
             samdata.close()
