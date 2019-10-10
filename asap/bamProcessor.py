@@ -300,7 +300,7 @@ def _process_roi(roi, samdata, amplicon_ref, smor, amplicon_ref_len, reverse_com
                 depth += 1
     elif not smor:#no --smor flag
         aligned_reads = samdata.fetch(amplicon_ref, start, end)
-        for read, pair in pairwise(aligned_reads):
+        for read in aligned_reads:
             rstart = read.reference_start
             alignment_length = read.get_overlap(start, end)
             #throw out reads that either have gaps in the ROI or don't cover the whole ROI
