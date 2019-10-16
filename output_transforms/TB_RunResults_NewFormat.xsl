@@ -207,7 +207,7 @@
                         </xsl:for-each>
 	    		<td><xsl:for-each select="assay[@name='inhA']/amplicon/snp">
                             <xsl:if test="snp_call/@count &gt;= $mutant_count_filter and snp_call/@percent &gt;= $prop_filter">
-	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
+	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>-<xsl:value-of select="snp_call/@count"/>/<xsl:value-of select="@depth"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
                             </xsl:if>
 	    		</xsl:for-each></td>
 	                <xsl:for-each select="assay[@name='katG']/amplicon//region_of_interest//mutation">
@@ -222,7 +222,7 @@
 	                </xsl:for-each>
 	    		<td><xsl:for-each select="assay[@name='katG']/amplicon/snp">
                             <xsl:if test="snp_call/@count &gt;= $mutant_count_filter and snp_call/@percent &gt;= $prop_filter">
-	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
+	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>-<xsl:value-of select="snp_call/@count"/>/<xsl:value-of select="@depth"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
                             </xsl:if>
 	    		</xsl:for-each></td>
                         <td align="center"><xsl:choose>
@@ -244,7 +244,7 @@
 	                </xsl:for-each>
 	    		<td><xsl:for-each select="assay[@name='rpoB']/amplicon/snp">
                             <xsl:if test="snp_call/@count &gt;= $mutant_count_filter and snp_call/@percent &gt;= $prop_filter">
-	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
+	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>-<xsl:value-of select="snp_call/@count"/>/<xsl:value-of select="@depth"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
                             </xsl:if>
 	    		</xsl:for-each></td>
                         <td align="center"><xsl:choose>
@@ -266,7 +266,7 @@
                         </xsl:for-each>
 	    		<td><xsl:for-each select="assay[@name='eis']/amplicon/snp">
                             <xsl:if test="snp_call/@count &gt;= $mutant_count_filter and snp_call/@percent &gt;= $prop_filter">
-	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
+	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>-<xsl:value-of select="snp_call/@count"/>/<xsl:value-of select="@depth"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
                             </xsl:if>
 	    		</xsl:for-each></td>
                         <td align="center"><xsl:choose>
@@ -295,7 +295,7 @@
                         </xsl:for-each>
 	    		<td><xsl:for-each select="assay[@name='rrs']/amplicon/snp">
                             <xsl:if test="snp_call/@count &gt;= $mutant_count_filter and snp_call/@percent &gt;= $prop_filter">
-	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
+	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>-<xsl:value-of select="snp_call/@count"/>/<xsl:value-of select="@depth"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
                             </xsl:if>
 	    		</xsl:for-each></td>
                         <td align="center"><xsl:choose>
@@ -317,7 +317,7 @@
 	                </xsl:for-each>
 	    		<td><xsl:for-each select="assay[@name='gyrA']/amplicon/snp">
                             <xsl:if test="snp_call/@count &gt;= $mutant_count_filter and snp_call/@percent &gt;= $prop_filter">
-	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
+	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>-<xsl:value-of select="snp_call/@count"/>/<xsl:value-of select="@depth"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
                             </xsl:if>
 	    		</xsl:for-each></td>
                         <td align="center"><xsl:choose>
@@ -349,7 +349,7 @@
 	                </xsl:for-each>
 	    		<td><xsl:for-each select="assay[starts-with(@name, 'pncA')]/amplicon/snp">
                             <xsl:if test="snp_call/@count &gt;= $mutant_count_filter and snp_call/@percent &gt;= $prop_filter">
-	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
+	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>-<xsl:value-of select="snp_call/@count"/>/<xsl:value-of select="@depth"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
                             </xsl:if>
 	    		</xsl:for-each></td>
                         <td align="center"><xsl:choose>
@@ -381,7 +381,7 @@
 	                </xsl:for-each>
 	    		<td><xsl:for-each select="assay[starts-with(@name, 'Rv0678')]/amplicon/snp">
                             <xsl:if test="snp_call/@count &gt;= $mutant_count_filter and snp_call/@percent &gt;= $prop_filter">
-	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
+	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>-<xsl:value-of select="snp_call/@count"/>/<xsl:value-of select="@depth"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
                             </xsl:if>
 	    		</xsl:for-each></td>
                         <xsl:for-each select="assay[starts-with(@name, 'pepQ')]/amplicon//snp[@name != 'unknown' and @name != 'position of interest']">
@@ -406,7 +406,7 @@
 	                </xsl:for-each>
 	    		<td><xsl:for-each select="assay[starts-with(@name, 'pepQ')]/amplicon/snp">
                             <xsl:if test="snp_call/@count &gt;= $mutant_count_filter and snp_call/@percent &gt;= $prop_filter">
-	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
+	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>-<xsl:value-of select="snp_call/@count"/>/<xsl:value-of select="@depth"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
                             </xsl:if>
 	    		</xsl:for-each></td>
                         <xsl:for-each select="assay[starts-with(@name, 'atpE')]/amplicon//snp[@name != 'unknown' and @name != 'position of interest']">
@@ -431,7 +431,7 @@
 	                </xsl:for-each>
 	    		<td><xsl:for-each select="assay[starts-with(@name, 'atpE')]/amplicon/snp">
                             <xsl:if test="snp_call/@count &gt;= $mutant_count_filter and snp_call/@percent &gt;= $prop_filter">
-	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
+	    		    <xsl:value-of select="@position"/><xsl:value-of select="@reference"/>-><xsl:value-of select="snp_call"/>-<xsl:value-of select="snp_call/@count"/>/<xsl:value-of select="@depth"/>(<xsl:value-of select='format-number(snp_call/@percent, "##.##")'/>%)<br/>
                             </xsl:if>
 	    		</xsl:for-each></td>
                         </tr>
