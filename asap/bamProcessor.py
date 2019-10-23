@@ -439,6 +439,7 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion, mutdepth, smor, offs
             dominant_count = count
         if count >= reporting_threshold:
             aa_seq_node = ElementTree.SubElement(roi_node, "amino_acid_sequence", {'count':str(count), 'percent':str(count/int(roi_dict['depth'])*100), 'aa_changes':str(aa_changes)})
+            aa_seq_node.text = seq
             if aa_changes > 0:
                 nonsynonymous = True
             #get string of the aa changes
@@ -472,7 +473,7 @@ def _add_roi_node(parent, roi, roi_dict, depth, proportion, mutdepth, smor, offs
                     temp = seq[0:loc] + '1' + seq[loc] + '2' + seq[loc + 1:]
                 shift += 2
                 seq = temp
-            aa_seq_node.text = seq
+            aa_seq_node.set('underline_seq', seq)
             #create changes strings, adjusting the aa coordinates to be gene-relative
             if all_changes != []:
                 change_string = ""

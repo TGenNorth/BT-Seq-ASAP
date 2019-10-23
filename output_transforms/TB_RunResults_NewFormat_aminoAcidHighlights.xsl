@@ -512,7 +512,7 @@
                     <xsl:value-of select="@aa_reference"/><br/>
                     <xsl:for-each select="amino_acid_sequence">
                       Allotype:
-                      <xsl:value-of disable-output-escaping="yes" select="str:replace(str:replace(., '1','&lt;b&gt;&lt;u&gt;'),'2','&lt;/u&gt;&lt;/b&gt;')"/>,
+                      <xsl:value-of disable-output-escaping="yes" select="str:replace(str:replace(@underline_seq, '1','&lt;b&gt;&lt;u&gt;'),'2','&lt;/u&gt;&lt;/b&gt;')"/>,
                       <xsl:value-of select="format-number(@percent,'##.##')"/>%,
                       <xsl:value-of select="@count"/>
                       reads
