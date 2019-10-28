@@ -88,6 +88,15 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, whole
                 alignment = read.alignment
                 if pair.is_del and read.is_del:
                     base_counter.update("_") # XSLT doesn't like '-' as an attribute name, have to use '_'
+                elif pair.indel > 0 and read.indel > 0: #This means the next position is an insertion
+                    #print("Found an insertion at position %d, cigar string: %s" % (position, pileupread.alignment.cigarstring))
+                    start = pair.query_position
+                    end = pair.query_position + read.indel + 1
+                    if pair.alignment.query_sequence[start:end] == alignment.query_sequence[start:end]:
+                        depth_array[pileupcolumn.pos] += 1
+                        base_counter.update({pair.alignment.query_sequence[start:end]: 1})
+                    else:
+                        discard_array[pileupcolumn.pos] += 1
                 elif read.query_position and pair.query_position:
                     if pair.alignment.query_sequence[pair.query_position] == alignment.query_sequence[read.query_position]:
                         depth_array[pileupcolumn.pos] += 1
