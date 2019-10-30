@@ -105,7 +105,7 @@ USAGE
         align_group.add_argument("--aligner-args", dest="aargs", metavar="ARGS", default='', help="additional arguments to pass to the aligner, enclosed in \"\".")
         align_group.add_argument("-d", "--depth", default=100, type=int, help="minimum read depth required to consider a position covered. [default: 100]")
         align_group.add_argument("-b", "--breadth", default=0.8, type=float, help="minimum breadth of coverage required to consider an amplicon as present. [default: 0.8]")
-        align_group.add_argument("-p", "--proportion", default=0.1, type=float, help="minimum proportion required to call a mutation at a given locus. [default: 0.1]")
+        align_group.add_argument("-p", "--proportion", type=float, help="minimum proportion required to call a mutation at a given locus. [default: 0.1]") #Don't explicitly set default because I need to be certain whether user set the value
         align_group.add_argument("-m", "--mutation-depth", dest="mutdepth", default=5, type=int, help="minimum number of reads required to call a mutation at a given locus. [default: 5]")
         align_group.add_argument("-i", "--identity", dest="percid", default=0, type=float, help="minimum percent identity required to align a read to a reference amplicon sequence. [default: 0]")
         parser.add_argument("-V", "--version", action="version", version=program_version_message)
@@ -139,6 +139,14 @@ USAGE
         allele_min_reads = args.allele_min_reads
         debug = args.debug
         wholegenome = args.wholegenome
+
+        if smor:
+            if proportion:
+                dispatcher.smartSMOR = False #Turn off smartSMOR if user explicitely sets proportion flag
+            else:
+                proportion = 0.001 #Set SMOR default
+        else:
+            proportion = proportion or 0.1 #Set default if user did not specify
 
         if primer_seqs != False and trim != "bbduk":
             response = input(

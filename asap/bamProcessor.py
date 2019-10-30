@@ -44,6 +44,7 @@ PROFILE = 0
 
 low_level_cutoff = 0.01
 high_level_cutoff = 0.50
+smartSMOR = True
 
 def pairwise(iterable):
     from itertools import tee
@@ -595,6 +596,9 @@ def _add_dummy_roi_node(parent, roi):
     return roi_node
 
 def _compute_thresholds_SMOR(smor_count):
+    if not smartSMOR:
+        return (proportion, low_level_cutoff, high_level_cutoff) # Use user-specified proportion and default cutoff values
+    #else use smartSMOR
     proportion = 0
     low_level_cutoff = 0
     high_level_cutoff = 0
@@ -615,7 +619,6 @@ def _compute_thresholds_SMOR(smor_count):
         low_level_cutoff = 0.2
         high_level_cutoff = 0.5
     return (proportion, low_level_cutoff, high_level_cutoff)
-
 
 def _process_merge(reads, start, end):
     big_aligned_reads = []
@@ -838,7 +841,6 @@ USAGE
         # and will ignore passed-in value. Let's specifically set to zero, to make sure all get reported.
         if smor:
             sample_dict['SMOR'] = 'True'
-            proportion = 0.001
         sample_dict['proportion_filter'] = str(proportion)
         sample_dict['breadth_filter'] = str(breadth)
         sample_dict['mutation_depth_filter'] = str(mutdepth)
