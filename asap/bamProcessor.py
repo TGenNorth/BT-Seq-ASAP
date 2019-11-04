@@ -88,6 +88,7 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, whole
                 end_count = end_count + 1
                 alignment = read.alignment
                 if pair.is_del and read.is_del:
+                    depth_array[pileupcolumn.pos] += 1
                     base_counter.update("_") # XSLT doesn't like '-' as an attribute name, have to use '_'
                 elif pair.indel > 0 and read.indel > 0: #This means the next position is an insertion
                     start = read.query_position
