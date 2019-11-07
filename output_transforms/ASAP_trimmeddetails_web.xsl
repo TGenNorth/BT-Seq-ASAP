@@ -88,8 +88,8 @@
         </body>
         </html>
     </xsl:template>
-                    
-    
+
+
     <xsl:template name="amplicon-graph">
         <div id="{@name}-graph" class="ampGraph">
             <div>
@@ -97,6 +97,7 @@
                 <h2>Amplicon Graph</h2>
 			<canvas id="{@name}-canvas" height="90vh" class="ampCanvas"></canvas>
 			<script>
+        function render_<xsl:value-of select="str:replace(str:replace(@name, '+', '_'), '-', '_')"/>() {
 				var ctx_<xsl:value-of select="str:replace(str:replace(@name, '+', '_'), '-', '_')"/> = document.getElementById("<xsl:value-of select="@name"/>-canvas").getContext("2d");
 				var chart_<xsl:value-of select="str:replace(str:replace(@name, '+', '_'), '-', '_')"/> = new Chart(ctx_<xsl:value-of select="str:replace(str:replace(@name, '+', '_'), '-', '_')"/>, {
                                     type: 'bar',
@@ -157,11 +158,12 @@
 				        }
 				    }
 				});
+        }
 		    </script>
             </div>
         </div>
     </xsl:template>
-    
+
     <xsl:template match="sample">
 	<exsl:document method="html" href="{/analysis/@run_name}/{@name}.html">
 	    <html>
@@ -256,7 +258,7 @@
 	    		    <xsl:if test="@type = 'presence/absence' and amplicon/@reads &gt; 0">
 	    		    <xsl:call-template name="amplicon-graph"></xsl:call-template>
 	    		    <tr>
-	    		        <td><a href="#{@name}-graph"><xsl:value-of select="@name"/></a></td>
+	    		        <td><a href="#{@name}-graph" onclick="render_{str:replace(str:replace(@name, '+', '_'), '-', '_')}()"><xsl:value-of select="@name"/></a></td>
 	    		        <td><xsl:value-of select="amplicon/@reads"/></td>
 	    		        <td><xsl:value-of select='format-number(amplicon/breadth, "##.##")'/>%</td>
 	    		        <td><xsl:value-of select="amplicon/significance"/><xsl:if test="amplicon/significance/@flag"> (<xsl:value-of select="amplicon/significance/@flag"/>)</xsl:if></td>
@@ -281,7 +283,7 @@
 	    		    <xsl:if test="@type = 'SNP' or @type = 'mixed'">
 	    		    <xsl:call-template name="amplicon-graph"></xsl:call-template>
 	    		    <tr>
-	    		        <td><a href="#{@name}-graph"><xsl:value-of select="@name"/></a></td>
+	    		        <td><a href="#{@name}-graph" onclick="render_{str:replace(str:replace(@name, '+', '_'), '-', '_')}()"><xsl:value-of select="@name"/></a></td>
 	    		        <td><xsl:value-of select="amplicon/@reads"/></td>
 	    		        <xsl:if test="amplicon/@reads &gt; 0">
 		    		        <td><xsl:value-of select='format-number(amplicon/breadth, "##.##")'/>%</td>
@@ -316,7 +318,7 @@
 	    		    <xsl:if test="@type = 'ROI' or @type = 'mixed' and amplicon/region_of_interest">
 	    		    <xsl:call-template name="amplicon-graph"></xsl:call-template>
 	    		    <tr>
-	    		        <td><a href="#{@name}-graph"><xsl:value-of select="@name"/></a></td>
+	    		        <td><a href="#{@name}-graph" onclick="render_{str:replace(str:replace(@name, '+', '_'), '-', '_')}()"><xsl:value-of select="@name"/></a></td>
 	    		        <td><xsl:value-of select="amplicon/@reads"/></td>
 	    		        <xsl:if test="amplicon/@reads &gt; 0">
 		    		        <td><xsl:value-of select='format-number(amplicon/breadth, "##.##")'/>%</td>
