@@ -69,6 +69,7 @@ def main(argv=None):
         if assay.get('type') == 'mixed' or assay.get('type') == 'ROI':
             currentAssayDict = defaultdict(list)
             for sample in assay:
+                num_alleles = 0
                 for allele in sample.iter('allele_sequence'):
                     if currentAssayDict[allele.text] == []:
                         li = [0, 0]
@@ -82,6 +83,26 @@ def main(argv=None):
                         lis[1] += 1
                         lis.append([sample.get('name'), allele.get('count'), allele.get('percent')])
                         currentAssayDict[allele.text] = lis
+                    num_alleles += 1
+                if num_alleles == 0: #to check for case where indel caused no 'allele_sequence's, even though reads aligned
+                    if sample.find('./amplicon').get('reads') != "0":
+                        consensus_string = "Something went wrong with getting consensus allele"
+                        for consensus in sample.findall('./amplicon/consensus_sequence'):#there will only be one, but still easiest to loop
+                            consensus_string = consensus.text
+                        if currentAssayDict[consensus_string] == []:
+                            li = [0, 0]
+                            li[0] += int(sample.find('./amplicon').get('reads'))
+                            li[1] += 1
+                            li.append([sample.get('name') + '_CONSENSUS', sample.find('./amplicon').get('reads'), "100.0"])
+                            currentAssayDict[consensus_string] = li
+                        else:
+                            lis = currentAssayDict[consensus_string]
+                            lis[0] += int(sample.find('./amplicon').get('reads'))
+                            lis[1] += 1
+                            lis.append([sample.get('name') + '_CONSENSUS', sample.find('./amplicon').get('reads'), "100.0"])
+                            currentAssayDict[consensus_string] = lis
+                        if consensus_string == "Something went wrong with getting consensus allele": #double checking for case where there is no consensus to be found, this sample should be skipped because did not have reads aligning to assay
+                            continue
             all_dicts[assay.get('name')] = currentAssayDict
 
     #write out this info to xml tree
