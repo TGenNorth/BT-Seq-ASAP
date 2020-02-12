@@ -73,6 +73,9 @@ def main(argv=None): # IGNORE:C0111
   Distributed on an "AS IS" basis without warranties
   or conditions of any kind, either express or implied.
 
+  ***You are running the most current development version,
+  use at your own risk***
+
 USAGE
 ''' % (program_shortdesc, str(__date__))
 
@@ -82,10 +85,10 @@ USAGE
         required_group = parser.add_argument_group("required arguments")
         required_group.add_argument("-n", "--name", required=True, help="name for this run. [REQUIRED]")
         required_group.add_argument("-j", "--json", metavar="FILE", required=True, type=argparse.FileType('r'), help="JSON file of assay descriptions. [REQUIRED]")
-        optional_group = parser.add_argument_group("optional arguments")
-        reads_bams_group = optional_group.add_mutually_exclusive_group()
+        reads_bams_group = required_group.add_mutually_exclusive_group(required=True)
         reads_bams_group.add_argument("-r", "--read-dir", dest="rdir", metavar="DIR", help="directory of read files to analyze.")
         reads_bams_group.add_argument("--bam-dir", dest="bdir", metavar="DIR", help="directory of bam files to analyze.")
+        optional_group = parser.add_argument_group("optional arguments")
         optional_group.add_argument("-o", "--out-dir", dest="odir", metavar="DIR", help="directory to write output files to. [default: `pwd`]")
         optional_group.add_argument("-s", "--submitter", dest="job_manager", default="SLURM", help="cluster job submitter to use (PBS, SLURM, SGE, none). [default: SLURM]")
         optional_group.add_argument("--submitter-args", dest="sargs", metavar="ARGS", help="additional arguments to pass to the job submitter, enclosed in \"\".")
