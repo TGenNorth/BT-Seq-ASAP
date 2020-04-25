@@ -184,9 +184,9 @@
 	    <body>
 	        <center><h1>ASAP Results for Sample: <xsl:value-of select="@name"/></h1></center>
 	        <br />
-	        Total reads: <xsl:value-of select="@mapped_reads + @unmapped_reads + @unassigned_reads"/><br/>
+	        Total reads: <xsl:value-of select="@mapped_reads + @unmapped_reads"/><br/>
 	        Mapped reads: <xsl:value-of select="@mapped_reads"/><br/>
-	        Unmapped reads: <xsl:value-of select="@unmapped_reads + @unassigned_reads"/><br/>
+	        Unmapped reads: <xsl:value-of select="@unmapped_reads"/><br/>
 	        <br/>
 	    	<table border="2" rules="rows">
 	    	    <tr><th colspan="2">Clinical Summary for Sample: <xsl:value-of select="@name"/></th></tr>
