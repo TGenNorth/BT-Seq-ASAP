@@ -71,11 +71,16 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, whole
     depth_array = [0] * amplicon_length
     discard_array = [0] * amplicon_length
     prop_array = ["0"] * amplicon_length
+    previous_position = 0
     # for each position in alignment/pileup
     for pileupcolumn in pileup:
         base_counter = Counter()
         depth_array[pileupcolumn.pos] = 0 #gets incremented if smor, gets set to depth if not smor
         position = pileupcolumn.pos+1
+        if previous_position+1 < position: #We've skipped some positions in the alignment
+            for i in range(previous_position+1, position):
+                consensus_seq += "N" #Fill in the gap
+        previous_position = position
         column_depth = None
         if smor:
             from operator import attrgetter
@@ -139,6 +144,7 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, whole
             column_depth = pileupcolumn.n
         ordered_list = base_counter.most_common()
         if not ordered_list:
+            consensus_seq += "N" #TODO: This feels right, but maybe it isn't. Let's keep an eye on it
             continue
         alignment_call = ordered_list[0][0]
         alignment_call_proportion = ordered_list[0][1] / column_depth
@@ -366,6 +372,7 @@ def _process_roi(roi, samdata, amplicon_ref, smor, amplicon_ref_len, reverse_com
                     nt_sequence = DNA(read.query_alignment_sequence)
             if rstart2 <= start:
                 if not use_query_alignment_seq:
+                    qend = qstart = None
                     for (qpos, rpos) in pair.get_aligned_pairs():
                         if rpos == start:
                             qstart = qpos
@@ -375,7 +382,7 @@ def _process_roi(roi, samdata, amplicon_ref, smor, amplicon_ref_len, reverse_com
                 else:
                     #the ROI is the whole ref so can use .query_alignment_sequence
                     nt_sequence2 = DNA(pair.query_alignment_sequence)
-            if nt_sequence != nt_sequence2:
+            if not nt_sequence or not nt_sequence2 or nt_sequence != nt_sequence2:
                 continue
             else:
                 if reverse_comp:
