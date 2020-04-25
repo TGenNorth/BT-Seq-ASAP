@@ -23,6 +23,7 @@ import skbio
 import pkg_resources
 
 from asap import dispatcher
+from asap import bamProcessor
 from asap import assayInfo
 from asap import __version__
 __all__ = []
@@ -145,7 +146,7 @@ USAGE
 
         if smor:
             if proportion:
-                dispatcher.smartSMOR = False #Turn off smartSMOR if user explicitely sets proportion flag
+                bamProcessor.smartSMOR = False #Turn off smartSMOR if user explicitely sets proportion flag
             else:
                 proportion = 0.001 #Set SMOR default
         else:
