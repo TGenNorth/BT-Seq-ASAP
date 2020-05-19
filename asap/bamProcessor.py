@@ -113,7 +113,7 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, whole
                         discard_array[pileupcolumn.pos] += 1
             column_depth = depth_array[pileupcolumn.pos]
             if column_depth == 0:
-                consensus_seq += "_" #TODO Temporary, remove this line!
+                #consensus_seq += "_" #TODO Temporary, remove this line!
                 continue
             depth_passed = False
             if column_depth > 0: #TODO: This is going to end up being specific to these TB assays, maybe have a clever way to make this line optional
@@ -143,8 +143,8 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, whole
         if column_depth == None: # this means did not do smor, so set column_depth to whole depth
             column_depth = pileupcolumn.n
         ordered_list = base_counter.most_common()
-        if not ordered_list:
-            consensus_seq += "N" #TODO: This feels right, but maybe it isn't. Let's keep an eye on it
+        if not ordered_list: #No coverage so skip this position
+            #consensus_seq += "N" #TODO: Should not put N's where there is no coverage, but maybe revisit this. 
             continue
         alignment_call = ordered_list[0][0]
         alignment_call_proportion = ordered_list[0][1] / column_depth
@@ -164,7 +164,17 @@ def _process_pileup(pileup, amplicon, depth, proportion, mutdepth, offset, whole
             snp_call = snp_count = snp_call_proportion = None
         if smor:
             (proportion, low_level_cutoff, high_level_cutoff) = _compute_thresholds_SMOR(column_depth)
-        consensus_seq += alignment_call if alignment_call_proportion >= proportion else "N"
+
+        #Generate consensus call at this pos
+        #consensus_seq += alignment_call if alignment_call_proportion >= proportion else "N"
+        if not depth_passed: # N's if we don't have enough coverage
+            consensus_seq += "N"
+        elif alignment_call_proportion >= 0.75 and alignment_call_proportion >= proportion: #75% or user specified, whichever is higher
+            if alignment_call != "_": #Don't put gaps in the consensus call by default, maybe make command line option? 
+                consensus_seq += alignment_call
+        else: #Consensus proportion not high enough
+            consensus_seq += "N"
+
         if position >= abs(offset) and offset < 0: #if the offset is negative, ie. amplicon starts before beginning of the gene, then when converting to gene-based coordinates need to make offset 1 unit more positive to account for there being no 0-base in gene-coordinates
             translated = position + (offset + 1)
         else:
@@ -351,6 +361,7 @@ def _process_roi(roi, samdata, amplicon_ref, smor, amplicon_ref_len, reverse_com
         for read, pair in pairwise(reads):
             if read.query_name != pair.query_name:
                 continue
+            nt_sequence = nt_sequence2 = None
             rstart1 = read.reference_start
             rstart2 = pair.reference_start
             alignment_length1 = read.get_overlap(start, end)
