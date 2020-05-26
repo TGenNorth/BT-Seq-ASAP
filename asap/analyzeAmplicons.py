@@ -96,6 +96,7 @@ USAGE
         optional_group.add_argument("--smor", action="store_true", default=False, help="perform SMOR analysis with overlapping reads. [default: False]")
         optional_group.add_argument("-w", "--whole-genome", action="store_true", dest="wholegenome", default=False, help="JSON file uses a whole genome reference, so don't write out the consensus, depth, and proportion arrays for each sample")
         optional_group.add_argument("--allele-output-threshold", dest="allele_min_reads", default=8, type=int, help="cutoff of # of reads below which allels for amino acids and nucleotide alleles will not be output [default: 8]")
+        optional_group.add_argument("--remove-dups", action="store_true", dest="remove_dups", default=False, help="remove duplicate reads (ony makes sense for WGS or WMTS data. [default: False]")
         trim_group = parser.add_argument_group("read trimming options")
         on_off_group = trim_group.add_mutually_exclusive_group()
         on_off_group.add_argument("--trim", default="bbduk", help="perform adapter trimming on reads. [default: bbduk]. NOTE: cannot trim-primers if not using bbduk")
@@ -143,6 +144,7 @@ USAGE
         allele_min_reads = args.allele_min_reads
         debug = args.debug
         wholegenome = args.wholegenome
+        remove_dups = args.remove_dups
 
         if smor:
             if proportion:
@@ -212,9 +214,9 @@ USAGE
                     continue
                 if trim != False: #if trimming has not been turned off by --no-trim
                     trimmed_reads = dispatcher.trimAdapters(*read, outdir=out_dir, adapters=adapters, quality=qual, minlen=minlen, dependency=index_job, trimmer=trim, primers=primer_seqs)
-                    (bam_file, job_id) = dispatcher.alignReadsToReference(trimmed_reads.sample, trimmed_reads.reads, ref_fasta, out_dir, jobid=trimmed_reads.jobid, aligner=aligner, args=aligner_args)
+                    (bam_file, job_id) = dispatcher.alignReadsToReference(trimmed_reads.sample, trimmed_reads.reads, ref_fasta, out_dir, jobid=trimmed_reads.jobid, aligner=aligner, args=aligner_args, remove_dups=remove_dups)
                 else: #if trimming has been turned off go straight to aligning
-                    (bam_file, job_id) = dispatcher.alignReadsToReference(read.sample, read.reads, ref_fasta, out_dir, jobid=index_job, aligner=aligner, args=aligner_args)
+                    (bam_file, job_id) = dispatcher.alignReadsToReference(read.sample, read.reads, ref_fasta, out_dir, jobid=index_job, aligner=aligner, args=aligner_args, remove_dups=remove_dups)
                 bam_list.append((read.sample, bam_file, job_id))
             if trim == "bbduk":
                 f = open(out_dir+"/trimmed/STATS/info.txt", "w+")

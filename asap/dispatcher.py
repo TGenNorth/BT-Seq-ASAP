@@ -124,7 +124,7 @@ def _submit_job(job_submitter, command, job_parms, waitfor_id=None, hold=False, 
     logging.info("jobid = %s" % jobid)
     return jobid
 
-def _run_bwa(sample, reads, reference, outdir='', dependency=None, sampath='samtools', bwapath='bwa', ncpus=4, args=''):
+def _run_bwa(sample, reads, reference, outdir='', dependency=None, remove_dups=False, sampath='samtools', bwapath='bwa', ncpus=4, args=''):
     import os
     read1 = reads[0]
     read2 = reads[1] if len(reads) > 1 else ""
@@ -138,6 +138,8 @@ def _run_bwa(sample, reads, reference, outdir='', dependency=None, sampath='samt
     #samsort_command = "%s sort - %s" % (sampath, bam_nickname)
     #samtools 1.3 version
     samsort_command = "%s sort -T %s -o %s.bam -" % (sampath, bam_nickname, bam_nickname)
+    if remove_dups:
+        samsort_command = "%s fixmate -m - - | %s sort -O BAM | %s markdup -r - %s.bam" % (sampath, sampath, sampath, bam_nickname)
     samindex_command = "%s index %s.bam" % (sampath, bam_nickname)
     command = "%s | %s | %s \n %s" % (aligner_command, samview_command, samsort_command, samindex_command)
     work_dir = os.path.join(outdir, aligner_name)
@@ -148,7 +150,7 @@ def _run_bwa(sample, reads, reference, outdir='', dependency=None, sampath='samt
     job_id = _submit_job(job_manager, command, job_params, (dependency,))
     return (final_file, job_id)
 
-def _run_bowtie2(sample, reads, reference, outdir='', dependency=None, sampath='samtools', bt2path='bowtie2', ncpus=4, args=''):
+def _run_bowtie2(sample, reads, reference, outdir='', dependency=None, remove_dups=False, sampath='samtools', bt2path='bowtie2', ncpus=4, args=''):
     import os
     read1 = reads[0]
     read2 = reads[1] if len(reads) > 1 else ""
@@ -164,6 +166,8 @@ def _run_bowtie2(sample, reads, reference, outdir='', dependency=None, sampath='
     #samsort_command = "%s sort - %s" % (sampath, bam_nickname)
     #samtools 1.3 version
     samsort_command = "%s sort -T %s -o %s.bam -" % (sampath, bam_nickname, bam_nickname)
+    if remove_dups:
+        samsort_command = "%s fixmate -m - - | %s sort -O BAM | %s markdup -r - %s.bam" % (sampath, sampath, sampath, bam_nickname)
     samindex_command = "%s index %s.bam" % (sampath, bam_nickname)
     command = "%s | %s | %s \n %s" % (aligner_command, samview_command, samsort_command, samindex_command)
     work_dir = os.path.join(outdir, aligner_name)
@@ -174,7 +178,7 @@ def _run_bowtie2(sample, reads, reference, outdir='', dependency=None, sampath='
     job_id = _submit_job(job_manager, command, job_params, (dependency,))
     return (final_file, job_id)
 
-def _run_novoalign(sample, reads, reference, outdir='', dependency=None, sampath='samtools', novopath='novoalign', ncpus=4, args=''):
+def _run_novoalign(sample, reads, reference, outdir='', dependency=None, remove_dups=False, sampath='samtools', novopath='novoalign', ncpus=4, args=''):
     import os
     read1 = reads[0]
     read2 = reads[1] if len(reads) > 1 else ""
@@ -190,6 +194,8 @@ def _run_novoalign(sample, reads, reference, outdir='', dependency=None, sampath
     #samsort_command = "%s sort - %s" % (sampath, bam_nickname)
     #samtools 1.3 version
     samsort_command = "%s sort -T %s -o %s.bam -" % (sampath, bam_nickname, bam_nickname)
+    if remove_dups:
+        samsort_command = "%s fixmate -m - - | %s sort -O BAM | %s markdup -r - %s.bam" % (sampath, sampath, sampath, bam_nickname)
     samindex_command = "%s index %s.bam" % (sampath, bam_nickname)
     command = "%s | %s | %s \n %s" % (aligner_command, samview_command, samsort_command, samindex_command)
     work_dir = os.path.join(outdir, aligner_name)
@@ -221,7 +227,7 @@ def findReads(path):
             sample_name = is_read.group(1)
             #print("Found read: %s" % sample_name)
             full_file = os.path.join(path, file)
-            if os.path.getsize(full_file) == 0 or (is_read.group(3) and subprocess.getoutput("gzip -l %s | awk 'NR > 1{print $2}'" % full_file) == '0'):
+            if os.path.getsize(full_file) == 0: #or (is_read.group(3) and subprocess.getoutput("gzip -l %s | awk 'NR > 1{print $2}'" % full_file) == '0'):
                 logging.warning("Read file %s has no data, skipping..." % file)
                 read_list.append(Read(sample_name, None))
                 continue
@@ -434,14 +440,14 @@ def trimAdapters(sample, reads, outdir, quality=None, adapters="../illumina_adap
     else: #default to bbduk
         return _run_bbduk(sample, reads, outdir, quality, adapters, minlen, dependency, primers)
 
-def alignReadsToReference(sample, reads, reference, outdir, jobid=None, aligner="bowtie2", args=None):
+def alignReadsToReference(sample, reads, reference, outdir, jobid=None, aligner="bowtie2", args=None, remove_dups=False):
     import re
     if re.search('novo', aligner, re.IGNORECASE):
-        return _run_novoalign(sample, reads, reference, outdir, jobid, args=args)
+        return _run_novoalign(sample, reads, reference, outdir, jobid, remove_dups, args=args)
     elif re.search('bwa', aligner, re.IGNORECASE):
-        return _run_bwa(sample, reads, reference, outdir, jobid, args=args)
+        return _run_bwa(sample, reads, reference, outdir, jobid, remove_dups, args=args)
     else: #re.search('b(ow)?t(ie)?2', aligner, re.IGNORECASE)
-        return _run_bowtie2(sample, reads, reference, outdir, jobid, args=args)
+        return _run_bowtie2(sample, reads, reference, outdir, jobid, remove_dups, args=args)
 
 def processBam(sample_name, json_file, bam_file, xml_dir, dependency, depth, breadth, proportion, percid, mutdepth, smor=False, wholegenome=False, debug=False, allele_min_reads=8):
     import os
