@@ -7,6 +7,7 @@ Created on Jul 8, 2015
 import logging
 job_manager = "SLURM"
 job_manager_args = ""
+COVID=True
 
 def _submit_job(job_submitter, command, job_parms, waitfor_id=None, hold=False, notify=False):
     import subprocess
@@ -211,7 +212,7 @@ def _shortest_primer_or_adapter(filePath):
     lengths = []
     for line in f:
         if line[0] != '>' and len(line.strip()) != 0:
-            lengths.append(len(line))
+            lengths.append(len(line.strip()))
     return min(lengths), max(lengths)
 
 def findReads(path):
@@ -374,16 +375,17 @@ def _run_bbduk(sample, reads, outdir, quality, adapters, minlen, dependency, pri
             minPrimerLen, maxPrimerLen = _shortest_primer_or_adapter(primers)
             out_reads = [os.path.join(trim_dir, out_reads1_primers2), os.path.join(trim_dir, out_reads2_primers2)]
             #trims adapters
-            command = "bbduk.sh -da -Xmx%sg threads=%d in=%s in2=%s out=%s out2=%s outm=%s outm2=%s ref=%s ktrim=%s k=%d mink=%d edist=%d minlen=%d stats=%s statscolumns=%d ottm=%s ordered=%s qtrim=%s,5 trimq=%d ftm=%d tp=%d tbo copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], read1, read2, out_reads1, out_reads2, out_reads_match1, out_reads_match2, adapters, 'r', minAdapterLen, 11, 2, minlen, out_reads_stats, 5, 't', 't', qual_string, 20, 5, 4)
+            command = "bbduk.sh -da -Xmx%sg threads=%d in=%s in2=%s out=%s out2=%s outm=%s outm2=%s ref=%s ktrim=%s k=%d mink=%d edist=%d minlen=%d stats=%s statscolumns=%d ottm=%s ordered=%s qtrim=%s,5 trimq=%d ftm=%d tbo copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], read1, read2, out_reads1, out_reads2, out_reads_match1, out_reads_match2, adapters, 'r', minAdapterLen, 11, 2, minlen, out_reads_stats, 5, 't', 't', qual_string, 20, 5)
             jobid = _submit_job(job_manager, command, job_params, (dependency,)) if dependency else _submit_job(job_manager, command, job_params)
             #not sure why it seems impossible to get both primers in one call to bbduk, could possibly be fixed...
             #trims primers off left side
-            command2 = "bbduk.sh -Xmx%sg -da threads=%d in=%s in2=%s out=%s out2=%s outm=%s outm2=%s ref=%s stats=%s statscolumns=%d ottm=%s restrictleft=%d ordered=%s k=%d minlen=%d ktrim=%s edist=%d edist2=%d ftm=%d mink=%d copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], out_reads1, out_reads2, out_reads1_primers, out_reads2_primers, out_reads_match1_primers, out_reads_match2_primers, primers, out_reads_stats_primers, 5, 't', maxPrimerLen, 't', int(minPrimerLen/3), minlen, 'l', 3, 1, 5, 5)
+            # modified adds tpe, tbo, and int(minPrimerLen/2)
+            command2 = "bbduk.sh -Xmx%sg -da threads=%d in=%s in2=%s out=%s out2=%s outm=%s outm2=%s ref=%s stats=%s statscolumns=%d ottm=%s ordered=%s restrictleft=%d ktrim=%s k=%d hdist=%d qhdist=%d rcomp=%s copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], out_reads1, out_reads2, out_reads1_primers, out_reads2_primers, out_reads_match1_primers, out_reads_match2_primers, primers, out_reads_stats_primers, 5,'t', 't', maxPrimerLen + 10, 'l', minPrimerLen, 3, 1, 't')
             wait = []
             wait.append(jobid)
             jobid2 = _submit_job(job_manager, command2, job_params, waitfor_id=wait)
             #trims primers off right side
-            command3 = "bbduk.sh -Xmx%sg -da threads=%d in=%s in2=%s out=%s out2=%s outm=%s outm2=%s ref=%s stats=%s statscolumns=%d ottm=%s restrictright=%d ordered=%s k=%d minlen=%d ktrim=%s edist=%d edist2=%d ftm=%d mink=%d copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], out_reads1_primers, out_reads2_primers, out_reads1_primers2, out_reads2_primers2, out_reads_match1_primers2, out_reads_match2_primers2, primers, out_reads_stats_primers2, 5, 't', maxPrimerLen, 't', int(minPrimerLen/3), minlen, 'r', 3, 1, 5, 5)
+            command3 = "bbduk.sh -Xmx%sg -da threads=%d in=%s in2=%s out=%s out2=%s outm=%s outm2=%s ref=%s stats=%s statscolumns=%d ottm=%s ordered=%s restrictright=%d ktrim=%s k=%d hdist=%d qhdist=%d rcomp=%s copyundefined" % (job_params['mem_requested'], job_params['num_cpus'], out_reads1_primers, out_reads2_primers, out_reads1_primers2, out_reads2_primers2, out_reads_match1_primers2, out_reads_match2_primers2, primers, out_reads_stats_primers, 5, 't', 't', maxPrimerLen + 10, 'r', int(minPrimerLen), 3, 1, 't')
             wait2 = []
             wait2.append(jobid2)
             jobid3 = _submit_job(job_manager, command3, job_params, waitfor_id=wait2)
