@@ -11,12 +11,12 @@ INSTALLATION:
 -------------
 BT-Seq-ASAP is designed to be run on a compute cluster using a job manager such as SLURM or Torque/PBS. The other dependencies are:
 
-python 3.x with the following modules: lxml, numpy, pysam, openpyxl, scikit-bio, xmltodict 
-bowtie2
-samtools 1.x
-bbmap or trimmomatic
+* python 3.x with the following modules: lxml, numpy, pysam, openpyxl, scikit-bio, xmltodict 
+* bowtie2
+* samtools 1.x
+* bbmap or trimmomatic
 
-To install, first clone the git repository: 
+To install, first clone the git repository:
 ``git clone git@github.com:TGenNorth/BT-Seq-ASAP.git``
 
 Then run, as root:
@@ -28,7 +28,7 @@ BT-Seq-ASAP is run in two steps. The first step is analyzing the sequencing data
 
 **1) Running the Analysis**
 
-``analyzeAmplicons -n <RUN_NAME> -j <ASAP_INSTALL_PATH>/assay_data/BT-Seq_all_assays.json -r <DIRECTORY_OF_READ_FILES> -o <OUTPUT_DIRECTORY> <other options>``
+``analyzeAmplicons -n <RUN_NAME> -j <ASAP_INSTALL_PATH>/assay_data/BT-Seq_all_assays.json -r <DIRECTORY_OF_READ_FILES> -o <OUTPUT_DIRECTORY>``
 
 ``<RUN_NAME>`` can be whatever you want, the final output file will be: ``<OUTPUT_DIRECTORY>/<RUN_NAME>_analysis.xml``
 
