@@ -130,10 +130,10 @@
 	    	<xsl:variable name="count_bpbmnn">
                     <xsl:value-of select="count(./assay/amplicon/snp[contains(significance, 'Burkholderia cepacia complex')]//significance[not(@flag)]) + count(./assay[@type = 'gene variant']/amplicon[not(contains(significance, 'mallei'))]//significance[not(@flag)])"/>
                 </xsl:variable>
-                <xsl:variable name="color_bp"><xsl:value-of select="concat(substring('#000', 1, (($count_bp div 5) &lt; 1) *4), substring('#FFF', 1, (($count_bp div 5) &gt;= 1) *4))"/></xsl:variable>
-                <xsl:variable name="color_bpbm"><xsl:value-of select="concat(substring('#000', 1, (($count_bpbm div 5) &lt; 1) *4), substring('#FFF', 1, (($count_bpbm div 5) &gt;= 1) *4))"/></xsl:variable>
-                <xsl:variable name="color_bm"><xsl:value-of select="concat(substring('#000', 1, (($count_bm div 2) &lt; 1) *4), substring('#FFF', 1, (($count_bm div 2) &gt;= 1) *4))"/></xsl:variable>
-                <xsl:variable name="color_bpbmnn"><xsl:value-of select="concat(substring('#000', 1, (($count_bpbmnn div 3) &lt; 1) *4), substring('#FFF', 1, (($count_bpbmnn div 3) &gt;= 1) *4))"/></xsl:variable>
+                <xsl:variable name="color_bp"><xsl:value-of select="concat(substring('#000', 1, (($count_bp div 5) &lt; 0.8) *4), substring('#FFF', 1, (($count_bp div 5) &gt;= 0.8) *4))"/></xsl:variable>
+                <xsl:variable name="color_bpbm"><xsl:value-of select="concat(substring('#000', 1, (($count_bpbm div 5) &lt; 0.8) *4), substring('#FFF', 1, (($count_bpbm div 5) &gt;= 0.8) *4))"/></xsl:variable>
+                <xsl:variable name="color_bm"><xsl:value-of select="concat(substring('#000', 1, (($count_bm div 2) &lt; 0.8) *4), substring('#FFF', 1, (($count_bm div 2) &gt;= 0.8) *4))"/></xsl:variable>
+                <xsl:variable name="color_bpbmnn"><xsl:value-of select="concat(substring('#000', 1, (($count_bpbmnn div 3) &lt; 0.8) *4), substring('#FFF', 1, (($count_bpbmnn div 3) &gt;= 0.8) *4))"/></xsl:variable>
                     <tr>
                     <td class="norotate" nowrap="true"><a href="{/analysis/@run_name}/Bp_{./@name}.html"><xsl:value-of select="@name"/></a></td>
                     <td class="norotate" style="background: hsl(0, 100%, {(1 - ($count_bp div 5)) * 70 + 30}%); color: {$color_bp}"><xsl:value-of select="$count_bp"/>/5</td>
@@ -199,20 +199,20 @@
 	    <html>
 	    <head>
 	    	<title>ASAP Results for Sample: <xsl:value-of select="@name"/></title>
-            <xsl:text disable-output-escaping="yes"><![CDATA[<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.0/Chart.min.js"></script>]]></xsl:text>
 	    	<style>
 		    .snpCell{
-                height:15px;
-                overflow:hidden;
-                text-overflow:ellipsis
-            }
-            .snpCell:hover{
-                height:auto;
-                width:auto;
-            }
+                        height:15px;
+                        overflow:hidden;
+                        text-overflow:ellipsis
+                    }
+                    .snpCell:hover{
+                        height:auto;
+                        width:auto;
+                    }
 	    	</style>
 	    </head>
 	    <body>
+                <xsl:variable name="PROP_FILTER" select="@proportion_filter * 100"/>
 	        <center><h1>BT-Seq Results for Sample: <xsl:value-of select="@name"/></h1></center>
                 <table border="0">
                 <tr>
@@ -274,7 +274,7 @@
                 </xsl:variable>
 	    	<h4>Assays positive for <em>Burkholderia pseudomallei</em>: <xsl:value-of select="$count_bp"/>/5</h4>
 	    	<h4>Assays positive for <em>Burkholderia mallei</em>: <xsl:value-of select="$count_bm"/>/2</h4>
-	    	<h4>Assays positive for <em>Burkholderia pseudomallei or mallei</em>: <xsl:value-of select="$count_bpbm"/>/3</h4>
+	    	<h4>Assays positive for <em>Burkholderia pseudomallei or mallei</em>: <xsl:value-of select="$count_bpbm"/>/6</h4>
 	    	<br />
 	    	<br />
 	    	<h3>Species and strain identification assays for sample: <xsl:value-of select="@name"/></h3>
@@ -298,7 +298,7 @@
                             </xsl:variable>
 	    		    <tr>
 	    		        <td><xsl:value-of select="@name"/></td>
-	    		        <td><xsl:value-of select='amplicon/@reads'/></td>
+	    		        <td><xsl:value-of select='sum(.//amplicon/@reads)'/></td>
                                 <xsl:choose>
                                 <xsl:when test='amplicon/breadth'>
 	    		        <td><xsl:value-of select='format-number(exsl:node-set($best_amp)/breadth, "##.##")'/>%</td>
@@ -310,7 +310,7 @@
 	    		            <xsl:when test="@type = 'SNP'">
 			    		        <td><xsl:for-each select="amplicon/snp">
 			    		            <!--<xsl:if test="significance and ./@name != 'unknown'">-->
-			    		            <xsl:if test="significance and ./snp_call/@percent &gt; 10">
+			    		            <xsl:if test="significance and ./snp_call/@percent &gt; $PROP_FILTER">
 			    		                <xsl:value-of select="./@position"/><xsl:value-of select="./@reference"/>-><xsl:value-of select="./snp_call"/>(<xsl:value-of select='format-number(./snp_call/@percent, "##.##")'/>%)
 			    		                - <xsl:value-of select="significance"/><xsl:if test="significance/@flag">(<xsl:value-of select="significance/@flag"/>)</xsl:if>
 			    		                <br/>
@@ -371,7 +371,7 @@
                             </xsl:variable>-->
 	    		    <tr>
 	    		        <td><xsl:value-of select="@name"/></td>
-	    		        <td><xsl:value-of select='amplicon/@reads'/></td>
+	    		        <td><xsl:value-of select='sum(.//amplicon/@reads)'/></td>
                                 <xsl:choose>
                                 <xsl:when test='amplicon/breadth'>
 	    		        <td><xsl:value-of select='format-number(amplicon/breadth, "##.##")'/>%</td>
@@ -422,7 +422,7 @@
                         </tbody>
 	    	</table>
 	    	<br />
-<!--                <table width="100%">
+                <!--<table width="100%">
                 <tr>
                 <td align="center"><img src="../web_resources/NAU_Acronym_primary-281_3514-300x213.png" height="82" width="115"/></td>
                 <td align="center"><img src="../web_resources/195px-Seal_of_the_United_States_Department_of_Homeland_Security.svg.png" height="150" width="150"/></td>

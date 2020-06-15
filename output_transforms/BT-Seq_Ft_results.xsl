@@ -31,9 +31,9 @@
                   white-space: nowrap;
                 }
                 .table-header-rotated th.rotate <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text> div {
-                  -webkit-transform: translate(37px, 81px) rotate(315deg);
-                      -ms-transform: translate(37px, 81px) rotate(315deg);
-                          transform: translate(37px, 81px) rotate(315deg);
+                  -webkit-transform: translate(17px, 81px) rotate(315deg);
+                      -ms-transform: translate(17px, 81px) rotate(315deg);
+                          transform: translate(17px, 81px) rotate(315deg);
                   width: 30px;
                 }
                 .table-header-rotated th.rotate <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text> div <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text> span {
@@ -89,34 +89,48 @@
 	        <tr>
 	    	<th class="norotate"></th>
 	    	<th class="norotate"></th>
+	    	<th class="norotate"></th>
 	    	<xsl:for-each select="sample[1]">
-	    	    <xsl:for-each select="assay">
+	    	    <xsl:for-each select="assay[starts-with(@name, 'Ft_') or starts-with(@name, 'IPSC')]">
 	    	        <th class="rotate"><div><span><xsl:value-of select='@name'/></span></div></th>
 	    	    </xsl:for-each>
 	    	</xsl:for-each>
 	    	</tr>
 	        <tr>
 	    	<td class="norotate">Sample</td>
-	    	<td class="norotate">Ft Positives</td>
-	    	<td class="norotate" colspan="5" align="center"><em>Francisella tularensis</em></td>
+	    	<td class="norotate"><em>Ft</em> Positives</td>
+	    	<td class="norotate">NN Positives</td>
+	    	<td class="norotate" colspan="2" align="center"><em>F. tularensis</em></td>
+	    	<td class="norotate" colspan="3" align="center"><em>Ft</em>/NN assays</td>
 	    	<td class="norotate" colspan="5" align="center">Other Francisella spp.</td>
-	    	<td class="norotate" colspan="4" align="center">Ft typing</td>
+	    	<td class="norotate" colspan="4" align="center"><em>Ft</em> typing</td>
+	    	<td class="norotate" colspan="2" align="center">Controls</td>
                 </tr>
                 <xsl:for-each select="sample">
+                <xsl:variable name="TOTAL_READS" select="@mapped_reads + @unmapped_reads"/>
+                <xsl:variable name="DEPTH_FILTER" select="@depth_filter"/>
+                <xsl:variable name="PROP_FILTER" select="@proportion_filter * 100"/>
+                <xsl:variable name="MUT_DEPTH" select="@mutation_depth_filter"/>            
 	    	<xsl:variable name="count_ft">
                     <xsl:value-of select="count(./assay/amplicon[contains(significance, 'Francisella tularensis') and not(contains(significance, 'novicida'))]//significance[not(@flag)]) + count(./assay/amplicon/snp[contains(significance, 'Francisella tularensis') and not(contains(significance, 'Strain'))]//significance[not(@flag)])"/>
                 </xsl:variable>
+	    	<xsl:variable name="count_nn">
+                    <xsl:value-of select="count(./assay/amplicon[contains(significance, 'novicida') or contains(significance, 'noatunensis') or contains(significance, 'philomiragia')]//significance[not(@flag)]) + count(./assay[contains(@name, 'Ft_NN')]/amplicon//snp[@name != 'unknown' and @depth &gt;= $DEPTH_FILTER and not(significance)])"/>
+                </xsl:variable>
+                <xsl:variable name="color_ft"><xsl:value-of select="concat(substring('#000', 1, (($count_ft div 5) &lt; 0.8) *4), substring('#FFF', 1, (($count_ft div 5) &gt;= 0.8) *4))"/></xsl:variable>
+                <xsl:variable name="color_nn"><xsl:value-of select="concat(substring('#000', 1, (($count_nn div 8) &lt; 0.8) *4), substring('#FFF', 1, (($count_nn div 8) &gt;= 0.8) *4))"/></xsl:variable>
                     <tr>
-                    <td class="norotate" nowrap="true"><a href="{/analysis/@run_name}/{./@name}.html"><xsl:value-of select="@name"/></a></td>
-                    <td class="norotate"><xsl:value-of select="$count_ft"/>/5</td>
-		    <xsl:for-each select="assay">
-		        <td class="rotate" align="center">
+                    <td class="norotate" nowrap="true"><a href="{/analysis/@run_name}/Ft_{./@name}.html"><xsl:value-of select="@name"/></a></td>
+                    <td class="norotate" style="background: hsl(0, 100%, {(1 - ($count_ft div 5)) * 70 + 30}%); color: {$color_ft}"><xsl:value-of select="$count_ft"/>/5</td>
+                    <td class="norotate" style="background: hsl(240, 100%, {(1 - ($count_nn div 8)) * 70 + 30}%); color: {$color_nn}"><xsl:value-of select="$count_nn"/>/8</td>
+	    	    <xsl:for-each select="assay[starts-with(@name, 'Ft_') or starts-with(@name, 'IPSC')]">
+		        <td class="norotate" align="center">
 			<xsl:choose>
 			<xsl:when test="@type = 'SNP'">
                             <xsl:choose>
-                            <xsl:when test="amplicon/@reads &gt;= 100 and amplicon//snp[@name != 'unknown']/snp_call/@percent &gt;= 10">
+                            <xsl:when test="amplicon/@reads &gt;= $DEPTH_FILTER and amplicon//snp[@name != 'unknown']/snp_call/@percent &gt;= $PROP_FILTER">
                                 <xsl:choose>
-                                <xsl:when test="position() &lt;= 5">Ft</xsl:when>
+                                <xsl:when test="position() &gt;= 1 and position() &lt;= 5">Ft</xsl:when>
                                 <xsl:when test="position() &gt;= 6 and position() &lt;=10">NN</xsl:when>
                                 <xsl:when test="position() = 11">FtA1</xsl:when>
                                 <xsl:when test="position() = 12">FtA2</xsl:when>
@@ -125,14 +139,20 @@
                                 <xsl:otherwise>+</xsl:otherwise>
                                 </xsl:choose>
                             </xsl:when>
+                            <xsl:when test="amplicon/@reads &gt;= $DEPTH_FILTER and amplicon//snp[not(significance)]">
+                                <xsl:choose>
+                                <xsl:when test="position() &gt;= 3 and position() &lt;= 5">NN</xsl:when>
+                                <xsl:otherwise>-</xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:when>
                             <xsl:otherwise>-</xsl:otherwise>
                             </xsl:choose>
 			</xsl:when>
 			<xsl:otherwise>
                             <xsl:choose>
-                            <xsl:when test="amplicon/@reads &gt;= 100">
+                            <xsl:when test="amplicon/@reads &gt;= $DEPTH_FILTER">
                                 <xsl:choose>
-                                <xsl:when test="position() &lt;= 5">Ft</xsl:when>
+                                <xsl:when test="position() &gt;= 1 and position() &lt;= 5">Ft</xsl:when>
                                 <xsl:when test="position() &gt;= 6 and position() &lt;=10">NN</xsl:when>
                                 <xsl:when test="position() = 11">FtA1</xsl:when>
                                 <xsl:when test="position() = 12">FtA2</xsl:when>
@@ -155,156 +175,26 @@
         </html>
     </xsl:template>
     
-    <xsl:template name="amplicon-graph">
-        <div id="{@name}-graph" class="ampGraph">
-            <div>
-                <a href="#close" title="Close" class="close">X</a>
-                <h2><xsl:value-of select="@name"/> Coverage Graph</h2>
-			<canvas id="{@name}-canvas" height="90vh" class="ampCanvas"></canvas>
-                            <xsl:variable name="best_amp">
-                            <xsl:for-each select="amplicon">
-                                <xsl:sort select="breadth" data-type="number" order="descending"/>
-                                <xsl:sort select="@reads" data-type="number" order="descending"/>
-                                <xsl:if test="position()=1"><xsl:copy-of select="./*"/></xsl:if>
-                            </xsl:for-each>
-                            </xsl:variable>
-			<script>
-				var ctx_<xsl:value-of select="str:replace(str:replace(@name, '+', '_'), '-', '_')"/> = document.getElementById("<xsl:value-of select="@name"/>-canvas").getContext("2d");
-				var chart_<xsl:value-of select="str:replace(str:replace(@name, '+', '_'), '-', '_')"/> = new Chart(ctx_<xsl:value-of select="str:replace(str:replace(@name, '+', '_'), '-', '_')"/>, {
-                                    type: 'bar',
-				    data: {
-				        labels: "<xsl:value-of select="exsl:node-set($best_amp)/consensus_sequence"/>".split(""),
-				        datasets: [{
-					    type: 'line',
-                                            label: 'Consensus Proportion',
-				            yAxisID: 'proportion',
-				            data: [<xsl:value-of select="exsl:node-set($best_amp)/proportions"/>],
-				            borderColor: "#5F9EA0",
-				            borderWidth: 5,
-				            fill: false,
-				            pointRadius: 0,
-				            pointHoverRadius: 3,
-				            pointHoverBorderColor: "#B22222",
-				        },
-				        {
-					    type: 'bar',
-				            label: 'Read Depth',
-				            yAxisID: 'depth',
-				            data: [<xsl:value-of select="exsl:node-set($best_amp)/depths"/>],
-				            backgroundColor: "#FFDEAD",
-				            borderColor: "#DEB887",
-				            borderWidth: 1,
-				            hoverBorderColor: "#B22222",
-				        }]
-				    },
-				    options: {
-					responsive: true,
-					hover: {
-					    mode: 'label'
-					},
-					tooltips: {
-					    mode: 'label'
-					},
-				        scales: {
-				            yAxes: [{
-				            	id: "proportion",
-				            	position: "left",
-				                ticks: {
-				                    beginAtZero: true
-				                },
-				            },
-				            {
-				            	id: "depth",
-				            	position: "right",
-				                ticks: {
-				                    beginAtZero: true
-				                },
-				            }],
-				            xAxes: [{
-				            	gridLines: {
-					            display: false
-				            	},
-			                        categoryPercentage: 1.0,
-			                    }]
-				        }
-				    }
-				});
-		    </script>
-            </div>
-        </div>
-    </xsl:template>
-    
     <xsl:template match="sample">
-	<exsl:document method="html" href="{/analysis/@run_name}/{@name}.html">
+	<exsl:document method="html" href="{/analysis/@run_name}/Ft_{@name}.html">
 	    <html>
 	    <head>
 	    	<title>ASAP Results for Sample: <xsl:value-of select="@name"/></title>
-            <xsl:text disable-output-escaping="yes"><![CDATA[<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.0/Chart.min.js"></script>]]></xsl:text>
 	    	<style>
-	    	    .ampGraph {
-	    	        position: fixed;
-	    	        top: 0;
-	    	        right: 0;
-	    	        bottom: 0;
-	    	        left: 0;
-	    	        background: rgba(80,80,80,0.8);
-	    	        z-index: 99999;
-	    	        opacity: 0;
-	    	        -webkit-transition: opacity 400ms ease-in;
-	                -moz-transition: opacity 400ms ease-in;
-	                transition: opacity 400ms ease-in;
-	                pointer-events: none;
-	    	    }
-	    	    .ampGraph:target {
-			opacity:1;
-			pointer-events: auto;
-		    }
-		    .ampGraph <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text> div {
-			width: 95vw;
-			height: 60vh;
-			position: relative;
-			margin: 10% auto;
-			padding: 5px 20px 13px 20px;
-			border-radius: 10px;
-			background: #fff;
-			background: -moz-linear-gradient(#fff, #999);
-			background: -webkit-linear-gradient(#fff, #999);
-			background: -o-linear-gradient(#fff, #999);
-	            }
-		    .close {
-			background: #606061;
-			color: #FFFFFF;
-			line-height: 25px;
-			position: absolute;
-			right: -12px;
-			text-align: center;
-			top: -10px;
-			width: 24px;
-		        text-decoration: none;
-			font-weight: bold;
-			-webkit-border-radius: 12px;
-			-moz-border-radius: 12px;
-			border-radius: 12px;
-			-moz-box-shadow: 1px 1px 3px #000;
-			-webkit-box-shadow: 1px 1px 3px #000;
-			box-shadow: 1px 1px 3px #000;
-		    }
-		    .close:hover { background: #00d9ff; }
-		    .ampCanvas {
-		        overflow-x: auto;
-		    }
 		    .snpCell{
-                height:15px;
-                overflow:hidden;
-                text-overflow:ellipsis
-            }
-            .snpCell:hover{
-                height:auto;
-                width:auto;
-            }
+                        height:15px;
+                        overflow:hidden;
+                        text-overflow:ellipsis
+                    }
+                    .snpCell:hover{
+                        height:auto;
+                        width:auto;
+                    }
 	    	</style>
 	    </head>
 	    <body>
+                <xsl:variable name="PROP_FILTER" select="@proportion_filter * 100"/>
+                <xsl:variable name="DEPTH_FILTER" select="@depth_filter"/>
 	        <center><h1>BT-Seq Results for Sample: <xsl:value-of select="@name"/></h1></center>
                 <table border="0">
                 <tr>
@@ -358,7 +248,11 @@
 	    	<xsl:variable name="count_ft">
                     <xsl:value-of select="count(./assay/amplicon[contains(significance, 'Francisella tularensis') and not(contains(significance, 'novicida'))]//significance[not(@flag)]) + count(./assay/amplicon/snp[contains(significance, 'Francisella tularensis') and not(contains(significance, 'Strain'))]//significance[not(@flag)])"/>
                 </xsl:variable>
+	    	<xsl:variable name="count_nn">
+                    <xsl:value-of select="count(./assay/amplicon[contains(significance, 'novicida') or contains(significance, 'noatunensis') or contains(significance, 'philomiragia')]//significance[not(@flag)]) + count(./assay[contains(@name, 'Ft_NN')]/amplicon//snp[@name != 'unknown' and @depth &gt;= $DEPTH_FILTER and not(significance)])"/>
+                </xsl:variable>
 	    	<h4>Assays positive for <em>Francisella tularensis</em>: <xsl:value-of select="$count_ft"/>/5</h4>
+	    	<h4>Assays positive for <em>Francisella tularensis</em> near neighbors: <xsl:value-of select="$count_nn"/>/8</h4>
 	    	<br />
 	    	<br />
 	    	<h3>Species and strain identification assays for sample: <xsl:value-of select="@name"/></h3>
@@ -371,7 +265,7 @@
 	    		<th>SNPs found</th>
 	    		</tr>
                         <tbody valign="top">
-	    		<xsl:for-each select="assay">
+	    	        <xsl:for-each select="assay[starts-with(@name, 'Ft_') or starts-with(@name, 'IPSC')]">
 	    		    <xsl:if test="(@function = 'species ID' or @function = 'strain ID')"><!--and (exsl:node-set($best_amp)/@reads &gt; 0)--> 
                             <xsl:variable name="best_amp">
                             <xsl:for-each select="amplicon">
@@ -380,10 +274,9 @@
                                 <xsl:if test="position()=1"><xsl:copy-of select="./*"/></xsl:if>
                             </xsl:for-each>
                             </xsl:variable>
-	    		    <xsl:call-template name="amplicon-graph"></xsl:call-template>
 	    		    <tr>
-	    		        <td><a href="#{@name}-graph"><xsl:value-of select="@name"/></a></td>
-	    		        <td><xsl:value-of select='amplicon/@reads'/></td>
+	    		        <td><xsl:value-of select="@name"/></td>
+	    		        <td><xsl:value-of select='sum(.//amplicon/@reads)'/></td>
                                 <xsl:choose>
                                 <xsl:when test='amplicon/breadth'>
 	    		        <td><xsl:value-of select='format-number(exsl:node-set($best_amp)/breadth, "##.##")'/>%</td>
@@ -395,7 +288,7 @@
 	    		            <xsl:when test="@type = 'SNP'">
 			    		        <td><xsl:for-each select="amplicon/snp">
 			    		            <!--<xsl:if test="significance and ./@name != 'unknown'">-->
-			    		            <xsl:if test="significance and ./snp_call/@percent &gt; 10">
+			    		            <xsl:if test="significance and ./snp_call/@percent &gt; $PROP_FILTER">
 			    		                <xsl:value-of select="./@position"/><xsl:value-of select="./@reference"/>-><xsl:value-of select="./snp_call"/>(<xsl:value-of select='format-number(./snp_call/@percent, "##.##")'/>%)
 			    		                - <xsl:value-of select="significance"/><xsl:if test="significance/@flag">(<xsl:value-of select="significance/@flag"/>)</xsl:if>
 			    		                <br/>

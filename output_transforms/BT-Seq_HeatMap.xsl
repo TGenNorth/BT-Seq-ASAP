@@ -160,16 +160,16 @@
 	    	<xsl:variable name="count_ypnn">
                     <xsl:value-of select="count(./assay/amplicon[contains(significance, 'Yersinia enterolytica')]//significance[not(@flag)]) + count(./assay[contains(@name, 'Yp_NN')]/amplicon//snp[@name != 'unknown' and @depth &gt;= $DEPTH_FILTER and not(significance)])"/>
                 </xsl:variable>
-                <xsl:variable name="color_bp"><xsl:value-of select="concat(substring('#000', 1, (($count_bp div 5) &lt; 1) *4), substring('#FFF', 1, (($count_bp div 5) &gt;= 1) *4))"/></xsl:variable>
-                <xsl:variable name="color_bpbm"><xsl:value-of select="concat(substring('#000', 1, (($count_bpbm div 5) &lt; 1) *4), substring('#FFF', 1, (($count_bpbm div 5) &gt;= 1) *4))"/></xsl:variable>
-                <xsl:variable name="color_bm"><xsl:value-of select="concat(substring('#000', 1, (($count_bm div 2) &lt; 1) *4), substring('#FFF', 1, (($count_bm div 2) &gt;= 1) *4))"/></xsl:variable>
-                <xsl:variable name="color_bpbmnn"><xsl:value-of select="concat(substring('#000', 1, (($count_bpbmnn div 3) &lt; 1) *4), substring('#FFF', 1, (($count_bpbmnn div 3) &gt;= 1) *4))"/></xsl:variable>
-                <xsl:variable name="color_ba"><xsl:value-of select="concat(substring('#000', 1, (($count_ba div 16) &lt; 1) *4), substring('#FFF', 1, (($count_ba div 16) &gt;= 1) *4))"/></xsl:variable>
-                <xsl:variable name="color_bann"><xsl:value-of select="concat(substring('#000', 1, (($count_bann div 12) &lt; 1) *4), substring('#FFF', 1, (($count_bann div 12) &gt;= 1) *4))"/></xsl:variable>
-                <xsl:variable name="color_ft"><xsl:value-of select="concat(substring('#000', 1, (($count_ft div 5) &lt; 1) *4), substring('#FFF', 1, (($count_ft div 5) &gt;= 1) *4))"/></xsl:variable>
-                <xsl:variable name="color_ftnn"><xsl:value-of select="concat(substring('#000', 1, (($count_ftnn div 8) &lt; 1) *4), substring('#FFF', 1, (($count_ftnn div 8) &gt;= 1) *4))"/></xsl:variable>
-                <xsl:variable name="color_yp"><xsl:value-of select="concat(substring('#000', 1, (($count_yp div 8) &lt; 1) *4), substring('#FFF', 1, (($count_yp div 8) &gt;= 1) *4))"/></xsl:variable>
-                <xsl:variable name="color_ypnn"><xsl:value-of select="concat(substring('#000', 1, (($count_ypnn div 7) &lt; 1) *4), substring('#FFF', 1, (($count_ypnn div 7) &gt;= 1) *4))"/></xsl:variable>
+                <xsl:variable name="color_bp"><xsl:value-of select="concat(substring('#000', 1, (($count_bp div 5) &lt; 0.8) *4), substring('#FFF', 1, (($count_bp div 5) &gt;= 0.8) *4))"/></xsl:variable>
+                <xsl:variable name="color_bpbm"><xsl:value-of select="concat(substring('#000', 1, (($count_bpbm div 5) &lt; 0.8) *4), substring('#FFF', 1, (($count_bpbm div 5) &gt;= 0.8) *4))"/></xsl:variable>
+                <xsl:variable name="color_bm"><xsl:value-of select="concat(substring('#000', 1, (($count_bm div 2) &lt; 0.8) *4), substring('#FFF', 1, (($count_bm div 2) &gt;= 0.8) *4))"/></xsl:variable>
+                <xsl:variable name="color_bpbmnn"><xsl:value-of select="concat(substring('#000', 1, (($count_bpbmnn div 3) &lt; 0.8) *4), substring('#FFF', 1, (($count_bpbmnn div 3) &gt;= 0.8) *4))"/></xsl:variable>
+                <xsl:variable name="color_ba"><xsl:value-of select="concat(substring('#000', 1, (($count_ba div 16) &lt; 0.8) *4), substring('#FFF', 1, (($count_ba div 16) &gt;= 0.8) *4))"/></xsl:variable>
+                <xsl:variable name="color_bann"><xsl:value-of select="concat(substring('#000', 1, (($count_bann div 12) &lt; 0.8) *4), substring('#FFF', 1, (($count_bann div 12) &gt;= 0.8) *4))"/></xsl:variable>
+                <xsl:variable name="color_ft"><xsl:value-of select="concat(substring('#000', 1, (($count_ft div 5) &lt; 0.8) *4), substring('#FFF', 1, (($count_ft div 5) &gt;= 0.8) *4))"/></xsl:variable>
+                <xsl:variable name="color_ftnn"><xsl:value-of select="concat(substring('#000', 1, (($count_ftnn div 8) &lt; 0.8) *4), substring('#FFF', 1, (($count_ftnn div 8) &gt;= 0.8) *4))"/></xsl:variable>
+                <xsl:variable name="color_yp"><xsl:value-of select="concat(substring('#000', 1, (($count_yp div 8) &lt; 0.8) *4), substring('#FFF', 1, (($count_yp div 8) &gt;= 0.8) *4))"/></xsl:variable>
+                <xsl:variable name="color_ypnn"><xsl:value-of select="concat(substring('#000', 1, (($count_ypnn div 7) &lt; 0.8) *4), substring('#FFF', 1, (($count_ypnn div 7) &gt;= 0.8) *4))"/></xsl:variable>
                     <tr>
                     <td class="norotate" nowrap="true"><a href="{/analysis/@run_name}/{./@name}.html"><xsl:value-of select="@name"/></a></td>
                     <td class="norotate" style="background: hsl(0, 100%, {(1 - ($count_bp div 5)) * 70 + 30}%); color: {$color_bp}"><xsl:value-of select="$count_bp"/>/5</td>
