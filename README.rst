@@ -9,7 +9,18 @@ This is a customized version of the Amplicon Sequencing Analysis Pipeline (ASAP)
 
 INSTALLATION:
 -------------
+BT-Seq-ASAP is designed to be run on a compute cluster using a job manager such as SLURM or Torque/PBS. The other dependencies are:
 
+python 3.x with the following modules: lxml, numpy, pysam, openpyxl, scikit-bio, xmltodict 
+bowtie2
+samtools 1.x
+bbmap or trimmomatic
+
+To install, first clone the git repository: 
+``git clone git@github.com:TGenNorth/BT-Seq-ASAP.git``
+
+Then run, as root:
+``PYTHONPATH=<ASAP_INSTALL_DIRECTORY> easy_install -d <ASAP_INSTALL_DIRECTORY> <SOURCE_REPOSITORY_DIRECTORY>``
 
 USAGE:
 ------
@@ -21,11 +32,11 @@ BT-Seq-ASAP is run in two steps. The first step is analyzing the sequencing data
 
 ``<RUN_NAME>`` can be whatever you want, the final output file will be: ``<OUTPUT_DIRECTORY>/<RUN_NAME>_analysis.xml``
 
-This final output file is gets passed into the next command.
+This final output file is what gets passed into the next command.
 
 For more information about the analyzeAmplicons command, see the full `ASAP documentation <ABOUT.rst>`_.
 
-**2) Formatting Output**
+**2) Generating Reports**
 
 ``formatOutput -s <ASAP_INSTALL_PATH>/output_transforms/BT-Seq_HeatMap.xsl -x <XML_OUTPUT_FILE> -o <MAIN_OUTPUT_HTML_FILE>``
 
