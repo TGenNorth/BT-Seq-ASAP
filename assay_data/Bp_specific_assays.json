@@ -1,0 +1,432 @@
+{
+  "Assay": [
+    {
+      "name": "Bp_AmpSeq_1_TTS1",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia pseudomallei"
+          },
+          "sequence": "TCGTCGTCACCGGGATGGTCGCGCACGCAGCCGATGCCGCCACCGTGCGCACGCTGCTTGCGAGCATCGCATCGTCCGGCATCGTGAGCCGATATGACATCGCGCAACAGGTTTCGCACAACATCGAGGATTCGCTCGGTGTGCCCGGCGCGCAAGTCGAGTATGCGGGCAAAGGCC"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Bp_AmpSeq_3_Bp",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia pseudomallei"
+          },
+          "sequence": "TCGCATGAAGTGCGTTGCCGCAGCAATCGGTCGCGCCGGCACGCGGATCAATCGCAAGGGATCCGGCGCAGTTGAAAGGAAACCGTATGAACGACTGCCGACGTTCAGGCCCCGGTGCACGTCGACGGCCGCCGGCTCGCATCATCGCTTCGCAAGCGGC"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Bp_AmpSeq_4_Bp",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia pseudomallei"
+          },
+          "sequence": "CGCGCTTGCCCAACTACCAGAATTGGCAGGCGCGTCTTGGCCTGGCGGCCCGATCGACGCGGCATATCGCTCGAAGCGTTTCGCGGCAAGGGCACGCCGAGGTTCGTCGCTCGAAAGCATCGGCTCGATGCCGCATGAATGCCGTCGGCGAGCCCGTTCGTAACGATGCGTTTCGTTAAAAATGGGAGGTGGCGAAACGCGGCGCTATTGTCTCGCACCGTTGCGC"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Bp_AmpSeq_5_Bp",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia pseudomallei"
+          },
+          "sequence": "AATCCATGCATGTCGCGCCCGACCGTCTGTTCACCGACTCCCGCTTGCTCCGTCCGCACACCGAAACGCACGCAAATCTACGAACGCACACCGAGTGCGTCTGGAAAACAATCCGGTCCGGCGTTTTTCATGGCGGAACCTTTCGACTCATGCCGGGAGCGGTTCGCGCGGATTTTTCCGGACGCGCGCCACGGAAATGAAGCCCGTTGAGCGATCGC"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Bp_AmpSeq_6_Bp",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia pseudomallei"
+          },
+          "sequence": "TCGCATTTGCACACGCTCCCGTATTGAACGTTTGTCGCGCGTTTTGAACGATAGCGATGCGGCGCGCCTCGGATGCGCGAGCGAGGCGACGTGACGTGGTGCGATGCGACGGCGCGGCAACGTCCGCCTCGGCCGCGATCGCCGCACCCGCACGCGAGCGCGCGAAGCCCACCGGACTCCTCGCCAAGTTTGCGCACT"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Bp_AmpSeq_10_Bp+m",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia pseudomallei or mallei"
+          },
+          "sequence": "CCAGTCGGGCCGGGAAAAACGCGCGCCTGCGACGCACCGCCAAACGCCGCGCGTACGTACGGCAACTCGCCGGGCGACGAACACCGCCGCTCGAGCGGCGGCGCGCGGCAAACGGCTGCGATTCGCGCGCGCGACCGTCATCGACGCTTTTGCCGCC"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Bp_AmpSeq_11_Bp+m",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia pseudomallei or mallei"
+          },
+          "sequence": "GCCGGAACCGTCGAGCATTGTGTCCGCTCGTTTCGAACACCGGGCGCGCGAATCGGCGCACGCCGCACGTTGAAAGTCGGCGTTTCGGCCAGCGCGCGGTGATCGCTCGCGAGCGAGCGGAGGCAGTCGAATCCA"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Bp_AmpSeq_13_Bp+m",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia pseudomallei or mallei"
+          },
+          "sequence": "GAAAGGCGATGTGCCGAGCGGTCGGGAAGCCGGGCCGGCGCGCGTCGCCGAGAGCCGCCGGCGACCTCTGCCGGATGAAACGAACTTTCCGACCGTTGCGGGGTGTGAAACGTATCCGATCGAACGGCCTCCTGTCGAAACGCGATTTTTCGAGTGTAGCCGGCCCGGCGCGTTTGGCGCTTCTCCGAA"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Bp_AmpSeq_21_Bm",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia mallei"
+          },
+          "sequence": "AGGGGGTGGTTTCCTGAGTGGCGTGACGGCGGGCGGTTCCGGCGGCGATGGCCGCGGCGCGCAATCGGGTCGGACGACGAGTATGGGACGGCGGGCTTTGGGGAGTCCGCCGGTGCTGGCTGTTGGATCGGGCGTCGTGGAGCGAGCGGGTGCGATGGGGGCGTCGACTGATTCGACGAATTTGACATAACGCAAATTATCGACATTTTGGGTGTGACAGCTAAGCGGTAGCCTGCCGGGGCCAGTGTCTTAATACATTCAACATTCGTCGTGGAGGTTTCATCATGAAGCATTCCGTCAGGCATCCTTTCCACCCGTCGACACCGCT"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Bp_AmpSeq_22_Bm",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia mallei"
+          },
+          "sequence": "ACGGGCGCTTCACGATCTCGGTGTTCGAATCCGACGGCCCCGGGCGGCTTTACGCGAACCACGCGCAGCGCCTCTATCGCGAGTTCACCGAGCCCGAGCTCGCCGAACTGCTGCGCGCCGCGCATTTCACCCCCGTCGACAGCCAGCGGGTGCCGCGGCCGAAAGCCGGCCTGCACTATCTGAGGGTCGGCCGGGATTCGTGAAATTTTCGCCAAAATTGCCTTATCCAACTGATCTATAAGGGGAATTTCGCCCCTCGATCGAGTCGGCCGTACGCTAGACTTTGCGTGCCTCAAATGCCTGATCGAACTGCCGCGC"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Bp_AmpSeq_17_Bpc-SNPs",
+      "assay_type": "SNP",
+      "Target": {
+        "Amplicon": {
+          "SNP": {
+            "name": "BpseudomalleiComplex-SNP",
+            "variant": "G",
+            "reference": "C",
+            "position": 86,
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia pseudomallei complex"
+            }
+          },
+          "sequence": "CGACGCGCTCGATCCCAAACTCAAACGGATGGCCTGACATGAGCGATTTATTGACCATCCGCAATCTCGCGGTGAACTTCAGCGGGCTGCCCGCGGTCGACAGGATCAACCTGTCCATCGCGCGCGGCGAAGTGGTCGGCGTGGTGGGCGAGTCCGGCTCGGGCAAGAGCGTGACGAT"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Bp_AmpSeq_19_Bpc-MSS",
+      "assay_type": "gene variant",
+      "Target": {
+        "Amplicon": [
+          {
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia pseudomallei or mallei"
+            },
+            "variant_name": "Bpseudomallei_variant4",
+            "sequence": "CACGTTGCCCGGAAAGTACGAATCGGCGACCGCCTCGGCGAGCCAGTAAGGCAGCTCCGGCAGCGCGGCGAGCCGATCCTCGCCGACGATCGACGCGACGAACGACTTGAACAGCGCGATCTTGTCGACGG"
+          },
+          {
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia humptydooensis"
+            },
+            "variant_name": "Bhumptydooensis_variant8",
+            "sequence": "CACGTTGCCCGGGAAGTACGAATCGGCGACCGCCTCGGCAAGCCAGTAAGGCAGCTCCGGCAGCGCGGCGAGCCGGTCCTCGCCGACGACCGACGCGACGAACGATTTGAAGAGCGCGATCTTGTCGACGG"
+          },
+          {
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-3"
+            },
+            "variant_name": "PS-3_variant3",
+            "sequence": "CACGTTGCCCGGAAAATACGAATCGGCGACCGCTTCGGCGAGCCAATATGGCAGCTCCGGCAGTGCGGCGAGGCGCTCCTCGCCGACGATCGACGCGACGAACGACTTGAACAGCGCGATCTTGTCGACGG"
+          },
+          {
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia thailandensis"
+            },
+            "variant_name": "Bthailandensis_variant5",
+            "sequence": "CACGTTGCCCGGGAAGTACGAATCGGCCACCGCTTCGGCGAGCCAGTATGGCAGCTCCGGCAGCGCGGCGAGCCGGTCCTCGCCGACGATCGACGCGACGAACGACTTGAACAGCGCGATCTTGTCGACGG"
+          },
+          {
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-2"
+            },
+            "variant_name": "PS-2_variant12",
+            "sequence": "CACGTTGCCGGGGAAGTACGAATCGGCGACCGCTTCGGCGAGCCAGTAAGGCAGCTCCGGCAGCGCCGAGAGGCGATCGTCGCCGACGATCGATGCGACGAACGACTTGAAGAGCGCGATCTTGTCGACGG"
+          },
+          {
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-2"
+            },
+            "variant_name": "PS-2_variant14",
+            "sequence": "CACGTTGCCGGGGAAGTACGAATCGGCGACGGCTTCGGCGAGCCAGTAAGGCAGCTCCGACAGCGCCGAGAGGCGATCGTCGCCGACAATCGATGCGACGAACGACTTGAAGAGCGCGATCTTGTCGACGG"
+          },
+          {
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-3"
+            },
+            "variant_name": "PS-3_variant1",
+            "sequence": "CACGTTGCCCGGAAAATACGAATCGGCGACCGCTTCGGCGAGCCAATAAGGCAGTTCCGGCAGCGCGGCGAGACGCTCCTCGCCGACGACCGACGCGACGAACGACTTGAACAGCGCGATCTTGTCGACGG"
+          },
+          {
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia oklahomensis"
+            },
+            "variant_name": "Boklahomensis_variant13",
+            "sequence": "CACGTTGCCGGGGAAGTACGAATCGGCGACCGCTTCGGCGAGCCAGTAAGGCAGCTCCGGCAGCGCCGCGAGTCGATCCTCGCCGACGACCGACGCGACGAACGACTTGAAGAGCGCGATCTTGTCGACGG"
+          },
+          {
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-1"
+            },
+            "variant_name": "PS-1_variantX",
+            "sequence": "CACATTGCCGGGAAAATACGAATCGGCAACGGACTCGGCAAGCCAGTAAGGCAACTCCGGAAGCTCGGCAAGCCGTGCGTCGCCGACCACCGACGCGACGAACGTCTTGAAGAGCGCGATCTTGTCGACGG"
+          }
+        ],
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Bp_AmpSeq_20_Bpc-MSS",
+      "assay_type": "gene variant",
+      "Target": {
+        "Amplicon": [
+          {
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia pseudomallei or mallei"
+            },
+            "variant_name": "Bpseudomallei_variant26",
+            "sequence": "CAGAACGCGCTGTTCCACGCATGCTGCGGCGCCTGGCCGTAGGTGCGCAGCAGCACGCGCGGCGGCGCGCCGGCGAGCGCCGCGCGCACGTGCTCGGGCGTGACGGCGGAGCGCGCGCCGATGCAATGGATCACGCGGCA"
+          },
+          {
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia thailandensis"
+            },
+            "variant_name": "Bthailandensis_variant19",
+            "sequence": "CAGAACGCGCTGTCCCACGCGCGCTGCGGCGCCTGGCCGTAGGTGCGCAGCAGCACGCGCGGCGGCGCGTCGGCGAGCGCCGCGCGCACATCGTCGGGCGAGACGACGGGATGCGCGCCGATGCAATGGATCACGCGGCA"
+          },
+          {
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-3"
+            },
+            "variant_name": "PS-3_variant23",
+            "sequence": "CAGAACGCGCTGTCCCACGCGCGCTGCGGCGCGTTCCGGTACGTGCGCAGCAGCACGCGCGGCGGCGCGCCGGCGAGCGCCGCGCGTACGTCGTCGGGCGCGACGACTGGGCCCGCGCCGATGCAATGGATCACGCGGCA"
+          },
+          {
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia humptydooensis"
+            },
+            "variant_name": "Bhumptydooensis_variant17",
+            "sequence": "CAGAACGCGCTGTCCCACGCGCGCTGCGGCGCCTGGCCGTACGTGCGCAGCAGCACGCGCGGCGGCGCGCCGGCGAGCGCCGCGCGCACGTCGTCGGGCGCGACGACGGGGCGCGCGCCGATGCAATGGATCACGCGGCA"
+          },
+          {
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-2"
+            },
+            "variant_name": "PS-2_variant16",
+            "sequence": "CAGAACGCGCTGTCCCACGCGCGCTGCGGCGCCTGCCGGTACGTGCGCAGCAGCACGCGCGGGGGGGCGTCGGCGAGCGCCGCGCGCACGTCGTCGGGCGCGACGGCGGGGCCGGCGCCGATGCAATGGATCACGCGGCA"
+          },
+          {
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-2"
+            },
+            "variant_name": "PS-2_variant18",
+            "sequence": "CAGAACGCGCTGTCCCACGCGCGCTGCGGCGCCTGGCCGTACGTGCGCAGCAGCACGCGCGGCGGCGCGTCGGCGAGCGCCGCGAGCACGTCGTCGGGCGCGACGGCGGGGCCGGCGCCGATGCAATGGATCACGCGGCA"
+          },
+          {
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia oklahomensis"
+            },
+            "variant_name": "Boklahomensis_variant15",
+            "sequence": "CAGAACGCGCTGTCCCACGCGCGCTGCGGCGCCTGCCGGTACGTGCGCAGCAGCACGCGCGGCGGCGCGTCGGCGAGCGCCGCGCGCACGTCGTCGGGCGCGACGGCGCGGCCGGCGCCGATGCAATGGATCACGCGGCA"
+          },
+          {
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-2"
+            },
+            "variant_name": "PS-2_variant25",
+            "sequence": "CAGAACGCGCTGTCCCACGCGCGCTGCGGCGCTTGCCGGTACGTGCGCAGCAGCACGCGCGGCGGCGCGTCGGCGAGCGCAGCGCGCACGTCGTCGGGCGCGACGACGGGGCCGGCGTCGATGCAATGGATCACGCGGCA"
+          },
+          {
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-1"
+            },
+            "variant_name": "PS-1_variantX",
+            "sequence": "CAGAACGCGCTATCCCACGCATGCAGCGGCGCCTGCCGGTATGTGCGCAGCAATACGCGCGGCGGCGGGGCGTCGGCGAGCGCCGCGGCGACATCGCCGGGCATGACCGCGGGATGCGCGCCGATGCAATCGATCACGCGGCA"
+          }
+        ],
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Bp_AmpSeq_18_Bcc-SNPs",
+      "assay_type": "SNP",
+      "Target": {
+        "Amplicon": {
+          "SNP": {
+            "name": "BcepaciaComplex-SNP",
+            "variant": "C",
+            "reference": "T",
+            "position": 112,
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia cepacia complex"
+            }
+          },
+          "sequence": "CGCGCAGTTCGTCGTCCTCGACGAGCTTGCCCGCGCCTTCCATTGCGGACAGCAGCGTCGCTTCCGAATAGCGTGCGGGCGGCTTCGTGACGAGCGCGACGGCGGCGATTTCGTCCGTCTTCACCTTCTCGTCCTTCTGCACCGGCACGAGGTTCG"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Bp_AmpSeq_24_pbp3",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": "Antimicrobial resistance marker detected - no expected variation in anitmicrobial resistance",
+            "resistance": "Ceftazidime"
+          },
+          "sequence": "ATCCGCCGTCCCGCCCAGCAATAGCGAGCCCATGCGCCTGAACAAAAAACCGAAGTCATCCGATCCTTACGTCGCCGTCGCGAAAAATCCGATGCTGTCGTCGAGCCTGCCGATGTGGCGCTCGAAATTCGTCGTGATCCTCGTGTTCCTCGCGTTCGGCGCGCTGATCGCCCGCGCGTTCTGGGTGCAGGTGGCGAATCAGGATTTCTACGTCGGCCAGGGCCAGAAGCGCTATCAGCGCACCATCGAGCTCGGCGCGATGCGCGGCAGCATCGTCGATCGCAACGGCGCGCTGCTCGCCGTGAGCCTCACCACCTACGAAATCTGGGCGAACCC"
+        },
+        "function": "resistance type",
+        "gene_name": "pbp3"
+      }
+    },
+    {
+      "name": "Bp_penA_78promoter",
+      "assay_type": "SNP",
+      "Target": {
+        "Amplicon": {
+          "SNP": {
+            "name": "penA_-78promoter",
+            "variant": "A",
+            "reference": "G",
+            "position": 46,
+            "Significance": {
+              "message": "Antimicrobial resistance marker detected - penA",
+              "resistance": "Ceftazidime"
+            }
+          },
+          "sequence": "CGGTCGCCACAAATTCGCACGCACTCCTGTGACGAGAGCTGATACGCTAGCGAGCCGCGATGTCGGGTGCGCGCACGCCGCGTGCCCGATTCGCGCCCGTTCAATCTTCCCGCGATCCGCCTGATGAATCATTCTCCGTTGCGCCGCTCGCT"
+        },
+        "function": "resistance type",
+        "gene_name": "penA"
+      }
+    },
+    {
+      "name": "Bp_penA_C69Y_S72F",
+      "assay_type": "SNP",
+      "Target": {
+        "Amplicon": {
+          "SNP": [
+            {
+              "name": "penA_C69Y",
+              "variant": "A",
+              "reference": "G",
+              "position": 150,
+              "Significance": {
+                "message": "Antimicrobial resistance marker detected - penA",
+                "resistance": "Ceftazidime"
+              }
+            },
+            {
+              "name": "penA_S72F",
+              "variant": "T",
+              "reference": "C",
+              "position": 159,
+              "Significance": {
+                "message": "Antimicrobial resistance marker detected.- penA",
+                "resistance": "Ceftazidime"
+              }
+            }
+          ],
+          "sequence": "GCTGCGCGGCCAAGCGAAAAACGTCGCCGCCGCCGAGCGGCAATTGCGCGAACTCGAATCGACGTTCGACGGCCGCTTGGGCTTCGTCGCGCTCGACACCGCGACCGGCGCGCGCATCGCGCATCGCGGCGACGAGCGTTTCCCGTTCTGCAGCACATCCAAGATGATGCTTTGCGCTGCGGTCCTCGCG"
+        },
+        "function": "resistance type",
+        "gene_name": "penA"
+      }
+    },
+    {
+      "name": "Bp_penA_P167F",
+      "assay_type": "SNP",
+      "Target": {
+        "Amplicon": {
+          "SNP": {
+            "name": "penA_P167F",
+            "variant": "T",
+            "reference": "C",
+            "position": 70,
+            "Significance": {
+              "message": "Antimicrobial resistance marker detected - penA",
+              "resistance": "Ceftazidime"
+            }
+          },
+          "sequence": "GGCCGCAGACCGTCACCGCGTATGCGCGCTCGATCGGCGACGCGACGTTCCGGCTCGATCGCCGCGAGCCTGAGCTGAACACGGCGCTGCCCGGCGACGAGCGCGATACGACGACGCCCGCCGCGATGGCCGCGAGCGTGCACCGGCTGCTCGTGGGCGACGCGCTCGGCGCCGCGCAGCGCGCGCAGCTCAATGCATGGATGCTCGGCAACAAGACGGGCGAC"
+        },
+        "function": "resistance type",
+        "gene_name": "penA"
+      }
+    },
+    {
+      "name": "IPSC-1",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": "Control"
+          },
+          "sequence": "GGGCGGACGAAAACCCTTGAGCACAGAAATTGAGCAGAGGCTAGTCGCGTGATATGACTTAAGATTTGGGTCTGTACGGCTATAGTTTGGTGAGTTAAGCTGGATCGGGAGTTTGCAAGACGATCTGGCACAGTTAGTCACAGACGAAGGACTCACTTTGGAAAGGCGGCTTCGGCCGCCAATCTTGGATCCCAGCGGAAGCAGGAACCGTTGAGGCCAGAGGAATACGTCCGTCATTGCGTCTAGGTAAGGCATCCCGGC"
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "IPSC-2",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "Significance": {
+            "message": "Control"
+          },
+          "sequence": "GCGGCAGCCGTTGAGGCAAAAGTGATACGTGCGACACTGCATCTAGGCAGCGCAACAACGCGACAGCTCGAGGTGTTCTTCGCAGAGGAACCGCACGTCCAGTTCTAGCACTCTCGTATGTGCTCGTCGTTTATGCTTTCGGCGTGAAAACTGGTGCGCCGGTGTCTGGGGACCATCCTTCTTGCGTATGACCCCAAGGACAGCCATCACGGTTTGTGGGTTCGCTGGGACTGTCACGCTTAACCGGACGGAACTCG"
+        },
+        "function": "species ID"
+      }
+    }
+  ]
+}

@@ -1,0 +1,547 @@
+{
+  "Assay": [
+    {
+      "name": "Ba_specific-3_CP008853.1_5309",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "sequence": "ACGTCAGGTGATTATTGGACTCGATTTGTCGTTATCTACAGATAATACAGCTGTTACATTTATGTGGTACGACCAACAAAATGAACATCATTATGCTAAAAACCTTGTCTTTTATCCGAAGAATAAGGAAACTGACAAAACCCAGAAAGAACGTATTCCTTACGACAAATGGGCACGTGCTGGATACTGTCAACCAATTGGTGAAGATACAGTTGATTATGATGAAATGGCGGATATAATTGTTG",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus anthracis"
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_specific-5_CP008853.1_5316",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "sequence": "GAAGATGTACGCTCGATAGGATTAATTGCACATTTGATGTCATTACCTGAAACATGGGTGATAAAAAAGATGCAACTGTATAAAAAATTCGGTAGAGCTGCCATTACAAAAGGTATCGCTGAACTGGAAGAAAAGAAATACTGGGTGGATATCAAATACCGTGATGGCAAAAAGAATTTC",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus anthracis"
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_specific-6_CP012725.1_3629",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "sequence": "CACAATTGAATGAAAATGCTACTAAAAAGAAAGTCCTGATTGCATTTGCAATATATAGGAGTTTTATAAAAAATAAGAACAAAACTAAGGATCGAATTGATTATATTAACGATATGAATGTTGCGTTACAAAAGTTAGTCAATAAAGAAGATAAGAAGATTATACAAGAGTATATGTTAAGAGAAAAGGTAAACAGGTTTCGTG",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus anthracis"
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_specific-8_CP012725.1_5103",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "sequence": "GATATTCGACGAGCTTTCTGTGGATCTGGAAAAACGTATTCATGCTTACGAACGTTCTATAATAGCTCATATGAAGGACTTGTGTATTCCATTATCTCAACGTTTACGATTAAGTAACGATATAGCTAAATTGATGATTGAAGAGAAAAAACTGGAACAGATGAATCAACAAAATAATCAAGCTATCAATCCACTGATGGCATTACTGGAGGAGGATGACGATGAATA",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus anthracis"
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_specific-9_CP012725.1_5107",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "sequence": "TATTGAACGCATTGAATCAGGAGCATTCACACGTGCTTTAGAACGAGGAAATGATGTTCATTTCTTAGCTGAGCATGACAACGCCAAACTATTGGCTTCAACTAAAAATGGTAGCTTGCAACTGCGTGAGGACGATAAAGGTCTTTACATGGAAGCTCGTATTTCCCCTACATCTTACGGGAAAGATTACCACCAATTAATTCAAGACGGTTTGCTTACCAATA",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus anthracis"
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_specific-11_JSZQ01000034.1_220",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "sequence": "GGTTCAGGACAAAATGTAGCACATATCATTACAAATCGTGAAGCATATGGCATTAGCATGACGAATATTCGATTTACACGAATTAAAGGCGATACAAAACAACAAATCAACAACGCTCACGTATACATTGGAGAAAGTTATGTTGATGGTAAACTTATTAATGAATTTGCTAAAACTTCAGCGGTTTTCGCTTCAGAAGTTA",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus anthracis"
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_specific-12_JSZS01000036.1_5",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "sequence": "GCGAATTTTAGACGACAATCGTGTTCATTTGCTAAATCATGAAGCCAATGACTTTTTAAACGGTTATTCCTTAAAGAAACACATGGTCAAGGATTACTTATTACATGGTTCCTCTTATGTATCAATCATTGAGGCAGGTAACACAATTTTAGAGCTTCACCCATTGCTTTCAAAAGCTATTGTGGTTAACAAACGAATTAAGCACGGTT",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus anthracis"
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_specific-14_LGCC01000010.1_232",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "sequence": "ATTAATAAGGCGACTGGTGAAACGTTAATTAGAGCGGGTATCACTGTAAGATATACTGATGGAACAATTCAAAAGTCTACAATGTTTAAACTAAAGGCAGACGGAAAAGAGTATGCTGATGTGTTTGAACAGGATATAGATAATACTAAAACTATTTCATCTATGTATTTGTATATCAGCGGTGGTGATGTGAATGATGTCATTAAAATTTCTTATGTCTCATTCTGGATGGGTAA",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus anthracis"
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_specific-16_LGCC01000048.1_280",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "sequence": "ACAATTCTTAAAAGGCGACATTCACGGTGCTGAAGTTCGTACAATGACAACTGGTACTGGTGCTATCACAGTTCCAACATCTTTATCAAACGTTATCGTAGAAAAACTTGTTGAAGAAGCAGCTCTATTTGGTCGTGCTAAATCTTTCACGCCAGTATCTGGTACTTTAGAAGTATTACGTGAGAAAAATATCGGAGACGCTACA",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus anthracis"
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_NN1_plcR",
+      "assay_type": "SNP",
+      "Target": {
+        "Amplicon": {
+          "sequence": "TTTTTCGTAAGCATCTTCAATTTCTGCTCTATCACACTCTAGCTTTTCTAGGCATTCAACTTTTCGATAGTATAACTGTCCAATCAATGTCATACTATTAATTTGACACGATAGTTCAATAGCTTTATTTGCATGACAAAGCGCTTATTCGTATTGATTGTCCAAGTATAATGCTTTTGCATGATTATGTCTCACCTTCACATCAAA",
+          "SNP": {
+            "variant": "A",
+            "name": "plcR_147",
+            "reference": "C",
+            "position": 147,
+            "Significance": {
+              "message": "Species ID marker detected - Bacillus anthracis"
+            }
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_NN32_AmesAnc_4669915",
+      "assay_type": "SNP",
+      "Target": {
+        "Amplicon": {
+          "sequence": "AGGAGATGAGAGTTTTGCACGAAACAACGCAAGAGCTCGTAAATTGGCAGTATTATTTTGCTATCGCAGTCTTTTTAATTACATATGCCATTATTATTTCTGAAAAAATCAATCGCGCTGTCATCGCACTTCTCGGTGCAGCACTCATGGTAATTATGGGGGT",
+          "SNP": {
+            "variant": "T",
+            "name": "Ba_AmesAnc_4669915",
+            "reference": "C",
+            "position": 40,
+            "Significance": {
+              "message": "Species ID marker detected - Bacillus anthracis"
+            }
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_NN33_AmesAnc_4001578",
+      "assay_type": "SNP",
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGTTGCGTAAGTATGTGCTACGAGAGTTTTTCAAGCTTGCAATGCGCTCTTCAGCTAGACGATCAGCTGCTACATAAGTTGCAATGCCATCGCGTTTTGAAATTTCGATTACCTTTGCAATTGTGTCATAAATTGATTCTACGCGTTTTAATGCACGTTCTCTATTGTATCCATATAACTCGTCTGCTACGTTAATTACGCCACCT",
+          "SNP": {
+            "variant": "C",
+            "name": "Ba_AmesAnc_4001578",
+            "reference": "T",
+            "position": 113,
+            "Significance": {
+              "message": "Species ID marker detected - Bacillus anthracis"
+            }
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_NN37_AmesAnc_1069024",
+      "assay_type": "SNP",
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGAAAAGTTGTCGACCTAATGATGGATAAAATCCATACGAAAAATTATCGAAAAAAAGAATTGTATGAGTTTGAACTGGAGCTCTTGGTGTAAGGTTCAACGATGAAGGATACGATGTTATTAGCCTAGTAGACTATGTCTGCTAGGTTTTTTTCTGTTCACAAACTACTATTCTTCGTGAACGCAGT",
+          "SNP": {
+            "variant": "T",
+            "name": "Ba_AmesAnc_1069024",
+            "reference": "A",
+            "position": 91,
+            "Significance": {
+              "message": "Species ID marker detected - Bacillus anthracis"
+            }
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_NN38_AmesAnc_3668548",
+      "assay_type": "SNP",
+      "Target": {
+        "Amplicon": {
+          "sequence": "TCTCTTGATTCAACGTTTCCAACAAAATTAATTGGCGCATCTTTAAGCATTGCAAAGACTTGTTTTGAAAGCTCGTTTCCTTTGCCACCCTCTGTCCCAACATTTAAAAGTCCGACGCGAGGATTTTTAATTCCTCTTACTTTCTCAGCGTATACAGATCCCATTACTGCATATTGATATAAGTGAATTGGTTTTGCATC",
+          "SNP": {
+            "variant": "C",
+            "name": "Ba_AmesAnc_3668548",
+            "reference": "T",
+            "position": 88,
+            "Significance": {
+              "message": "Species ID marker detected - Bacillus anthracis"
+            }
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_NN40_AmesAnc_371913",
+      "assay_type": "SNP",
+      "Target": {
+        "Amplicon": {
+          "sequence": "GTGAAACATCGCTTTTTAGGAGCAGCTACACCGAAAGGAGCAGTTGATTTTGTTCCTAACTTAACAGAAGGATTACTACATCGTTATTTTATAAAAGGACGCCCAGGCTCTGGGAAATCAACAATGCTCAAAAAATTAGCTAAGGCAGCGGAAGAAAAAGGGTTTGAAGTTGAAGTATATCATTGCGGA",
+          "SNP": {
+            "variant": "T",
+            "name": "Ba_AmesAnc_371913",
+            "reference": "C",
+            "position": 77,
+            "Significance": {
+              "message": "Species ID marker detected - Bacillus anthracis"
+            }
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_NN41_AmesAnc_999035",
+      "assay_type": "SNP",
+      "Target": {
+        "Amplicon": {
+          "sequence": "ATACGGTGAAAATGAAGCAGGGAAATCAACAATTCGCTCGTTTATGAAAAGTATTTTATTCGGTTTTCCGACGAGAGGGCAGCGCCGTTATGAGCCGAAAGAAGGCGGCAAGTATGGTGGTGCGATCACTGTACAAACAGAGAAGTACGGCCGTTTGAAAATTGAACGATTACCAAAGACG",
+          "SNP": {
+            "variant": "G",
+            "name": "Ba_AmesAnc_999035",
+            "reference": "A",
+            "position": 79,
+            "Significance": {
+              "message": "Species ID marker detected - Bacillus anthracis"
+            }
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_specific-20_LOMU01000090.1_49",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "sequence": "CATGGGGCTTTCTATTATGTTTTTAATACTGTTTTTCATGGGTAAGAAGAAAGATACTGCCCTATTACTTTTCTCATTTTATTTTGGCTCTATGTTAATTGATAGACTTTTTGTCATTCAAGAAGCAAAAGGTACATGGATACATACCGTTTGGAAAATTTTTCATATTGTAATGATGCTTGGATTTACTATTTATGTGATTAAAGATATTAGGAAACTTATGAAAGAACGAA",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus cereus"
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_specific-22_LOQC01000013.1_3",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "sequence": "TTGGAGTTTGTTTTGCTTTTATGGTTACTCAAGGCGCTGTTCTTGAACTTTATGGTAAAGTAAGTTGGGTAGGTGTAACTTATGCGTCATTATACAACGTTGTATCTGCAATCGTAAATGGTGCTTCGATTATGAATGCTGTAGCAGTTGTTACAGCTGTTATTGCAGGACCGTTAGCGGCAGCTCTTACTGCGGTAGGACGTGGATTAATTGTTAC",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus cereus"
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_BcereusBvAnth_1",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "sequence": "TATGAAAGGAGCCGTAAAACAAAGGGACAAATCGAGACAGCGATGATGAATTTTATAATGGGTAAAAATACAACTGTAGAGTATTTGGAAGTGTTTTTAGAATGTATTGAAAAAGTATTTAATGTTAGTGTCATTAATATTTTGCAAGGAAAGTTTGAGATGAATCAAGTTGATGGTAAAGATTTGCTGATGAGGGAAATTTCTAATACTAGTTTTCCGCTTCATATTCA",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus cereus biovar anthracis"
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_BcereusBvAnth_2",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "sequence": "TCGAACATACCTCCATTTCTTGATGCTCTTCAAATATTAACTATGATAACTTCATTTTTAATCTATTTTATAGAAGGGTATTCACTAATGAAGTTGGATGTTCTTACTAAATTAAAACAACGCCCAAAACTTCATAAATTGCTCATTATTATGTTTAGTATTGTTTCTATTACTGGGGTTACTGTACAGATGCTAACACCAAGTGCAAAGCTATCTTT",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus cereus biovar anthracis"
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_BcereusBvAnthSNP",
+      "assay_type": "SNP",
+      "Target": {
+        "Amplicon": {
+          "sequence": "TTTCTTAGTTGTGCGGATTTCTTCTAATAAGTCAGTTGCATTAGAATCTAACCAAGCATGGAATTCTTCTTCGAAACGAGTGATATCTACTACTGGGATGTCATCTAGGAATCCACGTGTTAAAGCGTAAAGAATGATAACTTGTTTCTCTACACGTAACG",
+          "SNP": {
+            "variant": "G",
+            "name": "BcereusBvAnth_SNP",
+            "reference": "A",
+            "position": 100,
+            "Significance": {
+              "message": "Species ID marker detected - Bacillus cereus biovar anthracis"
+            }
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "Ba_pX01",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "sequence": "CACCGTTCATGGGACTTAAGGATTTTACTGAATATCCAGAATATATTAATTCTGTAATAGTACCTTGGATAAATTCCACAAATTCCTCAGATTTAAATGGAATATCAGATACATTATAAAAAGATTGTTTTTTTCCGTTTACGTAACAGTTAAATCCAATTATATAGTTCTTATTGGCAAGTTCTTTCCAAGCGGCATCTA",
+          "Significance": {
+            "message": "Virulence factor marker detected - Bacillus anthracis plasmid"
+          }
+        },
+        "function": "virulence factor"
+      }
+    },
+    {
+      "name": "Ba_pX02",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGCCAGCGTATTATATAGGTGCATACAAAGGGTGGACAGAAGAACAGGTAGAGAGAATAAAAGGTAAAATATATGAGAAAGAACAAGAAATTAAAGATATAGTAAGGTGTATTCCTTATGGTTTAACTCCATCGGGTTCGGAGTATTTAAAACACAACCCAGAATTAGC",
+          "Significance": {
+            "message": "Virulence factor marker detected - Bacillus anthracis plasmid"
+          }
+        },
+        "function": "virulence factor"
+      }
+    },
+    {
+      "name": "Ba_pagA",
+      "assay_type": "presence/absence",
+      "Target": {
+        "gene_name": "pagA",
+        "Amplicon": {
+          "sequence": "GGTTACAGGACGGATTGATAAGAATGTATCACCAGAGGCAAGACACCCCCTTGTGGCAGCTTATCCGAGTGTACATGTAGATATGGAGAATATTATTCTCTCAAAAAATGAGGATCAATCCACACAGAATACTGATAGTCAAACGAGAACAATAAGTAAAAATACTTCTACAAGTAGGACACATACTAGTGAAGTACATGGAAATGCAGAAGTGCATGCGTCGTTCTTTGATATTGGTGGGA",
+          "Significance": {
+            "message": "Virulence factor marker detected - Bacillus anthracis plasmid pagA"
+          }
+        },
+        "function": "virulence factor"
+      }
+    },
+    {
+      "name": "Ba_gyrA",
+      "assay_type": "SNP",
+      "Target": {
+        "gene_name": "gyrA",
+        "Amplicon": {
+          "sequence": "TCGGTAAGTATCACCCTCATGGTGATTCAGCTGTTTATGAAACGATGGTACGTATGGCGCAAGATTTCAGTCAACGTTATATGCTTGTTGATGGGCATGGTAACTTTGGATCTGTCGATGGAGATTCAGCGGCAGCAATGCGTTATACAGAAGCA",
+          "SNP": [
+            {
+              "variant": "T",
+              "name": "gyrA_S85L",
+              "reference": "C",
+              "position": 28,
+              "Significance": {
+                "resistance": "Ciprofloxacin",
+                "message": "Antimicrobial resistance marker detected - gyrA"
+              }
+            },
+            {
+              "variant": "A",
+              "name": "gyrA_E89K",
+              "reference": "G",
+              "position": 39,
+              "Significance": {
+                "resistance": "Ciprofloxacin",
+                "message": "Antimicrobial resistance marker detected - gyrA"
+              }
+            }
+          ]
+        },
+        "function": "resistance type"
+      }
+    },
+    {
+      "name": "Ba_parC",
+      "assay_type": "SNP",
+      "Target": {
+        "gene_name": "parC",
+        "Amplicon": {
+          "sequence": "CAGTCGGTAACGTTATTGGTAACTATCACCCGCACGGTGATTCCTCTGTATATGAAGCGATGGTACGTTTAAGTCAAACTTGGAAAGTACGTAATGTTTTAGTTGAGATGCATGGTAATAATGGTAGTGTTGACGGGGATCCGGCAGCAGCAATGCGTTATACGGAAGCCCGATTATCACCAATTGCATCTGAGTTA",
+          "SNP": [
+            {
+              "variant": "A,T",
+              "name": "parC_S81F-Y",
+              "reference": "C",
+              "position": 43,
+              "Significance": {
+                "resistance": "Ciprofloxacin",
+                "message": "Antimicrobial resistance marker detected - parC"
+              }
+            },
+            {
+              "variant": "A",
+              "name": "parC_E85K",
+              "reference": "G",
+              "position": 54,
+              "Significance": {
+                "resistance": "Ciprofloxacin",
+                "message": "Antimicrobial resistance marker detected - parC"
+              }
+            }
+          ]
+        },
+        "function": "resistance type"
+      }
+    },
+    {
+      "name": "Ba_gyrB",
+      "assay_type": "SNP",
+      "Target": {
+        "gene_name": "gyrB",
+        "Amplicon": {
+          "sequence": "ATTGTAGAGGGTGACTCTGCCGGTGGATCAGCAAAGCAAGGGCGTGATCGTCACTTCCAAGCGATTTTACCACTGAAAGGTAAAATTATTAACGTTGAAAAGGCAAGATTAGATAAAATCTTATCTAACGATGAAGTGCGTACAATTATTACTGCAATTGGTACGAACATTGGCGGAGATTTTGATA",
+          "SNP": [
+            {
+              "variant": "A",
+              "name": "gyrB_D437N",
+              "reference": "T",
+              "position": 28,
+              "Significance": {
+                "resistance": "Ciprofloxacin",
+                "message": "Antimicrobial resistance marker detected - gyrB"
+              }
+            },
+            {
+              "variant": "G",
+              "name": "gyrB_N475D",
+              "reference": "A",
+              "position": 142,
+              "Significance": {
+                "resistance": "Ciprofloxacin",
+                "message": "Antimicrobial resistance marker detected - gyrB"
+              }
+            }
+          ]
+        },
+        "function": "resistance type"
+      }
+    },
+    {
+      "name": "Ba_rpoB",
+      "assay_type": "SNP",
+      "Target": {
+        "gene_name": "rpoB",
+        "Amplicon": {
+          "sequence": "TTCTTCGGAAGTTCTCAGTTATCTCAGTTCATGGACCAAACAAATCCATTAGCAGAGTTAACTCACAAACGAAGATTATCTGCATTAGGACCTGGTGGTTTAACGCGTGAGCGCGCAGGCTTTGAAGTACGTGACGTTCACTACTCTCACTATGGTCGTATGTGTCCG",
+          "SNP": {
+            "name": "Bc_rpoB_73",
+            "reference": "A",
+            "position": 73,
+            "Significance": {
+              "resistance": "Rifampin",
+              "message": "Antimicrobial resistance marker detected - rpoB"
+            }
+          }
+        },
+        "function": "resistance type"
+      }
+    },
+    {
+      "name": "Ba_AA2502",
+      "assay_type": "SNP",
+      "Target": {
+        "Amplicon": {
+          "sequence": "AAGTTTGAGGTGTGGAAATGGAACAGACATTTATTGAAAAGTGTAATCATGATGAGCTGGACGATGTTATAAAAGACTATTGGCAAGATGTATGGAATTATTCATTTATTATTACGAAAGATCCACACTTATCAGGTGATATTACGCAAGATGTATTTATAAAGGTATTTAAAAATTGGAACTCATTTCGA",
+          "SNP": {
+            "variant": "G",
+            "name": "Bc_AA2502_88",
+            "reference": "A",
+            "position": 88,
+            "Significance": {
+              "message": "Antimicrobial resistance marker detected - AA2502"
+            }
+          }
+        },
+        "function": "resistance type"
+      }
+    },
+    {
+      "name": "Ba_AA2503",
+      "assay_type": "SNP",
+      "Target": {
+        "Amplicon": {
+          "sequence": "CAAAACTAATAGGGGAGGGTGGTAGTGATGAACAATAAACAAAATCCTGACTGGTATAGAAAATTAAAAAAAGGCCCAATGGAACACCGTAAAGACGAAGAAGAATATATTTATAAAATAAAGCAATCTATATATCAAAGTAACGAGGTAGGTTCTCGG",
+          "SNP": {
+            "name": "Bc_AA2503_38",
+            "reference": "A",
+            "position": 44,
+            "Significance": {
+              "message": "Antimicrobial resistance marker detected - AA2503"
+            }
+          }
+        },
+        "function": "resistance type"
+      }
+    },
+    {
+      "name": "IPSC-1",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "sequence": "GGGCGGACGAAAACCCTTGAGCACAGAAATTGAGCAGAGGCTAGTCGCGTGATATGACTTAAGATTTGGGTCTGTACGGCTATAGTTTGGTGAGTTAAGCTGGATCGGGAGTTTGCAAGACGATCTGGCACAGTTAGTCACAGACGAAGGACTCACTTTGGAAAGGCGGCTTCGGCCGCCAATCTTGGATCCCAGCGGAAGCAGGAACCGTTGAGGCCAGAGGAATACGTCCGTCATTGCGTCTAGGTAAGGCATCCCGGC",
+          "Significance": {
+            "message": "Control"
+          }
+        },
+        "function": "species ID"
+      }
+    },
+    {
+      "name": "IPSC-2",
+      "assay_type": "presence/absence",
+      "Target": {
+        "Amplicon": {
+          "sequence": "GCGGCAGCCGTTGAGGCAAAAGTGATACGTGCGACACTGCATCTAGGCAGCGCAACAACGCGACAGCTCGAGGTGTTCTTCGCAGAGGAACCGCACGTCCAGTTCTAGCACTCTCGTATGTGCTCGTCGTTTATGCTTTCGGCGTGAAAACTGGTGCGCCGGTGTCTGGGGACCATCCTTCTTGCGTATGACCCCAAGGACAGCCATCACGGTTTGTGGGTTCGCTGGGACTGTCACGCTTAACCGGACGGAACTCG",
+          "Significance": {
+            "message": "Control"
+          }
+        },
+        "function": "species ID"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1423 @@
+{
+  "Assay": [
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TCGTCGTCACCGGGATGGTCGCGCACGCAGCCGATGCCGCCACCGTGCGCACGCTGCTTGCGAGCATCGCATCGTCCGGCATCGTGAGCCGATATGACATCGCGCAACAGGTTTCGCACAACATCGAGGATTCGCTCGGTGTGCCCGGCGCGCAAGTCGAGTATGCGGGCAAAGGCC",
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia pseudomallei"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Bp_AmpSeq_1_TTS1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TCGCATGAAGTGCGTTGCCGCAGCAATCGGTCGCGCCGGCACGCGGATCAATCGCAAGGGATCCGGCGCAGTTGAAAGGAAACCGTATGAACGACTGCCGACGTTCAGGCCCCGGTGCACGTCGACGGCCGCCGGCTCGCATCATCGCTTCGCAAGCGGC",
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia pseudomallei"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Bp_AmpSeq_3_Bp",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGCGCTTGCCCAACTACCAGAATTGGCAGGCGCGTCTTGGCCTGGCGGCCCGATCGACGCGGCATATCGCTCGAAGCGTTTCGCGGCAAGGGCACGCCGAGGTTCGTCGCTCGAAAGCATCGGCTCGATGCCGCATGAATGCCGTCGGCGAGCCCGTTCGTAACGATGCGTTTCGTTAAAAATGGGAGGTGGCGAAACGCGGCGCTATTGTCTCGCACCGTTGCGC",
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia pseudomallei"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Bp_AmpSeq_4_Bp",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AATCCATGCATGTCGCGCCCGACCGTCTGTTCACCGACTCCCGCTTGCTCCGTCCGCACACCGAAACGCACGCAAATCTACGAACGCACACCGAGTGCGTCTGGAAAACAATCCGGTCCGGCGTTTTTCATGGCGGAACCTTTCGACTCATGCCGGGAGCGGTTCGCGCGGATTTTTCCGGACGCGCGCCACGGAAATGAAGCCCGTTGAGCGATCGC",
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia pseudomallei"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Bp_AmpSeq_5_Bp",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TCGCATTTGCACACGCTCCCGTATTGAACGTTTGTCGCGCGTTTTGAACGATAGCGATGCGGCGCGCCTCGGATGCGCGAGCGAGGCGACGTGACGTGGTGCGATGCGACGGCGCGGCAACGTCCGCCTCGGCCGCGATCGCCGCACCCGCACGCGAGCGCGCGAAGCCCACCGGACTCCTCGCCAAGTTTGCGCACT",
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia pseudomallei"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Bp_AmpSeq_6_Bp",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CCAGTCGGGCCGGGAAAAACGCGCGCCTGCGACGCACCGCCAAACGCCGCGCGTACGTACGGCAACTCGCCGGGCGACGAACACCGCCGCTCGAGCGGCGGCGCGCGGCAAACGGCTGCGATTCGCGCGCGCGACCGTCATCGACGCTTTTGCCGCC",
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia pseudomallei or mallei"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Bp_AmpSeq_10_Bp+m",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GCCGGAACCGTCGAGCATTGTGTCCGCTCGTTTCGAACACCGGGCGCGCGAATCGGCGCACGCCGCACGTTGAAAGTCGGCGTTTCGGCCAGCGCGCGGTGATCGCTCGCGAGCGAGCGGAGGCAGTCGAATCCA",
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia pseudomallei or mallei"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Bp_AmpSeq_11_Bp+m",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GAAAGGCGATGTGCCGAGCGGTCGGGAAGCCGGGCCGGCGCGCGTCGCCGAGAGCCGCCGGCGACCTCTGCCGGATGAAACGAACTTTCCGACCGTTGCGGGGTGTGAAACGTATCCGATCGAACGGCCTCCTGTCGAAACGCGATTTTTCGAGTGTAGCCGGCCCGGCGCGTTTGGCGCTTCTCCGAA",
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia pseudomallei or mallei"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Bp_AmpSeq_13_Bp+m",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AGGGGGTGGTTTCCTGAGTGGCGTGACGGCGGGCGGTTCCGGCGGCGATGGCCGCGGCGCGCAATCGGGTCGGACGACGAGTATGGGACGGCGGGCTTTGGGGAGTCCGCCGGTGCTGGCTGTTGGATCGGGCGTCGTGGAGCGAGCGGGTGCGATGGGGGCGTCGACTGATTCGACGAATTTGACATAACGCAAATTATCGACATTTTGGGTGTGACAGCTAAGCGGTAGCCTGCCGGGGCCAGTGTCTTAATACATTCAACATTCGTCGTGGAGGTTTCATCATGAAGCATTCCGTCAGGCATCCTTTCCACCCGTCGACACCGCT",
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia mallei"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Bp_AmpSeq_21_Bm",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ACGGGCGCTTCACGATCTCGGTGTTCGAATCCGACGGCCCCGGGCGGCTTTACGCGAACCACGCGCAGCGCCTCTATCGCGAGTTCACCGAGCCCGAGCTCGCCGAACTGCTGCGCGCCGCGCATTTCACCCCCGTCGACAGCCAGCGGGTGCCGCGGCCGAAAGCCGGCCTGCACTATCTGAGGGTCGGCCGGGATTCGTGAAATTTTCGCCAAAATTGCCTTATCCAACTGATCTATAAGGGGAATTTCGCCCCTCGATCGAGTCGGCCGTACGCTAGACTTTGCGTGCCTCAAATGCCTGATCGAACTGCCGCGC",
+          "Significance": {
+            "message": "Species ID marker detected - Burkholderia mallei"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Bp_AmpSeq_22_Bm",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGACGCGCTCGATCCCAAACTCAAACGGATGGCCTGACATGAGCGATTTATTGACCATCCGCAATCTCGCGGTGAACTTCAGCGGGCTGCCCGCGGTCGACAGGATCAACCTGTCCATCGCGCGCGGCGAAGTGGTCGGCGTGGTGGGCGAGTCCGGCTCGGGCAAGAGCGTGACGAT",
+          "SNP": {
+            "name": "BpseudomalleiComplex-SNP",
+            "position": 86,
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia pseudomallei complex"
+            },
+            "reference": "C",
+            "variant": "G"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Bp_AmpSeq_17_Bpc-SNPs",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": [
+          {
+            "sequence": "CACGTTGCCCGGAAAGTACGAATCGGCGACCGCCTCGGCGAGCCAGTAAGGCAGCTCCGGCAGCGCGGCGAGCCGATCCTCGCCGACGATCGACGCGACGAACGACTTGAACAGCGCGATCTTGTCGACGG",
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia pseudomallei or mallei"
+            },
+            "variant_name": "Bpseudomallei_variant4"
+          },
+          {
+            "sequence": "CACGTTGCCCGGGAAGTACGAATCGGCGACCGCCTCGGCAAGCCAGTAAGGCAGCTCCGGCAGCGCGGCGAGCCGGTCCTCGCCGACGACCGACGCGACGAACGATTTGAAGAGCGCGATCTTGTCGACGG",
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia humptydooensis"
+            },
+            "variant_name": "Bhumptydooensis_variant8"
+          },
+          {
+            "sequence": "CACGTTGCCCGGAAAATACGAATCGGCGACCGCTTCGGCGAGCCAATATGGCAGCTCCGGCAGTGCGGCGAGGCGCTCCTCGCCGACGATCGACGCGACGAACGACTTGAACAGCGCGATCTTGTCGACGG",
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-3"
+            },
+            "variant_name": "PS-3_variant3"
+          },
+          {
+            "sequence": "CACGTTGCCCGGGAAGTACGAATCGGCCACCGCTTCGGCGAGCCAGTATGGCAGCTCCGGCAGCGCGGCGAGCCGGTCCTCGCCGACGATCGACGCGACGAACGACTTGAACAGCGCGATCTTGTCGACGG",
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia thailandensis"
+            },
+            "variant_name": "Bthailandensis_variant5"
+          },
+          {
+            "sequence": "CACGTTGCCGGGGAAGTACGAATCGGCGACCGCTTCGGCGAGCCAGTAAGGCAGCTCCGGCAGCGCCGAGAGGCGATCGTCGCCGACGATCGATGCGACGAACGACTTGAAGAGCGCGATCTTGTCGACGG",
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-2"
+            },
+            "variant_name": "PS-2_variant12"
+          },
+          {
+            "sequence": "CACGTTGCCGGGGAAGTACGAATCGGCGACGGCTTCGGCGAGCCAGTAAGGCAGCTCCGACAGCGCCGAGAGGCGATCGTCGCCGACAATCGATGCGACGAACGACTTGAAGAGCGCGATCTTGTCGACGG",
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-2"
+            },
+            "variant_name": "PS-2_variant14"
+          },
+          {
+            "sequence": "CACGTTGCCCGGAAAATACGAATCGGCGACCGCTTCGGCGAGCCAATAAGGCAGTTCCGGCAGCGCGGCGAGACGCTCCTCGCCGACGACCGACGCGACGAACGACTTGAACAGCGCGATCTTGTCGACGG",
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-3"
+            },
+            "variant_name": "PS-3_variant1"
+          },
+          {
+            "sequence": "CACGTTGCCGGGGAAGTACGAATCGGCGACCGCTTCGGCGAGCCAGTAAGGCAGCTCCGGCAGCGCCGCGAGTCGATCCTCGCCGACGACCGACGCGACGAACGACTTGAAGAGCGCGATCTTGTCGACGG",
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia oklahomensis"
+            },
+            "variant_name": "Boklahomensis_variant13"
+          },
+          {
+            "sequence": "CACATTGCCGGGAAAATACGAATCGGCAACGGACTCGGCAAGCCAGTAAGGCAACTCCGGAAGCTCGGCAAGCCGTGCGTCGCCGACCACCGACGCGACGAACGTCTTGAAGAGCGCGATCTTGTCGACGG",
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-1"
+            },
+            "variant_name": "PS-1_variantX"
+          }
+        ],
+        "function": "species ID"
+      },
+      "name": "Bp_AmpSeq_19_Bpc-MSS",
+      "assay_type": "gene variant"
+    },
+    {
+      "Target": {
+        "Amplicon": [
+          {
+            "sequence": "CAGAACGCGCTGTTCCACGCATGCTGCGGCGCCTGGCCGTAGGTGCGCAGCAGCACGCGCGGCGGCGCGCCGGCGAGCGCCGCGCGCACGTGCTCGGGCGTGACGGCGGAGCGCGCGCCGATGCAATGGATCACGCGGCA",
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia pseudomallei or mallei"
+            },
+            "variant_name": "Bpseudomallei_variant26"
+          },
+          {
+            "sequence": "CAGAACGCGCTGTCCCACGCGCGCTGCGGCGCCTGGCCGTAGGTGCGCAGCAGCACGCGCGGCGGCGCGTCGGCGAGCGCCGCGCGCACATCGTCGGGCGAGACGACGGGATGCGCGCCGATGCAATGGATCACGCGGCA",
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia thailandensis"
+            },
+            "variant_name": "Bthailandensis_variant19"
+          },
+          {
+            "sequence": "CAGAACGCGCTGTCCCACGCGCGCTGCGGCGCGTTCCGGTACGTGCGCAGCAGCACGCGCGGCGGCGCGCCGGCGAGCGCCGCGCGTACGTCGTCGGGCGCGACGACTGGGCCCGCGCCGATGCAATGGATCACGCGGCA",
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-3"
+            },
+            "variant_name": "PS-3_variant23"
+          },
+          {
+            "sequence": "CAGAACGCGCTGTCCCACGCGCGCTGCGGCGCCTGGCCGTACGTGCGCAGCAGCACGCGCGGCGGCGCGCCGGCGAGCGCCGCGCGCACGTCGTCGGGCGCGACGACGGGGCGCGCGCCGATGCAATGGATCACGCGGCA",
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia humptydooensis"
+            },
+            "variant_name": "Bhumptydooensis_variant17"
+          },
+          {
+            "sequence": "CAGAACGCGCTGTCCCACGCGCGCTGCGGCGCCTGCCGGTACGTGCGCAGCAGCACGCGCGGGGGGGCGTCGGCGAGCGCCGCGCGCACGTCGTCGGGCGCGACGGCGGGGCCGGCGCCGATGCAATGGATCACGCGGCA",
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-2"
+            },
+            "variant_name": "PS-2_variant16"
+          },
+          {
+            "sequence": "CAGAACGCGCTGTCCCACGCGCGCTGCGGCGCCTGGCCGTACGTGCGCAGCAGCACGCGCGGCGGCGCGTCGGCGAGCGCCGCGAGCACGTCGTCGGGCGCGACGGCGGGGCCGGCGCCGATGCAATGGATCACGCGGCA",
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-2"
+            },
+            "variant_name": "PS-2_variant18"
+          },
+          {
+            "sequence": "CAGAACGCGCTGTCCCACGCGCGCTGCGGCGCCTGCCGGTACGTGCGCAGCAGCACGCGCGGCGGCGCGTCGGCGAGCGCCGCGCGCACGTCGTCGGGCGCGACGGCGCGGCCGGCGCCGATGCAATGGATCACGCGGCA",
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia oklahomensis"
+            },
+            "variant_name": "Boklahomensis_variant15"
+          },
+          {
+            "sequence": "CAGAACGCGCTGTCCCACGCGCGCTGCGGCGCTTGCCGGTACGTGCGCAGCAGCACGCGCGGCGGCGCGTCGGCGAGCGCAGCGCGCACGTCGTCGGGCGCGACGACGGGGCCGGCGTCGATGCAATGGATCACGCGGCA",
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-2"
+            },
+            "variant_name": "PS-2_variant25"
+          },
+          {
+            "sequence": "CAGAACGCGCTATCCCACGCATGCAGCGGCGCCTGCCGGTATGTGCGCAGCAATACGCGCGGCGGCGGGGCGTCGGCGAGCGCCGCGGCGACATCGCCGGGCATGACCGCGGGATGCGCGCCGATGCAATCGATCACGCGGCA",
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia PS-1"
+            },
+            "variant_name": "PS-1_variantX"
+          }
+        ],
+        "function": "species ID"
+      },
+      "name": "Bp_AmpSeq_20_Bpc-MSS",
+      "assay_type": "gene variant"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGCGCAGTTCGTCGTCCTCGACGAGCTTGCCCGCGCCTTCCATTGCGGACAGCAGCGTCGCTTCCGAATAGCGTGCGGGCGGCTTCGTGACGAGCGCGACGGCGGCGATTTCGTCCGTCTTCACCTTCTCGTCCTTCTGCACCGGCACGAGGTTCG",
+          "SNP": {
+            "name": "BcepaciaComplex-SNP",
+            "position": 112,
+            "Significance": {
+              "message": "Species ID marker detected - Burkholderia cepacia complex"
+            },
+            "reference": "T",
+            "variant": "C"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Bp_AmpSeq_18_Bcc-SNPs",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "gene_name": "pbp3",
+        "function": "resistance type",
+        "Amplicon": {
+          "sequence": "ATCCGCCGTCCCGCCCAGCAATAGCGAGCCCATGCGCCTGAACAAAAAACCGAAGTCATCCGATCCTTACGTCGCCGTCGCGAAAAATCCGATGCTGTCGTCGAGCCTGCCGATGTGGCGCTCGAAATTCGTCGTGATCCTCGTGTTCCTCGCGTTCGGCGCGCTGATCGCCCGCGCGTTCTGGGTGCAGGTGGCGAATCAGGATTTCTACGTCGGCCAGGGCCAGAAGCGCTATCAGCGCACCATCGAGCTCGGCGCGATGCGCGGCAGCATCGTCGATCGCAACGGCGCGCTGCTCGCCGTGAGCCTCACCACCTACGAAATCTGGGCGAACCC",
+          "Significance": {
+            "resistance": "Ceftazidime",
+            "message": "Antimicrobial resistance marker detected - no expected variation in anitmicrobial resistance"
+          }
+        }
+      },
+      "name": "Bp_AmpSeq_24_pbp3",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "gene_name": "penA",
+        "function": "resistance type",
+        "Amplicon": {
+          "sequence": "CGGTCGCCACAAATTCGCACGCACTCCTGTGACGAGAGCTGATACGCTAGCGAGCCGCGATGTCGGGTGCGCGCACGCCGCGTGCCCGATTCGCGCCCGTTCAATCTTCCCGCGATCCGCCTGATGAATCATTCTCCGTTGCGCCGCTCGCT",
+          "SNP": {
+            "name": "penA_-78promoter",
+            "position": 46,
+            "Significance": {
+              "resistance": "Ceftazidime",
+              "message": "Antimicrobial resistance marker detected - penA"
+            },
+            "reference": "G",
+            "variant": "A"
+          }
+        }
+      },
+      "name": "Bp_penA_78promoter",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "gene_name": "penA",
+        "function": "resistance type",
+        "Amplicon": {
+          "sequence": "GCTGCGCGGCCAAGCGAAAAACGTCGCCGCCGCCGAGCGGCAATTGCGCGAACTCGAATCGACGTTCGACGGCCGCTTGGGCTTCGTCGCGCTCGACACCGCGACCGGCGCGCGCATCGCGCATCGCGGCGACGAGCGTTTCCCGTTCTGCAGCACATCCAAGATGATGCTTTGCGCTGCGGTCCTCGCG",
+          "SNP": [
+            {
+              "name": "penA_C69Y",
+              "position": 150,
+              "Significance": {
+                "resistance": "Ceftazidime",
+                "message": "Antimicrobial resistance marker detected - penA"
+              },
+              "reference": "G",
+              "variant": "A"
+            },
+            {
+              "name": "penA_S72F",
+              "position": 159,
+              "Significance": {
+                "resistance": "Ceftazidime",
+                "message": "Antimicrobial resistance marker detected.- penA"
+              },
+              "reference": "C",
+              "variant": "T"
+            }
+          ]
+        }
+      },
+      "name": "Bp_penA_C69Y_S72F",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "gene_name": "penA",
+        "function": "resistance type",
+        "Amplicon": {
+          "sequence": "GGCCGCAGACCGTCACCGCGTATGCGCGCTCGATCGGCGACGCGACGTTCCGGCTCGATCGCCGCGAGCCTGAGCTGAACACGGCGCTGCCCGGCGACGAGCGCGATACGACGACGCCCGCCGCGATGGCCGCGAGCGTGCACCGGCTGCTCGTGGGCGACGCGCTCGGCGCCGCGCAGCGCGCGCAGCTCAATGCATGGATGCTCGGCAACAAGACGGGCGAC",
+          "SNP": {
+            "name": "penA_P167F",
+            "position": 70,
+            "Significance": {
+              "resistance": "Ceftazidime",
+              "message": "Antimicrobial resistance marker detected - penA"
+            },
+            "reference": "C",
+            "variant": "T"
+          }
+        }
+      },
+      "name": "Bp_penA_P167F",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GGGCGGACGAAAACCCTTGAGCACAGAAATTGAGCAGAGGCTAGTCGCGTGATATGACTTAAGATTTGGGTCTGTACGGCTATAGTTTGGTGAGTTAAGCTGGATCGGGAGTTTGCAAGACGATCTGGCACAGTTAGTCACAGACGAAGGACTCACTTTGGAAAGGCGGCTTCGGCCGCCAATCTTGGATCCCAGCGGAAGCAGGAACCGTTGAGGCCAGAGGAATACGTCCGTCATTGCGTCTAGGTAAGGCATCCCGGC",
+          "Significance": {
+            "message": "Control"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "IPSC-1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ACGTCAGGTGATTATTGGACTCGATTTGTCGTTATCTACAGATAATACAGCTGTTACATTTATGTGGTACGACCAACAAAATGAACATCATTATGCTAAAAACCTTGTCTTTTATCCGAAGAATAAGGAAACTGACAAAACCCAGAAAGAACGTATTCCTTACGACAAATGGGCACGTGCTGGATACTGTCAACCAATTGGTGAAGATACAGTTGATTATGATGAAATGGCGGATATAATTGTTG",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus anthracis"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_specific-3_CP008853.1_5309",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GAAGATGTACGCTCGATAGGATTAATTGCACATTTGATGTCATTACCTGAAACATGGGTGATAAAAAAGATGCAACTGTATAAAAAATTCGGTAGAGCTGCCATTACAAAAGGTATCGCTGAACTGGAAGAAAAGAAATACTGGGTGGATATCAAATACCGTGATGGCAAAAAGAATTTC",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus anthracis"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_specific-5_CP008853.1_5316",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CACAATTGAATGAAAATGCTACTAAAAAGAAAGTCCTGATTGCATTTGCAATATATAGGAGTTTTATAAAAAATAAGAACAAAACTAAGGATCGAATTGATTATATTAACGATATGAATGTTGCGTTACAAAAGTTAGTCAATAAAGAAGATAAGAAGATTATACAAGAGTATATGTTAAGAGAAAAGGTAAACAGGTTTCGTG",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus anthracis"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_specific-6_CP012725.1_3629",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GATATTCGACGAGCTTTCTGTGGATCTGGAAAAACGTATTCATGCTTACGAACGTTCTATAATAGCTCATATGAAGGACTTGTGTATTCCATTATCTCAACGTTTACGATTAAGTAACGATATAGCTAAATTGATGATTGAAGAGAAAAAACTGGAACAGATGAATCAACAAAATAATCAAGCTATCAATCCACTGATGGCATTACTGGAGGAGGATGACGATGAATA",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus anthracis"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_specific-8_CP012725.1_5103",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TATTGAACGCATTGAATCAGGAGCATTCACACGTGCTTTAGAACGAGGAAATGATGTTCATTTCTTAGCTGAGCATGACAACGCCAAACTATTGGCTTCAACTAAAAATGGTAGCTTGCAACTGCGTGAGGACGATAAAGGTCTTTACATGGAAGCTCGTATTTCCCCTACATCTTACGGGAAAGATTACCACCAATTAATTCAAGACGGTTTGCTTACCAATA",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus anthracis"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_specific-9_CP012725.1_5107",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GGTTCAGGACAAAATGTAGCACATATCATTACAAATCGTGAAGCATATGGCATTAGCATGACGAATATTCGATTTACACGAATTAAAGGCGATACAAAACAACAAATCAACAACGCTCACGTATACATTGGAGAAAGTTATGTTGATGGTAAACTTATTAATGAATTTGCTAAAACTTCAGCGGTTTTCGCTTCAGAAGTTA",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus anthracis"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_specific-11_JSZQ01000034.1_220",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GCGAATTTTAGACGACAATCGTGTTCATTTGCTAAATCATGAAGCCAATGACTTTTTAAACGGTTATTCCTTAAAGAAACACATGGTCAAGGATTACTTATTACATGGTTCCTCTTATGTATCAATCATTGAGGCAGGTAACACAATTTTAGAGCTTCACCCATTGCTTTCAAAAGCTATTGTGGTTAACAAACGAATTAAGCACGGTT",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus anthracis"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_specific-12_JSZS01000036.1_5",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ATTAATAAGGCGACTGGTGAAACGTTAATTAGAGCGGGTATCACTGTAAGATATACTGATGGAACAATTCAAAAGTCTACAATGTTTAAACTAAAGGCAGACGGAAAAGAGTATGCTGATGTGTTTGAACAGGATATAGATAATACTAAAACTATTTCATCTATGTATTTGTATATCAGCGGTGGTGATGTGAATGATGTCATTAAAATTTCTTATGTCTCATTCTGGATGGGTAA",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus anthracis"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_specific-14_LGCC01000010.1_232",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ACAATTCTTAAAAGGCGACATTCACGGTGCTGAAGTTCGTACAATGACAACTGGTACTGGTGCTATCACAGTTCCAACATCTTTATCAAACGTTATCGTAGAAAAACTTGTTGAAGAAGCAGCTCTATTTGGTCGTGCTAAATCTTTCACGCCAGTATCTGGTACTTTAGAAGTATTACGTGAGAAAAATATCGGAGACGCTACA",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus anthracis"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_specific-16_LGCC01000048.1_280",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TTTTTCGTAAGCATCTTCAATTTCTGCTCTATCACACTCTAGCTTTTCTAGGCATTCAACTTTTCGATAGTATAACTGTCCAATCAATGTCATACTATTAATTTGACACGATAGTTCAATAGCTTTATTTGCATGACAAAGCGCTTATTCGTATTGATTGTCCAAGTATAATGCTTTTGCATGATTATGTCTCACCTTCACATCAAA",
+          "SNP": {
+            "name": "plcR_147",
+            "position": 147,
+            "Significance": {
+              "message": "Species ID marker detected - Bacillus anthracis"
+            },
+            "reference": "C",
+            "variant": "A"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_NN1_plcR",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AGGAGATGAGAGTTTTGCACGAAACAACGCAAGAGCTCGTAAATTGGCAGTATTATTTTGCTATCGCAGTCTTTTTAATTACATATGCCATTATTATTTCTGAAAAAATCAATCGCGCTGTCATCGCACTTCTCGGTGCAGCACTCATGGTAATTATGGGGGT",
+          "SNP": {
+            "name": "Ba_AmesAnc_4669915",
+            "position": 40,
+            "Significance": {
+              "message": "Species ID marker detected - Bacillus anthracis"
+            },
+            "reference": "C",
+            "variant": "T"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_NN32_AmesAnc_4669915",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGTTGCGTAAGTATGTGCTACGAGAGTTTTTCAAGCTTGCAATGCGCTCTTCAGCTAGACGATCAGCTGCTACATAAGTTGCAATGCCATCGCGTTTTGAAATTTCGATTACCTTTGCAATTGTGTCATAAATTGATTCTACGCGTTTTAATGCACGTTCTCTATTGTATCCATATAACTCGTCTGCTACGTTAATTACGCCACCT",
+          "SNP": {
+            "name": "Ba_AmesAnc_4001578",
+            "position": 113,
+            "Significance": {
+              "message": "Species ID marker detected - Bacillus anthracis"
+            },
+            "reference": "T",
+            "variant": "C"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_NN33_AmesAnc_4001578",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGAAAAGTTGTCGACCTAATGATGGATAAAATCCATACGAAAAATTATCGAAAAAAAGAATTGTATGAGTTTGAACTGGAGCTCTTGGTGTAAGGTTCAACGATGAAGGATACGATGTTATTAGCCTAGTAGACTATGTCTGCTAGGTTTTTTTCTGTTCACAAACTACTATTCTTCGTGAACGCAGT",
+          "SNP": {
+            "name": "Ba_AmesAnc_1069024",
+            "position": 91,
+            "Significance": {
+              "message": "Species ID marker detected - Bacillus anthracis"
+            },
+            "reference": "A",
+            "variant": "T"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_NN37_AmesAnc_1069024",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TCTCTTGATTCAACGTTTCCAACAAAATTAATTGGCGCATCTTTAAGCATTGCAAAGACTTGTTTTGAAAGCTCGTTTCCTTTGCCACCCTCTGTCCCAACATTTAAAAGTCCGACGCGAGGATTTTTAATTCCTCTTACTTTCTCAGCGTATACAGATCCCATTACTGCATATTGATATAAGTGAATTGGTTTTGCATC",
+          "SNP": {
+            "name": "Ba_AmesAnc_3668548",
+            "position": 88,
+            "Significance": {
+              "message": "Species ID marker detected - Bacillus anthracis"
+            },
+            "reference": "T",
+            "variant": "C"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_NN38_AmesAnc_3668548",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GTGAAACATCGCTTTTTAGGAGCAGCTACACCGAAAGGAGCAGTTGATTTTGTTCCTAACTTAACAGAAGGATTACTACATCGTTATTTTATAAAAGGACGCCCAGGCTCTGGGAAATCAACAATGCTCAAAAAATTAGCTAAGGCAGCGGAAGAAAAAGGGTTTGAAGTTGAAGTATATCATTGCGGA",
+          "SNP": {
+            "name": "Ba_AmesAnc_371913",
+            "position": 77,
+            "Significance": {
+              "message": "Species ID marker detected - Bacillus anthracis"
+            },
+            "reference": "C",
+            "variant": "T"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_NN40_AmesAnc_371913",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ATACGGTGAAAATGAAGCAGGGAAATCAACAATTCGCTCGTTTATGAAAAGTATTTTATTCGGTTTTCCGACGAGAGGGCAGCGCCGTTATGAGCCGAAAGAAGGCGGCAAGTATGGTGGTGCGATCACTGTACAAACAGAGAAGTACGGCCGTTTGAAAATTGAACGATTACCAAAGACG",
+          "SNP": {
+            "name": "Ba_AmesAnc_999035",
+            "position": 79,
+            "Significance": {
+              "message": "Species ID marker detected - Bacillus anthracis"
+            },
+            "reference": "A",
+            "variant": "G"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_NN41_AmesAnc_999035",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CATGGGGCTTTCTATTATGTTTTTAATACTGTTTTTCATGGGTAAGAAGAAAGATACTGCCCTATTACTTTTCTCATTTTATTTTGGCTCTATGTTAATTGATAGACTTTTTGTCATTCAAGAAGCAAAAGGTACATGGATACATACCGTTTGGAAAATTTTTCATATTGTAATGATGCTTGGATTTACTATTTATGTGATTAAAGATATTAGGAAACTTATGAAAGAACGAA",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus cereus"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_specific-20_LOMU01000090.1_49",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TTGGAGTTTGTTTTGCTTTTATGGTTACTCAAGGCGCTGTTCTTGAACTTTATGGTAAAGTAAGTTGGGTAGGTGTAACTTATGCGTCATTATACAACGTTGTATCTGCAATCGTAAATGGTGCTTCGATTATGAATGCTGTAGCAGTTGTTACAGCTGTTATTGCAGGACCGTTAGCGGCAGCTCTTACTGCGGTAGGACGTGGATTAATTGTTAC",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus cereus"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_specific-22_LOQC01000013.1_3",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TATGAAAGGAGCCGTAAAACAAAGGGACAAATCGAGACAGCGATGATGAATTTTATAATGGGTAAAAATACAACTGTAGAGTATTTGGAAGTGTTTTTAGAATGTATTGAAAAAGTATTTAATGTTAGTGTCATTAATATTTTGCAAGGAAAGTTTGAGATGAATCAAGTTGATGGTAAAGATTTGCTGATGAGGGAAATTTCTAATACTAGTTTTCCGCTTCATATTCA",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus cereus biovar anthracis"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_BcereusBvAnth_1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TCGAACATACCTCCATTTCTTGATGCTCTTCAAATATTAACTATGATAACTTCATTTTTAATCTATTTTATAGAAGGGTATTCACTAATGAAGTTGGATGTTCTTACTAAATTAAAACAACGCCCAAAACTTCATAAATTGCTCATTATTATGTTTAGTATTGTTTCTATTACTGGGGTTACTGTACAGATGCTAACACCAAGTGCAAAGCTATCTTT",
+          "Significance": {
+            "message": "Species ID marker detected - Bacillus cereus biovar anthracis"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_BcereusBvAnth_2",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TTTCTTAGTTGTGCGGATTTCTTCTAATAAGTCAGTTGCATTAGAATCTAACCAAGCATGGAATTCTTCTTCGAAACGAGTGATATCTACTACTGGGATGTCATCTAGGAATCCACGTGTTAAAGCGTAAAGAATGATAACTTGTTTCTCTACACGTAACG",
+          "SNP": {
+            "name": "BcereusBvAnth_SNP",
+            "position": 100,
+            "Significance": {
+              "message": "Species ID marker detected - Bacillus cereus biovar anthracis"
+            },
+            "reference": "A",
+            "variant": "G"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ba_BcereusBvAnthSNP",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CACCGTTCATGGGACTTAAGGATTTTACTGAATATCCAGAATATATTAATTCTGTAATAGTACCTTGGATAAATTCCACAAATTCCTCAGATTTAAATGGAATATCAGATACATTATAAAAAGATTGTTTTTTTCCGTTTACGTAACAGTTAAATCCAATTATATAGTTCTTATTGGCAAGTTCTTTCCAAGCGGCATCTA",
+          "Significance": {
+            "message": "Virulence factor marker detected - Bacillus anthracis plasmid"
+          }
+        },
+        "function": "virulence factor"
+      },
+      "name": "Ba_pX01",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGCCAGCGTATTATATAGGTGCATACAAAGGGTGGACAGAAGAACAGGTAGAGAGAATAAAAGGTAAAATATATGAGAAAGAACAAGAAATTAAAGATATAGTAAGGTGTATTCCTTATGGTTTAACTCCATCGGGTTCGGAGTATTTAAAACACAACCCAGAATTAGC",
+          "Significance": {
+            "message": "Virulence factor marker detected - Bacillus anthracis plasmid"
+          }
+        },
+        "function": "virulence factor"
+      },
+      "name": "Ba_pX02",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "gene_name": "pagA",
+        "function": "virulence factor",
+        "Amplicon": {
+          "sequence": "GGTTACAGGACGGATTGATAAGAATGTATCACCAGAGGCAAGACACCCCCTTGTGGCAGCTTATCCGAGTGTACATGTAGATATGGAGAATATTATTCTCTCAAAAAATGAGGATCAATCCACACAGAATACTGATAGTCAAACGAGAACAATAAGTAAAAATACTTCTACAAGTAGGACACATACTAGTGAAGTACATGGAAATGCAGAAGTGCATGCGTCGTTCTTTGATATTGGTGGGA",
+          "Significance": {
+            "message": "Virulence factor marker detected - Bacillus anthracis plasmid pagA"
+          }
+        }
+      },
+      "name": "Ba_pagA",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "gene_name": "gyrA",
+        "function": "resistance type",
+        "Amplicon": {
+          "sequence": "TCGGTAAGTATCACCCTCATGGTGATTCAGCTGTTTATGAAACGATGGTACGTATGGCGCAAGATTTCAGTCAACGTTATATGCTTGTTGATGGGCATGGTAACTTTGGATCTGTCGATGGAGATTCAGCGGCAGCAATGCGTTATACAGAAGCA",
+          "SNP": [
+            {
+              "name": "gyrA_S85L",
+              "position": 28,
+              "Significance": {
+                "resistance": "Ciprofloxacin",
+                "message": "Antimicrobial resistance marker detected - gyrA"
+              },
+              "reference": "C",
+              "variant": "T"
+            },
+            {
+              "name": "gyrA_E89K",
+              "position": 39,
+              "Significance": {
+                "resistance": "Ciprofloxacin",
+                "message": "Antimicrobial resistance marker detected - gyrA"
+              },
+              "reference": "G",
+              "variant": "A"
+            }
+          ]
+        }
+      },
+      "name": "Ba_gyrA",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "gene_name": "parC",
+        "function": "resistance type",
+        "Amplicon": {
+          "sequence": "CAGTCGGTAACGTTATTGGTAACTATCACCCGCACGGTGATTCCTCTGTATATGAAGCGATGGTACGTTTAAGTCAAACTTGGAAAGTACGTAATGTTTTAGTTGAGATGCATGGTAATAATGGTAGTGTTGACGGGGATCCGGCAGCAGCAATGCGTTATACGGAAGCCCGATTATCACCAATTGCATCTGAGTTA",
+          "SNP": [
+            {
+              "name": "parC_S81F-Y",
+              "position": 43,
+              "Significance": {
+                "resistance": "Ciprofloxacin",
+                "message": "Antimicrobial resistance marker detected - parC"
+              },
+              "reference": "C",
+              "variant": "A,T"
+            },
+            {
+              "name": "parC_E85K",
+              "position": 54,
+              "Significance": {
+                "resistance": "Ciprofloxacin",
+                "message": "Antimicrobial resistance marker detected - parC"
+              },
+              "reference": "G",
+              "variant": "A"
+            }
+          ]
+        }
+      },
+      "name": "Ba_parC",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "gene_name": "gyrB",
+        "function": "resistance type",
+        "Amplicon": {
+          "sequence": "ATTGTAGAGGGTGACTCTGCCGGTGGATCAGCAAAGCAAGGGCGTGATCGTCACTTCCAAGCGATTTTACCACTGAAAGGTAAAATTATTAACGTTGAAAAGGCAAGATTAGATAAAATCTTATCTAACGATGAAGTGCGTACAATTATTACTGCAATTGGTACGAACATTGGCGGAGATTTTGATA",
+          "SNP": [
+            {
+              "name": "gyrB_D437N",
+              "position": 28,
+              "Significance": {
+                "resistance": "Ciprofloxacin",
+                "message": "Antimicrobial resistance marker detected - gyrB"
+              },
+              "reference": "T",
+              "variant": "A"
+            },
+            {
+              "name": "gyrB_N475D",
+              "position": 142,
+              "Significance": {
+                "resistance": "Ciprofloxacin",
+                "message": "Antimicrobial resistance marker detected - gyrB"
+              },
+              "reference": "A",
+              "variant": "G"
+            }
+          ]
+        }
+      },
+      "name": "Ba_gyrB",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "gene_name": "rpoB",
+        "function": "resistance type",
+        "Amplicon": {
+          "sequence": "TTCTTCGGAAGTTCTCAGTTATCTCAGTTCATGGACCAAACAAATCCATTAGCAGAGTTAACTCACAAACGAAGATTATCTGCATTAGGACCTGGTGGTTTAACGCGTGAGCGCGCAGGCTTTGAAGTACGTGACGTTCACTACTCTCACTATGGTCGTATGTGTCCG",
+          "SNP": {
+            "name": "Bc_rpoB_73",
+            "position": 73,
+            "Significance": {
+              "resistance": "Rifampin",
+              "message": "Antimicrobial resistance marker detected - rpoB"
+            },
+            "reference": "A"
+          }
+        }
+      },
+      "name": "Ba_rpoB",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AAGTTTGAGGTGTGGAAATGGAACAGACATTTATTGAAAAGTGTAATCATGATGAGCTGGACGATGTTATAAAAGACTATTGGCAAGATGTATGGAATTATTCATTTATTATTACGAAAGATCCACACTTATCAGGTGATATTACGCAAGATGTATTTATAAAGGTATTTAAAAATTGGAACTCATTTCGA",
+          "SNP": {
+            "name": "Bc_AA2502_88",
+            "position": 88,
+            "Significance": {
+              "message": "Antimicrobial resistance marker detected - AA2502"
+            },
+            "reference": "A",
+            "variant": "G"
+          }
+        },
+        "function": "resistance type"
+      },
+      "name": "Ba_AA2502",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CAAAACTAATAGGGGAGGGTGGTAGTGATGAACAATAAACAAAATCCTGACTGGTATAGAAAATTAAAAAAAGGCCCAATGGAACACCGTAAAGACGAAGAAGAATATATTTATAAAATAAAGCAATCTATATATCAAAGTAACGAGGTAGGTTCTCGG",
+          "SNP": {
+            "name": "Bc_AA2503_38",
+            "position": 44,
+            "Significance": {
+              "message": "Antimicrobial resistance marker detected - AA2503"
+            },
+            "reference": "A"
+          }
+        },
+        "function": "resistance type"
+      },
+      "name": "Ba_AA2503",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GAAGTGGCTCATGTTAGAGGTAGTACTGATGACTATCATTACTTACGCAAGTTGGTTAGATCGTTAGAGCTATTTTTCATTATTGTTGGTGTTCTGGTATTTATTGTAATTAGTACACATTCAAGGTATATATCCACCTCTTGGTTACATATAGGCTCGCT",
+          "Significance": {
+            "message": "Species ID marker detected - Francisella tularensis"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ft_NN2_Ftularensis-CP000915.1_1782",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TGTTACGTACAGGCTGTCAATGGAGGATGTTACCATTTTATTATGGTAAATATAGATCAATACATAAGCGTTTTAAAGATTGGTGTGATAAAGATATATTTTCTAGATTATTTAAATCAGTACAAAACCCTGATTTACAAGAAGTCATGCTTGATTCAACAATAGCAAGAGCACATGCTTGTGCTACGGGATATGAT",
+          "Significance": {
+            "message": "Species ID marker detected - Francisella tularensis"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ft_NN8_Ft-dup-CP000915.1_197",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ATCAAGCTCATCTTCAAAGCCTTTGCCTTCTTCAACTGTAATCACACCTTCTTTACCAACTTTTGCCATTGCGTCAGCGATAAGCTTACCTACAGTAGCATCAGAGTTAGCAGAGATAGTACCAACTTGCTCAATTGATTTTGGATCTGAACATGGTT",
+          "SNP": {
+            "name": "FtLVS_AM233362_1646546",
+            "position": 73,
+            "Significance": {
+              "message": "Species ID marker detected - Francisella tularensis"
+            },
+            "reference": "A",
+            "variant": "G"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ft_NN9_FtLVS-AM233362_1646546",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TACCTCTGCCAAAAATTCATCTGATAGCACTGATATATCTGGTTTTTTGATGCTGCAAAAGTATCAAATAGCTGATCATCAAGATCGTTTCTATCTGTGATAACCACTATAGTTGGATTGTTTAGAGCTAATACAGCTTTACCTGTATAGAAAACCATAGATAACGATTTACCACTACCTTGAGTATGCC",
+          "SNP": {
+            "name": "FtLVS_AM233362_1643765",
+            "position": 120,
+            "Significance": {
+              "message": "Species ID marker detected - Francisella tularensis"
+            },
+            "reference": "A",
+            "variant": "G"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ft_NN10_FtLVS-AM233362_1643765",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TCTTTGGTAGCTTGCTGACTCTTATATGTATCATAAAATCCTTGCCCAACTGATAATAAATCTAGAGTAATATTCTCAAAGTTAGTTGCTTGATACCAACTCATACCTTTTCCACTGATTAAAGCTTCTTTGTAGGCTTGTCTAATATTGAATAAGCCAAGTGTCGTCTG",
+          "SNP": {
+            "name": "FtLVS_AM233362_1562618",
+            "position": 68,
+            "Significance": {
+              "message": "Species ID marker detected - Francisella tularensis"
+            },
+            "reference": "A",
+            "variant": "T"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ft_NN11_FtLVS-AM233362_1562618",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GGTAGGATAACTACCAAGATCCATGCTATGACTGATGCTTTAGGTAATCCAATAGGAGTATTGGTAAAACTCATGAC",
+          "Significance": {
+            "message": "Species ID marker detected - Francisella tularensis subspecies novicida"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ft_NN1_Ftnovicida-CP009607.1",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGGTAAGAATACGACCAGAGGGCAATAAACAATTCATTAATTTTGCAATAGAGCTTCATAAGACTATATTAGAAAGCTTAGATAATCCATATCCATTTGAGAGTATTATTAATAAACTAAATTTAAAACAACAAGGAGGAAGAAATCCTCT",
+          "Significance": {
+            "message": "Species ID marker detected - Francisella noatunensis"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ft_NN4_Fnoatunensis-CP003402.1_1749",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AATTCTACAAGCACCTGGAACATGGGTGAGTTTTTTATTATCGCTAAATTCCAAGGTGCGGGCATTGCTACTCGTGTTGCTAAACAGGTATGGAATATGCATACCGGCAGGTGGGAAGTTTCTGTTATCCCTAATAATCAGTCAGCCTTAAAGTTTTGGGAAAAGTCTATCAGTGAATTTACCTATGGCGCTTTTAATAGGA",
+          "Significance": {
+            "message": "Species ID marker detected - Francisella noatunensis"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ft_NN5_Fnoatunensis-CP003402.1_424",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CTTATGCAGCAAGAGGAACTTATTGGTCTACTATAGAGATGTGCGATTTTCCAAAAGAGATATTAGGTTTAGCTATAGGTGTGGCAGCAATGTTATCTTTTTCACCAGATATATTACTACCTATACTAAATGGATACTTATTAGAAACCTATCCCGGTGTAT",
+          "Significance": {
+            "message": "Species ID marker detected - Francisella philomiragia"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ft_NN6_Fphilom-CP009444.1_569",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CTGATGGAAGAGAGTTCGAGTGTCAGAAAGAAGAGTATTGTAATAAATCTTCTTATAGCCCTATTAAAGAAAAAGGTTTTGTGGCATGGAGTAATATTACAAATGATATTTATCACTTTGTGAACAAAGAGCAAGATGTTAAACCTAGTGGCGCTGATTATATCTAC",
+          "Significance": {
+            "message": "Species ID marker detected - Francisella philomiragia"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Ft_NN7_Fphilom-CP009444.1_285",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CATAACCCATCGCAATATCTTGTAGCTCACACTCGCCACCTTGGTCACAGATAGGACAATCTAATGGGTGATTTATAAGCAAAAACTCCATAACATCTTTTTGCATTTGCAATGCTTCTTCTGAACGAGTTTTAACTTTCATTCCATCCATAACTGGTGTTGCACATGCTGGTGAAGCGCGTCTTGCACCCTCAACATCTACCAAACACATTCTACAGTTTGCCGCTACAGATAATTT",
+          "SNP": {
+            "name": "FtA1_118",
+            "position": 118,
+            "Significance": {
+              "message": "Strain ID marker detected - Francisella tularensis A.I"
+            },
+            "reference": "T",
+            "variant": "C"
+          }
+        },
+        "function": "strain ID"
+      },
+      "name": "Ft_FtA1",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GTGTCCAACGAAACCATAATCAGTAAGCACTCTTCTTAAATCAGGATGATTATTAAAGTAAATTCCAAACATATCGTAGACTTCTCTCTCAGTCCAGTTAGCTGATGGCCATAAATCACTGACAGAATCAACCAAA",
+          "SNP": {
+            "name": "FtA2_93",
+            "position": 93,
+            "Significance": {
+              "message": "Strain ID marker detected - Francisella tularensis A.II"
+            },
+            "reference": "C",
+            "variant": "T"
+          }
+        },
+        "function": "strain ID"
+      },
+      "name": "Ft_FtA2",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AAGCTTAACTGGTGATTGGAAGTTTGAGCCAATAGATGAAGACTCATGTAAGGTTTCATTAGATATGGAATTTACCTTCGAAAATAAATTTGTCGAGAGGGCTCTTGGACCAGTTTTCCGTGGCTTAGCAGATAAGATGTTAGGCG",
+          "SNP": {
+            "name": "FtB_99",
+            "position": 99,
+            "Significance": {
+              "message": "Strain ID marker detected - Francisella tularensis B"
+            },
+            "reference": "T",
+            "variant": "G"
+          }
+        },
+        "function": "strain ID"
+      },
+      "name": "Ft_FtB",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GGGTGATGCAGTAGAGAAAATCAAGCAACTTCCACAAGAACTTCAAGATAAAATTAATGCCGATATTGAAAAAGTATTTGCAAAGCAGCCTGATATTGCGATGGTTAATTCTAACAAGGGTATTACAAACCTAAATGTTCCGAGTGATGTAATTATTGATGCTTCTATGCCTGCGGCTATTCGTTCATCTGGTA",
+          "SNP": {
+            "name": "FtA_113",
+            "position": 113,
+            "Significance": {
+              "message": "Strain ID marker detected - Francisella tularensis A or Francisella mediasiatica"
+            },
+            "reference": "G",
+            "variant": "A"
+          }
+        },
+        "function": "strain ID"
+      },
+      "name": "Ft_FtA",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CAGTACCGACAAAACTTCGCGCAGCCTGATGGCCCTGACCGGCATCACTGACAGCGGAGACGTGCCCACGTCGCGTTTACTGGCTTATTGCAGTCGCTGACACTGGTAAGAACCACCCGCACGGCGGAAGGAACTGCCCACGCAGGCGCCCAACACCCGAGTCACAGGGAAGCCGCATAAGGCCACGCGGATGCCCGCCGGAAAACAGGCGAGATTCTCGTTTTCAGAGTAGTAAA",
+          "Significance": {
+            "message": "Species ID marker detected - Yersinia pestis"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Yp_NN11_Yp-AGJT01000065.1_0_338",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GCACTACAAATTTAAATCCCCCTCACACGACGGGGTTTGTACGAGGCCTCCGGGCTGAAACCACTGAGATGGCTGTGGTGCCGGACTCGGTTGTAAAAGACTTGAATGTAATGGAGGATATCAGCGTATCCAGCACCAGCTCTCATGAAAGCGTCGGTTTCATTGACCAGCCCATCACGTTATGGGCATAGAGGTTGATAATCGAC",
+          "Significance": {
+            "message": "Species ID marker detected - Yersinia pestis"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Yp_NN12_Yp-FAUR01000053.1_96407_96884",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ACTCGGGATACTCCATACTGGATGATTTTATTCAGCCTAGGCTGATAAAGCGAATTATAGGATAAAACGGCTCAAGTCTTCATCCGCAACCAGCTCATCTAAGTGCTTACCAACGTATTCCGCGTCAATAGTGATAGATTGACCACTGCTTTCG",
+          "SNP": {
+            "name": "YpCO92-NC_003143_113190",
+            "position": 32,
+            "Significance": {
+              "message": "Species ID marker detected - Yersinia pestis"
+            },
+            "reference": "C",
+            "variant": "T"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Yp_NN4_YpCO92-NC_003143_113190",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CATGCGCTTTACGTTATATGGCAACCGCGACCGGTTTATCTGGGCCATATTGGCTGGTTCACCGGTTGGCAAATGAATGGCTGTGGGTATCGTCCAGTGACATGCCATTTCATTCCGGGGTGGTGGCTATCGAGACAGAGTGCAGAACGC",
+          "SNP": {
+            "name": "YpCO92-NC_003143_161621",
+            "position": 30,
+            "Significance": {
+              "message": "Species ID marker detected - Yersinia pestis"
+            },
+            "reference": "G",
+            "variant": "A"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Yp_NN5_YpCO92-NC_003143_161621",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AGCGACTTCCGTGATAAAGCGGACTTGCAGGCGGGTATCCGCATTAGCACCGCAGAATGTATCGACAACAAAGAGGCGTTTGCCAGAGAGTTGTTCCGTCACCAGACCTTTCAAATGGTTCCAGATCTCTTGGCTCAGAGGCTTATTATCATTTTTACCTTTGCCCTGATCGGCCCACCACACGGTATCCTGAGT",
+          "SNP": {
+            "name": "YpCO92-NC_003143_152213",
+            "position": 119,
+            "Significance": {
+              "message": "Species ID marker detected - Yersinia pestis"
+            },
+            "reference": "C",
+            "variant": "T"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Yp_NN6_YpCO92-NC_003143_152213",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TTCACGATAATCCCCTAATGCGCCTGGTTGGCCAGGCAGTTATTGTACGGTTCTCGCGCTGTTGCGCGTATCCCAAAATGCCATTAGTAGCCCAATAATTAAACCAGAAACATGAGCTGCATTGGCAATCGACAAGCCTAAAATATCGAAATACCCGGCTATCAGCCAGAGCACAGAA",
+          "SNP": {
+            "name": "YpCO92-NC_003143_129539",
+            "position": 100,
+            "Significance": {
+              "message": "Species ID marker detected - Yersinia pestis"
+            },
+            "reference": "C",
+            "variant": "T"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Yp_NN7_YpCO92-NC_003143_129539",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ATTATCTGTGCCCCTTCTTTCACCGCGATAGCCACGCCTGACTTAACCAGGTCAATGCGACTATTAGGTAAAATCTTACCTGAATCAATCAGTTTATCGATTGCATTGGCAGACAGGATCACCACGTCAAAAGCTTCGCCAGCTTCTACGCGTTTAGTGGCATCCACTCC",
+          "SNP": {
+            "name": "YpCO92-NC_003143_91203",
+            "position": 66,
+            "Significance": {
+              "message": "Species ID marker detected - Yersinia pestis"
+            },
+            "reference": "G",
+            "variant": "A"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Yp_NN8_YpCO92-NC_003143_91203",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CCTCACACAACAATTCACTGTTGGTAGCATGGCGCAGGTTATTCACCTGACGGCGGGTCCGCTCATCGGTGAGGATTTTTAACACTTTCAACGGAATGGATACCGTGATTTTTTTGACCTGCTTGCTTTTCTTGCCGTGTTCAGCGTAAGGGCTGACATACTCGCCGTTCCACTCAGCCATGGGATACCTTAAATTTGTCGGAAAAA",
+          "SNP": {
+            "name": "YpCO92-NC_003143_121812",
+            "position": 124,
+            "Significance": {
+              "message": "Species ID marker detected - Yersinia pestis"
+            },
+            "reference": "C",
+            "variant": "T"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Yp_NN9_YpCO92-NC_003143_121812",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GATGCTTCTGCTATCAGCTTGCTCAAGCTATACAATGCCAGTAGAAGATTTATCTGGTCTTTCGAATGATGATTTGTGCATCGCTTTAGGTGAGCGCAATGACAATGGGCCGATGGTTATTCGCATCACAAAAGAGATTGAAAGTAGAGGGGGTGTAATTAATCAAGAGCGATGTTATATCGCCTCTTCAATGGCAATACAAAAAAGTAAACAAGAGTTCAAAGTCACAC",
+          "Significance": {
+            "message": "Species ID marker detected - Yersinia enterolytica"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "Yp_NN3_Yentero-FR729477.2_1623",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "AGCATGAAGGTTGCTAAAAGCAACGTTCCTGCGTTGGAAGCATGCCCGCAGAAACGTGGTGTATGTACCCGCGTATATACAACCACTCCGAAAAAACCTAACTCCGCACTGCGTAAAGTTTGCCGTGTGCGTTTGACTAACGGTTTTGAAGTCACC",
+          "SNP": {
+            "name": "Yp-AL590842.1_RX_SNP",
+            "position": 92,
+            "Significance": {
+              "message": "Antimicrobial resistance marker detected - RX"
+            },
+            "reference": "A",
+            "variant": "G"
+          }
+        },
+        "function": "resistance type"
+      },
+      "name": "Yp_Yp-AL590842.1_RX_SNP",
+      "assay_type": "SNP"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TCTGGCCTGCTAAATAAAAACGAACCCATTAATTTTACAAACGTTTGGCGATCCTGTTACTATACCCCCCTATAGTATCTACGGGAGGCGATCATGCCCCATTCACCTGAAGATAAAAAACGCGTATTGACCCGGGTACGGCGGATCCGGGGTCAGGTTGAGGCGCTGGAGCGCGCGCTTGAAGCAGGCGAGCCGTGCATCGCTATCCTGCAACAAATTGCCGCGGTACGCGGCGCGGCCAACGGTTTGATGGGCGAGATGGTGGAAATCCATCTCAACGATGAACTGGTCGGCACTGTTGCAAAGTTAGCGATGAGGCAGCCTTTTGTCTTATTCAAAGGCCTTACATTTCAAAAACTCTGCTTACCAGGCGCATTTCGCCCAGGGGATCACCATAATAAAATGCTGAGGCCTG",
+          "Significance": {
+            "message": "Antimicrobial resistance marker detected - plP1202"
+          }
+        },
+        "function": "resistance type"
+      },
+      "name": "Yp_plP1202_42780F",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GGGGCGGATACCTTCACCTATGACAGCCAGAACCGGCTGGTGGCCGCAACGGTCGCTGGAGTGACAGCAGCTTACACCTACAAGGGGGCACCTCAGAAAACGGAAAATAAAGCACGCTAAGGCATAGCTGACCTTGCCAGGCCTGCTTCGCCCTGTAGTGACGCGATCAACGGGCAGGAAACATTCCCCTTTCGTGCATGGCAGGCGCACACGAGTTCAGACAGCACGGTTTCCATGCGCGCCAAGTCGGCCATCTTCTCGCGCACGTCCTTGAGCTTGTGTTCGGCCAGGCTGCTGGCCTCCTCGCAGTGGGTGCCATCGTCGAGCCGCAACAGCTCGGCAATCTCGTCCAGACTGAACCCCAG",
+          "Significance": {
+            "message": "Antimicrobial resistance marker detected - plP1202"
+          }
+        },
+        "function": "resistance type"
+      },
+      "name": "Yp_plP1202_126386F",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "ACCATCCGGCGCTAAATCGTCAGAATAGAGTTGCCTTCCGAATTGATTGACATACGCCGTCAAGGGTCATAGATTTCTTCCTGACACATTTCCCTCAGGAGGATACCTTGCACGGTCAGCGCATCGGTTACGTCCGCGTCAGCAGCTTCGACCAGAACCCAGAACGGCAGCTCGAACAGATCCAGGTGGATAAAGTGTTCACCGACAAGGCGTCGGGCAAGGGCACTGTTGCAAAGTTAGCGATGAGGCAGCCTTTTGTCTTATTCAAAGGCCTTACATTTCAAAAACTCTGCTTACCAGGCGCATTTC",
+          "Significance": {
+            "message": "Antimicrobial resistance marker detected - plP1202"
+          }
+        },
+        "function": "resistance type"
+      },
+      "name": "Yp_plP1202_156402F2",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGGAAACTTCCCGAAAGGAGTGCGGGTAATAGGTTATAACCAGCGCTTTTCTATGCCATATATTGGACTTGCAGGCCAGTATCGCATTAATGATTTTGAGTTAAATGCATTATTTAAATTCAGCGACTGGGTTCGGGCACATGATAATGATGA",
+          "Significance": {
+            "message": "Virulence factor marker detected - Yersinia pestis pla"
+          }
+        },
+        "function": "virulence factor"
+      },
+      "name": "Yp_pla_long",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TTAATATCCCGGCACTCATAAACTTCGATCCTGCAGGTATAAAAAAAAGCACCTGCATGTATATTTCAGACCTGCCCGGTATTGTGCTATATGACACTATACCATTCACTGAATATTCAGCTGAATTACTGAGCACTTATTCAGTTAAGGA",
+          "Significance": {
+            "message": "Virulence factor marker detected - Yersinia pgm locus"
+          }
+        },
+        "function": "virulence factor"
+      },
+      "name": "Yp_PGM_AL031866.1_81",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "TTTAATGAACGGTGCCTAGAAGCACTGATTGAACAAAGCCGGTTAAGACCCACACCGACACCTTCCCTGCAGCACTGTCGATTTTGCGGCAAGGCTATTCCGGAAAAACGCCGTCAGACGCTGCCGGGTGTAACAACCTGTACTGACTGTCAGTCGATACTGGAGAAACGCAGAC",
+          "Significance": {
+            "message": "Virulence factor marker detected - Yersinia pgm locus"
+          }
+        },
+        "function": "virulence factor"
+      },
+      "name": "Yp_PGM_AL031866.1_83",
+      "assay_type": "presence/absence"
+    },
+    {
+      "Target": {
+        "Amplicon": {
+          "sequence": "GCGGCAGCCGTTGAGGCAAAAGTGATACGTGCGACACTGCATCTAGGCAGCGCAACAACGCGACAGCTCGAGGTGTTCTTCGCAGAGGAACCGCACGTCCAGTTCTAGCACTCTCGTATGTGCTCGTCGTTTATGCTTTCGGCGTGAAAACTGGTGCGCCGGTGTCTGGGGACCATCCTTCTTGCGTATGACCCCAAGGACAGCCATCACGGTTTGTGGGTTCGCTGGGACTGTCACGCTTAACCGGACGGAACTCG",
+          "Significance": {
+            "message": "Control"
+          }
+        },
+        "function": "species ID"
+      },
+      "name": "IPSC-2",
+      "assay_type": "presence/absence"
+    }
+  ]
+}

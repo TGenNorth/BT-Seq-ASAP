@@ -1,0 +1,254 @@
+{
+  "Assay": [
+    {
+      "name": "Ft_NN2_Ftularensis-CP000915.1_1782",
+      "Target": {
+        "Amplicon": {
+          "sequence": "GAAGTGGCTCATGTTAGAGGTAGTACTGATGACTATCATTACTTACGCAAGTTGGTTAGATCGTTAGAGCTATTTTTCATTATTGTTGGTGTTCTGGTATTTATTGTAATTAGTACACATTCAAGGTATATATCCACCTCTTGGTTACATATAGGCTCGCT",
+          "Significance": {
+            "message": "Species ID marker detected - Francisella tularensis"
+          }
+        },
+        "function": "species ID"
+      },
+      "assay_type": "presence/absence"
+    },
+    {
+      "name": "Ft_NN8_Ft-dup-CP000915.1_197",
+      "Target": {
+        "Amplicon": {
+          "sequence": "TGTTACGTACAGGCTGTCAATGGAGGATGTTACCATTTTATTATGGTAAATATAGATCAATACATAAGCGTTTTAAAGATTGGTGTGATAAAGATATATTTTCTAGATTATTTAAATCAGTACAAAACCCTGATTTACAAGAAGTCATGCTTGATTCAACAATAGCAAGAGCACATGCTTGTGCTACGGGATATGAT",
+          "Significance": {
+            "message": "Species ID marker detected - Francisella tularensis"
+          }
+        },
+        "function": "species ID"
+      },
+      "assay_type": "presence/absence"
+    },
+    {
+      "name": "Ft_NN9_FtLVS-AM233362_1646546",
+      "Target": {
+        "Amplicon": {
+          "sequence": "ATCAAGCTCATCTTCAAAGCCTTTGCCTTCTTCAACTGTAATCACACCTTCTTTACCAACTTTTGCCATTGCGTCAGCGATAAGCTTACCTACAGTAGCATCAGAGTTAGCAGAGATAGTACCAACTTGCTCAATTGATTTTGGATCTGAACATGGTT",
+          "SNP": {
+            "position": 73,
+            "name": "FtLVS_AM233362_1646546",
+            "Significance": {
+              "message": "Species ID marker detected - Francisella tularensis"
+            },
+            "variant": "G",
+            "reference": "A"
+          }
+        },
+        "function": "species ID"
+      },
+      "assay_type": "SNP"
+    },
+    {
+      "name": "Ft_NN10_FtLVS-AM233362_1643765",
+      "Target": {
+        "Amplicon": {
+          "sequence": "TACCTCTGCCAAAAATTCATCTGATAGCACTGATATATCTGGTTTTTTGATGCTGCAAAAGTATCAAATAGCTGATCATCAAGATCGTTTCTATCTGTGATAACCACTATAGTTGGATTGTTTAGAGCTAATACAGCTTTACCTGTATAGAAAACCATAGATAACGATTTACCACTACCTTGAGTATGCC",
+          "SNP": {
+            "position": 120,
+            "name": "FtLVS_AM233362_1643765",
+            "Significance": {
+              "message": "Species ID marker detected - Francisella tularensis"
+            },
+            "variant": "G",
+            "reference": "A"
+          }
+        },
+        "function": "species ID"
+      },
+      "assay_type": "SNP"
+    },
+    {
+      "name": "Ft_NN11_FtLVS-AM233362_1562618",
+      "Target": {
+        "Amplicon": {
+          "sequence": "TCTTTGGTAGCTTGCTGACTCTTATATGTATCATAAAATCCTTGCCCAACTGATAATAAATCTAGAGTAATATTCTCAAAGTTAGTTGCTTGATACCAACTCATACCTTTTCCACTGATTAAAGCTTCTTTGTAGGCTTGTCTAATATTGAATAAGCCAAGTGTCGTCTG",
+          "SNP": {
+            "position": 68,
+            "name": "FtLVS_AM233362_1562618",
+            "Significance": {
+              "message": "Species ID marker detected - Francisella tularensis"
+            },
+            "variant": "T",
+            "reference": "A"
+          }
+        },
+        "function": "species ID"
+      },
+      "assay_type": "SNP"
+    },
+    {
+      "name": "Ft_NN1_Ftnovicida-CP009607.1",
+      "Target": {
+        "Amplicon": {
+          "sequence": "GGTAGGATAACTACCAAGATCCATGCTATGACTGATGCTTTAGGTAATCCAATAGGAGTATTGGTAAAACTCATGAC",
+          "Significance": {
+            "message": "Species ID marker detected - Francisella tularensis subspecies novicida"
+          }
+        },
+        "function": "species ID"
+      },
+      "assay_type": "presence/absence"
+    },
+    {
+      "name": "Ft_NN4_Fnoatunensis-CP003402.1_1749",
+      "Target": {
+        "Amplicon": {
+          "sequence": "CGGTAAGAATACGACCAGAGGGCAATAAACAATTCATTAATTTTGCAATAGAGCTTCATAAGACTATATTAGAAAGCTTAGATAATCCATATCCATTTGAGAGTATTATTAATAAACTAAATTTAAAACAACAAGGAGGAAGAAATCCTCT",
+          "Significance": {
+            "message": "Species ID marker detected - Francisella noatunensis"
+          }
+        },
+        "function": "species ID"
+      },
+      "assay_type": "presence/absence"
+    },
+    {
+      "name": "Ft_NN5_Fnoatunensis-CP003402.1_424",
+      "Target": {
+        "Amplicon": {
+          "sequence": "AATTCTACAAGCACCTGGAACATGGGTGAGTTTTTTATTATCGCTAAATTCCAAGGTGCGGGCATTGCTACTCGTGTTGCTAAACAGGTATGGAATATGCATACCGGCAGGTGGGAAGTTTCTGTTATCCCTAATAATCAGTCAGCCTTAAAGTTTTGGGAAAAGTCTATCAGTGAATTTACCTATGGCGCTTTTAATAGGA",
+          "Significance": {
+            "message": "Species ID marker detected - Francisella noatunensis"
+          }
+        },
+        "function": "species ID"
+      },
+      "assay_type": "presence/absence"
+    },
+    {
+      "name": "Ft_NN6_Fphilom-CP009444.1_569",
+      "Target": {
+        "Amplicon": {
+          "sequence": "CTTATGCAGCAAGAGGAACTTATTGGTCTACTATAGAGATGTGCGATTTTCCAAAAGAGATATTAGGTTTAGCTATAGGTGTGGCAGCAATGTTATCTTTTTCACCAGATATATTACTACCTATACTAAATGGATACTTATTAGAAACCTATCCCGGTGTAT",
+          "Significance": {
+            "message": "Species ID marker detected - Francisella philomiragia"
+          }
+        },
+        "function": "species ID"
+      },
+      "assay_type": "presence/absence"
+    },
+    {
+      "name": "Ft_NN7_Fphilom-CP009444.1_285",
+      "Target": {
+        "Amplicon": {
+          "sequence": "CTGATGGAAGAGAGTTCGAGTGTCAGAAAGAAGAGTATTGTAATAAATCTTCTTATAGCCCTATTAAAGAAAAAGGTTTTGTGGCATGGAGTAATATTACAAATGATATTTATCACTTTGTGAACAAAGAGCAAGATGTTAAACCTAGTGGCGCTGATTATATCTAC",
+          "Significance": {
+            "message": "Species ID marker detected - Francisella philomiragia"
+          }
+        },
+        "function": "species ID"
+      },
+      "assay_type": "presence/absence"
+    },
+    {
+      "name": "Ft_FtA1",
+      "Target": {
+        "Amplicon": {
+          "sequence": "CATAACCCATCGCAATATCTTGTAGCTCACACTCGCCACCTTGGTCACAGATAGGACAATCTAATGGGTGATTTATAAGCAAAAACTCCATAACATCTTTTTGCATTTGCAATGCTTCTTCTGAACGAGTTTTAACTTTCATTCCATCCATAACTGGTGTTGCACATGCTGGTGAAGCGCGTCTTGCACCCTCAACATCTACCAAACACATTCTACAGTTTGCCGCTACAGATAATTT",
+          "SNP": {
+            "position": 118,
+            "name": "FtA1_118",
+            "Significance": {
+              "message": "Strain ID marker detected - Francisella tularensis A.I"
+            },
+            "variant": "C",
+            "reference": "T"
+          }
+        },
+        "function": "strain ID"
+      },
+      "assay_type": "SNP"
+    },
+    {
+      "name": "Ft_FtA2",
+      "Target": {
+        "Amplicon": {
+          "sequence": "GTGTCCAACGAAACCATAATCAGTAAGCACTCTTCTTAAATCAGGATGATTATTAAAGTAAATTCCAAACATATCGTAGACTTCTCTCTCAGTCCAGTTAGCTGATGGCCATAAATCACTGACAGAATCAACCAAA",
+          "SNP": {
+            "position": 93,
+            "name": "FtA2_93",
+            "Significance": {
+              "message": "Strain ID marker detected - Francisella tularensis A.II"
+            },
+            "variant": "T",
+            "reference": "C"
+          }
+        },
+        "function": "strain ID"
+      },
+      "assay_type": "SNP"
+    },
+    {
+      "name": "Ft_FtB",
+      "Target": {
+        "Amplicon": {
+          "sequence": "AAGCTTAACTGGTGATTGGAAGTTTGAGCCAATAGATGAAGACTCATGTAAGGTTTCATTAGATATGGAATTTACCTTCGAAAATAAATTTGTCGAGAGGGCTCTTGGACCAGTTTTCCGTGGCTTAGCAGATAAGATGTTAGGCG",
+          "SNP": {
+            "position": 99,
+            "name": "FtB_99",
+            "Significance": {
+              "message": "Strain ID marker detected - Francisella tularensis B"
+            },
+            "variant": "G",
+            "reference": "T"
+          }
+        },
+        "function": "strain ID"
+      },
+      "assay_type": "SNP"
+    },
+    {
+      "name": "Ft_FtA",
+      "Target": {
+        "Amplicon": {
+          "sequence": "GGGTGATGCAGTAGAGAAAATCAAGCAACTTCCACAAGAACTTCAAGATAAAATTAATGCCGATATTGAAAAAGTATTTGCAAAGCAGCCTGATATTGCGATGGTTAATTCTAACAAGGGTATTACAAACCTAAATGTTCCGAGTGATGTAATTATTGATGCTTCTATGCCTGCGGCTATTCGTTCATCTGGTA",
+          "SNP": {
+            "position": 113,
+            "name": "FtA_113",
+            "Significance": {
+              "message": "Strain ID marker detected - Francisella tularensis A or Francisella mediasiatica"
+            },
+            "variant": "A",
+            "reference": "G"
+          }
+        },
+        "function": "strain ID"
+      },
+      "assay_type": "SNP"
+    },
+    {
+      "name": "IPSC-1",
+      "Target": {
+        "Amplicon": {
+          "sequence": "GGGCGGACGAAAACCCTTGAGCACAGAAATTGAGCAGAGGCTAGTCGCGTGATATGACTTAAGATTTGGGTCTGTACGGCTATAGTTTGGTGAGTTAAGCTGGATCGGGAGTTTGCAAGACGATCTGGCACAGTTAGTCACAGACGAAGGACTCACTTTGGAAAGGCGGCTTCGGCCGCCAATCTTGGATCCCAGCGGAAGCAGGAACCGTTGAGGCCAGAGGAATACGTCCGTCATTGCGTCTAGGTAAGGCATCCCGGC",
+          "Significance": {
+            "message": "Control"
+          }
+        },
+        "function": "species ID"
+      },
+      "assay_type": "presence/absence"
+    },
+    {
+      "name": "IPSC-2",
+      "Target": {
+        "Amplicon": {
+          "sequence": "GCGGCAGCCGTTGAGGCAAAAGTGATACGTGCGACACTGCATCTAGGCAGCGCAACAACGCGACAGCTCGAGGTGTTCTTCGCAGAGGAACCGCACGTCCAGTTCTAGCACTCTCGTATGTGCTCGTCGTTTATGCTTTCGGCGTGAAAACTGGTGCGCCGGTGTCTGGGGACCATCCTTCTTGCGTATGACCCCAAGGACAGCCATCACGGTTTGTGGGTTCGCTGGGACTGTCACGCTTAACCGGACGGAACTCG",
+          "Significance": {
+            "message": "Control"
+          }
+        },
+        "function": "species ID"
+      },
+      "assay_type": "presence/absence"
+    }
+  ]
+}

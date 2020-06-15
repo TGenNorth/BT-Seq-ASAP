@@ -1,0 +1,280 @@
+{
+  "Assay": [
+    {
+      "name": "Yp_NN11_Yp-AGJT01000065.1_0_338",
+      "Target": {
+        "function": "species ID",
+        "Amplicon": {
+          "sequence": "CAGTACCGACAAAACTTCGCGCAGCCTGATGGCCCTGACCGGCATCACTGACAGCGGAGACGTGCCCACGTCGCGTTTACTGGCTTATTGCAGTCGCTGACACTGGTAAGAACCACCCGCACGGCGGAAGGAACTGCCCACGCAGGCGCCCAACACCCGAGTCACAGGGAAGCCGCATAAGGCCACGCGGATGCCCGCCGGAAAACAGGCGAGATTCTCGTTTTCAGAGTAGTAAA",
+          "Significance": {
+            "message": "Species ID marker detected - Yersinia pestis"
+          }
+        }
+      },
+      "assay_type": "presence/absence"
+    },
+    {
+      "name": "Yp_NN12_Yp-FAUR01000053.1_96407_96884",
+      "Target": {
+        "function": "species ID",
+        "Amplicon": {
+          "sequence": "GCACTACAAATTTAAATCCCCCTCACACGACGGGGTTTGTACGAGGCCTCCGGGCTGAAACCACTGAGATGGCTGTGGTGCCGGACTCGGTTGTAAAAGACTTGAATGTAATGGAGGATATCAGCGTATCCAGCACCAGCTCTCATGAAAGCGTCGGTTTCATTGACCAGCCCATCACGTTATGGGCATAGAGGTTGATAATCGAC",
+          "Significance": {
+            "message": "Species ID marker detected - Yersinia pestis"
+          }
+        }
+      },
+      "assay_type": "presence/absence"
+    },
+    {
+      "name": "Yp_NN4_YpCO92-NC_003143_113190",
+      "Target": {
+        "function": "species ID",
+        "Amplicon": {
+          "SNP": {
+            "reference": "C",
+            "name": "YpCO92-NC_003143_113190",
+            "variant": "T",
+            "position": 32,
+            "Significance": {
+              "message": "Species ID marker detected - Yersinia pestis"
+            }
+          },
+          "sequence": "ACTCGGGATACTCCATACTGGATGATTTTATTCAGCCTAGGCTGATAAAGCGAATTATAGGATAAAACGGCTCAAGTCTTCATCCGCAACCAGCTCATCTAAGTGCTTACCAACGTATTCCGCGTCAATAGTGATAGATTGACCACTGCTTTCG"
+        }
+      },
+      "assay_type": "SNP"
+    },
+    {
+      "name": "Yp_NN5_YpCO92-NC_003143_161621",
+      "Target": {
+        "function": "species ID",
+        "Amplicon": {
+          "SNP": {
+            "reference": "G",
+            "name": "YpCO92-NC_003143_161621",
+            "variant": "A",
+            "position": 30,
+            "Significance": {
+              "message": "Species ID marker detected - Yersinia pestis"
+            }
+          },
+          "sequence": "CATGCGCTTTACGTTATATGGCAACCGCGACCGGTTTATCTGGGCCATATTGGCTGGTTCACCGGTTGGCAAATGAATGGCTGTGGGTATCGTCCAGTGACATGCCATTTCATTCCGGGGTGGTGGCTATCGAGACAGAGTGCAGAACGC"
+        }
+      },
+      "assay_type": "SNP"
+    },
+    {
+      "name": "Yp_NN6_YpCO92-NC_003143_152213",
+      "Target": {
+        "function": "species ID",
+        "Amplicon": {
+          "SNP": {
+            "reference": "C",
+            "name": "YpCO92-NC_003143_152213",
+            "variant": "T",
+            "position": 119,
+            "Significance": {
+              "message": "Species ID marker detected - Yersinia pestis"
+            }
+          },
+          "sequence": "AGCGACTTCCGTGATAAAGCGGACTTGCAGGCGGGTATCCGCATTAGCACCGCAGAATGTATCGACAACAAAGAGGCGTTTGCCAGAGAGTTGTTCCGTCACCAGACCTTTCAAATGGTTCCAGATCTCTTGGCTCAGAGGCTTATTATCATTTTTACCTTTGCCCTGATCGGCCCACCACACGGTATCCTGAGT"
+        }
+      },
+      "assay_type": "SNP"
+    },
+    {
+      "name": "Yp_NN7_YpCO92-NC_003143_129539",
+      "Target": {
+        "function": "species ID",
+        "Amplicon": {
+          "SNP": {
+            "reference": "C",
+            "name": "YpCO92-NC_003143_129539",
+            "variant": "T",
+            "position": 100,
+            "Significance": {
+              "message": "Species ID marker detected - Yersinia pestis"
+            }
+          },
+          "sequence": "TTCACGATAATCCCCTAATGCGCCTGGTTGGCCAGGCAGTTATTGTACGGTTCTCGCGCTGTTGCGCGTATCCCAAAATGCCATTAGTAGCCCAATAATTAAACCAGAAACATGAGCTGCATTGGCAATCGACAAGCCTAAAATATCGAAATACCCGGCTATCAGCCAGAGCACAGAA"
+        }
+      },
+      "assay_type": "SNP"
+    },
+    {
+      "name": "Yp_NN8_YpCO92-NC_003143_91203",
+      "Target": {
+        "function": "species ID",
+        "Amplicon": {
+          "SNP": {
+            "reference": "G",
+            "name": "YpCO92-NC_003143_91203",
+            "variant": "A",
+            "position": 66,
+            "Significance": {
+              "message": "Species ID marker detected - Yersinia pestis"
+            }
+          },
+          "sequence": "ATTATCTGTGCCCCTTCTTTCACCGCGATAGCCACGCCTGACTTAACCAGGTCAATGCGACTATTAGGTAAAATCTTACCTGAATCAATCAGTTTATCGATTGCATTGGCAGACAGGATCACCACGTCAAAAGCTTCGCCAGCTTCTACGCGTTTAGTGGCATCCACTCC"
+        }
+      },
+      "assay_type": "SNP"
+    },
+    {
+      "name": "Yp_NN9_YpCO92-NC_003143_121812",
+      "Target": {
+        "function": "species ID",
+        "Amplicon": {
+          "SNP": {
+            "reference": "C",
+            "name": "YpCO92-NC_003143_121812",
+            "variant": "T",
+            "position": 124,
+            "Significance": {
+              "message": "Species ID marker detected - Yersinia pestis"
+            }
+          },
+          "sequence": "CCTCACACAACAATTCACTGTTGGTAGCATGGCGCAGGTTATTCACCTGACGGCGGGTCCGCTCATCGGTGAGGATTTTTAACACTTTCAACGGAATGGATACCGTGATTTTTTTGACCTGCTTGCTTTTCTTGCCGTGTTCAGCGTAAGGGCTGACATACTCGCCGTTCCACTCAGCCATGGGATACCTTAAATTTGTCGGAAAAA"
+        }
+      },
+      "assay_type": "SNP"
+    },
+    {
+      "name": "Yp_NN3_Yentero-FR729477.2_1623",
+      "Target": {
+        "function": "species ID",
+        "Amplicon": {
+          "sequence": "GATGCTTCTGCTATCAGCTTGCTCAAGCTATACAATGCCAGTAGAAGATTTATCTGGTCTTTCGAATGATGATTTGTGCATCGCTTTAGGTGAGCGCAATGACAATGGGCCGATGGTTATTCGCATCACAAAAGAGATTGAAAGTAGAGGGGGTGTAATTAATCAAGAGCGATGTTATATCGCCTCTTCAATGGCAATACAAAAAAGTAAACAAGAGTTCAAAGTCACAC",
+          "Significance": {
+            "message": "Species ID marker detected - Yersinia enterolytica"
+          }
+        }
+      },
+      "assay_type": "presence/absence"
+    },
+    {
+      "name": "Yp_Yp-AL590842.1_RX_SNP",
+      "Target": {
+        "function": "resistance type",
+        "Amplicon": {
+          "SNP": {
+            "reference": "A",
+            "name": "Yp-AL590842.1_RX_SNP",
+            "variant": "G",
+            "position": 92,
+            "Significance": {
+              "message": "Antimicrobial resistance marker detected - RX"
+            }
+          },
+          "sequence": "AGCATGAAGGTTGCTAAAAGCAACGTTCCTGCGTTGGAAGCATGCCCGCAGAAACGTGGTGTATGTACCCGCGTATATACAACCACTCCGAAAAAACCTAACTCCGCACTGCGTAAAGTTTGCCGTGTGCGTTTGACTAACGGTTTTGAAGTCACC"
+        }
+      },
+      "assay_type": "SNP"
+    },
+    {
+      "name": "Yp_plP1202_42780F",
+      "Target": {
+        "function": "resistance type",
+        "Amplicon": {
+          "sequence": "TCTGGCCTGCTAAATAAAAACGAACCCATTAATTTTACAAACGTTTGGCGATCCTGTTACTATACCCCCCTATAGTATCTACGGGAGGCGATCATGCCCCATTCACCTGAAGATAAAAAACGCGTATTGACCCGGGTACGGCGGATCCGGGGTCAGGTTGAGGCGCTGGAGCGCGCGCTTGAAGCAGGCGAGCCGTGCATCGCTATCCTGCAACAAATTGCCGCGGTACGCGGCGCGGCCAACGGTTTGATGGGCGAGATGGTGGAAATCCATCTCAACGATGAACTGGTCGGCACTGTTGCAAAGTTAGCGATGAGGCAGCCTTTTGTCTTATTCAAAGGCCTTACATTTCAAAAACTCTGCTTACCAGGCGCATTTCGCCCAGGGGATCACCATAATAAAATGCTGAGGCCTG",
+          "Significance": {
+            "message": "Antimicrobial resistance marker detected - plP1202"
+          }
+        }
+      },
+      "assay_type": "presence/absence"
+    },
+    {
+      "name": "Yp_plP1202_126386F",
+      "Target": {
+        "function": "resistance type",
+        "Amplicon": {
+          "sequence": "GGGGCGGATACCTTCACCTATGACAGCCAGAACCGGCTGGTGGCCGCAACGGTCGCTGGAGTGACAGCAGCTTACACCTACAAGGGGGCACCTCAGAAAACGGAAAATAAAGCACGCTAAGGCATAGCTGACCTTGCCAGGCCTGCTTCGCCCTGTAGTGACGCGATCAACGGGCAGGAAACATTCCCCTTTCGTGCATGGCAGGCGCACACGAGTTCAGACAGCACGGTTTCCATGCGCGCCAAGTCGGCCATCTTCTCGCGCACGTCCTTGAGCTTGTGTTCGGCCAGGCTGCTGGCCTCCTCGCAGTGGGTGCCATCGTCGAGCCGCAACAGCTCGGCAATCTCGTCCAGACTGAACCCCAG",
+          "Significance": {
+            "message": "Antimicrobial resistance marker detected - plP1202"
+          }
+        }
+      },
+      "assay_type": "presence/absence"
+    },
+    {
+      "name": "Yp_plP1202_156402F2",
+      "Target": {
+        "function": "resistance type",
+        "Amplicon": {
+          "sequence": "ACCATCCGGCGCTAAATCGTCAGAATAGAGTTGCCTTCCGAATTGATTGACATACGCCGTCAAGGGTCATAGATTTCTTCCTGACACATTTCCCTCAGGAGGATACCTTGCACGGTCAGCGCATCGGTTACGTCCGCGTCAGCAGCTTCGACCAGAACCCAGAACGGCAGCTCGAACAGATCCAGGTGGATAAAGTGTTCACCGACAAGGCGTCGGGCAAGGGCACTGTTGCAAAGTTAGCGATGAGGCAGCCTTTTGTCTTATTCAAAGGCCTTACATTTCAAAAACTCTGCTTACCAGGCGCATTTC",
+          "Significance": {
+            "message": "Antimicrobial resistance marker detected - plP1202"
+          }
+        }
+      },
+      "assay_type": "presence/absence"
+    },
+    {
+      "name": "Yp_pla_long",
+      "Target": {
+        "function": "virulence factor",
+        "Amplicon": {
+          "sequence": "CGGAAACTTCCCGAAAGGAGTGCGGGTAATAGGTTATAACCAGCGCTTTTCTATGCCATATATTGGACTTGCAGGCCAGTATCGCATTAATGATTTTGAGTTAAATGCATTATTTAAATTCAGCGACTGGGTTCGGGCACATGATAATGATGA",
+          "Significance": {
+            "message": "Virulence factor marker detected - Yersinia pestis pla"
+          }
+        }
+      },
+      "assay_type": "presence/absence"
+    },
+    {
+      "name": "Yp_PGM_AL031866.1_81",
+      "Target": {
+        "function": "virulence factor",
+        "Amplicon": {
+          "sequence": "TTAATATCCCGGCACTCATAAACTTCGATCCTGCAGGTATAAAAAAAAGCACCTGCATGTATATTTCAGACCTGCCCGGTATTGTGCTATATGACACTATACCATTCACTGAATATTCAGCTGAATTACTGAGCACTTATTCAGTTAAGGA",
+          "Significance": {
+            "message": "Virulence factor marker detected - Yersinia pgm locus"
+          }
+        }
+      },
+      "assay_type": "presence/absence"
+    },
+    {
+      "name": "Yp_PGM_AL031866.1_83",
+      "Target": {
+        "function": "virulence factor",
+        "Amplicon": {
+          "sequence": "TTTAATGAACGGTGCCTAGAAGCACTGATTGAACAAAGCCGGTTAAGACCCACACCGACACCTTCCCTGCAGCACTGTCGATTTTGCGGCAAGGCTATTCCGGAAAAACGCCGTCAGACGCTGCCGGGTGTAACAACCTGTACTGACTGTCAGTCGATACTGGAGAAACGCAGAC",
+          "Significance": {
+            "message": "Virulence factor marker detected - Yersinia pgm locus"
+          }
+        }
+      },
+      "assay_type": "presence/absence"
+    },
+    {
+      "name": "IPSC-1",
+      "Target": {
+        "function": "species ID",
+        "Amplicon": {
+          "sequence": "GGGCGGACGAAAACCCTTGAGCACAGAAATTGAGCAGAGGCTAGTCGCGTGATATGACTTAAGATTTGGGTCTGTACGGCTATAGTTTGGTGAGTTAAGCTGGATCGGGAGTTTGCAAGACGATCTGGCACAGTTAGTCACAGACGAAGGACTCACTTTGGAAAGGCGGCTTCGGCCGCCAATCTTGGATCCCAGCGGAAGCAGGAACCGTTGAGGCCAGAGGAATACGTCCGTCATTGCGTCTAGGTAAGGCATCCCGGC",
+          "Significance": {
+            "message": "Control"
+          }
+        }
+      },
+      "assay_type": "presence/absence"
+    },
+    {
+      "name": "IPSC-2",
+      "Target": {
+        "function": "species ID",
+        "Amplicon": {
+          "sequence": "GCGGCAGCCGTTGAGGCAAAAGTGATACGTGCGACACTGCATCTAGGCAGCGCAACAACGCGACAGCTCGAGGTGTTCTTCGCAGAGGAACCGCACGTCCAGTTCTAGCACTCTCGTATGTGCTCGTCGTTTATGCTTTCGGCGTGAAAACTGGTGCGCCGGTGTCTGGGGACCATCCTTCTTGCGTATGACCCCAAGGACAGCCATCACGGTTTGTGGGTTCGCTGGGACTGTCACGCTTAACCGGACGGAACTCG",
+          "Significance": {
+            "message": "Control"
+          }
+        }
+      },
+      "assay_type": "presence/absence"
+    }
+  ]
+}
